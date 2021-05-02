@@ -4,23 +4,29 @@
     ViewData["Title"] = "Index";
 }
 
-@Html.ValidationMessage("WrongUP")
+<div class="row">
+    <div class="col-lg-6">
+        <div class="bs-component">
+            @Html.ValidationMessage("WrongUP")
+            <form method="post">
+                <fieldset>
+                    <span asp-validation-for="loginModel.Username"></span>
+                    <div class="form-group">
+                        <label asp-for="loginModel.Username"></label>
+                        <input class="form-control" asp-for="loginModel.Username">
+                    </div>
 
-    <form method="post">
+                    <span asp-validation-for="loginModel.Password"></span>
+                    <div class="form-group">
+                        <label asp-for="loginModel.Password"></label>
+                        <input class="form-control" asp-for="loginModel.Password">
+                    </div>
 
-        <div>
-            <span asp-validation-for="loginModel.Username"></span>
-            <label asp-for="loginModel.Username"></label>
-            <input asp-for="loginModel.Username" />
+                    <button type="submit" class="btn btn-primary">ورود</button>
+                </fieldset>
+            </form>
         </div>
+    </div>
+</div>
 
-        <div>
-            <span asp-validation-for="loginModel.Password"></span>
-            <label asp-for="loginModel.Password"></label>
-            <input asp-for="loginModel.Password" />
-        </div>
 
-        <div>
-            <input type="submit" value="ورود" />
-        </div>
-    </form>
