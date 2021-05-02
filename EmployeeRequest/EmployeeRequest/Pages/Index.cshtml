@@ -1,0 +1,26 @@
+﻿@page
+@model EmployeeRequest.Pages.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+@Html.ValidationMessage("WrongUP")
+
+    <form method="post">
+
+        <div>
+            <span asp-validation-for="loginModel.Username"></span>
+            <label asp-for="loginModel.Username"></label>
+            <input asp-for="loginModel.Username" />
+        </div>
+
+        <div>
+            <span asp-validation-for="loginModel.Password"></span>
+            <label asp-for="loginModel.Password"></label>
+            <input asp-for="loginModel.Password" />
+        </div>
+
+        <div>
+            <input type="submit" value="ورود" />
+        </div>
+    </form>
