@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -10,16 +11,18 @@ namespace EmployeeRequest.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        EmployeeRequestDBContext _db;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(EmployeeRequestDBContext db)
         {
-            _logger = logger;
+            _db = db;
         }
+
+        public TblJobTamin TblJobTamin { get; set; }
 
         public void OnGet()
         {
-
+            TblJobTamin = _db.TblJobTamins.Find(7);
         }
     }
 }
