@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\EmployeeRequest\" />
-    <Folder Include="Pages\Panel\" />
   </ItemGroup>
 
 </Project>

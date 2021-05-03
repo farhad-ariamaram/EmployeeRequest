@@ -50,7 +50,7 @@ namespace EmployeeRequest.Pages
             }
 
             //TODO: ست کردن سشن و فرستادن به صفحه مورد نظر
-            return RedirectToPage("Index2");
+            return RedirectToPage("Panel/Index");
         }
     }
 
