@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -27,14 +28,20 @@ namespace EmployeeRequest.Pages
         [BindProperty]
         public LoginModel loginModel { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            //TODO: اگر لاگین بود بره صفحه دیگه
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid != null)
+            {
+                return RedirectToPage("Panel/Index");
+            } 
+
+            return Page();
         }
 
         public IActionResult OnPost()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
@@ -49,7 +56,9 @@ namespace EmployeeRequest.Pages
                 return Page();
             }
 
-            //TODO: ست کردن سشن و فرستادن به صفحه مورد نظر
+            string uid = checkUser.FirstOrDefault().FldEmployeeRequestUserId.ToString();
+            HttpContext.Session.SetString("uid", uid);
+
             return RedirectToPage("Panel/Index");
         }
     }
@@ -57,7 +66,7 @@ namespace EmployeeRequest.Pages
     public class LoginModel
     {
         [DisplayName("نام کاربری")]
-        [Required(ErrorMessage ="نام کاربری را وارد کنید")]
+        [Required(ErrorMessage = "نام کاربری را وارد کنید")]
         public string Username { get; set; }
 
         [DisplayName("کلمه عبور")]

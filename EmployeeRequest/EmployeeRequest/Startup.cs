@@ -25,6 +25,7 @@ namespace EmployeeRequest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EmployeeRequestDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CS")));
+            services.AddSession();
             services.AddRazorPages();
         }
 
@@ -39,6 +40,7 @@ namespace EmployeeRequest
             {
                 app.UseExceptionHandler("/Error");
             }
+            app.UseSession();
 
             app.UseStaticFiles();
 
