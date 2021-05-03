@@ -20,8 +20,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest
 
         public IActionResult OnGet()
         {
-        ViewData["FldEmployeeRequestJobOnetId"] = new SelectList(_context.TblJobs, "FldJobId", "FldJobName");
-        ViewData["FldEmployeeRequestJobTaminId"] = new SelectList(_context.TblJobTamins, "FldTaminJobId", "FldTaminJobCode");
+        //ViewData["FldEmployeeRequestJobOnetId"] = new SelectList(_context.TblJobs, "FldJobId", "FldJobName");
+        //ViewData["FldEmployeeRequestJobTaminId"] = new SelectList(_context.TblJobTamins, "FldTaminJobId", "FldTaminJobCode");
         ViewData["FldEmployeeRequestUserAccepterId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserId");
         ViewData["FldEmployeeRequestUserApplicantId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserId");
         ViewData["FldEmployeeRequestUserSubmitterId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserId");
@@ -44,6 +44,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+        public async Task<IActionResult> OnGetJobsAsync(string jobName)
+        {
+            ViewData["FldEmployeeRequestJobTaminId"] = new SelectList(_context.TblJobTamins.Where(a => a.FldTaminJobName.Contains(jobName)), "FldTaminJobId", "FldTaminJobCode");
+            return new JsonResult(_context.TblJobTamins.Where(a => a.FldTaminJobName.Contains(jobName)).ToList());
         }
     }
 }

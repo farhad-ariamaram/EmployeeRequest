@@ -5,6 +5,7 @@
     ViewData["Title"] = "Create";
 }
 
+
 <h1>Create</h1>
 
 <h4>TblEmployeeRequestEmployeeRequest</h4>
@@ -15,23 +16,71 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserApplicantId" class="control-label"></label>
-                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserApplicantId" class ="form-control" asp-items="ViewBag.FldEmployeeRequestUserApplicantId"></select>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserApplicantId" class="form-control" asp-items="ViewBag.FldEmployeeRequestUserApplicantId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserAccepterId" class="control-label"></label>
-                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserAccepterId" class ="form-control" asp-items="ViewBag.FldEmployeeRequestUserAccepterId"></select>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserAccepterId" class="form-control" asp-items="ViewBag.FldEmployeeRequestUserAccepterId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserSubmitterId" class="control-label"></label>
-                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserSubmitterId" class ="form-control" asp-items="ViewBag.FldEmployeeRequestUserSubmitterId"></select>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserSubmitterId" class="form-control" asp-items="ViewBag.FldEmployeeRequestUserSubmitterId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" class="control-label"></label>
-                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" class ="form-control" asp-items="ViewBag.FldEmployeeRequestJobTaminId"></select>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" class="form-control" asp-items="ViewBag.FldEmployeeRequestJobTaminId"></select>
             </div>
+
+
+
+            <div class="form-group">
+                <label class="control-label">نام شغل(اونت) را وارد کنید</label>
+                <input id="onetJobName1" name="onetJobName" type="text" class="form-control" />
+                <a onclick="loadjson()">ascsc</a>
+            </div>
+
+            <div class="form-group">
+                <select id="taminjobdropdown" name="taminjobdropdown">
+                </select>
+            </div>
+
+            <script>
+                function loadjson() {
+                    let dropdown = $('#taminjobdropdown');
+
+                    dropdown.empty();
+
+                    var data = { jobName: $("#onetJobName1").val() };
+                    $.ajax({
+                        type: "GET",
+                        url: "?handler=Jobs",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        async: true,
+                        data: data,
+                        success: function (response) {
+                            $.each(response, function (key, entry) {
+                                dropdown.append($('<option></option>').attr('value', entry.fldTaminJobId).text(entry.fldTaminJobName));
+                            });
+                        },
+                        failure: function () {
+                            alert("Error on get tamin jobs");
+                        },
+                        beforeSend: function () {
+                            $('#loading').show();
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        },
+                    });
+                }
+            </script>
+
+
+
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class="control-label"></label>
-                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class ="form-control" asp-items="ViewBag.FldEmployeeRequestJobOnetId"></select>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class="form-control" asp-items="ViewBag.FldEmployeeRequestJobOnetId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate" class="control-label"></label>
