@@ -50,6 +50,7 @@ namespace EmployeeRequest.Models
         public virtual DbSet<TblEmployeeRequestUserLanguage> TblEmployeeRequestUserLanguages { get; set; }
         public virtual DbSet<TblEmployeeRequestUserMilitary> TblEmployeeRequestUserMilitaries { get; set; }
         public virtual DbSet<TblEmployeeRequestUserSkill> TblEmployeeRequestUserSkills { get; set; }
+        public virtual DbSet<TblJob> TblJobs { get; set; }
         public virtual DbSet<TblJobTamin> TblJobTamins { get; set; }
         public virtual DbSet<TblLeaveJob> TblLeaveJobs { get; set; }
         public virtual DbSet<TblWorkExperience> TblWorkExperiences { get; set; }
@@ -59,7 +60,7 @@ namespace EmployeeRequest.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("");
+                optionsBuilder.UseSqlServer("Server=.;Database=EmployeeRequestDB;Trusted_Connection=True;");
             }
         }
 
@@ -355,6 +356,11 @@ namespace EmployeeRequest.Models
                 entity.Property(e => e.FldEmployeeRequestUserApplicantId).HasColumnName("Fld_EmployeeRequest_User_ApplicantId");
 
                 entity.Property(e => e.FldEmployeeRequestUserSubmitterId).HasColumnName("Fld_EmployeeRequest_User_SubmitterId");
+
+                entity.HasOne(d => d.FldEmployeeRequestJobOnet)
+                    .WithMany(p => p.TblEmployeeRequestEmployeeRequests)
+                    .HasForeignKey(d => d.FldEmployeeRequestJobOnetId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_EmployeeRequest_Tbl_Job");
 
                 entity.HasOne(d => d.FldEmployeeRequestJobTamin)
                     .WithMany(p => p.TblEmployeeRequestEmployeeRequests)
@@ -1168,6 +1174,70 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblEmployeeRequestUserSkills)
                     .HasForeignKey(d => d.FldEmployeeRequestSkillsId)
                     .HasConstraintName("FK_Tbl_UserSkill_Skills");
+            });
+
+            modelBuilder.Entity<TblJob>(entity =>
+            {
+                entity.HasKey(e => e.FldJobId);
+
+                entity.ToTable("Tbl_Job");
+
+                entity.Property(e => e.FldJobId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_JobID");
+
+                entity.Property(e => e.FldBehinyabAddress).HasColumnName("Fld_BehinyabAddress");
+
+                entity.Property(e => e.FldBehinyabId)
+                    .HasMaxLength(50)
+                    .HasColumnName("Fld_BehinyabID");
+
+                entity.Property(e => e.FldDes)
+                    .HasColumnType("ntext")
+                    .HasColumnName("Fld_Des");
+
+                entity.Property(e => e.FldDesDeActive)
+                    .HasColumnType("ntext")
+                    .HasColumnName("Fld_DesDeActive");
+
+                entity.Property(e => e.FldDesEn)
+                    .HasColumnType("ntext")
+                    .HasColumnName("Fld_DesEN");
+
+                entity.Property(e => e.FldEndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EndDate");
+
+                entity.Property(e => e.FldIsactive).HasColumnName("Fld_ISActive");
+
+                entity.Property(e => e.FldJobName)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasColumnName("Fld_JobName");
+
+                entity.Property(e => e.FldJobNameEn)
+                    .HasMaxLength(200)
+                    .HasColumnName("Fld_JobNameEN");
+
+                entity.Property(e => e.FldMiniCode)
+                    .HasMaxLength(50)
+                    .HasColumnName("Fld_miniCode");
+
+                entity.Property(e => e.FldOnetAddress).HasColumnName("Fld_ONetAddress");
+
+                entity.Property(e => e.FldOnetId)
+                    .HasMaxLength(50)
+                    .HasColumnName("Fld_ONetID");
+
+                entity.Property(e => e.FldStartDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_StartDate");
+
+                entity.Property(e => e.FldTaminJobId).HasColumnName("Fld_TaminJobID");
+
+                entity.Property(e => e.JobsId).HasColumnName("Jobs_ID");
+
+                entity.Property(e => e.LevelId).HasColumnName("Level_ID");
             });
 
             modelBuilder.Entity<TblJobTamin>(entity =>

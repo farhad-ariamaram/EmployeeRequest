@@ -25,6 +25,7 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestEmployeeRequestPublishDescription { get; set; }
         public string FldEmployeeRequestEmployeeRequestJobDescription { get; set; }
 
+        public virtual TblJob FldEmployeeRequestJobOnet { get; set; }
         public virtual TblJobTamin FldEmployeeRequestJobTamin { get; set; }
         public virtual TblEmployeeRequestUser FldEmployeeRequestUserAccepter { get; set; }
         public virtual TblEmployeeRequestUser FldEmployeeRequestUserApplicant { get; set; }
