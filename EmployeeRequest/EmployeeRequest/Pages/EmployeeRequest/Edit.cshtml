@@ -1,0 +1,110 @@
+﻿@page
+@model EmployeeRequest.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TblEmployeeRequestEmployeeRequest</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestId" />
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserApplicantId" class="control-label"></label>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserApplicantId" class="form-control" asp-items="ViewBag.FldEmployeeRequestUserApplicantId"></select>
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserApplicantId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserAccepterId" class="control-label"></label>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserAccepterId" class="form-control" asp-items="ViewBag.FldEmployeeRequestUserAccepterId"></select>
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserAccepterId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserSubmitterId" class="control-label"></label>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserSubmitterId" class="form-control" asp-items="ViewBag.FldEmployeeRequestUserSubmitterId"></select>
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserSubmitterId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" class="control-label"></label>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" class="form-control" asp-items="ViewBag.FldEmployeeRequestJobTaminId"></select>
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class="control-label"></label>
+                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class="form-control" asp-items="ViewBag.FldEmployeeRequestJobOnetId"></select>
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestEndDate" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestEndDate" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestIsAccept" /> @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestIsAccept)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestNeedMan" /> @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestNeedMan)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestNeedWoman" /> @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestNeedWoman)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestIsTransfered" /> @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestIsTransfered)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestTransferDate" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestTransferDate" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestTransferDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestAcceptDate" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestAcceptDate" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestAcceptDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestInternalDescription" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestInternalDescription" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestInternalDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestPublishDescription" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestPublishDescription" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestPublishDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestJobDescription" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestJobDescription" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestJobDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

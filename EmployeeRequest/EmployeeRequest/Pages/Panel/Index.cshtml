@@ -1,5 +1,5 @@
 ﻿@page
-@model EmployeeRequest.Pages.Panel.IndexModel
+@model Panel.IndexModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,7 +10,7 @@
     <div class="col-lg-6">
         <h4><span class="badge badge-secondary h-1">بخش درخواست نیرو</span></h4>
         <div class="bs-component">
-            <a asp-page="../EmployeeRequest/">
+            <a asp-page="../EmployeeRequest/Create">
                 <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
                     <div class="card-header"><i class="fa fa-users"></i><span class="h5 ml-2">ایجاد درخواست نیرو</span></div>
                     <div class="card-body">
@@ -19,7 +19,7 @@
                 </div>
             </a>
 
-            <a>
+            <a asp-page="../EmployeeRequest/Index">
                 <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
                     <div class="card-header"><i class="fa fa-history"></i><span class="h5 ml-2">سوابق درخواست نیرو</span></div>
                     <div class="card-body">
