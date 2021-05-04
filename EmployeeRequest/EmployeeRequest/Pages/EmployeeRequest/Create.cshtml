@@ -31,57 +31,24 @@
                 <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" class="form-control" asp-items="ViewBag.FldEmployeeRequestJobTaminId"></select>
             </div>
 
-
-
             <div class="form-group">
-                <label class="control-label">نام شغل(اونت) را وارد کنید</label>
-                <input id="onetJobName1" name="onetJobName" type="text" class="form-control" />
-                <a onclick="loadjson()">ascsc</a>
+                <label class="control-label">نام شغل را وارد کنید</label>
+                <input id="JobName" name="JobName" type="text" class="form-control" />
+                <a onclick="loadjson()">جستجو</a>
             </div>
 
-            <div class="form-group">
-                <select id="taminjobdropdown" name="taminjobdropdown">
+            <div class="form-group" id="taminjobsection" style="display:none">
+                <label class="control-label">شغل تامین اجتماعی</label>
+                <select class="form-control" id="taminjobdropdown" name="taminjobdropdown">
                 </select>
             </div>
 
-            <script>
-                function loadjson() {
-                    let dropdown = $('#taminjobdropdown');
-
-                    dropdown.empty();
-
-                    var data = { jobName: $("#onetJobName1").val() };
-                    $.ajax({
-                        type: "GET",
-                        url: "?handler=Jobs",
-                        contentType: "application/json;charset=utf-8",
-                        dataType: "json",
-                        async: true,
-                        data: data,
-                        success: function (response) {
-                            $.each(response, function (key, entry) {
-                                dropdown.append($('<option></option>').attr('value', entry.fldTaminJobId).text(entry.fldTaminJobName));
-                            });
-                        },
-                        failure: function () {
-                            alert("Error on get tamin jobs");
-                        },
-                        beforeSend: function () {
-                            $('#loading').show();
-                        },
-                        complete: function () {
-                            $("#loading").hide();
-                        },
-                    });
-                }
-            </script>
-
-
-
-            <div class="form-group">
-                <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class="control-label"></label>
-                <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" class="form-control" asp-items="ViewBag.FldEmployeeRequestJobOnetId"></select>
+            <div class="form-group" id="onetjobsection" style="display:none">
+                <label class="control-label">شغل اونت</label>
+                <select class="form-control" id="onetjobdropdown" name="onetjobdropdown">
+                </select>
             </div>
+
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate" class="control-label"></label>
                 <input asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate" class="form-control" />
@@ -150,4 +117,84 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
+    <script>
+        function loadjson() {
+            let dropdown = $('#taminjobdropdown');
+
+            dropdown.empty();
+
+            var data = { jobName: $("#JobName").val() };
+            $.ajax({
+                type: "GET",
+                url: "?handler=Jobs",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: true,
+                data: data,
+                success: function (response) {
+                    $.each(response, function (key, entry) {
+                        dropdown.append($('<option></option>').attr('value', entry.fldTaminJobId).text(entry.fldTaminJobName));
+                    });
+                    $("#taminjobsection").show();
+                    loadonet();
+                },
+                failure: function () {
+                    alert("Error on get tamin jobs");
+                },
+                beforeSend: function () {
+                    Swal.fire({
+                        html: 'در حال بارگذاری اطلاعات، لطفا منتظر بمانید...',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        },
+                    });
+                },
+                complete: function () {
+                    swal.close();
+                },
+            });
+        }
+
+        function loadonet() {
+            let dropdown = $('#onetjobdropdown');
+
+            dropdown.empty();
+
+            var data = { jobName: $("#JobName").val() };
+            $.ajax({
+                type: "GET",
+                url: "?handler=Jobso",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: true,
+                data: data,
+                success: function (response) {
+                    $.each(response, function (key, entry) {
+                        dropdown.append($('<option></option>').attr('value', entry.fldJobId).text(entry.fldJobName));
+                    });
+                    $("#onetjobsection").show();
+                },
+                failure: function () {
+                    alert("Error on get tamin jobs");
+                },
+                beforeSend: function () {
+                    Swal.fire({
+                        html: 'در حال بارگذاری اطلاعات، لطفا منتظر بمانید...',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        },
+                    });
+                },
+                complete: function () {
+                    swal.close();
+                },
+            });
+        }
+    </script>
 }
