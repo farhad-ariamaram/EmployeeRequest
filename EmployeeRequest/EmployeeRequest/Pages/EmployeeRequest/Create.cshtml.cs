@@ -40,6 +40,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest
                 return Page();
             }
 
+            //TODO: use tamin and onet dropdowns for fields
+            //TODO: persian datetime picker for datetime fields
             _context.TblEmployeeRequestEmployeeRequests.Add(TblEmployeeRequestEmployeeRequest);
             await _context.SaveChangesAsync();
 
@@ -48,8 +50,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest
 
         public async Task<IActionResult> OnGetJobsAsync(string jobName)
         {
-            ViewData["FldEmployeeRequestJobTaminId"] = new SelectList(_context.TblJobTamins.Where(a => a.FldTaminJobName.Contains(jobName)), "FldTaminJobId", "FldTaminJobCode");
             return new JsonResult(_context.TblJobTamins.Where(a => a.FldTaminJobName.Contains(jobName)).ToList());
+        }
+
+        public async Task<IActionResult> OnGetJobsoAsync(string jobName)
+        {
+            return new JsonResult(_context.TblJobs.Where(a => a.FldJobName.Contains(jobName)).ToList());
         }
     }
 }
