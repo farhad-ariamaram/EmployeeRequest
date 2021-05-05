@@ -1,5 +1,6 @@
 ﻿@page
 @model EmployeeRequest.IndexModel
+@using System.Globalization;
 
 @{
     ViewData["Title"] = "مشاهده وضعیت و سوابق درخواست نیرو";
@@ -29,7 +30,7 @@
                 شغل اونت
             </th>
             <th>
-                انتخاب عنوان شغل از 
+                انتخاب عنوان شغل از
             </th>
             <th>
                 تاریخ شروع انتشار آگهی استخدام
@@ -73,66 +74,73 @@
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestEmployeeRequest)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserApplicant.FldEmployeeRequestUserUsername)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSubmitter.FldEmployeeRequestUserUsername)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.JobsName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTamin.FldTaminJobName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobOnet.FldJobName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTitleFrom.TblEmployeeRequestJobTitleFromTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedMan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedWoman)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestInternalDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestPublishDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestJobDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsAccept)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserAccepter.FldEmployeeRequestUserUsername)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestAcceptDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsTransfered)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestTransferDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">حذف</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserApplicant.FldEmployeeRequestUserUsername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSubmitter.FldEmployeeRequestUserUsername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.JobsName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTamin.FldTaminJobName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobOnet.FldJobName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTitleFrom.TblEmployeeRequestJobTitleFromTitle)
+                </td>
+                <td>
+                    @{
+                        PersianCalendar pc = new PersianCalendar();
+                        DateTime sd = (DateTime)item.FldEmployeeRequestEmployeeRequestStartDate;
+                        ViewData["startdate"] = string.Format("{0}/{1}/{2}", pc.GetYear(sd), pc.GetMonth(sd), pc.GetDayOfMonth(sd));
+                        DateTime ed = (DateTime)item.FldEmployeeRequestEmployeeRequestEndDate;
+                        ViewData["enddate"] = string.Format("{0}/{1}/{2}", pc.GetYear(ed), pc.GetMonth(ed), pc.GetDayOfMonth(ed));
+                    }
+                    @ViewBag.startdate
+                </td>
+                <td>
+                    @ViewBag.enddate
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedMan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedWoman)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestInternalDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestPublishDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestJobDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsAccept)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserAccepter.FldEmployeeRequestUserUsername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestAcceptDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsTransfered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestTransferDate)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">حذف</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
