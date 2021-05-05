@@ -17,8 +17,11 @@ namespace EmployeeRequest.Models
         {
         }
 
+        public virtual DbSet<PayDeanery> PayDeaneries { get; set; }
         public virtual DbSet<PayDiploma> PayDiplomas { get; set; }
         public virtual DbSet<PayEducation> PayEducations { get; set; }
+        public virtual DbSet<PayJob> PayJobs { get; set; }
+        public virtual DbSet<PayWorkPlace> PayWorkPlaces { get; set; }
         public virtual DbSet<TblCustomerDegree> TblCustomerDegrees { get; set; }
         public virtual DbSet<TblEmployeeRequestCompilationType> TblEmployeeRequestCompilationTypes { get; set; }
         public virtual DbSet<TblEmployeeRequestCreativityType> TblEmployeeRequestCreativityTypes { get; set; }
@@ -69,6 +72,23 @@ namespace EmployeeRequest.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Persian_100_CI_AS");
 
+            modelBuilder.Entity<PayDeanery>(entity =>
+            {
+                entity.HasKey(e => e.DeaneryId);
+
+                entity.ToTable("Pay_Deanery");
+
+                entity.Property(e => e.DeaneryId).HasColumnName("Deanery_ID");
+
+                entity.Property(e => e.DeaneryCompanyRef).HasColumnName("Deanery_Company_Ref");
+
+                entity.Property(e => e.DeaneryName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Deanery_Name");
+            });
+
             modelBuilder.Entity<PayDiploma>(entity =>
             {
                 entity.HasKey(e => e.DiplomaId);
@@ -105,6 +125,68 @@ namespace EmployeeRequest.Models
                     .IsUnicode(false)
                     .HasColumnName("Education_Name")
                     .HasDefaultValueSql("('')");
+            });
+
+            modelBuilder.Entity<PayJob>(entity =>
+            {
+                entity.HasKey(e => e.JobsId);
+
+                entity.ToTable("Pay_Jobs");
+
+                entity.Property(e => e.JobsId).HasColumnName("Jobs_ID");
+
+                entity.Property(e => e.JobsCode)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("Jobs_Code");
+
+                entity.Property(e => e.JobsCompanyRef).HasColumnName("Jobs_Company_Ref");
+
+                entity.Property(e => e.JobsDeaneryRef).HasColumnName("Jobs_Deanery_Ref");
+
+                entity.Property(e => e.JobsName)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("Jobs_Name");
+
+                entity.Property(e => e.JobsWorkPlaceRef).HasColumnName("Jobs_WorkPlace_Ref");
+
+                entity.HasOne(d => d.JobsDeaneryRefNavigation)
+                    .WithMany(p => p.PayJobs)
+                    .HasForeignKey(d => d.JobsDeaneryRef)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pay_Jobs_Pay_Deanery");
+
+                entity.HasOne(d => d.JobsWorkPlaceRefNavigation)
+                    .WithMany(p => p.PayJobs)
+                    .HasForeignKey(d => d.JobsWorkPlaceRef)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pay_Jobs_Pay_WorkPlace");
+            });
+
+            modelBuilder.Entity<PayWorkPlace>(entity =>
+            {
+                entity.HasKey(e => e.WorkPlaceId);
+
+                entity.ToTable("Pay_WorkPlace");
+
+                entity.Property(e => e.WorkPlaceId).HasColumnName("WorkPlace_ID");
+
+                entity.Property(e => e.WorkPlaceCompanyRef).HasColumnName("WorkPlace_Company_Ref");
+
+                entity.Property(e => e.WorkPlaceName)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("WorkPlace_Name");
+
+                entity.Property(e => e.WorkPlaceWorkPlaceRef).HasColumnName("WorkPlace_WorkPlace_Ref");
+
+                entity.HasOne(d => d.WorkPlaceWorkPlaceRefNavigation)
+                    .WithMany(p => p.InverseWorkPlaceWorkPlaceRefNavigation)
+                    .HasForeignKey(d => d.WorkPlaceWorkPlaceRef)
+                    .HasConstraintName("FK_Pay_WorkPlace_Pay_WorkPlace");
             });
 
             modelBuilder.Entity<TblCustomerDegree>(entity =>
@@ -352,6 +434,8 @@ namespace EmployeeRequest.Models
 
                 entity.Property(e => e.FldEmployeeRequestJobTaminId).HasColumnName("Fld_EmployeeRequest_JobTamin_Id");
 
+                entity.Property(e => e.FldEmployeeRequestJobsId).HasColumnName("Fld_EmployeeRequest_Jobs_ID");
+
                 entity.Property(e => e.FldEmployeeRequestUserAccepterId).HasColumnName("Fld_EmployeeRequest_User_AccepterId");
 
                 entity.Property(e => e.FldEmployeeRequestUserApplicantId).HasColumnName("Fld_EmployeeRequest_User_ApplicantId");
@@ -367,6 +451,11 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblEmployeeRequestEmployeeRequests)
                     .HasForeignKey(d => d.FldEmployeeRequestJobTaminId)
                     .HasConstraintName("FK_Tbl_EmployeeRequest_Tbl_JobTamin");
+
+                entity.HasOne(d => d.FldEmployeeRequestJobs)
+                    .WithMany(p => p.TblEmployeeRequestEmployeeRequests)
+                    .HasForeignKey(d => d.FldEmployeeRequestJobsId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_EmployeeRequest_Pay_Jobs");
 
                 entity.HasOne(d => d.FldEmployeeRequestUserAccepter)
                     .WithMany(p => p.TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserAccepters)
