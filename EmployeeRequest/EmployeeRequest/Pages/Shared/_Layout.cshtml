@@ -10,10 +10,12 @@
 
     <!-- CSS -->
     <link href="~/lib/rtlbootstrap/css/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/lib/persianDatepicker/css/persianDatepicker-default.css" rel="stylesheet" />
+    <link href="~/lib/select2/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
-<body class="rtl">
+<body class="rtl" onload="Load()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -39,6 +41,8 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/rtlbootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/fontawesome/js/all.js"></script>
+    <script src="~/lib/persianDatepicker/js/persianDatepicker.js"></script>
+    <script src="~/lib/select2/select2.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)

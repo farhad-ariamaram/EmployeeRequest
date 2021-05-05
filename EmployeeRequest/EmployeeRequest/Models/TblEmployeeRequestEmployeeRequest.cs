@@ -8,7 +8,7 @@ namespace EmployeeRequest.Models
     public partial class TblEmployeeRequestEmployeeRequest
     {
         public long FldEmployeeRequestEmployeeRequestId { get; set; }
-        public long FldEmployeeRequestUserApplicantId { get; set; }
+        public long? FldEmployeeRequestUserApplicantId { get; set; }
         public long? FldEmployeeRequestUserAccepterId { get; set; }
         public long? FldEmployeeRequestUserSubmitterId { get; set; }
         public int? FldEmployeeRequestJobTaminId { get; set; }
