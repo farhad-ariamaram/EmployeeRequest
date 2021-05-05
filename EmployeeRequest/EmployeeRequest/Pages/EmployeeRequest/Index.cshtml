@@ -131,7 +131,7 @@
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">ویرایش</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">حذف</a>
+                    <a asp-page-handler="Delete" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">حذف</a>
                 </td>
             </tr>
         }

@@ -42,5 +42,17 @@ namespace EmployeeRequest.Pages.EmployeeRequest
            
             return Page();
         }
+
+        public IActionResult OnGetDelete(long id)
+        {
+            TblEmployeeRequestEmployeeRequest TblEmployeeRequestEmployeeRequest2 = _context.TblEmployeeRequestEmployeeRequests.Find(id);
+            if (TblEmployeeRequestEmployeeRequest2 != null)
+            {
+                _context.TblEmployeeRequestEmployeeRequests.Remove(TblEmployeeRequestEmployeeRequest2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+
+        }
     }
 }
