@@ -34,6 +34,7 @@ namespace EmployeeRequest.Models
         public virtual DbSet<TblEmployeeRequestInterviewSession> TblEmployeeRequestInterviewSessions { get; set; }
         public virtual DbSet<TblEmployeeRequestIpLog> TblEmployeeRequestIpLogs { get; set; }
         public virtual DbSet<TblEmployeeRequestJob> TblEmployeeRequestJobs { get; set; }
+        public virtual DbSet<TblEmployeeRequestJobTitleFrom> TblEmployeeRequestJobTitleFroms { get; set; }
         public virtual DbSet<TblEmployeeRequestLanguageType> TblEmployeeRequestLanguageTypes { get; set; }
         public virtual DbSet<TblEmployeeRequestLink> TblEmployeeRequestLinks { get; set; }
         public virtual DbSet<TblEmployeeRequestMedicalRecord> TblEmployeeRequestMedicalRecords { get; set; }
@@ -398,6 +399,11 @@ namespace EmployeeRequest.Models
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_EmployeeRequest_AcceptDate");
 
+                entity.Property(e => e.FldEmployeeRequestEmployeeRequestApplicationDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EmployeeRequest_EmployeeRequest_ApplicationDate")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.FldEmployeeRequestEmployeeRequestEndDate)
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_EmployeeRequest_EndDate");
@@ -434,6 +440,8 @@ namespace EmployeeRequest.Models
 
                 entity.Property(e => e.FldEmployeeRequestJobTaminId).HasColumnName("Fld_EmployeeRequest_JobTamin_Id");
 
+                entity.Property(e => e.FldEmployeeRequestJobTitleFromId).HasColumnName("Fld_EmployeeRequest_JobTitleFrom_Id");
+
                 entity.Property(e => e.FldEmployeeRequestJobsId).HasColumnName("Fld_EmployeeRequest_Jobs_ID");
 
                 entity.Property(e => e.FldEmployeeRequestUserAccepterId).HasColumnName("Fld_EmployeeRequest_User_AccepterId");
@@ -451,6 +459,11 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblEmployeeRequestEmployeeRequests)
                     .HasForeignKey(d => d.FldEmployeeRequestJobTaminId)
                     .HasConstraintName("FK_Tbl_EmployeeRequest_Tbl_JobTamin");
+
+                entity.HasOne(d => d.FldEmployeeRequestJobTitleFrom)
+                    .WithMany(p => p.TblEmployeeRequestEmployeeRequests)
+                    .HasForeignKey(d => d.FldEmployeeRequestJobTitleFromId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_EmployeeRequest_Tbl_EmployeeRequest_JobTitleFrom");
 
                 entity.HasOne(d => d.FldEmployeeRequestJobs)
                     .WithMany(p => p.TblEmployeeRequestEmployeeRequests)
@@ -638,6 +651,17 @@ namespace EmployeeRequest.Models
                 entity.Property(e => e.FldEmployeeRequestJobsStartDate)
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_Jobs_StartDate");
+            });
+
+            modelBuilder.Entity<TblEmployeeRequestJobTitleFrom>(entity =>
+            {
+                entity.ToTable("Tbl_EmployeeRequest_JobTitleFrom");
+
+                entity.Property(e => e.TblEmployeeRequestJobTitleFromId).HasColumnName("Tbl_EmployeeRequest_JobTitleFrom_Id");
+
+                entity.Property(e => e.TblEmployeeRequestJobTitleFromTitle)
+                    .HasMaxLength(50)
+                    .HasColumnName("Tbl_EmployeeRequest_JobTitleFrom_Title");
             });
 
             modelBuilder.Entity<TblEmployeeRequestLanguageType>(entity =>

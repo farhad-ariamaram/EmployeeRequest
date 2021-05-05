@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest
 {
@@ -18,17 +19,27 @@ namespace EmployeeRequest.Pages.EmployeeRequest
             _context = context;
         }
 
-        public IList<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequest { get;set; }
+        public IList<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequest { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             TblEmployeeRequestEmployeeRequest = await _context.TblEmployeeRequestEmployeeRequests
                 .Include(t => t.FldEmployeeRequestJobOnet)
                 .Include(t => t.FldEmployeeRequestJobTamin)
                 .Include(t => t.FldEmployeeRequestJobs)
                 .Include(t => t.FldEmployeeRequestUserAccepter)
                 .Include(t => t.FldEmployeeRequestUserApplicant)
-                .Include(t => t.FldEmployeeRequestUserSubmitter).ToListAsync();
+                .Include(t => t.FldEmployeeRequestUserSubmitter)
+                .Where(a => a.FldEmployeeRequestEmployeeRequestId == int.Parse(uid) || a.FldEmployeeRequestUserSubmitterId == int.Parse(uid))
+                .ToListAsync();
+           
+            return Page();
         }
     }
 }

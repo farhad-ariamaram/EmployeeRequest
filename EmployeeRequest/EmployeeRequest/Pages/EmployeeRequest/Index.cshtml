@@ -2,131 +2,131 @@
 @model EmployeeRequest.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "مشاهده وضعیت و سوابق درخواست نیرو";
 }
 
-<h1>Index</h1>
+<h4>مشاهده وضعیت و سوابق درخواست نیرو</h4>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn btn-outline-primary" asp-page="Create">ایجاد درخواست جدید</a>
 </p>
-<table class="table">
+<table class="table table-striped table-responsive">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestStartDate)
+                درخواست دهنده
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestEndDate)
+                ثبت کننده
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestIsAccept)
+                شغل
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestNeedMan)
+                شغل تامین اجتماعی
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestNeedWoman)
+                شغل اونت
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestIsTransfered)
+               تاریخ شروع انتشار آگهی استخدام
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestTransferDate)
+                تاریخ پایان انتشار آگهی استخدام
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestAcceptDate)
+                نیاز به مرد
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestInternalDescription)
+                نیاز به زن
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestPublishDescription)
+                توضیحات داخلی
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestEmployeeRequestJobDescription)
+                توضیحات انتشار
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestJobOnet)
+                توضیحات شغل
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestJobTamin)
+                وضعیت تایید
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestJobs)
+                تایید کننده
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestUserAccepter)
+                تاریخ تایید
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestUserApplicant)
+                وضعیت انتقال
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblEmployeeRequestEmployeeRequest[0].FldEmployeeRequestUserSubmitter)
+                تاریخ انتقال
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TblEmployeeRequestEmployeeRequest) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsAccept)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedMan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedWoman)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsTransfered)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestTransferDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestAcceptDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestInternalDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestPublishDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestJobDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobOnet.FldJobName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTamin.FldTaminJobCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.JobsCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserAccepter.FldEmployeeRequestUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserApplicant.FldEmployeeRequestUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSubmitter.FldEmployeeRequestUserId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.TblEmployeeRequestEmployeeRequest)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserApplicant.FldEmployeeRequestUserUsername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSubmitter.FldEmployeeRequestUserUsername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.JobsName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTamin.FldTaminJobName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobOnet.FldJobName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedMan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedWoman)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestInternalDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestPublishDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestJobDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsAccept)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserAccepter.FldEmployeeRequestUserUsername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestAcceptDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsTransfered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestTransferDate)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">حذف</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
