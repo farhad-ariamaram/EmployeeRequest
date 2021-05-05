@@ -10,13 +10,21 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestId" />
+
             <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate" />
             <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestEndDate" />
-            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestApplicationDate" />
             <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobsId" />
             <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId" />
             <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobOnetId" />
+
+            @*not included fields - must not change*@
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestId" />
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestApplicationDate" />
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserAccepterId" />
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestTransferDate" />
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestIsTransfered" />
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestIsAccept" />
+            <input type="hidden" asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestAcceptDate" />
 
             <div class="form-group">
                 <label class="control-label">کاربر درخواست کننده</label>
