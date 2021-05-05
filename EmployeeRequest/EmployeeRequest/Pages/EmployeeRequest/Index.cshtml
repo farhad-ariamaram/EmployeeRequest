@@ -1,6 +1,6 @@
 ﻿@page
 @model EmployeeRequest.IndexModel
-@using System.Globalization;
+@using Utilities;
 
 @{
     ViewData["Title"] = "مشاهده وضعیت و سوابق درخواست نیرو";
@@ -94,17 +94,10 @@
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTitleFrom.TblEmployeeRequestJobTitleFromTitle)
                 </td>
                 <td>
-                    @{
-                        PersianCalendar pc = new PersianCalendar();
-                        DateTime sd = (DateTime)item.FldEmployeeRequestEmployeeRequestStartDate;
-                        ViewData["startdate"] = string.Format("{0}/{1}/{2}", pc.GetYear(sd), pc.GetMonth(sd), pc.GetDayOfMonth(sd));
-                        DateTime ed = (DateTime)item.FldEmployeeRequestEmployeeRequestEndDate;
-                        ViewData["enddate"] = string.Format("{0}/{1}/{2}", pc.GetYear(ed), pc.GetMonth(ed), pc.GetDayOfMonth(ed));
-                    }
-                    @ViewBag.startdate
+                    @item.FldEmployeeRequestEmployeeRequestStartDate.toPersianDate()
                 </td>
                 <td>
-                    @ViewBag.enddate
+                    @item.FldEmployeeRequestEmployeeRequestEndDate.toPersianDate()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedMan)

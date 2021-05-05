@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
-using System.Globalization;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.EmployeeRequest
 {
@@ -44,15 +42,11 @@ namespace EmployeeRequest.Pages.EmployeeRequest
                 return NotFound();
             }
 
-            PersianCalendar pc = new PersianCalendar();
-
             ViewData["FldEmployeeRequestJobTitleFromId"] = new SelectList(_context.TblEmployeeRequestJobTitleFroms, "TblEmployeeRequestJobTitleFromId", "TblEmployeeRequestJobTitleFromTitle");
             ViewData["FldEmployeeRequestUserApplicantId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
             ViewData["FldEmployeeRequestUserSubmitterId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
-            DateTime sd = (DateTime)TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate;
-            DateTime ed = (DateTime)TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestEndDate;
-            ViewData["startdate"] = string.Format("{0}/{1}/{2}", pc.GetYear(sd), pc.GetMonth(sd), pc.GetDayOfMonth(sd));
-            ViewData["enddate"] = string.Format("{0}/{1}/{2}", pc.GetYear(ed), pc.GetMonth(ed), pc.GetDayOfMonth(ed));
+            ViewData["startdate"] = TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate.toPersianDate();
+            ViewData["enddate"] = TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestEndDate.toPersianDate();
 
             if (TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId != null)
             {
@@ -80,6 +74,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest
                 ViewData["FldEmployeeRequestJobTitleFromId"] = new SelectList(_context.TblEmployeeRequestJobTitleFroms, "TblEmployeeRequestJobTitleFromId", "TblEmployeeRequestJobTitleFromTitle");
                 ViewData["FldEmployeeRequestUserApplicantId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
                 ViewData["FldEmployeeRequestUserSubmitterId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
+                ViewData["startdate"] = TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestStartDate.toPersianDate();
+                ViewData["enddate"] = TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestEndDate.toPersianDate();
 
                 if (TblEmployeeRequestEmployeeRequest.FldEmployeeRequestJobTaminId != null)
                 {
