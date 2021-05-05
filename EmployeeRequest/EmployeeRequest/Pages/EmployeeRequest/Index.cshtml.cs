@@ -36,6 +36,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest
                 .Include(t => t.FldEmployeeRequestUserAccepter)
                 .Include(t => t.FldEmployeeRequestUserApplicant)
                 .Include(t => t.FldEmployeeRequestUserSubmitter)
+                .Include(t => t.FldEmployeeRequestJobTitleFrom)
                 .Where(a => a.FldEmployeeRequestEmployeeRequestId == int.Parse(uid) || a.FldEmployeeRequestUserSubmitterId == int.Parse(uid))
                 .ToListAsync();
            
