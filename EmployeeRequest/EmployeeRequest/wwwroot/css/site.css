@@ -79,5 +79,5 @@ body {
 }
 
 .acart {
-    text-decoration: none;
+    text-decoration: none !important;
 }
