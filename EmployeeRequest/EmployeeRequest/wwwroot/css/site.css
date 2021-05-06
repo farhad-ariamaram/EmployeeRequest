@@ -77,3 +77,7 @@ body {
 .field-validation-error {
     color: red;
 }
+
+.acart {
+    text-decoration: none;
+}

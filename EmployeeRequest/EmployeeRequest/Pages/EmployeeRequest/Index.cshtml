@@ -57,7 +57,7 @@
                 وضعیت تایید
             </th>
             <th>
-                تایید کننده
+                تاییدکننده / ردکننده
             </th>
             <th>
                 تاریخ تایید
@@ -74,66 +74,105 @@
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestEmployeeRequest)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserApplicant.FldEmployeeRequestUserUsername)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSubmitter.FldEmployeeRequestUserUsername)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.JobsName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTamin.FldTaminJobName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobOnet.FldJobName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTitleFrom.TblEmployeeRequestJobTitleFromTitle)
-                </td>
-                <td>
-                    @item.FldEmployeeRequestEmployeeRequestStartDate.toPersianDate()
-                </td>
-                <td>
-                    @item.FldEmployeeRequestEmployeeRequestEndDate.toPersianDate()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedMan)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedWoman)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestInternalDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestPublishDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestJobDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsAccept)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserAccepter.FldEmployeeRequestUserUsername)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestAcceptDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsTransfered)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestTransferDate)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">ویرایش</a> |
-                    <a asp-page-handler="Delete" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">حذف</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserApplicant.FldEmployeeRequestUserUsername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSubmitter.FldEmployeeRequestUserUsername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.JobsName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTamin.FldTaminJobName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobOnet.FldJobName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobTitleFrom.TblEmployeeRequestJobTitleFromTitle)
+            </td>
+            <td>
+                @if (item.FldEmployeeRequestEmployeeRequestStartDate != null)
+                {
+                    @item.FldEmployeeRequestEmployeeRequestStartDate.toPersianDate();
+                }
+            </td>
+            <td>
+                @if (item.FldEmployeeRequestEmployeeRequestEndDate != null)
+                {
+                    @item.FldEmployeeRequestEmployeeRequestEndDate.toPersianDate();
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedMan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestNeedWoman)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestInternalDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestPublishDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestJobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsAccept)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserAccepter.FldEmployeeRequestUserUsername)
+            </td>
+            <td>
+                @if (item.FldEmployeeRequestEmployeeRequestAcceptDate != null)
+                {
+                    @item.FldEmployeeRequestEmployeeRequestAcceptDate.toPersianDate();
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeRequestIsTransfered)
+            </td>
+            <td>
+                @if (item.FldEmployeeRequestEmployeeRequestTransferDate != null)
+                {
+                    @item.FldEmployeeRequestEmployeeRequestTransferDate.toPersianDate();
+                }
+            </td>
+            <td>
+                <a class="btn btn-info w-100" asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmployeeRequestId">ویرایش</a>
+                <a class="btn btn-danger w-100" href="#" onclick="AskDelete(@item.FldEmployeeRequestEmployeeRequestId);">حذف</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+
+<div>
+    <a asp-page="../Panel/Index">بازگشت به پنل کاربری</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
+    <script>
+        function AskDelete(id) {
+            Swal.fire({
+                title: 'درخواست حذف شود؟',
+                showDenyButton: true,
+                confirmButtonText: `بله`,
+                denyButtonText: `خیر`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", "?id=" + id + "&handler=Delete", false);
+                    xmlHttp.send(null);
+                    Swal.fire('حذف شد', '', 'success').then(() => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+    </script>
+}

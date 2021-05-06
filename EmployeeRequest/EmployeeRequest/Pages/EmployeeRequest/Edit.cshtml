@@ -119,14 +119,14 @@
                 <span asp-validation-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestEmployeeRequestJobDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">بازگشت به لیست درخواست ها</a>
 </div>
 
 @section Scripts {
@@ -264,19 +264,6 @@
                     swal.close();
                 },
             });
-        }
-
-        function validateForm() {
-            if (!$('#jobdropdown').val()) {
-                Swal.fire({
-                    icon: 'خطا',
-                    title: 'شغلی انتخاب نشده',
-                    confirmButtonText: 'بستن',
-                    text: 'ابتدا یک شغل انتخاب کنید',
-                    footer: 'در صورتی که دسترسی لازم برای ایجاد شغل ندارید با واحد انفورماتیک تماس بگیرید'
-                })
-                return false;
-            }
         }
     </script>
 }
