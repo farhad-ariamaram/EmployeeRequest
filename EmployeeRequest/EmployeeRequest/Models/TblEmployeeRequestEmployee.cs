@@ -38,10 +38,16 @@ namespace EmployeeRequest.Models
         public DateTime? FldEmployeeRequestEmployeeInterviewStartDate { get; set; }
         public int? FldEmployeeRequestFinalAcceptionId { get; set; }
         public int? FldEmployeeRequestPrimaryAcceptionId { get; set; }
+        public DateTime? FldEmployeeRequestEmployeePrimaryAcceptionDate { get; set; }
+        public DateTime? FldEmployeeRequestEmployeeFinalAcceptionDate { get; set; }
+        public long? FldEmployeeRequestUserPrimaryAccepterId { get; set; }
+        public long? FldEmployeeRequestUserFinalAccepterId { get; set; }
 
         public virtual TblEmployeeRequestFinalAcception FldEmployeeRequestFinalAcception { get; set; }
         public virtual TblEmployeeRequestPagesSequence FldEmployeeRequestPagesSequence { get; set; }
         public virtual TblEmployeeRequestPrimaryAcception FldEmployeeRequestPrimaryAcception { get; set; }
+        public virtual TblEmployeeRequestUser FldEmployeeRequestUserFinalAccepter { get; set; }
+        public virtual TblEmployeeRequestUser FldEmployeeRequestUserPrimaryAccepter { get; set; }
         public virtual ICollection<TblCustomerDegree> TblCustomerDegrees { get; set; }
         public virtual ICollection<TblEmployeeRequestEmergencyCall> TblEmployeeRequestEmergencyCalls { get; set; }
         public virtual ICollection<TblEmployeeRequestGeneralRecord> TblEmployeeRequestGeneralRecords { get; set; }

@@ -65,7 +65,6 @@ namespace EmployeeRequest.Pages.EmployeeRequest
                 _context.TblEmployeeRequestEmployeeRequests.Update(TblEmployeeRequestEmployeeRequest2);
                 _context.SaveChanges();
 
-                //TODO: Publish process here
                 string jobTitleFrom = null;
                 if (TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestJobTitleFromId == 1)
                 {

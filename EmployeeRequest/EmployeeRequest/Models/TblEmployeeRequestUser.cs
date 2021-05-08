@@ -9,6 +9,8 @@ namespace EmployeeRequest.Models
     {
         public TblEmployeeRequestUser()
         {
+            TblEmployeeRequestEmployeeFldEmployeeRequestUserFinalAccepters = new HashSet<TblEmployeeRequestEmployee>();
+            TblEmployeeRequestEmployeeFldEmployeeRequestUserPrimaryAccepters = new HashSet<TblEmployeeRequestEmployee>();
             TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserAccepters = new HashSet<TblEmployeeRequestEmployeeRequest>();
             TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserApplicants = new HashSet<TblEmployeeRequestEmployeeRequest>();
             TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserSubmitters = new HashSet<TblEmployeeRequestEmployeeRequest>();
@@ -19,6 +21,8 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestUserUsername { get; set; }
         public string FldEmployeeRequestUserPassword { get; set; }
 
+        public virtual ICollection<TblEmployeeRequestEmployee> TblEmployeeRequestEmployeeFldEmployeeRequestUserFinalAccepters { get; set; }
+        public virtual ICollection<TblEmployeeRequestEmployee> TblEmployeeRequestEmployeeFldEmployeeRequestUserPrimaryAccepters { get; set; }
         public virtual ICollection<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserAccepters { get; set; }
         public virtual ICollection<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserApplicants { get; set; }
         public virtual ICollection<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserSubmitters { get; set; }

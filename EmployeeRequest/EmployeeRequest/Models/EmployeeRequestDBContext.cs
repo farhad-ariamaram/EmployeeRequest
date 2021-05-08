@@ -344,6 +344,10 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(20)
                     .HasColumnName("Fld_EmployeeRequest_Employee_CurrentLevel");
 
+                entity.Property(e => e.FldEmployeeRequestEmployeeFinalAcceptionDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EmployeeRequest_Employee_FinalAcceptionDate");
+
                 entity.Property(e => e.FldEmployeeRequestEmployeeInterviewEndDate)
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_Employee_InterviewEndDate");
@@ -357,6 +361,10 @@ namespace EmployeeRequest.Models
                 entity.Property(e => e.FldEmployeeRequestEmployeePassword)
                     .HasMaxLength(50)
                     .HasColumnName("Fld_EmployeeRequest_Employee_Password");
+
+                entity.Property(e => e.FldEmployeeRequestEmployeePrimaryAcceptionDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EmployeeRequest_Employee_PrimaryAcceptionDate");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeResultPoint).HasColumnName("Fld_EmployeeRequest_Employee_ResultPoint");
 
@@ -384,6 +392,16 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblEmployeeRequestEmployees)
                     .HasForeignKey(d => d.FldEmployeeRequestPrimaryAcceptionId)
                     .HasConstraintName("FK_Tbl_User_Tbl_PrimaryAcception");
+
+                entity.HasOne(d => d.FldEmployeeRequestUserFinalAccepter)
+                    .WithMany(p => p.TblEmployeeRequestEmployeeFldEmployeeRequestUserFinalAccepters)
+                    .HasForeignKey(d => d.FldEmployeeRequestUserFinalAccepterId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_Employee_Tbl_EmployeeRequest_User");
+
+                entity.HasOne(d => d.FldEmployeeRequestUserPrimaryAccepter)
+                    .WithMany(p => p.TblEmployeeRequestEmployeeFldEmployeeRequestUserPrimaryAccepters)
+                    .HasForeignKey(d => d.FldEmployeeRequestUserPrimaryAccepterId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_Employee_Tbl_EmployeeRequest_User1");
             });
 
             modelBuilder.Entity<TblEmployeeRequestEmployeeRequest>(entity =>

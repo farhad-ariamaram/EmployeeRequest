@@ -1,0 +1,169 @@
+﻿@page
+@model EmployAccept.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                نام و نام خانوادگی
+            </th>
+            <th>
+                شماره ملی
+            </th>
+            <th>
+                شماره تماس
+            </th>
+            <th>
+                وضعیت تایید/رد اولیه
+            </th>
+            <th>
+                تایید/رد کننده اولیه
+            </th>
+            <th>
+                تاریخ تایید/رد اولیه
+            </th>
+            <th>
+                وضعیت تایید/رد نهایی
+            </th>
+            <th>
+                تایید/رد کننده نهایی
+            </th>
+            <th>
+                تاریخ تایید/رد نهایی
+            </th>
+            <th>
+                نمره کسب شده / از
+            </th>
+            <th>
+                تاریخ شروع مصاحبه
+            </th>
+            <th>
+                تاریخ پایان مصاحبه
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TblEmployeeRequestEmployee)
+        {
+            <tr>
+                <td>
+                    @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName
+                </td>
+                <td>
+                    @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode
+                </td>
+                <td>
+                    @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryAcceptionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserPrimaryAccepterId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeePrimaryAcceptionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestFinalAcceptionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserFinalAccepterId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeFinalAcceptionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) / @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeInterviewStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeInterviewEndDate)
+                </td>
+                <td>
+                    <a href="#" class="btn btn-success w-100" onclick="AskAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله اولیه</a>
+                    <a href="#" class="btn btn-danger w-100" onclick="AskDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله اولیه</a>
+                    @if (item.FldEmployeeRequestEmployeeMaxPoint == null)
+                    {
+                        <a href="#" class="btn btn-primary w-100" onclick="AskPoint('@item.FldEmployeeRequestEmployeeId');">تعیین نمره</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/lib/sweetalert/sweetalert2.10.js"></script>
+@section Scripts {
+
+    <script>
+
+        function AskAccept(id) {
+            Swal.fire({
+                title: 'درخواست تایید شود؟',
+                showDenyButton: true,
+                confirmButtonText: `بله`,
+                denyButtonText: `خیر`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", "?id=" + id + "&handler=Accept", false);
+                    xmlHttp.send(null);
+                    Swal.fire('درخواست تایید شد', '', 'success').then(() => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+
+        function AskDeny(id) {
+            Swal.fire({
+                title: 'درخواست رد شود؟',
+                showDenyButton: true,
+                confirmButtonText: `بله`,
+                denyButtonText: `خیر`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", "?id=" + id + "&handler=Deny", false);
+                    xmlHttp.send(null);
+                    Swal.fire('درخواست رد شد', '', 'success').then(() => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+
+        async function AskPoint(id) {
+            const { value: point } = await Swal.fire({
+                input: 'text',
+                inputLabel: 'حداکثر نمره',
+                inputPlaceholder: 'حداکثر نمره مجاز را وارد کنید',
+                showCancelButton: true,
+                confirmButtonText: `تایید`,
+                cancelButtonText: `انصراف`,
+            })
+            if (point) {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", "?id=" + id + "&point=" + point + "&handler=Point", false);
+                xmlHttp.send(null);
+                Swal.fire('حداکثر نمره مجاز تعیین شد', '', 'success').then(() => {
+                    location.reload();
+                })
+            }
+        }
+    </script>
+}
