@@ -11,17 +11,30 @@
         <form method="post">
             <div class="form-group">
                 <label class="control-label">تاریخ شروع مصاحبه </label>
-                @*<input class="form-control" type="text" id="input1" value="@ViewBag.startdate" readonly />*@
+                <input class="form-control" name="startdate" type="text" id="input1" value="@ViewBag.startdate" readonly />
                 <span id="span1"></span>
-                <input id="textbox" type="text" value="۱۳۹۲/۰۱/۰۱"
-                       data-mddatetimepicker="true"
-                       data-placement="right" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">ساعت شروع مصاحبه </label>
+                <input class="form-control" name="starttime" type="text" id="input1" value="@ViewBag.starttime" readonly />
+                <span id="span1"></span>
             </div>
 
             <div class="form-group">
                 <label class="control-label">تاریخ پایان مصاحبه</label>
-                <input class="form-control" type="text" id="input2" value="@ViewBag.enddate" readonly />
+                <input class="form-control" name="enddate" type="text" id="input2" value="@ViewBag.enddate" readonly />
                 <span id="span2"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">ساعت شروع مصاحبه </label>
+                <input class="form-control" name="endtime" type="text" id="input1" value="@ViewBag.endtime" readonly />
+                <span id="span1"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -33,16 +46,9 @@
     <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
     <script>
         function Load() {
-            //$("#input1, #span1").persianDatepicker({
-            //    onSelect: function () {
-            //        $("#TblEmployeeRequestEmployeeRequest_FldEmployeeRequestEmployeeRequestStartDate").val($("#input1").attr("data-gdate"));
-            //    }
-            //});
-            //$("#input2, #span2").persianDatepicker({
-            //    onSelect: function () {
-            //        $("#TblEmployeeRequestEmployeeRequest_FldEmployeeRequestEmployeeRequestEndDate").val($("#input2").attr("data-gdate"));
-            //    }
-            //});
+            
+            $("#input1, #span1").persianDatepicker();
+            $("#input2, #span2").persianDatepicker();
         }
 
     </script>

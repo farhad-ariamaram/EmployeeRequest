@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeRequest.Models;
@@ -37,8 +38,11 @@ namespace EmployeeRequest.Pages.EmployAccept
                 return NotFound();
             }
 
-            ViewData["startdate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate() + ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate).TimeOfDay;
-            ViewData["enddate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate() + ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate).TimeOfDay;
+            ViewData["startdate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate();
+            ViewData["starttime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate).TimeOfDay;
+
+            ViewData["enddate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate();
+            ViewData["endtime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate).TimeOfDay;
 
             return Page();
         }
@@ -48,8 +52,24 @@ namespace EmployeeRequest.Pages.EmployAccept
         {
             if (!ModelState.IsValid)
             {
+                ViewData["startdate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate();
+                ViewData["starttime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate).TimeOfDay;
+                ViewData["enddate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate();
+                ViewData["endtime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate).TimeOfDay;
                 return Page();
             }
+
+            string startdate = Request.Form["startdate"] + "/" + Request.Form["starttime"];
+            string enddate = Request.Form["enddate"] + "/" + Request.Form["endtime"];
+
+            var startdatearray = startdate.Split('/');
+            var starttimearray = startdatearray[3].Split(':');
+            var enddatearray = startdate.Split('/');
+            PersianCalendar pc = new PersianCalendar();
+
+            DateTime startdatefinal = pc.ToDateTime(int.Parse(startdatearray[0]), int.Parse(startdatearray[1]), int.Parse(startdatearray[2]), int.Parse(starttimearray[0]), int.Parse(starttimearray[1]), int.Parse(starttimearray[2]),0);
+
+
 
             _context.Attach(TblEmployeeRequestEmployee).State = EntityState.Modified;
 
