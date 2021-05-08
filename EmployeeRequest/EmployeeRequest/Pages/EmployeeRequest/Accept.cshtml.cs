@@ -44,6 +44,11 @@ namespace EmployeeRequest.Pages.EmployeeRequest
 
         public IActionResult OnGetDelete(long id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
             TblEmployeeRequestEmployeeRequest TblEmployeeRequestEmployeeRequest2 = _context.TblEmployeeRequestEmployeeRequests.Find(id);
             if (TblEmployeeRequestEmployeeRequest2 != null)
             {
@@ -59,13 +64,15 @@ namespace EmployeeRequest.Pages.EmployeeRequest
             if (TblEmployeeRequestEmployeeRequest2 != null)
             {
                 string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
                 TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestIsAccept = true;
                 TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestAcceptDate = DateTime.Now;
                 TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestUserAccepterId = int.Parse(uid);
                 _context.TblEmployeeRequestEmployeeRequests.Update(TblEmployeeRequestEmployeeRequest2);
                 _context.SaveChanges();
-
-                //TODO: Publish process here
             }
             return RedirectToPage("Index");
         }
@@ -76,6 +83,10 @@ namespace EmployeeRequest.Pages.EmployeeRequest
             if (TblEmployeeRequestEmployeeRequest2 != null)
             {
                 string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
                 TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestIsAccept = false;
                 TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestAcceptDate = DateTime.Now;
                 TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestUserAccepterId = int.Parse(uid);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
 using EmployeeRequest.Utilities;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest
 {
@@ -130,16 +131,31 @@ namespace EmployeeRequest.Pages.EmployeeRequest
 
         public async Task<IActionResult> OnGetJobsAsync(string jobName)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
             return new JsonResult(_context.TblJobTamins.Where(a => a.FldTaminJobName.Contains(jobName) || a.FldTaminJobName.Contains(jobName.Replace("ی", "ي").Replace("ک", "ك"))).Select(a => new { a.FldTaminJobId, a.FldTaminJobName }).ToList());
         }
 
         public async Task<IActionResult> OnGetJobsoAsync(string jobName)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
             return new JsonResult(_context.TblJobs.Where(a => a.FldJobName.Contains(jobName) || a.FldJobName.Contains(jobName.Replace("ی", "ي").Replace("ک", "ك"))).Select(a => new { a.FldJobId, a.FldJobName }).ToList());
         }
 
         public async Task<IActionResult> OnGetJobseAsync(string jobName)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
             return new JsonResult(_context.PayJobs.Where(a => a.JobsName.Contains(jobName) || a.JobsName.Contains(jobName.Replace("ی", "ي").Replace("ک", "ك"))).Select(a => new { a.JobsId, a.JobsName }).ToList());
         }
 
