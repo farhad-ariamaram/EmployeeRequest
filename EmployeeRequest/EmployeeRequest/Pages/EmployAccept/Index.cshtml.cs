@@ -72,6 +72,44 @@ namespace EmployeeRequest.Pages.EmployAccept
             return RedirectToPage("Index");
         }
 
+        public IActionResult OnGetFAccept(string id)
+        {
+            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
+            if (TblEmployeeRequestEmployee2 != null)
+            {
+                string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
+                TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = 1;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = DateTime.Now;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = Int64.Parse(uid);
+                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+        }
+
+        public IActionResult OnGetFDeny(string id)
+        {
+            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
+            if (TblEmployeeRequestEmployee2 != null)
+            {
+                string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
+                TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = 2;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = DateTime.Now;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = Int64.Parse(uid);
+                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+        }
+
         public IActionResult OnGetPoint(string id, int point)
         {
             TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
