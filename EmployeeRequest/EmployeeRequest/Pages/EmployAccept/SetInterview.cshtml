@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form name="myform" method="post" onsubmit="return validate()">
             <input type="hidden" asp-for="TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId" />
             <div class="form-group">
                 <label class="control-label">تاریخ شروع مصاحبه </label>
@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label class="control-label">ساعت شروع مصاحبه </label>
-                <input class="form-control bs-timepicker" name="starttime" id="starttime" type="text" value="@ViewBag.starttime" />
+                <input class="form-control bs-timepicker" name="starttime" id="starttime" type="text" value="@ViewBag.starttime" autocomplete="off"/>
                 <span id="span1"></span>
             </div>
 
@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label class="control-label">ساعت پایان مصاحبه </label>
-                <input class="form-control bs-timepicker" name="endtime" id="endtime" type="text" value="@ViewBag.endtime" />
+                <input class="form-control bs-timepicker" name="endtime" id="endtime" type="text" value="@ViewBag.endtime" autocomplete="off"/>
                 <span id="span1"></span>
             </div>
 
@@ -43,6 +43,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
     <script>
         function Load() {
             $('.bs-timepicker').timepicker();
@@ -50,5 +51,15 @@
             $("#input2, #span2").persianDatepicker();
         }
 
+        function validate() {
+            if ((document.forms["myform"]["startdate"].value == "") ||
+                (document.forms["myform"]["starttime"].value == "") ||
+                (document.forms["myform"]["enddate"].value == "") ||
+                (document.forms["myform"]["endtime"].value == "")) {
+                Swal.fire('لطفا همه مقادیر را وارد کنید', '', 'error');
+                return false;
+            }
+            return true;
+        }
     </script>
 }

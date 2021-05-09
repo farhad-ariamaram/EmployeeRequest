@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeRequest.Models;
 using EmployeeRequest.Utilities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,12 @@ namespace EmployeeRequest.Pages.EmployAccept
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -38,11 +45,17 @@ namespace EmployeeRequest.Pages.EmployAccept
                 return NotFound();
             }
 
-            ViewData["startdate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate();
-            ViewData["starttime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate).TimeOfDay.ToString().Remove(5);
+            if(TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate != null)
+            {
+                ViewData["startdate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate();
+                ViewData["starttime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate).TimeOfDay.ToString().Remove(5);
+            }
 
-            ViewData["enddate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate();
-            ViewData["endtime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate).TimeOfDay.ToString().Remove(5);
+            if (TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate != null)
+            {
+                ViewData["enddate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate();
+                ViewData["endtime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate).TimeOfDay.ToString().Remove(5);
+            }
 
             return Page();
         }

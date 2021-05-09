@@ -90,21 +90,55 @@
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeInterviewEndDate)
                 </td>
                 <td>
-                    @if (item.FldEmployeeRequestEmployeeMaxPoint == null)
-                    {
-                        <a href="#" class="btn btn-primary w-100" onclick="AskPoint('@item.FldEmployeeRequestEmployeeId');">تعیین نمره</a>
-                    }
 
-                    @if (item.FldEmployeeRequestEmployeeResultPoint != null)
-                    {
-                        <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
-                        <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
-                    }
-                    else
+                    @*تایید اولیه*@
+                    @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate == null)
                     {
                         <a href="#" class="btn btn-success w-100" onclick="AskAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله اولیه</a>
                         <a href="#" class="btn btn-danger w-100" onclick="AskDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله اولیه</a>
                     }
+                    else if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
+                    {
+                        //زمان مصاحبه
+                        if (item.FldEmployeeRequestEmployeeInterviewStartDate == null)
+                        {
+                            <a asp-page="SetInterview" asp-route-id="@item.FldEmployeeRequestEmployeeId" class="btn btn-primary w-100">تعیین زمان مصاحبه</a>
+                        }
+                        else
+                        {
+                            //تعیین نمره
+                            if (item.FldEmployeeRequestEmployeeMaxPoint == null)
+                            {
+                                <a href="#" class="btn btn-primary w-100" onclick="AskPoint('@item.FldEmployeeRequestEmployeeId');">تعیین حداکثر نمره</a>
+                            }
+                            else
+                            {
+                                //تایید نهایی
+                                if (item.FldEmployeeRequestFinalAcceptionId == null)
+                                {
+                                    <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
+                                    <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
+                                }
+                                else
+                                {
+                                    if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                                    {
+                                        <span class="badge badge-success">کاربر تایید نهایی شده</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger">کاربر مردود شده</span>
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">کاربر مردود شده</span>
+                    }
+
                 </td>
             </tr>
         }
