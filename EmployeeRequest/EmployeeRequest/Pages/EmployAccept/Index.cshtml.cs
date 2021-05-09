@@ -117,22 +117,5 @@ namespace EmployeeRequest.Pages.EmployAccept
             }
             return RedirectToPage("Index");
         }
-
-        public IActionResult OnGetPoint(string id, int point)
-        {
-            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
-            if (TblEmployeeRequestEmployee2 != null)
-            {
-                string uid = HttpContext.Session.GetString("uid");
-                if (uid == null)
-                {
-                    return RedirectToPage("../Index");
-                }
-                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeMaxPoint = point;
-                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
-                _context.SaveChanges();
-            }
-            return RedirectToPage("Index");
-        }
     }
 }

@@ -1,0 +1,47 @@
+﻿@page
+@model EmployAccept.CreateScorerModel
+
+@{
+    ViewData["Title"] = "ایجاد امتیاز دهنده";
+}
+
+<h4>ایجاد امتیاز دهنده</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label class="control-label">کابر امتیاز دهنده</label>
+                <select asp-for="TblEmployeeRequestInterviewSession.FldEmployeeRequestUserId" class="form-control select2-dropdown" asp-items="ViewBag.FldEmployeeRequestUserId"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">کابر متقضی شغل</label>
+                <select asp-for="TblEmployeeRequestInterviewSession.FldEmployeeRequestEmployeeId" class="form-control select2-dropdown" asp-items="ViewBag.FldEmployeeRequestEmployeeId"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">حداکثر نمره مجاز</label>
+                <input asp-for="TblEmployeeRequestInterviewSession.FldEmployeeRequestInterviewSessionMaxPoint" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestInterviewSession.FldEmployeeRequestInterviewSessionMaxPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ایجاد" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="../Panel/Index">بازگشت به پنل کاربری</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function Load() {
+            $('.select2-dropdown').select2({
+                width: 'resolve'
+            });
+        }
+    </script>
+}

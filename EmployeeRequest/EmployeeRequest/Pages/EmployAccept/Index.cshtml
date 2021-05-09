@@ -64,9 +64,9 @@
                     @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo
                 </td>
                 <td>
-                    @if (item.FldEmployeeRequestPrimaryAcceptionId == 1)
+                    @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
                     {
-                        <span class="badge badge-warning">مشخص نشده</span>
+                        <span class="badge badge-success">تایید شده</span>
                     }
                     else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
                     {
@@ -74,30 +74,42 @@
                     }
                     else
                     {
-                        <span class="badge badge-success">تایید شده</span>
+                        <span class="badge badge-warning text-white">مشخص نشده</span>
                     }
                 </td>
                 <td>
-                    @item.FldEmployeeRequestUserPrimaryAccepter.FldEmployeeRequestUserUsername
+                    @if (item.FldEmployeeRequestUserPrimaryAccepterId != null)
+                    {
+                        @item.FldEmployeeRequestUserPrimaryAccepter.FldEmployeeRequestUserUsername
+                    }
                 </td>
                 <td>
-                    @item.FldEmployeeRequestEmployeePrimaryAcceptionDate.toPersianDate()
+                    @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate != null)
+                    {
+                        @item.FldEmployeeRequestEmployeePrimaryAcceptionDate.toPersianDate()
+                    }
                 </td>
                 <td>
                     @if (item.FldEmployeeRequestFinalAcceptionId == 1)
                     {
                         <span class="badge badge-success">تایید شده</span>
                     }
-                    else
+                    else if(item.FldEmployeeRequestFinalAcceptionId == 2)
                     {
                         <span class="badge badge-danger">رد شده</span>
                     }
                 </td>
                 <td>
-                    @item.FldEmployeeRequestUserFinalAccepter.FldEmployeeRequestUserUsername
+                    @if (item.FldEmployeeRequestUserFinalAccepterId != null)
+                    {
+                        @item.FldEmployeeRequestUserFinalAccepter.FldEmployeeRequestUserUsername
+                    }
                 </td>
                 <td>
-                    @item.FldEmployeeRequestEmployeeFinalAcceptionDate.toPersianDate()
+                    @if (item.FldEmployeeRequestEmployeeFinalAcceptionDate != null)
+                    {
+                        @item.FldEmployeeRequestEmployeeFinalAcceptionDate.toPersianDate()
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) <br />
@@ -133,29 +145,21 @@
                         }
                         else
                         {
-                            //تعیین نمره
-                            if (item.FldEmployeeRequestEmployeeMaxPoint == null)
+                            //تایید نهایی
+                            if (item.FldEmployeeRequestFinalAcceptionId == null)
                             {
-                                <a href="#" class="btn btn-primary w-100" onclick="AskPoint('@item.FldEmployeeRequestEmployeeId');">تعیین حداکثر نمره</a>
+                                <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
+                                <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
                             }
                             else
                             {
-                                //تایید نهایی
-                                if (item.FldEmployeeRequestFinalAcceptionId == null)
+                                if (item.FldEmployeeRequestFinalAcceptionId == 1)
                                 {
-                                    <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
-                                    <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
+                                    <span class="badge badge-success">کاربر تایید نهایی شده</span>
                                 }
                                 else
                                 {
-                                    if (item.FldEmployeeRequestFinalAcceptionId == 1)
-                                    {
-                                        <span class="badge badge-success">کاربر تایید نهایی شده</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-danger">کاربر مردود شده</span>
-                                    }
+                                    <span class="badge badge-danger">کاربر مردود شده</span>
                                 }
                             }
                         }
@@ -251,25 +255,6 @@
                     })
                 }
             });
-        }
-
-        async function AskPoint(id) {
-            const { value: point } = await Swal.fire({
-                input: 'text',
-                inputLabel: 'حداکثر نمره',
-                inputPlaceholder: 'حداکثر نمره مجاز را وارد کنید',
-                showCancelButton: true,
-                confirmButtonText: `تایید`,
-                cancelButtonText: `انصراف`,
-            })
-            if (point) {
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET", "?id=" + id + "&point=" + point + "&handler=Point", false);
-                xmlHttp.send(null);
-                Swal.fire('حداکثر نمره مجاز تعیین شد', '', 'success').then(() => {
-                    location.reload();
-                })
-            }
         }
     </script>
 }

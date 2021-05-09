@@ -72,7 +72,7 @@
                     @item.FldEmployeeRequestInterviewSessionDate.toPersianDate()
                 </td>
                 <td>
-                    @if (item.FldEmployeeRequestInterviewSessionResultPoint == null)
+                    @if (item.FldEmployeeRequestInterviewSessionDate == null)
                     {
                         <a href="#" class="btn btn-primary w-100" onclick="AskPoint(@item.FldEmployeeRequestInterviewSessionId,@item.FldEmployeeRequestInterviewSessionMaxPoint,'@item.FldEmployeeRequestEmployeeId');">ثبت نمره</a>
                     }
