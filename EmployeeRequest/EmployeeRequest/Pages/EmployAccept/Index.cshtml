@@ -1,5 +1,6 @@
 ﻿@page
 @model EmployAccept.IndexModel
+@using Utilities;
 
 @{
     ViewData["Title"] = "تایید نیرو";
@@ -63,31 +64,57 @@
                     @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryAcceptionId)
+                    @if (item.FldEmployeeRequestPrimaryAcceptionId == 1)
+                    {
+                        <span class="badge badge-warning">مشخص نشده</span>
+                    }
+                    else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
+                    {
+                        <span class="badge badge-danger">رد شده</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-success">تایید شده</span>
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserPrimaryAccepterId)
+                    @item.FldEmployeeRequestUserPrimaryAccepter.FldEmployeeRequestUserUsername
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeePrimaryAcceptionDate)
+                    @item.FldEmployeeRequestEmployeePrimaryAcceptionDate.toPersianDate()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestFinalAcceptionId)
+                    @if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                    {
+                        <span class="badge badge-success">تایید شده</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">رد شده</span>
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserFinalAccepterId)
+                    @item.FldEmployeeRequestUserFinalAccepter.FldEmployeeRequestUserUsername
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeFinalAcceptionDate)
+                    @item.FldEmployeeRequestEmployeeFinalAcceptionDate.toPersianDate()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) / @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) <br />
+                    از <br />
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeInterviewStartDate)
+                    @if (item.FldEmployeeRequestEmployeeInterviewStartDate != null)
+                    {
+                        @item.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewStartDate.ToString().Split(' ')[1]
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeInterviewEndDate)
+                    @if (item.FldEmployeeRequestEmployeeInterviewEndDate != null)
+                    {
+                        @item.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewEndDate.ToString().Split(' ')[1]
+                    }
                 </td>
                 <td>
 
