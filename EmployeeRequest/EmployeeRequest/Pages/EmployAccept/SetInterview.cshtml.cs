@@ -39,10 +39,10 @@ namespace EmployeeRequest.Pages.EmployAccept
             }
 
             ViewData["startdate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate();
-            ViewData["starttime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate).TimeOfDay;
+            ViewData["starttime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate).TimeOfDay.ToString().Remove(5);
 
             ViewData["enddate"] = TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate();
-            ViewData["endtime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate).TimeOfDay;
+            ViewData["endtime"] = ((DateTime)TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate).TimeOfDay.ToString().Remove(5);
 
             return Page();
         }
@@ -64,14 +64,20 @@ namespace EmployeeRequest.Pages.EmployAccept
 
             var startdatearray = startdate.Split('/');
             var starttimearray = startdatearray[3].Split(':');
-            var enddatearray = startdate.Split('/');
+            var enddatearray = enddate.Split('/');
+            var endttimearray = enddatearray[3].Split(':');
             PersianCalendar pc = new PersianCalendar();
 
-            DateTime startdatefinal = pc.ToDateTime(int.Parse(startdatearray[0]), int.Parse(startdatearray[1]), int.Parse(startdatearray[2]), int.Parse(starttimearray[0]), int.Parse(starttimearray[1]), int.Parse(starttimearray[2]),0);
+            DateTime startfinal = pc.ToDateTime(int.Parse(startdatearray[0]), int.Parse(startdatearray[1]), int.Parse(startdatearray[2]), int.Parse(starttimearray[0]), int.Parse(starttimearray[1]), 0,0);
+            DateTime endfinal = pc.ToDateTime(int.Parse(enddatearray[0]), int.Parse(enddatearray[1]), int.Parse(enddatearray[2]), int.Parse(endttimearray[0]), int.Parse(endttimearray[1]), 0, 0);
 
+            TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
+                .FirstOrDefaultAsync(m => m.FldEmployeeRequestEmployeeId == TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId);
 
+            TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewStartDate = startfinal;
+            TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeInterviewEndDate = endfinal;
 
-            _context.Attach(TblEmployeeRequestEmployee).State = EntityState.Modified;
+            _context.Update(TblEmployeeRequestEmployee);
 
             await _context.SaveChangesAsync();
 
