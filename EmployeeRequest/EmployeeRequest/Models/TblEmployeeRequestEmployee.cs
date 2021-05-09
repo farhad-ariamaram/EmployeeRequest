@@ -32,7 +32,7 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestEmployeePassword { get; set; }
         public string FldEmployeeRequestEmployeeCurrentLevel { get; set; }
         public long? FldEmployeeRequestPagesSequenceId { get; set; }
-        public int? FldEmployeeRequestEmployeeResultPoint { get; set; }
+        public int FldEmployeeRequestEmployeeResultPoint { get; set; }
         public int? FldEmployeeRequestEmployeeMaxPoint { get; set; }
         public DateTime? FldEmployeeRequestEmployeeInterviewEndDate { get; set; }
         public DateTime? FldEmployeeRequestEmployeeInterviewStartDate { get; set; }

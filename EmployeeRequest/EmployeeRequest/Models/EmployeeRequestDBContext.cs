@@ -590,6 +590,10 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(50)
                     .HasColumnName("Fld_EmployeeRequest_Employee_Id");
 
+                entity.Property(e => e.FldEmployeeRequestInterviewSessionDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EmployeeRequest_InterviewSession_Date");
+
                 entity.Property(e => e.FldEmployeeRequestInterviewSessionMaxPoint).HasColumnName("Fld_EmployeeRequest_InterviewSession_MaxPoint");
 
                 entity.Property(e => e.FldEmployeeRequestInterviewSessionResultPoint).HasColumnName("Fld_EmployeeRequest_InterviewSession_ResultPoint");

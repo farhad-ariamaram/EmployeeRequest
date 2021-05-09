@@ -13,6 +13,7 @@ namespace EmployeeRequest.Models
         public int? FldEmployeeRequestPrimaryAcceptionId { get; set; }
         public int? FldEmployeeRequestInterviewSessionResultPoint { get; set; }
         public int? FldEmployeeRequestInterviewSessionMaxPoint { get; set; }
+        public DateTime? FldEmployeeRequestInterviewSessionDate { get; set; }
 
         public virtual TblEmployeeRequestEmployee FldEmployeeRequestEmployee { get; set; }
         public virtual TblEmployeeRequestPrimaryAcception FldEmployeeRequestPrimaryAcception { get; set; }
