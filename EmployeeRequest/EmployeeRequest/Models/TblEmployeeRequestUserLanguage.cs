@@ -15,6 +15,7 @@ namespace EmployeeRequest.Models
         public int? FldEmployeeRequestUserLanguageListeningLevel { get; set; }
         public int? FldEmployeeRequestUserLanguageSpeakingLevel { get; set; }
         public string FldEmployeeRequestUserLanguageDescription { get; set; }
+        public bool FldEmployeeRequestUserLanguageIsNative { get; set; }
 
         public virtual TblEmployeeRequestEmployee FldEmployeeRequestEmployee { get; set; }
         public virtual TblEmployeeRequestLanguageType FldEmployeeRequestUserLanguageLanguageType { get; set; }

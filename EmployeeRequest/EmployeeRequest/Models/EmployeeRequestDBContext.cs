@@ -196,7 +196,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_CustomerDegree");
 
-                entity.Property(e => e.FldCustomerDegreeId).HasColumnName("Fld_CustomerDegreeID");
+                entity.Property(e => e.FldCustomerDegreeId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_CustomerDegreeID");
 
                 entity.Property(e => e.CustomerName)
                     .HasMaxLength(100)
@@ -297,7 +299,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_EmergencyCall");
 
-                entity.Property(e => e.FldEmployeeRequestEmergencyCallId).HasColumnName("Fld_EmployeeRequest_EmergencyCall_Id");
+                entity.Property(e => e.FldEmployeeRequestEmergencyCallId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_EmergencyCall_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmergencyCallDescription)
                     .HasMaxLength(1000)
@@ -525,7 +529,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_GeneralRecord");
 
-                entity.Property(e => e.FldEmployeeRequestGeneralRecordId).HasColumnName("Fld_EmployeeRequest_GeneralRecord_Id");
+                entity.Property(e => e.FldEmployeeRequestGeneralRecordId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_GeneralRecord_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -556,7 +562,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_HowFind");
 
-                entity.Property(e => e.FldEmployeeRequestHowFindId).HasColumnName("Fld_EmployeeRequest_HowFind_Id");
+                entity.Property(e => e.FldEmployeeRequestHowFindId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_HowFind_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -631,7 +639,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_IpLog");
 
-                entity.Property(e => e.FldEmployeeRequestIpLogId).HasColumnName("Fld_EmployeeRequest_IpLog_Id");
+                entity.Property(e => e.FldEmployeeRequestIpLogId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_IpLog_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -659,6 +669,10 @@ namespace EmployeeRequest.Models
                 entity.ToTable("Tbl_EmployeeRequest_Jobs");
 
                 entity.Property(e => e.FldEmployeeRequestJobsId).HasColumnName("Fld_EmployeeRequest_Jobs_Id");
+
+                entity.Property(e => e.FldEmployeeRequestJobsDescription)
+                    .HasMaxLength(1000)
+                    .HasColumnName("Fld_EmployeeRequest_Jobs_Description");
 
                 entity.Property(e => e.FldEmployeeRequestJobsEndDate)
                     .HasColumnType("datetime")
@@ -731,7 +745,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_MedicalRecord");
 
-                entity.Property(e => e.FldEmployeeRequestMedicalRecordId).HasColumnName("Fld_EmployeeRequest_MedicalRecord_Id");
+                entity.Property(e => e.FldEmployeeRequestMedicalRecordId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_MedicalRecord_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -809,7 +825,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_PageTimeLog");
 
-                entity.Property(e => e.FldEmployeeRequestPageTimeLogId).HasColumnName("Fld_EmployeeRequest_PageTimeLog_Id");
+                entity.Property(e => e.FldEmployeeRequestPageTimeLogId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_PageTimeLog_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -902,7 +920,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_PrimaryInformation");
 
-                entity.Property(e => e.FldEmployeeRequestPrimaryInformationId).HasColumnName("Fld_EmployeeRequest_PrimaryInformation_Id");
+                entity.Property(e => e.FldEmployeeRequestPrimaryInformationId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_PrimaryInformation_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -1039,7 +1059,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_UserCompilation");
 
-                entity.Property(e => e.FldEmployeeRequestUserCompilationId).HasColumnName("Fld_EmployeeRequest_UserCompilation_Id");
+                entity.Property(e => e.FldEmployeeRequestUserCompilationId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_UserCompilation_Id");
 
                 entity.Property(e => e.FldEmployeeRequestCompilationTypeId).HasColumnName("Fld_EmployeeRequest_CompilationType_Id");
 
@@ -1085,7 +1107,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_UserCreativity");
 
-                entity.Property(e => e.FldEmployeeRequestUserCreativityId).HasColumnName("Fld_EmployeeRequest_UserCreativity_Id");
+                entity.Property(e => e.FldEmployeeRequestUserCreativityId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_UserCreativity_Id");
 
                 entity.Property(e => e.FldEmployeeRequestCreativityTypeId).HasColumnName("Fld_EmployeeRequest_CreativityType_Id");
 
@@ -1127,7 +1151,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_UserJob");
 
-                entity.Property(e => e.FldEmployeeRequestUserJobId).HasColumnName("Fld_EmployeeRequest_UserJob_Id");
+                entity.Property(e => e.FldEmployeeRequestUserJobId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_UserJob_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -1169,7 +1195,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_UserLanguage");
 
-                entity.Property(e => e.FldEmployeeRequestUserLanguageId).HasColumnName("Fld_EmployeeRequest_UserLanguage_Id");
+                entity.Property(e => e.FldEmployeeRequestUserLanguageId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_UserLanguage_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -1178,6 +1206,8 @@ namespace EmployeeRequest.Models
                 entity.Property(e => e.FldEmployeeRequestUserLanguageDescription)
                     .HasMaxLength(1000)
                     .HasColumnName("Fld_EmployeeRequest_UserLanguage_Description");
+
+                entity.Property(e => e.FldEmployeeRequestUserLanguageIsNative).HasColumnName("Fld_EmployeeRequest_UserLanguage_IsNative");
 
                 entity.Property(e => e.FldEmployeeRequestUserLanguageLanguageTypeId).HasColumnName("Fld_EmployeeRequest_UserLanguage_LanguageType_Id");
 
@@ -1207,7 +1237,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_UserMilitary");
 
-                entity.Property(e => e.FldEmployeeRequestUserMilitaryId).HasColumnName("Fld_EmployeeRequest_UserMilitary_Id");
+                entity.Property(e => e.FldEmployeeRequestUserMilitaryId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_UserMilitary_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -1264,7 +1296,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_UserSkill");
 
-                entity.Property(e => e.FldEmployeeRequestUserSkillId).HasColumnName("Fld_EmployeeRequest_UserSkill_Id");
+                entity.Property(e => e.FldEmployeeRequestUserSkillId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_UserSkill_Id");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeId)
                     .HasMaxLength(50)
@@ -1426,7 +1460,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_WorkExperience");
 
-                entity.Property(e => e.FldWorkExperienceId).HasColumnName("Fld_WorkExperienceID");
+                entity.Property(e => e.FldWorkExperienceId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_WorkExperienceID");
 
                 entity.Property(e => e.FldAmountOfDailyInsurance)
                     .HasMaxLength(50)
@@ -1525,7 +1561,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_WorkExperienceLeaveJobDtl");
 
-                entity.Property(e => e.FldWorkExperienceLeaveJobDtlId).HasColumnName("Fld_WorkExperienceLeaveJobDtlID");
+                entity.Property(e => e.FldWorkExperienceLeaveJobDtlId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_WorkExperienceLeaveJobDtlID");
 
                 entity.Property(e => e.FldLeaveJob).HasColumnName("Fld_LeaveJob");
 

@@ -19,6 +19,7 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestJobsJobTitle { get; set; }
         public bool FldEmployeeRequestJobsNeedMan { get; set; }
         public bool FldEmployeeRequestJobsNeedWoman { get; set; }
+        public string FldEmployeeRequestJobsDescription { get; set; }
 
         public virtual ICollection<TblEmployeeRequestUserJob> TblEmployeeRequestUserJobs { get; set; }
     }
