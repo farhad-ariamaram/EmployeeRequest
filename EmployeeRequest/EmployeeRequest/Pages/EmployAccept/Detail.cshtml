@@ -556,9 +556,9 @@
     <dl class="row">
         @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
         {
-        <dt class="col-sm-2">
-            عنوان مهارت
-        </dt>
+            <dt class="col-sm-2">
+                عنوان مهارت
+            </dt>
             <dd class="col-sm-10">
                 @item.FldEmployeeRequestUserSkillSkillTitle
             </dd>
@@ -617,6 +617,158 @@
             </dd>
         }
     </dl>
+    <hr />
+    <dl class="row">
+        @foreach (var item in Model.TblEmployeeRequestEmployee.TblWorkExperiences.Where(a => a.UserId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
+        {
+            <dt class="col-sm-2">
+                نام شغل
+            </dt>
+            <dd class="col-sm-10">
+                @if (item.FldTaminJobId != null)
+                {
+                    @item.FldTaminJob.FldTaminJobName
+                }
+            </dd>
+            <dt class="col-sm-2">
+                تعداد روز های بیمه
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldAmountOfDailyInsurance
+            </dd>
+            <dt class="col-sm-2">
+                نام شرکت
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldCompanyName
+            </dd>
+            <dt class="col-sm-2">
+                شماره داخلی شرکت
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldContactInnerNumberOfCompany
+            </dd>
+            <dt class="col-sm-2">
+                شماره تلفن شرکت
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldContactNumberOfCompany
+            </dd>
+            <dt class="col-sm-2">
+                توضیحات
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldDescription
+            </dd>
+            <dt class="col-sm-2">
+                حقوق
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldEarlySalary
+            </dd>
+            <dt class="col-sm-2">
+                تاریخ ترک شغل
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldEndDate.toPersianDate()
+            </dd>
+            <dt class="col-sm-2">
+                عنوان شغل
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldJobTitle
+            </dd>
+            <dt class="col-sm-2">
+                اخرین حقوق
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldLateSalary
+            </dd>
+            <dt class="col-sm-2">
+                دلیل ترک کار
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldReasonsToLeaveJob
+            </dd>
+            <dt class="col-sm-2">
+                فرد مرتبط
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldRelatedPeople
+            </dd>
+            <dt class="col-sm-2">
+                تاریخ شروع کار
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldStartDate
+            </dd>
+            <dt class="col-sm-2">
+                نام واحد
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldUnitName
+            </dd>
+            <dt class="col-sm-2">
+                روز کاری
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldWorkDay
+            </dd>
+            <dt class="col-sm-2">
+                ساعت کاری
+            </dt>
+            <dd class="col-sm-10">
+                @item.FldWorkTime
+            </dd>
+            <dt class="col-sm-2">
+                بیمه
+            </dt>
+            <dd class="col-sm-10">
+                @item.HasInsurance
+            </dd>
+            <dt class="col-sm-2">
+                شماره بیمه
+            </dt>
+            <dd class="col-sm-10">
+                @item.InsuranceNo
+            </dd>
+            <dt class="col-sm-2">
+                مشغول به کار
+            </dt>
+            <dd class="col-sm-10">
+                @item.IsWorking
+            </dd>
+            <dt class="col-sm-2">
+                دستاورد ها
+            </dt>
+            <dd class="col-sm-10">
+                @item.PreviousJobAchievements
+            </dd>
+            <dt class="col-sm-2">
+                دلیل تغییر شغل
+            </dt>
+            <dd class="col-sm-10">
+                @item.WhyWantChangeJob
+            </dd>
+            <dt class="col-sm-2">
+                دلایل ترک شغل
+            </dt>
+            <dd class="col-sm-10">
+                @foreach (var item2 in item.TblWorkExperienceLeaveJobDtls.Where(a => a.FldWorkExperienceId == item.FldWorkExperienceId))
+                {
+                    <ul>
+                        <li>@item2.FldLeaveJobNavigation.FldLeaveJobTitle &nbsp; @item2.FldLeaveJobPercent</li>
+                    </ul>
+                }
+            </dd>
+            <dt class="col-sm-2">
+                ______________________________________
+            </dt>
+            <dd class="col-sm-10">
+            </dd>
+        }
+    </dl>
+    <hr />
 
 </div>
 <div>

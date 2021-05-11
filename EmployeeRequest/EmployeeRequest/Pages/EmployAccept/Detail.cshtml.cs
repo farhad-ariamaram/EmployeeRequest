@@ -56,6 +56,9 @@ namespace EmployeeRequest.Pages.EmployAccept
 
                 .Include(t => t.TblEmployeeRequestUserSkills)
 
+                .Include(t => t.TblWorkExperiences).ThenInclude(t => t.FldTaminJob)
+                .Include(t => t.TblWorkExperiences).ThenInclude(t => t.TblWorkExperienceLeaveJobDtls).ThenInclude(t=>t.FldLeaveJobNavigation)
+
                 .FirstOrDefaultAsync(m => m.FldEmployeeRequestEmployeeId == id);
 
             if (TblEmployeeRequestEmployee == null)
