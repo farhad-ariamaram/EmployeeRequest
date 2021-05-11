@@ -20,6 +20,8 @@ namespace EmployeeRequest.Pages.EmployAccept
         }
 
         public IList<TblEmployeeRequestInterviewSession> TblEmployeeRequestInterviewSession { get;set; }
+        public IList<TblEmployeeRequestPrimaryInformation> TblEmployeeRequestPrimaryInformation { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -40,6 +42,8 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.FldEmployeeRequestUser)
                 .Where(a=>a.FldEmployeeRequestEmployeeId==id)
                 .ToListAsync();
+
+            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
 
             return Page();
         }

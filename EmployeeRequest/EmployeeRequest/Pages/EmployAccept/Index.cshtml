@@ -112,9 +112,14 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) <br />
-                    از <br />
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
+                    @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
+                    {
+
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) <br />
+                        <i>از</i> <br />
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
+                    }
+
                 </td>
                 <td>
                     @if (item.FldEmployeeRequestEmployeeInterviewStartDate != null)

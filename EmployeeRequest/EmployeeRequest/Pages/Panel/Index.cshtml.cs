@@ -36,6 +36,11 @@ namespace EmployeeRequest.Pages.Panel
             ViewData["WomenRegisteredUsers"] = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationGender == "خانم").Count();
             ViewData["AcceptedRegisteredUsers"] = _context.TblEmployeeRequestEmployees.Where(a=>a.FldEmployeeRequestFinalAcceptionId==1).Count();
 
+            ViewData["AllRequestedJobs"] = _context.TblEmployeeRequestEmployeeRequests.Count();
+            ViewData["AcceptedJobs"] = _context.TblEmployeeRequestEmployeeRequests.Where(a => a.FldEmployeeRequestEmployeeRequestIsAccept == true).Count();
+            ViewData["WaitingJobs"] = _context.TblEmployeeRequestEmployeeRequests.Where(a => a.FldEmployeeRequestEmployeeRequestIsAccept == false && a.FldEmployeeRequestUserAccepterId == null).Count();
+            ViewData["TransferedJobs"] = _context.TblEmployeeRequestEmployeeRequests.Where(a => a.FldEmployeeRequestEmployeeRequestIsTransfered == true).Count();
+
             return Page();
         }
 

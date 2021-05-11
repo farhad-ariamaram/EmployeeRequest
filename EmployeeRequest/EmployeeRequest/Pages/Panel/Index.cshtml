@@ -4,16 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
+@*امار های بخش تایید نیرو*@
 <div class="row">
-
-
+    <div class="col-12"><span class="badge badge-info">آمار بخش تایید نیرو</span></div>
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                             کاربران ثبت نام شده
+                            متقضیان ثبت نام شده
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AllRegisteredUsers</div>
                     </div>
@@ -32,7 +32,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                             کاربران مرد
+                            متقضیان مرد
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.MenRegisteredUsers</div>
                     </div>
@@ -51,7 +51,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                             کاربران زن
+                            متقضیان زن
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.WomenRegisteredUsers</div>
                     </div>
@@ -70,12 +70,88 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                             کاربران تایید شده
+                            متقضیان تایید شده
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AcceptedRegisteredUsers</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-check fa-2x text-gray-300 text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*امار های بخش درخواست نیرو*@
+<div class="row">
+    <div class="col-12"><span class="badge badge-info">آمار بخش درخواست نیرو</span></div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            تعداد درخواست ها
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AllRequestedJobs</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-bars fa-2x text-gray-300 text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            درخواست های  تایید شده
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AcceptedJobs</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-calendar-check fa-2x text-gray-300 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            مشاغل در حال بررسی
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.WaitingJobs</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-calendar-minus fa-2x text-gray-300 text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            درخواست های منتقل شده
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TransferedJobs</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-calendar-plus fa-2x text-gray-300 text-warning"></i>
                     </div>
                 </div>
             </div>
