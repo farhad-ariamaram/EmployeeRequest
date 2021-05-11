@@ -41,7 +41,14 @@ namespace EmployeeRequest.Pages.EmployAccept
             _context.TblEmployeeRequestInterviewSessions.Add(TblEmployeeRequestInterviewSession);
 
             TblEmployeeRequestEmployee TblEmployeeRequestEmployees = _context.TblEmployeeRequestEmployees.Find(TblEmployeeRequestInterviewSession.FldEmployeeRequestEmployeeId);
-            TblEmployeeRequestEmployees.FldEmployeeRequestEmployeeMaxPoint += TblEmployeeRequestInterviewSession.FldEmployeeRequestInterviewSessionMaxPoint;
+            if (TblEmployeeRequestEmployees.FldEmployeeRequestEmployeeMaxPoint == null)
+            {
+                TblEmployeeRequestEmployees.FldEmployeeRequestEmployeeMaxPoint = TblEmployeeRequestInterviewSession.FldEmployeeRequestInterviewSessionMaxPoint;
+            }
+            else
+            {
+                TblEmployeeRequestEmployees.FldEmployeeRequestEmployeeMaxPoint += TblEmployeeRequestInterviewSession.FldEmployeeRequestInterviewSessionMaxPoint;
+            }
             _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployees);
 
             await _context.SaveChangesAsync();
