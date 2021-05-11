@@ -4,6 +4,10 @@
     Layout = "";
 }
 @using Utilities;
+@{
+    int result = 0;
+    int max = 0;
+}
 
 <!DOCTYPE html>
 <html lang="fa">
@@ -80,9 +84,16 @@
                                 @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName &nbsp; @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName
                             </td>
                         </tr>
+                        @(result += (int)item.FldEmployeeRequestInterviewSessionResultPoint)
+                        @(max += (int)item.FldEmployeeRequestInterviewSessionMaxPoint)
                     }
                 </tbody>
             </table>
+
+            <div class="badge badge-info">درصد نمره کسب شده کلی</div>
+            <div class="progress">
+                <div class="progress-bar @if (result>=max/2) { @("bg-success"); } else { @("bg-danger"); }" role="progressbar" style="width: @(result*100/max)%" aria-valuenow="@(result)" aria-valuemin="0" aria-valuemax="@(max)">@(result * 100 / max)%</div>
+            </div>
         </main>
     </div>
     <!-- JS -->
