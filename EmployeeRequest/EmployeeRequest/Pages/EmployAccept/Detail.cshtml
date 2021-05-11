@@ -2,776 +2,810 @@
 @model EmployAccept.DetailModel
 @using Utilities;
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "جزئیات";
 }
 
-<h1>Detail</h1>
-
 <div>
-    <h4>TblEmployeeRequestEmployee</h4>
+    <div>
+        <span onclick="$('#primaryInfos').toggle()">اطلاعات اولیه</span><br />
+        <dl id="primaryInfos" style="display:none" class="row">
+            <dt class="col-sm-2">
+                نام و نام خانوادگی
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName)
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </dd>
+            <dt class="col-sm-2">
+                کد ملی
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode)
+            </dd>
+            <dt class="col-sm-2">
+                تاریخ تولد
+            </dt>
+            <dd class="col-sm-10">
+                @Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
+            </dd>
+            <dt class="col-sm-2">
+                جنسیت
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationGender)
+            </dd>
+            <dt class="col-sm-2">
+                وضعیت تاهل
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationMarital)
+            </dd>
+            <dt class="col-sm-2">
+                تعداد فرزندان
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationChildrenNo)
+            </dd>
+            <dt class="col-sm-2">
+                تعداد افراد تحت تکفل
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationTutelage)
+            </dd>
+            <dt class="col-sm-2">
+                کد پستی
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode)
+            </dd>
+            <dt class="col-sm-2">
+                شماره پیگیری
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationTrackNo)
+            </dd>
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            نام و نام خانوادگی
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName)
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-        </dd>
-        <dt class="col-sm-2">
-            کد ملی
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode)
-        </dd>
-        <dt class="col-sm-2">
-            تاریخ تولد
-        </dt>
-        <dd class="col-sm-10">
-            @Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
-        </dd>
-        <dt class="col-sm-2">
-            جنسیت
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationGender)
-        </dd>
-        <dt class="col-sm-2">
-            وضعیت تاهل
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationMarital)
-        </dd>
-        <dt class="col-sm-2">
-            تعداد فرزندان
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationChildrenNo)
-        </dd>
-        <dt class="col-sm-2">
-            تعداد افراد تحت تکفل
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationTutelage)
-        </dd>
-        <dt class="col-sm-2">
-            کد پستی
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode)
-        </dd>
-        <dt class="col-sm-2">
-            شماره پیگیری
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationTrackNo)
-        </dd>
-    </dl>
+    <div>
+        <span onclick="$('#education').toggle()">سوابق تحصیلی</span><br />
+        <dl id="education" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblCustomerDegrees)
+            {
+                <dt class="col-sm-2">
+                    مقطع تحصیلی
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.DiplomaId != null)
+                    {
+                        @item.Diploma.DiplomaName
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    رشته تحصیلی
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.EducationId != null)
+                    {
+                        @item.Education.EducationName
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    نام رشته تحصیلی
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEducationName
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldDes
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ شروع
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldStartDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ پایان
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEndDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ اخذ مدرک
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldExportDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    شماره مدرک
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldExportNo
+                </dd>
+                <dt class="col-sm-2">
+                    نمره
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldPoint
+                </dd>
+                <dt class="col-sm-2">
+                    شهر محل تحصیل
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldStudyCity
+                </dd>
+                <dt class="col-sm-2">
+                    محل تحصیل
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldStudyPlace
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblCustomerDegrees.Where(a => a.UserId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                مقطع تحصیلی
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.DiplomaId != null)
-                {
-                    @item.Diploma.DiplomaName
-                }
-            </dd>
-            <dt class="col-sm-2">
-                رشته تحصیلی
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.EducationId != null)
-                {
-                    @item.Education.EducationName
-                }
-            </dd>
-            <dt class="col-sm-2">
-                نام رشته تحصیلی
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEducationName
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldDes
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ شروع
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldStartDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ پایان
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEndDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ اخذ مدرک
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldExportDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                شماره مدرک
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldExportNo
-            </dd>
-            <dt class="col-sm-2">
-                نمره
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldPoint
-            </dd>
-            <dt class="col-sm-2">
-                شهر محل تحصیل
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldStudyCity
-            </dd>
-            <dt class="col-sm-2">
-                محل تحصیل
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldStudyPlace
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#emergency').toggle()">مشخصات آشنایان</span><br />
+        <dl id="emergency" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls)
+            {
+                <dt class="col-sm-2">
+                    نسبت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestEmergencyCallRelative
+                </dd>
+                <dt class="col-sm-2">
+                    نام و نام خانولدگی
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestEmergencyCallFirstName &nbsp; @item.FldEmployeeRequestEmergencyCallLastName
+                </dd>
+                <dt class="col-sm-2">
+                    شماره تماس
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestEmergencyCallPhoneNo
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestEmergencyCallDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                نسبت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestEmergencyCallRelative
-            </dd>
-            <dt class="col-sm-2">
-                نام و نام خانولدگی
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestEmergencyCallFirstName &nbsp; @item.FldEmployeeRequestEmergencyCallLastName
-            </dd>
-            <dt class="col-sm-2">
-                شماره تماس
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestEmergencyCallPhoneNo
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestEmergencyCallDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#general').toggle()">سوابق عمومی(کیفری)</span><br />
+        <dl id="general" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords)
+            {
+                <dt class="col-sm-2">
+                    عنوان سابقه عمومی (کیفری)
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestGeneralRecordCriminalTiltle
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات سابقه
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestGeneralRecordCriminalDes
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestGeneralRecordDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                عنوان سابقه عمومی (کیفری)
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestGeneralRecordCriminalTiltle
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات سابقه
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestGeneralRecordCriminalDes
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestGeneralRecordDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#medical').toggle()">سوابق پزشکی</span><br />
+        <dl id="medical" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords)
+            {
+                <dt class="col-sm-2">
+                    نام بیماری
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordDisease
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات بیماری
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordProblemDes
+                </dd>
+                <dt class="col-sm-2">
+                    عوارض
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordHasComplications
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات عوارض
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordComplicationsDes
+                </dd>
+                <dt class="col-sm-2">
+                    اعتیاد
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordIsAddict
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ شروع
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ پایان
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestMedicalRecordDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                نام بیماری
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordDisease
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات بیماری
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordProblemDes
-            </dd>
-            <dt class="col-sm-2">
-                عوارض
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordHasComplications
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات عوارض
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordComplicationsDes
-            </dd>
-            <dt class="col-sm-2">
-                اعتیاد
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordIsAddict
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ شروع
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ پایان
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestMedicalRecordDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#compile').toggle()">تالیف ها</span><br />
+        <dl id="compile" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations)
+            {
+                <dt class="col-sm-2">
+                    نوع تالیف
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.FldEmployeeRequestCompilationTypeId != null)
+                    {
+                        @item.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeCompilationType
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    انتشارات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCompilationAuthor
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ انتشار
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCompilationDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    عنوان تالیف
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCompilationTitle
+                </dd>
+                <dt class="col-sm-2">
+                    توضیح تالیف
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCompilationExplanation
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCompilationDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                نوع تالیف
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.FldEmployeeRequestCompilationTypeId != null)
-                {
-                    @item.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeCompilationType
-                }
-            </dd>
-            <dt class="col-sm-2">
-                انتشارات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCompilationAuthor
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ انتشار
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCompilationDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                عنوان تالیف
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCompilationTitle
-            </dd>
-            <dt class="col-sm-2">
-                توضیح تالیف
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCompilationExplanation
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCompilationDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#howfind').toggle()">نحوه آشنایی با سایت</span><br />
+        <dl id="howfind" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestHowFinds)
+            {
+                <dt class="col-sm-2">
+                    نحوه آشنایی با سایت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestHowFindTitle
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestHowFindAdditionalDes
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestHowFinds.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                نحوه آشنایی با سایت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestHowFindTitle
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestHowFindAdditionalDes
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#creative').toggle()">خلاقیت و نوآوری ها</span><br />
+        <dl id="creative" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities)
+            {
+                <dt class="col-sm-2">
+                    نوع خلاقیت
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.FldEmployeeRequestCreativityTypeId != null)
+                    {
+                        @item.FldEmployeeRequestCreativityType.FldEmployeeRequestCreativityTypeCreativityType
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    عنوان خلاقیت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCreativityTitle
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات خلاقیت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCreativityExplanation
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ ثبت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCreativityDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserCreativityDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                نوع خلاقیت
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.FldEmployeeRequestCreativityTypeId != null)
-                {
-                    @item.FldEmployeeRequestCreativityType.FldEmployeeRequestCreativityTypeCreativityType
-                }
-            </dd>
-            <dt class="col-sm-2">
-                عنوان خلاقیت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCreativityTitle
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات خلاقیت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCreativityExplanation
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ ثبت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCreativityDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserCreativityDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#jobs').toggle()">شغل های انتخاب کرده</span><br />
+        <dl id="jobs" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserJobs)
+            {
+                <dt class="col-sm-2">
+                    عنوان شغل
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.FldEmployeeRequestJobsId != null)
+                    {
+                        @item.FldEmployeeRequestJobs.FldEmployeeRequestJobsJobTitle
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    حقوق مد نظر
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserJobRequestMoney
+                </dd>
+                <dt class="col-sm-2">
+                    نام عنوان شغل
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserJobTitle
+                </dd>
+                <dt class="col-sm-2">
+                    درباره شغل چه میدانید
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserJobWhatKnowAbout
+                </dd>
+                <dt class="col-sm-2">
+                    توشیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserJobDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserJobs.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                عنوان شغل
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.FldEmployeeRequestJobsId != null)
-                {
-                    @item.FldEmployeeRequestJobs.FldEmployeeRequestJobsJobTitle
-                }
-            </dd>
-            <dt class="col-sm-2">
-                حقوق مد نظر
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserJobRequestMoney
-            </dd>
-            <dt class="col-sm-2">
-                نام عنوان شغل
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserJobTitle
-            </dd>
-            <dt class="col-sm-2">
-                درباره شغل چه میدانید
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserJobWhatKnowAbout
-            </dd>
-            <dt class="col-sm-2">
-                توشیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserJobDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#langs').toggle()">زبان ها</span><br />
+        <dl id="langs" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestUserLanguages)
+            {
+                <dt class="col-sm-2">
+                    نوع زبان
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.FldEmployeeRequestUserLanguageLanguageTypeId != null)
+                    {
+                        @item.FldEmployeeRequestUserLanguageLanguageType.FldEmployeeRequestLanguageTypeLanguageType
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    سطح خواندن
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserLanguageReadingLevel
+                </dd>
+                <dt class="col-sm-2">
+                    سطح نوشتن
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserLanguageWritingLevel
+                </dd>
+                <dt class="col-sm-2">
+                    سطح گفتاری
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserLanguageSpeakingLevel
+                </dd>
+                <dt class="col-sm-2">
+                    سطح شنیداری
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserLanguageListeningLevel
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserLanguageDescription
+                </dd>
+                <dt class="col-sm-2">
+                    زبان مادری
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserLanguageIsNative
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                نوع زبان
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.FldEmployeeRequestUserLanguageLanguageTypeId != null)
-                {
-                    @item.FldEmployeeRequestUserLanguageLanguageType.FldEmployeeRequestLanguageTypeLanguageType
-                }
-            </dd>
-            <dt class="col-sm-2">
-                سطح خواندن
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserLanguageReadingLevel
-            </dd>
-            <dt class="col-sm-2">
-                سطح نوشتن
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserLanguageWritingLevel
-            </dd>
-            <dt class="col-sm-2">
-                سطح گفتاری
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserLanguageSpeakingLevel
-            </dd>
-            <dt class="col-sm-2">
-                سطح شنیداری
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserLanguageListeningLevel
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserLanguageIsNative
-            </dd>
-            <dt class="col-sm-2">
-                زبان مادری
-            </dt>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#milit').toggle()">سوابق سربازی</span><br />
+        <dl id="milit" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries)
+            {
+                <dt class="col-sm-2">
+                    وضعیت سربازی
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.FldEmployeeRequestMilitaryId != null)
+                    {
+                        @item.FldEmployeeRequestMilitary.FldEmployeeRequestMilitaryMilitaryStatus
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    ارگان خدمتی
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.FldEmployeeRequestMilitaryOrganizationId != null)
+                    {
+                        @item.FldEmployeeRequestMilitaryOrganization.FldEmployeeRequestMilitaryOrganizationOrganizationName
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    شهر محل خدمت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserMilitaryCity
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ شروع
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserMilitaryStartDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ پایان
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserMilitaryEndDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات معافیت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserMilitaryExemptDescription
+                </dd>
+                <dt class="col-sm-2">
+                    واحد
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserMilitaryUnit
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserMilitaryDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                وضعیت سربازی
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.FldEmployeeRequestMilitaryId != null)
-                {
-                    @item.FldEmployeeRequestMilitary.FldEmployeeRequestMilitaryMilitaryStatus
-                }
-            </dd>
-            <dt class="col-sm-2">
-                ارگان خدمتی
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.FldEmployeeRequestMilitaryOrganizationId != null)
-                {
-                    @item.FldEmployeeRequestMilitaryOrganization.FldEmployeeRequestMilitaryOrganizationOrganizationName
-                }
-            </dd>
-            <dt class="col-sm-2">
-                شهر محل خدمت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserMilitaryCity
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ شروع
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserMilitaryStartDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ پایان
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserMilitaryEndDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات معافیت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserMilitaryExemptDescription
-            </dd>
-            <dt class="col-sm-2">
-                واحد
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserMilitaryUnit
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserMilitaryDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#skills').toggle()">مهارت ها</span><br />
+        <dl id="skills" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills)
+            {
+                <dt class="col-sm-2">
+                    عنوان مهارت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillSkillTitle
+                </dd>
+                <dt class="col-sm-2">
+                    سطح مهارت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillSkillLevel
+                </dd>
+                <dt class="col-sm-2">
+                    نوع مهارت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillSkillType
+                </dd>
+                <dt class="col-sm-2">
+                    محل اخذ گواهی
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillLocation
+                </dd>
+                <dt class="col-sm-2">
+                    مرجع صادر کننده گواهی
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillLicenseReference
+                </dd>
+                <dt class="col-sm-2">
+                    شماره گواهی
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillLicenseNo
+                </dd>
+                <dt class="col-sm-2">
+                    خوداموز
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillIsSelfTaught
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEmployeeRequestUserSkillDescription
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Where(a => a.FldEmployeeRequestEmployeeId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                عنوان مهارت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillSkillTitle
-            </dd>
-            <dt class="col-sm-2">
-                سطح مهارت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillSkillLevel
-            </dd>
-            <dt class="col-sm-2">
-                نوع مهارت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillSkillType
-            </dd>
-            <dt class="col-sm-2">
-                محل اخذ گواهی
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillLocation
-            </dd>
-            <dt class="col-sm-2">
-                مرجع صادر کننده گواهی
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillLicenseReference
-            </dd>
-            <dt class="col-sm-2">
-                شماره گواهی
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillLicenseNo
-            </dd>
-            <dt class="col-sm-2">
-                خوداموز
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillIsSelfTaught
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEmployeeRequestUserSkillDescription
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
-    <hr />
-    <dl class="row">
-        @foreach (var item in Model.TblEmployeeRequestEmployee.TblWorkExperiences.Where(a => a.UserId == Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId))
-        {
-            <dt class="col-sm-2">
-                نام شغل
-            </dt>
-            <dd class="col-sm-10">
-                @if (item.FldTaminJobId != null)
-                {
-                    @item.FldTaminJob.FldTaminJobName
-                }
-            </dd>
-            <dt class="col-sm-2">
-                تعداد روز های بیمه
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldAmountOfDailyInsurance
-            </dd>
-            <dt class="col-sm-2">
-                نام شرکت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldCompanyName
-            </dd>
-            <dt class="col-sm-2">
-                شماره داخلی شرکت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldContactInnerNumberOfCompany
-            </dd>
-            <dt class="col-sm-2">
-                شماره تلفن شرکت
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldContactNumberOfCompany
-            </dd>
-            <dt class="col-sm-2">
-                توضیحات
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldDescription
-            </dd>
-            <dt class="col-sm-2">
-                حقوق
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEarlySalary
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ ترک شغل
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldEndDate.toPersianDate()
-            </dd>
-            <dt class="col-sm-2">
-                عنوان شغل
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldJobTitle
-            </dd>
-            <dt class="col-sm-2">
-                اخرین حقوق
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldLateSalary
-            </dd>
-            <dt class="col-sm-2">
-                دلیل ترک کار
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldReasonsToLeaveJob
-            </dd>
-            <dt class="col-sm-2">
-                فرد مرتبط
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldRelatedPeople
-            </dd>
-            <dt class="col-sm-2">
-                تاریخ شروع کار
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldStartDate
-            </dd>
-            <dt class="col-sm-2">
-                نام واحد
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldUnitName
-            </dd>
-            <dt class="col-sm-2">
-                روز کاری
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldWorkDay
-            </dd>
-            <dt class="col-sm-2">
-                ساعت کاری
-            </dt>
-            <dd class="col-sm-10">
-                @item.FldWorkTime
-            </dd>
-            <dt class="col-sm-2">
-                بیمه
-            </dt>
-            <dd class="col-sm-10">
-                @item.HasInsurance
-            </dd>
-            <dt class="col-sm-2">
-                شماره بیمه
-            </dt>
-            <dd class="col-sm-10">
-                @item.InsuranceNo
-            </dd>
-            <dt class="col-sm-2">
-                مشغول به کار
-            </dt>
-            <dd class="col-sm-10">
-                @item.IsWorking
-            </dd>
-            <dt class="col-sm-2">
-                دستاورد ها
-            </dt>
-            <dd class="col-sm-10">
-                @item.PreviousJobAchievements
-            </dd>
-            <dt class="col-sm-2">
-                دلیل تغییر شغل
-            </dt>
-            <dd class="col-sm-10">
-                @item.WhyWantChangeJob
-            </dd>
-            <dt class="col-sm-2">
-                دلایل ترک شغل
-            </dt>
-            <dd class="col-sm-10">
-                @foreach (var item2 in item.TblWorkExperienceLeaveJobDtls.Where(a => a.FldWorkExperienceId == item.FldWorkExperienceId))
-                {
-                    <ul>
-                        <li>@item2.FldLeaveJobNavigation.FldLeaveJobTitle &nbsp; @item2.FldLeaveJobPercent</li>
-                    </ul>
-                }
-            </dd>
-            <dt class="col-sm-2">
-                ______________________________________
-            </dt>
-            <dd class="col-sm-10">
-            </dd>
-        }
-    </dl>
+    <div>
+        <span onclick="$('#works').toggle()">سوابق شغلی</span><br />
+        <dl id="works" style="display:none" class="row">
+            @foreach (var item in Model.TblEmployeeRequestEmployee.TblWorkExperiences)
+            {
+                <dt class="col-sm-2">
+                    نام شغل
+                </dt>
+                <dd class="col-sm-10">
+                    @if (item.FldTaminJobId != null)
+                    {
+                        @item.FldTaminJob.FldTaminJobName
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    تعداد روز های بیمه
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldAmountOfDailyInsurance
+                </dd>
+                <dt class="col-sm-2">
+                    نام شرکت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldCompanyName
+                </dd>
+                <dt class="col-sm-2">
+                    شماره داخلی شرکت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldContactInnerNumberOfCompany
+                </dd>
+                <dt class="col-sm-2">
+                    شماره تلفن شرکت
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldContactNumberOfCompany
+                </dd>
+                <dt class="col-sm-2">
+                    توضیحات
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldDescription
+                </dd>
+                <dt class="col-sm-2">
+                    حقوق
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEarlySalary
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ ترک شغل
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldEndDate.toPersianDate()
+                </dd>
+                <dt class="col-sm-2">
+                    عنوان شغل
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldJobTitle
+                </dd>
+                <dt class="col-sm-2">
+                    اخرین حقوق
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldLateSalary
+                </dd>
+                <dt class="col-sm-2">
+                    دلیل ترک کار
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldReasonsToLeaveJob
+                </dd>
+                <dt class="col-sm-2">
+                    فرد مرتبط
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldRelatedPeople
+                </dd>
+                <dt class="col-sm-2">
+                    تاریخ شروع کار
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldStartDate
+                </dd>
+                <dt class="col-sm-2">
+                    نام واحد
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldUnitName
+                </dd>
+                <dt class="col-sm-2">
+                    روز کاری
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldWorkDay
+                </dd>
+                <dt class="col-sm-2">
+                    ساعت کاری
+                </dt>
+                <dd class="col-sm-10">
+                    @item.FldWorkTime
+                </dd>
+                <dt class="col-sm-2">
+                    بیمه
+                </dt>
+                <dd class="col-sm-10">
+                    @item.HasInsurance
+                </dd>
+                <dt class="col-sm-2">
+                    شماره بیمه
+                </dt>
+                <dd class="col-sm-10">
+                    @item.InsuranceNo
+                </dd>
+                <dt class="col-sm-2">
+                    مشغول به کار
+                </dt>
+                <dd class="col-sm-10">
+                    @item.IsWorking
+                </dd>
+                <dt class="col-sm-2">
+                    دستاورد ها
+                </dt>
+                <dd class="col-sm-10">
+                    @item.PreviousJobAchievements
+                </dd>
+                <dt class="col-sm-2">
+                    دلیل تغییر شغل
+                </dt>
+                <dd class="col-sm-10">
+                    @item.WhyWantChangeJob
+                </dd>
+                <dt class="col-sm-2">
+                    دلایل ترک شغل
+                </dt>
+                <dd class="col-sm-10">
+                    @foreach (var item2 in item.TblWorkExperienceLeaveJobDtls.Where(a => a.FldWorkExperienceId == item.FldWorkExperienceId))
+                    {
+                        <ul>
+                            <li>@item2.FldLeaveJobNavigation.FldLeaveJobTitle &nbsp; @item2.FldLeaveJobPercent%</li>
+                        </ul>
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    ______________________________________
+                </dt>
+                <dd class="col-sm-10">
+                </dd>
+            }
+        </dl>
+    </div>
     <hr />
 
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
 </div>

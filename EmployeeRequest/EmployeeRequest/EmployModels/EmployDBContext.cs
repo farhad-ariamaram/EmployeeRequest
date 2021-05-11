@@ -61,7 +61,7 @@ namespace EmployeeRequest.EmployModels
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Persian_100_CI_AI");
+            modelBuilder.HasAnnotation("Relational:Collation", "Persian_100_CI_AS");
 
             modelBuilder.Entity<PayDiploma>(entity =>
             {
