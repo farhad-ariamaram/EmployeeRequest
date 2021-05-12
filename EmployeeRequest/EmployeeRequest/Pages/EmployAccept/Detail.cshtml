@@ -5,8 +5,6 @@
     ViewData["Title"] = "جزئیات";
 }
 
-
-
 <div class="row">
     @*Primary Informations*@
     <div class="col-4">
@@ -222,167 +220,197 @@
 
     @*General*@
     <div class="col-4">
-        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-            <div onclick="$('#general').toggle()" class="card-header">سوابق کیفری (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()))</div>
-            <div id="general" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-danger">جدید</span></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>عنوان</td>
-                                <td>
-                                    @item.FldEmployeeRequestGeneralRecordCriminalTiltle
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات سابقه</td>
-                                <td>
-                                    @item.FldEmployeeRequestGeneralRecordCriminalDes
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldEmployeeRequestGeneralRecordDescription
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+        @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()<2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.FirstOrDefault().FldEmployeeRequestGeneralRecordCriminalTiltle))
+        {
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">سوابق کیفری (0)</div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                <div onclick="$('#general').toggle()" class="card-header">سوابق کیفری (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()))</div>
+                <div id="general" style="display:none" class="card-body">
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">جدید</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>عنوان</td>
+                                    <td>
+                                        @item.FldEmployeeRequestGeneralRecordCriminalTiltle
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات سابقه</td>
+                                    <td>
+                                        @item.FldEmployeeRequestGeneralRecordCriminalDes
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestGeneralRecordDescription
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
     </div>
 
     @*Medical*@
     <div class="col-4">
-        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
-            <div onclick="$('#medical').toggle()" class="card-header">سوابق پزشکی (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count()))</div>
-            <div id="medical" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-danger">جدید</span></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>نام بیماری</td>
-                                <td>
-                                    @item.FldEmployeeRequestMedicalRecordDisease
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات بیماری</td>
-                                <td>
-                                    @item.FldEmployeeRequestMedicalRecordProblemDes
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>عوارض</td>
-                                <td>
-                                    @(@item.FldEmployeeRequestMedicalRecordHasComplications ? "دارد" : "ندارد")
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات عوارض</td>
-                                <td>
-                                    @item.FldEmployeeRequestMedicalRecordComplicationsDes
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>اعتیاد</td>
-                                <td>
-                                    @(@item.FldEmployeeRequestMedicalRecordIsAddict ? "دارد" : "ندارد")
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ شروع</td>
-                                <td>
-                                    @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ پایان</td>
-                                <td>
-                                    @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldEmployeeRequestMedicalRecordDescription
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+        @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.FirstOrDefault().FldEmployeeRequestMedicalRecordDisease))
+        {
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">سوابق پزشکی (0)</div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                <div onclick="$('#medical').toggle()" class="card-header">سوابق پزشکی (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count()))</div>
+                <div id="medical" style="display:none" class="card-body">
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">جدید</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>نام بیماری</td>
+                                    <td>
+                                        @item.FldEmployeeRequestMedicalRecordDisease
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات بیماری</td>
+                                    <td>
+                                        @item.FldEmployeeRequestMedicalRecordProblemDes
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>عوارض</td>
+                                    <td>
+                                        @(@item.FldEmployeeRequestMedicalRecordHasComplications ? "دارد" : "ندارد")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات عوارض</td>
+                                    <td>
+                                        @item.FldEmployeeRequestMedicalRecordComplicationsDes
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>اعتیاد</td>
+                                    <td>
+                                        @(@item.FldEmployeeRequestMedicalRecordIsAddict ? "دارد" : "ندارد")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ شروع</td>
+                                    <td>
+                                        @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ پایان</td>
+                                    <td>
+                                        @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestMedicalRecordDescription
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
     </div>
 
     @*Compile*@
     <div class="col-4">
-        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-            <div onclick="$('#compile').toggle()" class="card-header">تالیف ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Count()))</div>
-            <div id="compile" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-danger">جدید</span></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>نوع تالیف</td>
-                                <td>
-                                    @if (item.FldEmployeeRequestCompilationTypeId != null)
-                                    {
-                                        @item.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeCompilationType
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>انتشارات</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCompilationAuthor
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ انتشار</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCompilationDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>عنوان تالیف</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCompilationTitle
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیح تالیف</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCompilationExplanation
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCompilationDescription
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+        @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Count()<2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.FirstOrDefault().FldEmployeeRequestUserCompilationTitle))
+        {
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">تالیف ها (0)</div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                <div onclick="$('#compile').toggle()" class="card-header">تالیف ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Count()))</div>
+                <div id="compile" style="display:none" class="card-body">
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">جدید</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>نوع تالیف</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestCompilationTypeId != null)
+                                        {
+                                            @item.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeCompilationType
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>انتشارات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCompilationAuthor
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ انتشار</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCompilationDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>عنوان تالیف</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCompilationTitle
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیح تالیف</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCompilationExplanation
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCompilationDescription
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
     </div>
 
     @*HowFind*@
@@ -412,55 +440,66 @@
 
     @*Creative*@
     <div class="col-4">
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-            <div onclick="$('#creative').toggle()" class="card-header">خلاقیت و نوآوری ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count()))</div>
-            <div id="creative" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-danger">جدید</span></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>نوع خلاقیت</td>
-                                <td>
-                                    @if (item.FldEmployeeRequestCreativityTypeId != null)
-                                    {
-                                        @item.FldEmployeeRequestCreativityType.FldEmployeeRequestCreativityTypeCreativityType
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>عنوان خلاقیت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCreativityTitle
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات خلاقیت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCreativityExplanation
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ ثبت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCreativityDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserCreativityDescription
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+        @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.FirstOrDefault().FldEmployeeRequestUserCreativityTitle))
+        {
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">خلاقیت و نوآوری ها (0)</div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div onclick="$('#creative').toggle()" class="card-header">خلاقیت و نوآوری ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count()))</div>
+                <div id="creative" style="display:none" class="card-body">
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">جدید</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>نوع خلاقیت</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestCreativityTypeId != null)
+                                        {
+                                            @item.FldEmployeeRequestCreativityType.FldEmployeeRequestCreativityTypeCreativityType
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>عنوان خلاقیت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCreativityTitle
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات خلاقیت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCreativityExplanation
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ ثبت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCreativityDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserCreativityDescription
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
+
     </div>
 
     @*Job*@
@@ -583,310 +622,342 @@
 
     @*Military*@
     <div class="col-4">
-        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-            <div onclick="$('#milit').toggle()" class="card-header">سوابق سربازی</div>
-            <div id="milit" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td>وضعیت سربازی</td>
-                                <td>
-                                    @if (item.FldEmployeeRequestMilitaryId != null)
-                                    {
-                                        @item.FldEmployeeRequestMilitary.FldEmployeeRequestMilitaryMilitaryStatus
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>ارگان خدمتی</td>
-                                <td>
-                                    @if (item.FldEmployeeRequestMilitaryOrganizationId != null)
-                                    {
-                                        @item.FldEmployeeRequestMilitaryOrganization.FldEmployeeRequestMilitaryOrganizationOrganizationName
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>شهر محل خدمت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserMilitaryCity
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ شروع</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserMilitaryStartDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ پایان</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserMilitaryEndDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات معافیت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserMilitaryExemptDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>واحد</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserMilitaryUnit
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserMilitaryDescription
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+        @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries.FirstOrDefault().FldEmployeeRequestMilitaryId == null)
+        {
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">سوابق سربازی (0)</div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                <div onclick="$('#milit').toggle()" class="card-header">سوابق سربازی</div>
+                <div id="milit" style="display:none" class="card-body">
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td>وضعیت سربازی</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestMilitaryId != null)
+                                        {
+                                            @item.FldEmployeeRequestMilitary.FldEmployeeRequestMilitaryMilitaryStatus
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ارگان خدمتی</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestMilitaryOrganizationId != null)
+                                        {
+                                            @item.FldEmployeeRequestMilitaryOrganization.FldEmployeeRequestMilitaryOrganizationOrganizationName
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>شهر محل خدمت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserMilitaryCity
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ شروع</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserMilitaryStartDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ پایان</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserMilitaryEndDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات معافیت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserMilitaryExemptDescription
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>واحد</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserMilitaryUnit
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserMilitaryDescription
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
+
     </div>
 
     @*Skill*@
     <div class="col-4">
-        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
-            <div onclick="$('#skills').toggle()" class="card-header">مهارت ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Count()))</div>
-            <div id="skills" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-danger">جدید</span></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>عنوان مهارت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillSkillTitle
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>سطح مهارت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillSkillLevel
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>نوع مهارت</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillSkillType
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>محل اخذ گواهی</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillLocation
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>مرجع صادر کننده گواهی</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillLicenseReference
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>شماره گواهی</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillLicenseNo
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>خوداموز</td>
-                                <td>
-                                    @(@item.FldEmployeeRequestUserSkillIsSelfTaught ? "بله" : "خیر")
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserSkillDescription
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+        @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.FirstOrDefault().FldEmployeeRequestUserSkillSkillTitle))
+        {
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">مهارت ها (0)</div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                <div onclick="$('#skills').toggle()" class="card-header">مهارت ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Count()))</div>
+                <div id="skills" style="display:none" class="card-body">
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">جدید</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>عنوان مهارت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillSkillTitle
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>سطح مهارت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillSkillLevel
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>نوع مهارت</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillSkillType
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>محل اخذ گواهی</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillLocation
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>مرجع صادر کننده گواهی</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillLicenseReference
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>شماره گواهی</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillLicenseNo
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>خوداموز</td>
+                                    <td>
+                                        @(@item.FldEmployeeRequestUserSkillIsSelfTaught ? "بله" : "خیر")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserSkillDescription
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
+
     </div>
 
     @*WorkExperience*@
     <div class="col-4">
-        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#works').toggle()" class="card-header">سوابق شغلی (@(Model.TblEmployeeRequestEmployee.TblWorkExperiences.Count()))</div>
-            <div id="works" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestEmployee.TblWorkExperiences)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-danger">جدید</span></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>نام شغل</td>
-                                <td>
-                                    @if (item.FldTaminJobId != null)
-                                    {
-                                        @item.FldTaminJob.FldTaminJobName
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تعداد روز های بیمه</td>
-                                <td>
-                                    @item.FldAmountOfDailyInsurance
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>نام شرکت</td>
-                                <td>
-                                    @item.FldCompanyName
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>شماره داخلی شرکت</td>
-                                <td>
-                                    @item.FldContactInnerNumberOfCompany
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>شماره تلفن شرکت</td>
-                                <td>
-                                    @item.FldContactNumberOfCompany
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>حقوق</td>
-                                <td>
-                                    @item.FldEarlySalary
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ ترک شغل</td>
-                                <td>
-                                    @item.FldEndDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>عنوان شغل</td>
-                                <td>
-                                    @item.FldJobTitle
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>اخرین حقوق</td>
-                                <td>
-                                    @item.FldLateSalary
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>دلیل ترک کار</td>
-                                <td>
-                                    @item.FldReasonsToLeaveJob
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> فرد مرتبط</td>
-                                <td>
-                                    @item.FldRelatedPeople
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تاریخ شروع کار</td>
-                                <td>
-                                    @item.FldStartDate.toPersianDate()
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>نام واحد</td>
-                                <td>
-                                    @item.FldUnitName
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>روز کاری</td>
-                                <td>
-                                    @item.FldWorkDay
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>ساعت کاری</td>
-                                <td>
-                                    @item.FldWorkTime
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>بیمه</td>
-                                <td>
-                                    @(@item.HasInsurance ? "دارد" : "ندارد")
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>شماره بیمه</td>
-                                <td>
-                                    @item.InsuranceNo
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>مشغول به کار</td>
-                                <td>
-                                    @if (@item.IsWorking == true)
-                                    {
-                                        @("میباشد")
-                                    }
-                                    else
-                                    {
-                                        @("نمیباشد")
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>دستاورد ها</td>
-                                <td>
-                                    @item.PreviousJobAchievements
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> دلیل تغییر شغل</td>
-                                <td>@item.WhyWantChangeJob</td>
-                            </tr>
-                            <tr>
-                                <td>دلایل ترک شغل</td>
-                                <td>
-                                    @foreach (var item2 in item.TblWorkExperienceLeaveJobDtls.Where(a => a.FldWorkExperienceId == item.FldWorkExperienceId))
-                                    {
-                                        <ul>
-                                            <li>@item2.FldLeaveJobNavigation.FldLeaveJobTitle &nbsp; @item2.FldLeaveJobPercent%</li>
-                                        </ul>
-                                    }
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+        @if (string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblWorkExperiences.FirstOrDefault().FldCompanyName) && Model.TblEmployeeRequestEmployee.TblWorkExperiences.Count() < 2)
+        {
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header">سوابق شغلی (0)</div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                <div onclick="$('#works').toggle()" class="card-header">سوابق شغلی (@(Model.TblEmployeeRequestEmployee.TblWorkExperiences.Count()))</div>
+                <div id="works" style="display:none" class="card-body">
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblWorkExperiences)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">جدید</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>نام شغل</td>
+                                    <td>
+                                        @if (item.FldTaminJobId != null)
+                                        {
+                                            @item.FldTaminJob.FldTaminJobName
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تعداد روز های بیمه</td>
+                                    <td>
+                                        @item.FldAmountOfDailyInsurance
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>نام شرکت</td>
+                                    <td>
+                                        @item.FldCompanyName
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>شماره داخلی شرکت</td>
+                                    <td>
+                                        @item.FldContactInnerNumberOfCompany
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>شماره تلفن شرکت</td>
+                                    <td>
+                                        @item.FldContactNumberOfCompany
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldDescription
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>حقوق</td>
+                                    <td>
+                                        @item.FldEarlySalary
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ ترک شغل</td>
+                                    <td>
+                                        @item.FldEndDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>عنوان شغل</td>
+                                    <td>
+                                        @item.FldJobTitle
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>اخرین حقوق</td>
+                                    <td>
+                                        @item.FldLateSalary
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>دلیل ترک کار</td>
+                                    <td>
+                                        @item.FldReasonsToLeaveJob
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> فرد مرتبط</td>
+                                    <td>
+                                        @item.FldRelatedPeople
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تاریخ شروع کار</td>
+                                    <td>
+                                        @item.FldStartDate.toPersianDate()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>نام واحد</td>
+                                    <td>
+                                        @item.FldUnitName
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>روز کاری</td>
+                                    <td>
+                                        @item.FldWorkDay
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ساعت کاری</td>
+                                    <td>
+                                        @item.FldWorkTime
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>بیمه</td>
+                                    <td>
+                                        @(@item.HasInsurance ? "دارد" : "ندارد")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>شماره بیمه</td>
+                                    <td>
+                                        @item.InsuranceNo
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>مشغول به کار</td>
+                                    <td>
+                                        @if (@item.IsWorking == true)
+                                        {
+                                            @("میباشد")
+                                        }
+                                        else
+                                        {
+                                            @("نمیباشد")
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>دستاورد ها</td>
+                                    <td>
+                                        @item.PreviousJobAchievements
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> دلیل تغییر شغل</td>
+                                    <td>@item.WhyWantChangeJob</td>
+                                </tr>
+                                <tr>
+                                    <td>دلایل ترک شغل</td>
+                                    <td>
+                                        @foreach (var item2 in item.TblWorkExperienceLeaveJobDtls.Where(a => a.FldWorkExperienceId == item.FldWorkExperienceId))
+                                        {
+                                            <ul>
+                                                <li>@item2.FldLeaveJobNavigation.FldLeaveJobTitle &nbsp; @item2.FldLeaveJobPercent%</li>
+                                            </ul>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
     </div>
 </div>
