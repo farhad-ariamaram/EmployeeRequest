@@ -48,6 +48,35 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                تعداد فرزند
+                                <input type="checkbox" id="active_child" />
+                            </td>
+                            <td>
+                                <div>
+                                    <input class="form-control" type="number" id="childNo" value="0" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                تاهل
+                                <input type="checkbox" id="active_marital" />
+                            </td>
+                            <td>
+                                <div>
+                                    <select class="form-control" id="marital">
+                                        <option value="متاهل">متاهل</option>
+                                        <option value="مجرد">مجرد</option>
+                                        <option value="مطلقه">مطلقه</option>
+                                        <option value="متارکه">متارکه</option>
+                                        <option value="همسر فوت کرده">همسر فوت کرده</option>
+                                        <option value="سایر">سایر</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -76,7 +105,12 @@
 
         function filter() {
             $("#DataT").dataTable().fnDestroy();
-            var data = { active_gender: $("#active_gender").prop('checked'), gender: $("#gender").val() };
+            var data = {
+                active_gender: $("#active_gender").prop('checked'), gender: $("#gender").val(),
+                active_child: $("#active_child").prop('checked'), childNo: $("#childNo").val(),
+                active_Marital: $("#active_marital").prop('checked'), marital: $("#marital").val(),
+                
+            };
             dataTable = $("#DataT").DataTable({
                 "ajax": { "url": "?handler=FilterSearch", "type": "GET", "data": data, "datatype": "json", async: true },
                 "columns": [{ "data": "fldEmployeeRequestPrimaryInformationFirstName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationLastName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationNationalCode", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationPhoneNo", "render": function (data) { return (data + '').substring(3) }, "width": "20%" }, { "data": "fldEmployeeRequestEmployeeId", "render": function (data) { return '<a href="Detail?id=' + data + '" onclick="window.open(this.href, \'mywin\',\'left=20,top=20,width=800,height=600,toolbar=1,resizable=1\'); return false;">جزئیات</a>' }, "width": "20%" }],

@@ -35,22 +35,41 @@ namespace EmployeeRequest.Pages.EmployAccept
             return new JsonResult(new { data = _context.TblEmployeeRequestEmployees.Include(a => a.TblEmployeeRequestPrimaryInformations).Select(a => new { a.FldEmployeeRequestEmployeeId, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo }).ToList() });
         }
 
-        public async Task<IActionResult> OnGetFilterSearchAsync(bool active_gender,string gender)
+        public async Task<IActionResult> OnGetFilterSearchAsync(bool active_gender, string gender,
+                                                                bool active_child, string childNo,
+                                                                bool active_marital, string marital)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
-                .Where(_=>true);
+                .Where(_ => true);
 
             if (active_gender)
             {
                 result = result.Where(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationGender == gender);
             }
 
-            var finalResult = result.Select(a => new { a.FldEmployeeRequestEmployeeId, a.TblEmployeeRequestPrimaryInformations
-                .FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName, a.TblEmployeeRequestPrimaryInformations
-                .FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName, a.TblEmployeeRequestPrimaryInformations
-                .FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode, a.TblEmployeeRequestPrimaryInformations
-                .FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo }).ToList();
+            if (active_child)
+            {
+                result = result.Where(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationChildrenNo == int.Parse(childNo));
+            }
+
+            if (active_marital)
+            {
+                result = result.Where(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationMarital == marital);
+            }
+
+            var finalResult = result.Select(a => new
+            {
+                a.FldEmployeeRequestEmployeeId,
+                a.TblEmployeeRequestPrimaryInformations
+                .FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName,
+                a.TblEmployeeRequestPrimaryInformations
+                .FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName,
+                a.TblEmployeeRequestPrimaryInformations
+                .FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode,
+                a.TblEmployeeRequestPrimaryInformations
+                .FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo
+            }).ToList();
 
             return new JsonResult(new { data = finalResult });
         }
