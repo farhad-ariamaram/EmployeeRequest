@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,15 @@ namespace EmployeeRequest.Pages.EmployAccept
             _context = context;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
 
+            return Page();
         }
 
         public async Task<IActionResult> OnGetSearchAsync()
