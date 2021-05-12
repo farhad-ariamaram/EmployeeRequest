@@ -1,0 +1,38 @@
+﻿@page
+@model EmployAccept.SearchModel
+@{
+    ViewData["Title"] = "جستجو";
+}
+
+<div class="row">
+    <div class="col-12">
+        <table id="DataT">
+            <thead>
+                <tr>
+                    <th>نام </th>
+                    <th>نام خانوادگی</th>
+                    <th>شماره ملی</th>
+                    <th>شماره تماس</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/DataTables/jquery.dataTables.min.js"></script>
+    <script>
+        function Load() {
+            loadDataT();
+        }
+
+        function loadDataT() {
+            dataTable = $("#DataT").DataTable({
+                "ajax": {"url":"?handler=Search","type":"GET","datatype":"json",async: true},
+                "columns": [{ "data": "FldEmployeeRequestPrimaryInformationFirstName", "width": "20%" }, { "data": "FldEmployeeRequestPrimaryInformationLastName", "width": "20%" }, { "data": "FldEmployeeRequestPrimaryInformationNationalCode", "width": "20%" }, { "data": "FldEmployeeRequestPrimaryInformationPhoneNo", "width": "20%" }, { "data": "FldEmployeeRequestEmployeeId", "width": "20%" }],
+                "language": {"emptyTable":"موردی یافت نشد"},
+                "width":"100%"});
+        }
+    </script>
+}
