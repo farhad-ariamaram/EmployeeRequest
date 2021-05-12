@@ -30,7 +30,7 @@
         function loadDataT() {
             dataTable = $("#DataT").DataTable({
                 "ajax": {"url":"?handler=Search","type":"GET","datatype":"json",async: true},
-                "columns": [{ "data": "FldEmployeeRequestPrimaryInformationFirstName", "width": "20%" }, { "data": "FldEmployeeRequestPrimaryInformationLastName", "width": "20%" }, { "data": "FldEmployeeRequestPrimaryInformationNationalCode", "width": "20%" }, { "data": "FldEmployeeRequestPrimaryInformationPhoneNo", "width": "20%" }, { "data": "FldEmployeeRequestEmployeeId", "width": "20%" }],
+                "columns": [{ "data": "fldEmployeeRequestPrimaryInformationFirstName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationLastName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationNationalCode", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationPhoneNo", "width": "20%" }, { "data": "fldEmployeeRequestEmployeeId", "width": "20%" }],
                 "language": {"emptyTable":"موردی یافت نشد"},
                 "width":"100%"});
         }
