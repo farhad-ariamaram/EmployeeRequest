@@ -4,10 +4,10 @@
     ViewData["Title"] = "جستجو";
 }
 
-<div class="row">
+<div id="result" class="row">
     <div class="col-12">
-        <a class="w-100 btn btn-outline-primary m-2">فیلتر</a>
-        <table class="table table-striped" id="DataT">
+        <a onclick="$('#filter').show();$('#result').hide();" class="w-100 btn btn-outline-primary m-2">فیلتر</a>
+        <table class="table table-striped w-100" id="DataT">
             <thead>
                 <tr>
                     <th>نام </th>
@@ -18,6 +18,43 @@
                 </tr>
             </thead>
         </table>
+    </div>
+</div>
+
+<div id="filter" class="row" style="display:none">
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیتر بر اساس اطلاعات اولیه</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                جنسیت
+                                <input type="checkbox" id="active_gender" />
+                            </td>
+                            <td>
+                                <div>
+                                    <select class="form-control" id="gender">
+                                        <option value="آقا">آقا</option>
+                                        <option value="خانم">خانم</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary" onclick="filter()">اعمال فیلتر</button>
     </div>
 </div>
 
@@ -32,9 +69,21 @@
             dataTable = $("#DataT").DataTable({
                 "ajax": { "url": "?handler=Search", "type": "GET", "datatype": "json", async: true },
                 "columns": [{ "data": "fldEmployeeRequestPrimaryInformationFirstName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationLastName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationNationalCode", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationPhoneNo", "render": function (data) { return (data + '').substring(3) }, "width": "20%" }, { "data": "fldEmployeeRequestEmployeeId", "render": function (data) { return '<a href="Detail?id=' + data + '" onclick="window.open(this.href, \'mywin\',\'left=20,top=20,width=800,height=600,toolbar=1,resizable=1\'); return false;">جزئیات</a>' }, "width": "20%" }],
-                "language": { "emptyTable": "موردی یافت نشد" , "search": "جستجو:","paginate": {"first":"اول","last":"آخر","next":"بعدی","previous":"قبلی"},"info": "نمایش _START_ از _END_ از _TOTAL_ نتیجه","lengthMenu":"نمایش _MENU_ نتیجه"},
+                "language": { "emptyTable": "موردی یافت نشد", "search": "جستجو:", "paginate": { "first": "اول", "last": "آخر", "next": "بعدی", "previous": "قبلی" }, "info": "نمایش _START_ از _END_ از _TOTAL_ نتیجه", "lengthMenu": "نمایش _MENU_ نتیجه" },
                 "width": "100%"
             });
+        }
+
+        function filter() {
+            $("#DataT").dataTable().fnDestroy();
+            var data = { active_gender: $("#active_gender").prop('checked'), gender: $("#gender").val() };
+            dataTable = $("#DataT").DataTable({
+                "ajax": { "url": "?handler=FilterSearch", "type": "GET", "data": data, "datatype": "json", async: true },
+                "columns": [{ "data": "fldEmployeeRequestPrimaryInformationFirstName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationLastName", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationNationalCode", "width": "20%" }, { "data": "fldEmployeeRequestPrimaryInformationPhoneNo", "render": function (data) { return (data + '').substring(3) }, "width": "20%" }, { "data": "fldEmployeeRequestEmployeeId", "render": function (data) { return '<a href="Detail?id=' + data + '" onclick="window.open(this.href, \'mywin\',\'left=20,top=20,width=800,height=600,toolbar=1,resizable=1\'); return false;">جزئیات</a>' }, "width": "20%" }],
+                "language": { "emptyTable": "موردی یافت نشد", "search": "جستجو:", "paginate": { "first": "اول", "last": "آخر", "next": "بعدی", "previous": "قبلی" }, "info": "نمایش _START_ از _END_ از _TOTAL_ نتیجه", "lengthMenu": "نمایش _MENU_ نتیجه" },
+                "width": "100%"
+            });
+            $('#filter').hide(); $('#result').show();
         }
     </script>
 }

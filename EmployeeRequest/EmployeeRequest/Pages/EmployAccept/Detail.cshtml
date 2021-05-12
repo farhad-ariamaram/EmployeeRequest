@@ -27,6 +27,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>شماره تماس</td>
+                            <td>
+                                @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo)
+                            </td>
+                        </tr>
+                        <tr>
                             <td>تاریخ تولد</td>
                             <td>
                                 @Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
