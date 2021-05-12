@@ -7,7 +7,7 @@
 
 <div class="row">
     @*Primary Informations*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
             <div onclick="$('#primaryInfos').toggle()" class="card-header">اطلاعات اولیه</div>
             <div id="primaryInfos" style="display:none" class="card-body">
@@ -79,7 +79,7 @@
     </div>
 
     @*Education*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
             <div onclick="$('#education').toggle()" class="card-header"> سوابق تحصیلی (@(Model.TblEmployeeRequestEmployee.TblCustomerDegrees.Count()))</div>
             <div id="education" style="display:none" class="card-body">
@@ -175,7 +175,7 @@
     </div>
 
     @*Emergency*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
             <div onclick="$('#emergency').toggle()" class="card-header">مشخصات آشنایان (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls.Count()))</div>
             <div id="emergency" style="display:none" class="card-body">
@@ -219,7 +219,7 @@
     </div>
 
     @*General*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()<2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.FirstOrDefault().FldEmployeeRequestGeneralRecordCriminalTiltle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
@@ -267,7 +267,7 @@
     </div>
 
     @*Medical*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.FirstOrDefault().FldEmployeeRequestMedicalRecordDisease))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
@@ -345,7 +345,7 @@
     </div>
 
     @*Compile*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Count()<2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.FirstOrDefault().FldEmployeeRequestUserCompilationTitle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
@@ -414,7 +414,7 @@
     </div>
 
     @*HowFind*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
             <div onclick="$('#howfind').toggle()" class="card-header">آشنایی با سایت</div>
             <div id="howfind" style="display:none" class="card-body">
@@ -439,7 +439,7 @@
     </div>
 
     @*Creative*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.FirstOrDefault().FldEmployeeRequestUserCreativityTitle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
@@ -503,7 +503,7 @@
     </div>
 
     @*Job*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
             <div onclick="$('#jobs').toggle()" class="card-header">شغل های انتخاب کرده (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserJobs.Count()))</div>
             <div id="jobs" style="display:none" class="card-body">
@@ -556,7 +556,7 @@
     </div>
 
     @*Language*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
             <div onclick="$('#langs').toggle()" class="card-header">زبان ها (@(Model.TblEmployeeRequestUserLanguages.Count()))</div>
             <div id="langs" style="display:none" class="card-body">
@@ -621,7 +621,7 @@
     </div>
 
     @*Military*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries.FirstOrDefault().FldEmployeeRequestMilitaryId == null)
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
@@ -702,7 +702,7 @@
     </div>
 
     @*Skill*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.FirstOrDefault().FldEmployeeRequestUserSkillSkillTitle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
@@ -787,7 +787,7 @@
     </div>
 
     @*WorkExperience*@
-    <div class="col-4">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         @if (string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblWorkExperiences.FirstOrDefault().FldCompanyName) && Model.TblEmployeeRequestEmployee.TblWorkExperiences.Count() < 2)
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
