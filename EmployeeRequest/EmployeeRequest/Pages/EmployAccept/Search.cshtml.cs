@@ -42,11 +42,15 @@ namespace EmployeeRequest.Pages.EmployAccept
                                                                 bool active_tutelage, string tutelage,
                                                                 bool active_birthdate, DateTime birthDate,
                                                                 bool active_degree, string degree,
-                                                                bool active_degreeField, string degreeField)
+                                                                bool active_degreeField, string degreeField,
+                                                                bool active_compile,
+                                                                bool active_general)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
                 .Include(a => a.TblCustomerDegrees).ThenInclude(a=>a.Diploma)
+                .Include(a => a.TblEmployeeRequestUserCompilations)
+                .Include(a => a.TblEmployeeRequestGeneralRecords)
                 .Where(_ => true);
 
             #region Based On Primary Informations
@@ -76,15 +80,31 @@ namespace EmployeeRequest.Pages.EmployAccept
             }
             #endregion
 
+            #region Based On Degree
             if (active_degree)
             {
-                result = result.Where(a => a.TblCustomerDegrees.Any(a=>a.DiplomaId == int.Parse(degree)));
+                result = result.Where(a => a.TblCustomerDegrees.Any(a => a.DiplomaId == int.Parse(degree)));
             }
 
             if (active_degreeField)
             {
-                result = result.Where(a => a.TblCustomerDegrees.Any(a=>a.FldEducationName.Contains(degreeField)));
+                result = result.Where(a => a.TblCustomerDegrees.Any(a => a.FldEducationName.Contains(degreeField)));
             }
+            #endregion
+
+            #region Based On Compilations
+            if (active_compile)
+            {
+                result = result.Where(a => a.TblEmployeeRequestUserCompilations.Any(a => a.FldEmployeeRequestUserCompilationTitle != null));
+            }
+            #endregion
+
+            #region Based On GeneralRecords
+            if (active_general)
+            {
+                result = result.Where(a => a.TblEmployeeRequestGeneralRecords.Any(a => a.FldEmployeeRequestGeneralRecordCriminalTiltle != null));
+            }
+            #endregion
 
             var finalResult = result.Select(a => new
             {
