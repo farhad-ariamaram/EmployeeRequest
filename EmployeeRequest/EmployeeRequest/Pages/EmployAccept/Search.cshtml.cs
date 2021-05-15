@@ -44,13 +44,16 @@ namespace EmployeeRequest.Pages.EmployAccept
                                                                 bool active_degree, string degree,
                                                                 bool active_degreeField, string degreeField,
                                                                 bool active_compile,
-                                                                bool active_general)
+                                                                bool active_general,
+                                                                bool active_medical,
+                                                                bool active_addict)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
                 .Include(a => a.TblCustomerDegrees).ThenInclude(a=>a.Diploma)
                 .Include(a => a.TblEmployeeRequestUserCompilations)
                 .Include(a => a.TblEmployeeRequestGeneralRecords)
+                .Include(a => a.TblEmployeeRequestMedicalRecords)
                 .Where(_ => true);
 
             #region Based On Primary Informations
@@ -103,6 +106,17 @@ namespace EmployeeRequest.Pages.EmployAccept
             if (active_general)
             {
                 result = result.Where(a => a.TblEmployeeRequestGeneralRecords.Any(a => a.FldEmployeeRequestGeneralRecordCriminalTiltle != null));
+            }
+            #endregion
+
+            #region Based On Medical
+            if (active_medical)
+            {
+                result = result.Where(a => a.TblEmployeeRequestMedicalRecords.All(a => a.FldEmployeeRequestMedicalRecordDisease == null));
+            }
+            if (active_addict)
+            {
+                result = result.Where(a => a.TblEmployeeRequestMedicalRecords.All(a => a.FldEmployeeRequestMedicalRecordIsAddict == false));
             }
             #endregion
 

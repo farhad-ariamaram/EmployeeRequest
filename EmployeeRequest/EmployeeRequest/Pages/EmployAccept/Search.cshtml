@@ -197,7 +197,43 @@
                                 <input type="checkbox" id="active_general" />
                             </td>
                             <td>
-                                سایقه عمومی (کیفری) داشته باشد
+                                سابقه عمومی (کیفری) داشته باشد
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیتر بر اساس سوابق عمومی (کیفری)</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                سابقه بیماری
+                                <input type="checkbox" id="active_medical" />
+                            </td>
+                            <td>
+                                سایقه بیماری نداشته باشد
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               اعتیاد
+                                <input type="checkbox" id="active_addict" />
+                            </td>
+                            <td>
+                                اعتیاد نداشته باشد
                             </td>
                         </tr>
                     </tbody>
@@ -239,6 +275,8 @@
                 active_degreeField: $("#active_degreeField").prop('checked'), degreeField: $("#degreeField").val(),
                 active_compile: $("#active_compile").prop('checked'),
                 active_general: $("#active_general").prop('checked'),
+                active_medical: $("#active_medical").prop('checked'),
+                active_addict: $("#active_addict").prop('checked'),
             };
             dataTable = $("#DataT").DataTable({
                 "ajax": { "url": "?handler=FilterSearch", "type": "GET", "data": data, "datatype": "json", async: true },
