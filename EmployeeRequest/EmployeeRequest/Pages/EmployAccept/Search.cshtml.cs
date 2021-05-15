@@ -37,12 +37,15 @@ namespace EmployeeRequest.Pages.EmployAccept
 
         public async Task<IActionResult> OnGetFilterSearchAsync(bool active_gender, string gender,
                                                                 bool active_child, string childNo,
-                                                                bool active_marital, string marital)
+                                                                bool active_marital, string marital,
+                                                                bool active_tutelage, string tutelage,
+                                                                bool active_birthdate, DateTime birthDate)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
                 .Where(_ => true);
 
+            #region Based On Primary Informations
             if (active_gender)
             {
                 result = result.Where(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationGender == gender);
@@ -57,6 +60,19 @@ namespace EmployeeRequest.Pages.EmployAccept
             {
                 result = result.Where(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationMarital == marital);
             }
+
+            if (active_tutelage)
+            {
+                result = result.Where(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationTutelage == int.Parse(tutelage));
+            }
+
+            if (active_birthdate)
+            {
+                result = result.Where(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationBirthDate >= birthDate);
+            }
+            #endregion
+
+
 
             var finalResult = result.Select(a => new
             {
