@@ -20,6 +20,9 @@ namespace EmployeeRequest.Pages.EmployAccept
             _context = context;
         }
 
+        public List<TblEmployeeRequestJob> TblEmployeeRequestJob { get; set; }
+        public List<TblEmployeeRequestLanguageType> TblEmployeeRequestLanguageType { get; set; }
+
         public IActionResult OnGet()
         {
             string uid = HttpContext.Session.GetString("uid");
@@ -27,6 +30,9 @@ namespace EmployeeRequest.Pages.EmployAccept
             {
                 return RedirectToPage("../Index");
             }
+
+            TblEmployeeRequestJob = _context.TblEmployeeRequestJobs.ToList();
+            TblEmployeeRequestLanguageType = _context.TblEmployeeRequestLanguageTypes.ToList();
 
             return Page();
         }
@@ -46,7 +52,10 @@ namespace EmployeeRequest.Pages.EmployAccept
                                                                 bool active_compile,
                                                                 bool active_general,
                                                                 bool active_medical,
-                                                                bool active_addict)
+                                                                bool active_addict,
+                                                                bool active_creative,
+                                                                bool active_job, string job,
+                                                                bool active_language, string language)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
@@ -54,6 +63,9 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(a => a.TblEmployeeRequestUserCompilations)
                 .Include(a => a.TblEmployeeRequestGeneralRecords)
                 .Include(a => a.TblEmployeeRequestMedicalRecords)
+                .Include(a => a.TblEmployeeRequestUserCreativities)
+                .Include(a => a.TblEmployeeRequestUserJobs)
+                .Include(a => a.TblEmployeeRequestUserLanguages)
                 .Where(_ => true);
 
             #region Based On Primary Informations
@@ -117,6 +129,27 @@ namespace EmployeeRequest.Pages.EmployAccept
             if (active_addict)
             {
                 result = result.Where(a => a.TblEmployeeRequestMedicalRecords.All(a => a.FldEmployeeRequestMedicalRecordIsAddict == false));
+            }
+            #endregion
+
+            #region Based On Creatives
+            if (active_creative)
+            {
+                result = result.Where(a => a.TblEmployeeRequestUserCreativities.Any(a => a.FldEmployeeRequestUserCreativityTitle != null));
+            }
+            #endregion
+
+            #region Based On Job
+            if (active_job)
+            {
+                result = result.Where(a => a.TblEmployeeRequestUserJobs.Any(a => a.FldEmployeeRequestJobsId == int.Parse(job)));
+            }
+            #endregion
+
+            #region Based On Language
+            if (active_language)
+            {
+                result = result.Where(a => a.TblEmployeeRequestUserLanguages.Any(a => a.FldEmployeeRequestUserLanguageLanguageTypeId == int.Parse(language)));
             }
             #endregion
 

@@ -229,11 +229,79 @@
                         </tr>
                         <tr>
                             <td>
-                               اعتیاد
+                                اعتیاد
                                 <input type="checkbox" id="active_addict" />
                             </td>
                             <td>
                                 اعتیاد نداشته باشد
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیلتر بر اساس شغل ها</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                شغل
+                                <input type="checkbox" id="active_job" />
+                            </td>
+                            <td>
+                                <div>
+                                    <select class="form-control" id="job">
+                                        @foreach (var item in Model.TblEmployeeRequestJob)
+                                        {
+                                            <option value="@item.FldEmployeeRequestJobsId">@item.FldEmployeeRequestJobsJobTitle</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیلتر بر اساس زبان ها</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                زبان
+                                <input type="checkbox" id="active_language" />
+                            </td>
+                            <td>
+                                <div>
+                                    <select class="form-control" id="language">
+                                        @foreach (var item in Model.TblEmployeeRequestLanguageType)
+                                        {
+                                            <option value="@item.FldEmployeeRequestLanguageTypeId">@item.FldEmployeeRequestLanguageTypeLanguageType</option>
+                                        }
+                                    </select>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -277,6 +345,9 @@
                 active_general: $("#active_general").prop('checked'),
                 active_medical: $("#active_medical").prop('checked'),
                 active_addict: $("#active_addict").prop('checked'),
+                active_creative: $("#active_creative").prop('checked'),
+                active_job: $("#active_job").prop('checked'), job: $("#job").val(),
+                active_language: $("#active_language").prop('checked'), language: $("#language").val()
             };
             dataTable = $("#DataT").DataTable({
                 "ajax": { "url": "?handler=FilterSearch", "type": "GET", "data": data, "datatype": "json", async: true },
