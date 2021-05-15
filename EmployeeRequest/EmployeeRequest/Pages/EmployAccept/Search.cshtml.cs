@@ -39,10 +39,13 @@ namespace EmployeeRequest.Pages.EmployAccept
                                                                 bool active_child, string childNo,
                                                                 bool active_marital, string marital,
                                                                 bool active_tutelage, string tutelage,
-                                                                bool active_birthdate, DateTime birthDate)
+                                                                bool active_birthdate, DateTime birthDate,
+                                                                bool active_degree, string degree,
+                                                                bool active_degreeField, string degreeField)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
+                .Include(a => a.TblCustomerDegrees).ThenInclude(a=>a.Diploma)
                 .Where(_ => true);
 
             #region Based On Primary Informations
@@ -72,7 +75,15 @@ namespace EmployeeRequest.Pages.EmployAccept
             }
             #endregion
 
+            if (active_degree)
+            {
+                result = result.Where(a => a.TblCustomerDegrees.Any(a=>a.DiplomaId == int.Parse(degree)));
+            }
 
+            if (active_degreeField)
+            {
+                result = result.Where(a => a.TblCustomerDegrees.Any(a=>a.FldEducationName.Contains(degreeField)));
+            }
 
             var finalResult = result.Select(a => new
             {

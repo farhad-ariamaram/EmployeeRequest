@@ -104,6 +104,54 @@
             </div>
         </div>
     </div>
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیتر بر اساس سوابق تحصیلی</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                اخرین مدرک
+                                <input type="checkbox" id="active_degree" />
+                            </td>
+                            <td>
+                                <div>
+                                    <select class="form-control" id="degree">
+                                        <option value="1">بي سواد و كم سواد</option>
+                                        <option value="4">زير ديپلم</option>
+                                        <option value="5">ديپلم</option>
+                                        <option value="11">فوق ديپلم</option>
+                                        <option value="12">کارشناسي</option>
+                                        <option value="13">کارشناسي ارشد</option>
+                                        <option value="17">دكتري</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                رشته تحصیلی
+                                <input type="checkbox" id="active_degreeField" />
+                            </td>
+                            <td>
+                                <div>
+                                    <input class="form-control" type="text" id="degreeField" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
     <div>
         <button class="btn btn-primary" onclick="filter()">اعمال فیلتر</button>
     </div>
@@ -133,6 +181,8 @@
                 active_Marital: $("#active_marital").prop('checked'), marital: $("#marital").val(),
                 active_tutelage: $("#active_tutelage").prop('checked'), tutelage: $("#tutelage").val(),
                 active_birthdate: $("#active_birthdate").prop('checked'), birthDate: $("#birthDate").val(),
+                active_degree: $("#active_degree").prop('checked'), degree: $("#degree").val(),
+                active_degreeField: $("#active_degreeField").prop('checked'), degreeField: $("#degreeField").val(),
             };
             dataTable = $("#DataT").DataTable({
                 "ajax": { "url": "?handler=FilterSearch", "type": "GET", "data": data, "datatype": "json", async: true },
