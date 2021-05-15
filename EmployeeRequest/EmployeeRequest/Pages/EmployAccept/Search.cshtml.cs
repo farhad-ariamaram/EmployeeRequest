@@ -61,11 +61,13 @@ namespace EmployeeRequest.Pages.EmployAccept
                                                                 bool active_job, string job,
                                                                 bool active_language, string language,
                                                                 bool active_military, string military,
-                                                                bool active_militaryOrg, string militaryOrg)
+                                                                bool active_militaryOrg, string militaryOrg,
+                                                                bool active_skill, string skill,
+                                                                bool active_exp, string exp)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
-                .Include(a => a.TblCustomerDegrees).ThenInclude(a=>a.Diploma)
+                .Include(a => a.TblCustomerDegrees)
                 .Include(a => a.TblEmployeeRequestUserCompilations)
                 .Include(a => a.TblEmployeeRequestGeneralRecords)
                 .Include(a => a.TblEmployeeRequestMedicalRecords)
@@ -73,6 +75,8 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(a => a.TblEmployeeRequestUserJobs)
                 .Include(a => a.TblEmployeeRequestUserLanguages)
                 .Include(a => a.TblEmployeeRequestUserMilitaries)
+                .Include(a => a.TblEmployeeRequestUserSkills)
+                .Include(a => a.TblWorkExperiences)
                 .Where(_ => true);
 
             #region Based On Primary Informations
@@ -169,6 +173,20 @@ namespace EmployeeRequest.Pages.EmployAccept
             if (active_militaryOrg)
             {
                 result = result.Where(a => a.TblEmployeeRequestUserMilitaries.Any(a => a.FldEmployeeRequestMilitaryOrganizationId == int.Parse(militaryOrg)));
+            }
+            #endregion
+
+            #region Based On Skill
+            if (active_skill)
+            {
+                result = result.Where(a => a.TblEmployeeRequestUserSkills.Any(a => a.FldEmployeeRequestUserSkillSkillTitle.Contains(skill)));
+            }
+            #endregion
+
+            #region Based On WorkExperience
+            if (active_exp)
+            {
+                result = result.Where(a => a.TblWorkExperiences.Any(a => a.FldJobTitle.Contains(exp)));
             }
             #endregion
 

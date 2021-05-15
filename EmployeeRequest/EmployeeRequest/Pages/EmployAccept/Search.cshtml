@@ -312,7 +312,7 @@
     </div>
     <div class="col-12">
         <div class="card text-white bg-primary mb-3">
-            <div class="card-header">فیلتر بر اساس زبان ها</div>
+            <div class="card-header">فیلتر بر اساس خدمت سربازی</div>
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -351,6 +351,64 @@
                                             <option value="@item.FldEmployeeRequestMilitaryOrganizationId">@item.FldEmployeeRequestMilitaryOrganizationOrganizationName</option>
                                         }
                                     </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیلتر بر اساس مهارت ها</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                مهارت
+                                <input type="checkbox" id="active_skill" />
+                            </td>
+                            <td>
+                                <div>
+                                    <input class="form-control" type="text" id="skill" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیلتر بر اساس سوابق شغلی </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                سابقه
+                                <input type="checkbox" id="active_exp" />
+                            </td>
+                            <td>
+                                <div>
+                                    <input class="form-control" type="text" id="exp" />
                                 </div>
                             </td>
                         </tr>
@@ -399,7 +457,9 @@
                 active_job: $("#active_job").prop('checked'), job: $("#job").val(),
                 active_language: $("#active_language").prop('checked'), language: $("#language").val(),
                 active_military: $("#active_military").prop('checked'), military: $("#military").val(),
-                active_militaryOrg: $("#active_militaryOrg").prop('checked'), militaryOrg: $("#militaryOrg").val()
+                active_militaryOrg: $("#active_militaryOrg").prop('checked'), militaryOrg: $("#militaryOrg").val(),
+                active_skill: $("#active_skill").prop('checked'), skill: $("#skill").val(),
+                active_exp: $("#active_exp").prop('checked'), exp: $("#exp").val()
             };
             dataTable = $("#DataT").DataTable({
                 "ajax": { "url": "?handler=FilterSearch", "type": "GET", "data": data, "datatype": "json", async: true },
