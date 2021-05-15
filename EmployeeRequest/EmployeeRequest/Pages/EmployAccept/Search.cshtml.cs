@@ -22,6 +22,8 @@ namespace EmployeeRequest.Pages.EmployAccept
 
         public List<TblEmployeeRequestJob> TblEmployeeRequestJob { get; set; }
         public List<TblEmployeeRequestLanguageType> TblEmployeeRequestLanguageType { get; set; }
+        public List<TblEmployeeRequestMilitary> TblEmployeeRequestMilitary { get; set; }
+        public List<TblEmployeeRequestMilitaryOrganization> TblEmployeeRequestMilitaryOrganization { get; set; }
 
         public IActionResult OnGet()
         {
@@ -33,6 +35,8 @@ namespace EmployeeRequest.Pages.EmployAccept
 
             TblEmployeeRequestJob = _context.TblEmployeeRequestJobs.ToList();
             TblEmployeeRequestLanguageType = _context.TblEmployeeRequestLanguageTypes.ToList();
+            TblEmployeeRequestMilitary = _context.TblEmployeeRequestMilitaries.ToList();
+            TblEmployeeRequestMilitaryOrganization = _context.TblEmployeeRequestMilitaryOrganizations.ToList();
 
             return Page();
         }
@@ -55,7 +59,9 @@ namespace EmployeeRequest.Pages.EmployAccept
                                                                 bool active_addict,
                                                                 bool active_creative,
                                                                 bool active_job, string job,
-                                                                bool active_language, string language)
+                                                                bool active_language, string language,
+                                                                bool active_military, string military,
+                                                                bool active_militaryOrg, string militaryOrg)
         {
             var result = _context.TblEmployeeRequestEmployees
                 .Include(a => a.TblEmployeeRequestPrimaryInformations)
@@ -66,6 +72,7 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(a => a.TblEmployeeRequestUserCreativities)
                 .Include(a => a.TblEmployeeRequestUserJobs)
                 .Include(a => a.TblEmployeeRequestUserLanguages)
+                .Include(a => a.TblEmployeeRequestUserMilitaries)
                 .Where(_ => true);
 
             #region Based On Primary Informations
@@ -150,6 +157,18 @@ namespace EmployeeRequest.Pages.EmployAccept
             if (active_language)
             {
                 result = result.Where(a => a.TblEmployeeRequestUserLanguages.Any(a => a.FldEmployeeRequestUserLanguageLanguageTypeId == int.Parse(language)));
+            }
+            #endregion
+
+            #region Based On Military
+            if (active_military)
+            {
+                result = result.Where(a => a.TblEmployeeRequestUserMilitaries.Any(a => a.FldEmployeeRequestMilitaryId == int.Parse(military)));
+            }
+
+            if (active_militaryOrg)
+            {
+                result = result.Where(a => a.TblEmployeeRequestUserMilitaries.Any(a => a.FldEmployeeRequestMilitaryOrganizationId == int.Parse(militaryOrg)));
             }
             #endregion
 

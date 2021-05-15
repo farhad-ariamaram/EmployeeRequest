@@ -310,6 +310,56 @@
         </div>
 
     </div>
+    <div class="col-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">فیلتر بر اساس زبان ها</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>نوع فیلتر</td>
+                            <td>گزینه ها</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                وضعیت خدمت سربازی
+                                <input type="checkbox" id="active_military" />
+                            </td>
+                            <td>
+                                <div>
+                                    <select class="form-control" id="military">
+                                        @foreach (var item in Model.TblEmployeeRequestMilitary)
+                                        {
+                                            <option value="@item.FldEmployeeRequestMilitaryId">@item.FldEmployeeRequestMilitaryMilitaryStatus</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ارگان
+                                <input type="checkbox" id="active_militaryOrg" />
+                            </td>
+                            <td>
+                                <div>
+                                    <select class="form-control" id="militaryOrg">
+                                        @foreach (var item in Model.TblEmployeeRequestMilitaryOrganization)
+                                        {
+                                            <option value="@item.FldEmployeeRequestMilitaryOrganizationId">@item.FldEmployeeRequestMilitaryOrganizationOrganizationName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
     <div>
         <button class="btn btn-primary" onclick="filter()">اعمال فیلتر</button>
     </div>
@@ -347,7 +397,9 @@
                 active_addict: $("#active_addict").prop('checked'),
                 active_creative: $("#active_creative").prop('checked'),
                 active_job: $("#active_job").prop('checked'), job: $("#job").val(),
-                active_language: $("#active_language").prop('checked'), language: $("#language").val()
+                active_language: $("#active_language").prop('checked'), language: $("#language").val(),
+                active_military: $("#active_military").prop('checked'), military: $("#military").val(),
+                active_militaryOrg: $("#active_militaryOrg").prop('checked'), militaryOrg: $("#militaryOrg").val()
             };
             dataTable = $("#DataT").DataTable({
                 "ajax": { "url": "?handler=FilterSearch", "type": "GET", "data": data, "datatype": "json", async: true },
