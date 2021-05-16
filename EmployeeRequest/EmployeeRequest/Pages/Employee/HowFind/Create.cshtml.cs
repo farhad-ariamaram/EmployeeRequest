@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.Employee.HowFind
 {
@@ -20,6 +21,12 @@ namespace EmployeeRequest.Pages.Employee.HowFind
 
         public IActionResult OnGet(string id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../../Index");
+            }
+
             ViewData["EmployeeId"] = id;
             return Page();
         }
@@ -29,6 +36,12 @@ namespace EmployeeRequest.Pages.Employee.HowFind
 
         public async Task<IActionResult> OnPostAsync()
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../../Index");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -39,6 +52,17 @@ namespace EmployeeRequest.Pages.Employee.HowFind
             TblEmployeeRequestHowFind.FldEmployeeRequestHowFindId = lastid + 1;
 
             _context.TblEmployeeRequestHowFinds.Add(TblEmployeeRequestHowFind);
+
+            TblEmployeeRequestEmployeeEditLog t = new TblEmployeeRequestEmployeeEditLog()
+            {
+                FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,
+                FldEmployeeRequestUserId = Int64.Parse(uid),
+                FldEmployeeRequestEmployeeId = TblEmployeeRequestHowFind.FldEmployeeRequestEmployeeId,
+                FldEmployeeRequestEmployeeEditLogSection = "HowFind-Create"
+            };
+
+            _context.TblEmployeeRequestEmployeeEditLogs.Add(t);
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("Index" , new {id = TblEmployeeRequestHowFind.FldEmployeeRequestEmployeeId });

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.Employee.HowFind
 {
@@ -23,6 +24,12 @@ namespace EmployeeRequest.Pages.Employee.HowFind
 
         public async Task<IActionResult> OnGetAsync(long? id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../../Index");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -40,6 +47,12 @@ namespace EmployeeRequest.Pages.Employee.HowFind
 
         public async Task<IActionResult> OnPostAsync(long? id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../../Index");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -50,6 +63,16 @@ namespace EmployeeRequest.Pages.Employee.HowFind
             if (TblEmployeeRequestHowFind != null)
             {
                 _context.TblEmployeeRequestHowFinds.Remove(TblEmployeeRequestHowFind);
+
+                TblEmployeeRequestEmployeeEditLog t = new TblEmployeeRequestEmployeeEditLog()
+                {
+                    FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,
+                    FldEmployeeRequestUserId = Int64.Parse(uid),
+                    FldEmployeeRequestEmployeeId = TblEmployeeRequestHowFind.FldEmployeeRequestEmployeeId,
+                    FldEmployeeRequestEmployeeEditLogSection = "HowFind-Delete"
+                };
+
+                _context.TblEmployeeRequestEmployeeEditLogs.Add(t);
                 await _context.SaveChangesAsync();
             }
 
