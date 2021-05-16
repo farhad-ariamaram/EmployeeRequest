@@ -455,13 +455,13 @@
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.FirstOrDefault().FldEmployeeRequestUserCreativityTitle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">خلاقیت و نوآوری ها (0)<i class="fa fa-trophy fa-pull-left"></i></div>
+                <div class="card-header">خلاقیت و نوآوری ها (0)<i class="fa fa-trophy fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/Creative/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#creative').toggle()" class="card-header"><i class="fa fa-trophy fa-pull-left"></i>خلاقیت و نوآوری ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count()))</div>
+                <div onclick="$('#creative').toggle()" class="card-header"><i class="fa fa-trophy fa-pull-left"></i>خلاقیت و نوآوری ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count()))<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Creative/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                 <div id="creative" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities)
                     {
