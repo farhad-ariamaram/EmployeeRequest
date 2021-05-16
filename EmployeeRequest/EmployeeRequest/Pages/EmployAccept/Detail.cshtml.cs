@@ -20,7 +20,6 @@ namespace EmployeeRequest.Pages.EmployAccept
         }
 
         public TblEmployeeRequestEmployee TblEmployeeRequestEmployee { get; set; }
-        public IQueryable<TblEmployeeRequestUserLanguage> TblEmployeeRequestUserLanguages { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -62,12 +61,12 @@ namespace EmployeeRequest.Pages.EmployAccept
 
                 .Include(t => t.TblEmployeeRequestUserSkills)
 
+                .Include(t=>t.TblEmployeeRequestUserLanguages).ThenInclude(t=>t.FldEmployeeRequestUserLanguageLanguageType)
+
                 .Include(t => t.TblWorkExperiences).ThenInclude(t => t.FldTaminJob)
                 .Include(t => t.TblWorkExperiences).ThenInclude(t => t.TblWorkExperienceLeaveJobDtls).ThenInclude(t=>t.FldLeaveJobNavigation)
 
                 .FirstOrDefaultAsync(m => m.FldEmployeeRequestEmployeeId == id);
-
-            TblEmployeeRequestUserLanguages = _context.TblEmployeeRequestUserLanguages.Include(a=>a.FldEmployeeRequestUserLanguageLanguageType).Where(a=>a.FldEmployeeRequestEmployeeId==id);
 
             if (TblEmployeeRequestEmployee == null)
             {

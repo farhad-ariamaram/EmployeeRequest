@@ -570,64 +570,82 @@
     @*Language*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#langs').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (@(Model.TblEmployeeRequestUserLanguages.Count()))</div>
+            <div onclick="$('#langs').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages.Count()))</div>
             <div id="langs" style="display:none" class="card-body">
-                @foreach (var item in Model.TblEmployeeRequestUserLanguages)
-                {
-                    <table class="table text-white">
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-danger">جدید</span></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>نوع زبان</td>
-                                <td>
-                                    @if (item.FldEmployeeRequestUserLanguageLanguageTypeId != null)
-                                    {
-                                        @item.FldEmployeeRequestUserLanguageLanguageType.FldEmployeeRequestLanguageTypeLanguageType
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>سطح خواندن</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserLanguageReadingLevel
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>سطح نوشتن</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserLanguageWritingLevel
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>سطح گفتاری</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserLanguageSpeakingLevel
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>سطح شنیداری</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserLanguageListeningLevel
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>زبان مادری</td>
-                                <td>
-                                    @(@item.FldEmployeeRequestUserLanguageIsNative ? "میباشد" : "نمیباشد")
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات</td>
-                                <td>
-                                    @item.FldEmployeeRequestUserLanguageDescription
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
+
+                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages)
+                    {
+                        <table class="table text-white">
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">جدید</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>نوع زبان</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestUserLanguageLanguageTypeId != null)
+                                        {
+                                            @item.FldEmployeeRequestUserLanguageLanguageType.FldEmployeeRequestLanguageTypeLanguageType
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>سطح خواندن</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestUserLanguageReadingLevel != null)
+                                        {
+                                            @item.FldEmployeeRequestUserLanguageReadingLevel
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>سطح نوشتن</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestUserLanguageWritingLevel != null)
+                                        {
+                                            @item.FldEmployeeRequestUserLanguageWritingLevel
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>سطح گفتاری</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestUserLanguageSpeakingLevel != null)
+                                        {
+                                            @item.FldEmployeeRequestUserLanguageSpeakingLevel
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>سطح شنیداری</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestUserLanguageListeningLevel != null)
+                                        {
+                                            @item.FldEmployeeRequestUserLanguageListeningLevel
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>زبان مادری</td>
+                                    <td>
+                                        @if (item.FldEmployeeRequestUserLanguageIsNative)
+                                        {
+                                            @(@item.FldEmployeeRequestUserLanguageIsNative ? "میباشد" : "نمیباشد")
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>توضیحات</td>
+                                    <td>
+                                        @item.FldEmployeeRequestUserLanguageDescription
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                
+
             </div>
         </div>
     </div>
