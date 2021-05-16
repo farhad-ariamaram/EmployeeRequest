@@ -1,0 +1,67 @@
+﻿@page
+@model Employee.Creative.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>جدول نوآوری های کاربر</h1>
+<br />
+<p>
+    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestUserCreativity.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                عنوان
+            </th>
+            <th>
+                توضیحات نوآوری
+            </th>
+            <th>
+                تاریخ ثبت
+            </th>
+            <th>
+               توضیحات
+            </th>
+            <th>
+                نوع نوآوری
+            </th>
+            <th>
+                نام و نام خانوادگی
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TblEmployeeRequestUserCreativity)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityExplanation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestCreativityType.FldEmployeeRequestCreativityTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserCreativityId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserCreativityId">حذف</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

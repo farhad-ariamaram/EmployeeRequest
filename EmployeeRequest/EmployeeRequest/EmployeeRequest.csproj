@@ -25,7 +25,6 @@
     <Folder Include="Pages\Employee\Emergency\" />
     <Folder Include="Pages\Employee\General\" />
     <Folder Include="Pages\Employee\Medical\" />
-    <Folder Include="Pages\Employee\Creative\" />
     <Folder Include="Pages\Employee\Job\" />
     <Folder Include="Pages\Employee\Language\" />
     <Folder Include="Pages\Employee\Military\" />
