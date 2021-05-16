@@ -189,7 +189,7 @@
     @*Emergency*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#emergency').toggle()" class="card-header"><i class="fa fa-phone fa-pull-left"></i>مشخصات آشنایان (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls.Count()))</div>
+            <div onclick="$('#emergency').toggle()" class="card-header"><i class="fa fa-phone fa-pull-left"></i>مشخصات آشنایان (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls.Count()))<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Emergency/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             <div id="emergency" style="display:none" class="card-body">
                 @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls)
                 {
