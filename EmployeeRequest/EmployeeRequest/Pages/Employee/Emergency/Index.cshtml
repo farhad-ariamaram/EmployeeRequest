@@ -1,0 +1,67 @@
+﻿@page
+@model Employee.Emergency.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <h1>جدول اطلاعات اشنایان کاربر</h1>
+
+    <p>
+        <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestEmergencyCall.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+    </p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    نام
+                </th>
+                <th>
+                    نام خانوادگی
+                </th>
+                <th>
+                    نسبت
+                </th>
+                <th>
+                    شماره تماس
+                </th>
+                <th>
+                    توضیحات
+                </th>
+                <th>
+                    نام و نام خانوادگی
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TblEmployeeRequestEmergencyCall)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallRelative)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallPhoneNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmergencyCallId">ویرایش</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmergencyCallId">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

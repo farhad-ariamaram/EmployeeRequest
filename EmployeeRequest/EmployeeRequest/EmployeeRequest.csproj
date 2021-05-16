@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Employee\Education\" />
-    <Folder Include="Pages\Employee\Emergency\" />
     <Folder Include="Pages\Employee\General\" />
     <Folder Include="Pages\Employee\Medical\" />
     <Folder Include="Pages\Employee\Job\" />
