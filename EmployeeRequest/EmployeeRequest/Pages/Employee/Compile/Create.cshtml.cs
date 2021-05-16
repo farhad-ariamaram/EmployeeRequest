@@ -27,7 +27,7 @@ namespace EmployeeRequest.Pages.Employee.Compile
                 return RedirectToPage("../../Index");
             }
 
-            ViewData["FldEmployeeRequestCompilationTypeId"] = new SelectList(_context.TblEmployeeRequestCompilationTypes, "FldEmployeeRequestCompilationTypeId", "FldEmployeeRequestCompilationTypeId");
+            ViewData["FldEmployeeRequestCompilationTypeId"] = new SelectList(_context.TblEmployeeRequestCompilationTypes, "FldEmployeeRequestCompilationTypeId", "FldEmployeeRequestCompilationTypeCompilationType");
             ViewData["EmployeeId"] = id;
             return Page();
         }

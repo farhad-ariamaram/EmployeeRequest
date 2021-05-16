@@ -44,7 +44,7 @@ namespace EmployeeRequest.Pages.Employee.Compile
             {
                 return NotFound();
             }
-           ViewData["FldEmployeeRequestCompilationTypeId"] = new SelectList(_context.TblEmployeeRequestCompilationTypes, "FldEmployeeRequestCompilationTypeId", "FldEmployeeRequestCompilationTypeId");
+           ViewData["FldEmployeeRequestCompilationTypeId"] = new SelectList(_context.TblEmployeeRequestCompilationTypes, "FldEmployeeRequestCompilationTypeId", "FldEmployeeRequestCompilationTypeCompilationType");
             return Page();
         }
 

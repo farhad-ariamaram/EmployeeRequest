@@ -37,7 +37,7 @@ namespace EmployeeRequest.Pages.Employee.Compile
             TblEmployeeRequestUserCompilation = await _context.TblEmployeeRequestUserCompilations
                 .Where(a => a.FldEmployeeRequestEmployeeId == id)
                 .Include(t => t.FldEmployeeRequestCompilationType)
-                .Include(t => t.FldEmployeeRequestEmployee).ToListAsync();
+                .Include(t => t.FldEmployeeRequestEmployee).ThenInclude(t => t.TblEmployeeRequestPrimaryInformations).ToListAsync();
 
             return Page();
         }
