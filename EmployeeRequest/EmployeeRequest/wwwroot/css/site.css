@@ -81,3 +81,9 @@ body {
 .acart {
     text-decoration: none !important;
 }
+
+.fixed {
+    position: fixed;
+    bottom: 20px;
+    z-index: 777;
+}

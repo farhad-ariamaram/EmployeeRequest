@@ -24,7 +24,7 @@
 <div id="filter" class="row" style="display:none">
     <div class="col-12">
         <div class="card text-white bg-primary mb-3">
-            <div onclick="$('#primary').toggle()" class="card-header">فیتر بر اساس اطلاعات اولیه</div>
+            <div onclick="$('#primary').toggle()" class="card-header"><i class="fa fa-user-circle fa-pull-left"></i>فیلتر بر اساس اطلاعات اولیه</div>
             <div id="primary" style="display:none" class="card-body">
                 <table class="table">
                     <thead>
@@ -106,7 +106,7 @@
     </div>
     <div class="col-12">
         <div class="card text-white bg-success mb-3">
-            <div onclick="$('#degreesection').toggle()" class="card-header">فیتر بر اساس سوابق تحصیلی</div>
+            <div onclick="$('#degreesection').toggle()" class="card-header">فیلتر بر اساس سوابق تحصیلی<i class="fa fa-graduation-cap fa-pull-left"></i></div>
             <div style="display:none" id="degreesection" class="card-body">
                 <table class="table">
                     <thead>
@@ -154,7 +154,7 @@
     </div>
     <div class="col-12">
         <div class="card text-white bg-danger mb-3">
-            <div onclick="$('#compilesection').toggle()" class="card-header">فیتر بر اساس تالیفات</div>
+            <div onclick="$('#compilesection').toggle()" class="card-header">فیلتر بر اساس تالیفات<i class="fa fa-newspaper fa-pull-left"></i></div>
             <div style="display:none" id="compilesection" class="card-body">
                 <table class="table">
                     <thead>
@@ -181,7 +181,7 @@
     </div>
     <div class="col-12">
         <div class="card text-white bg-warning mb-3">
-            <div onclick="$('#generalsection').toggle()" class="card-header">فیلتر بر اساس سوابق عمومی (کیفری)</div>
+            <div onclick="$('#generalsection').toggle()" class="card-header">فیلتر بر اساس سوابق عمومی (کیفری)<i class="fa fa-balance-scale fa-pull-left"></i></div>
             <div style="display:none" id="generalsection" class="card-body">
                 <table class="table">
                     <thead>
@@ -208,7 +208,7 @@
     </div>
     <div class="col-12">
         <div class="card text-white bg-info mb-3">
-            <div onclick="$('#medicalsection').toggle()" class="card-header">فیلتر بر اساس سوابق پزشکی)</div>
+            <div onclick="$('#medicalsection').toggle()" class="card-header">فیلتر بر اساس سوابق پزشکی)<i class="fa fa-medkit fa-pull-left"></i></div>
             <div style="display:none" id="medicalsection" class="card-body">
                 <table class="table">
                     <thead>
@@ -244,7 +244,7 @@
     </div>
     <div class="col-12">
         <div class="card text-white bg-secondary mb-3">
-            <div onclick="$('#jobsection').toggle()" class="card-header">فیلتر بر اساس شغل ها</div>
+            <div onclick="$('#jobsection').toggle()" class="card-header"><i class="fa fa-suitcase fa-pull-left"></i>فیلتر بر اساس شغل ها</div>
             <div style="display:none" id="jobsection" class="card-body">
                 <table class="table">
                     <thead>
@@ -277,8 +277,8 @@
 
     </div>
     <div class="col-12">
-        <div class="card text-dark bg-warning mb-3">
-            <div onclick="$('#langsection').toggle()" class="card-header">فیلتر بر اساس زبان ها</div>
+        <div class="card text-white bg-primary mb-3">
+            <div onclick="$('#langsection').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>فیلتر بر اساس زبان ها</div>
             <div style="display:none" id="langsection" class="card-body">
                 <table class="table">
                     <thead>
@@ -311,8 +311,8 @@
 
     </div>
     <div class="col-12">
-        <div class="card text-white bg-primary mb-3">
-            <div onclick="$('#militarysection').toggle()" class="card-header">فیلتر بر اساس خدمت سربازی</div>
+        <div class="card text-white bg-success mb-3">
+            <div onclick="$('#militarysection').toggle()" class="card-header"><i class="fa-pull-left"><img src="~/img/soldier.png" width="20" height="20" /></i>فیلتر بر اساس خدمت سربازی</div>
             <div style="display:none" id="militarysection" class="card-body">
                 <table class="table">
                     <thead>
@@ -361,8 +361,8 @@
 
     </div>
     <div class="col-12">
-        <div class="card text-white bg-success mb-3">
-            <div onclick="$('#skillsection').toggle()" class="card-header">فیلتر بر اساس مهارت ها</div>
+        <div class="card text-white bg-danger mb-3">
+            <div onclick="$('#skillsection').toggle()" class="card-header"><i class="fa fa-cogs fa-pull-left"></i>فیلتر بر اساس مهارت ها</div>
             <div style="display:none" id="skillsection" class="card-body">
                 <table class="table">
                     <thead>
@@ -390,8 +390,8 @@
 
     </div>
     <div class="col-12">
-        <div class="card text-white bg-danger mb-3">
-            <div onclick="$('#experiencesection').toggle()" class="card-header">فیلتر بر اساس سوابق شغلی </div>
+        <div class="card text-white bg-warning mb-3">
+            <div onclick="$('#experiencesection').toggle()" class="card-header">فیلتر بر اساس سوابق شغلی <i class="fa-pull-left"><img src="~/img/workexperience.png" height="20" width="20" /></i></div>
             <div style="display:none" id="experiencesection" class="card-body">
                 <table class="table">
                     <thead>
@@ -418,7 +418,7 @@
         </div>
 
     </div>
-    <div>
+    <div class="fixed">
         <button class="btn btn-primary" onclick="filter()">اعمال فیلتر</button>
     </div>
 </div>

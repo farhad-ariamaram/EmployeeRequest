@@ -5,11 +5,17 @@
     ViewData["Title"] = "جزئیات";
 }
 
+    <div class="row">
+        <div class="col-12 fixed">
+            <span onclick="window.close()" class="btn btn-light">بستن پنجره &nbsp; ×</span>
+        </div>
+    </div>
+<br />
 <div class="row">
     @*Primary Informations*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#primaryInfos').toggle()" class="card-header">اطلاعات اولیه</div>
+            <div onclick="$('#primaryInfos').toggle()" class="card-header"><i class="fa fa-user-circle fa-pull-left"></i>اطلاعات اولیه</div>
             <div id="primaryInfos" style="display:none" class="card-body">
                 <table class="table text-white">
                     <tbody>
@@ -87,7 +93,7 @@
     @*Education*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#education').toggle()" class="card-header"> سوابق تحصیلی (@(Model.TblEmployeeRequestEmployee.TblCustomerDegrees.Count()))</div>
+            <div onclick="$('#education').toggle()" class="card-header"> سوابق تحصیلی<i class="fa fa-graduation-cap fa-pull-left"></i> (@(Model.TblEmployeeRequestEmployee.TblCustomerDegrees.Count()))</div>
             <div id="education" style="display:none" class="card-body">
                 @foreach (var item in Model.TblEmployeeRequestEmployee.TblCustomerDegrees)
                 {
@@ -183,7 +189,7 @@
     @*Emergency*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#emergency').toggle()" class="card-header">مشخصات آشنایان (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls.Count()))</div>
+            <div onclick="$('#emergency').toggle()" class="card-header"><i class="fa fa-phone fa-pull-left"></i>مشخصات آشنایان (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls.Count()))</div>
             <div id="emergency" style="display:none" class="card-body">
                 @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestEmergencyCalls)
                 {
@@ -229,13 +235,13 @@
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()<2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.FirstOrDefault().FldEmployeeRequestGeneralRecordCriminalTiltle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">سوابق کیفری (0)</div>
+                <div class="card-header">سوابق کیفری (0)<i class="fa fa-balance-scale fa-pull-left"></i></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#general').toggle()" class="card-header">سوابق کیفری (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()))</div>
+                <div onclick="$('#general').toggle()" class="card-header"><i class="fa fa-balance-scale fa-pull-left"></i>سوابق کیفری (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()))</div>
                 <div id="general" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords)
                     {
@@ -277,13 +283,13 @@
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.FirstOrDefault().FldEmployeeRequestMedicalRecordDisease))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">سوابق پزشکی (0)</div>
+                <div class="card-header">سوابق پزشکی (0)<i class="fa fa-medkit fa-pull-left"></i></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#medical').toggle()" class="card-header">سوابق پزشکی (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count()))</div>
+                <div onclick="$('#medical').toggle()" class="card-header">سوابق پزشکی<i class="fa fa-medkit fa-pull-left"></i> (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count()))</div>
                 <div id="medical" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords)
                     {
@@ -355,13 +361,13 @@
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Count()<2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.FirstOrDefault().FldEmployeeRequestUserCompilationTitle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">تالیف ها (0)</div>
+                <div class="card-header">تالیف ها (0)<i class="fa fa-newspaper fa-pull-left"></i></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#compile').toggle()" class="card-header">تالیف ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Count()))</div>
+                <div onclick="$('#compile').toggle()" class="card-header">تالیف ها<i class="fa fa-newspaper fa-pull-left"></i> (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations.Count()))</div>
                 <div id="compile" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCompilations)
                     {
@@ -422,7 +428,7 @@
     @*HowFind*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#howfind').toggle()" class="card-header">آشنایی با سایت</div>
+            <div onclick="$('#howfind').toggle()" class="card-header"><i class="fa fa-info fa-pull-left"></i>آشنایی با سایت</div>
             <div id="howfind" style="display:none" class="card-body">
                 <table class="table text-white">
                     <tbody>
@@ -449,13 +455,13 @@
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.FirstOrDefault().FldEmployeeRequestUserCreativityTitle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">خلاقیت و نوآوری ها (0)</div>
+                <div class="card-header">خلاقیت و نوآوری ها (0)<i class="fa fa-trophy fa-pull-left"></i></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#creative').toggle()" class="card-header">خلاقیت و نوآوری ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count()))</div>
+                <div onclick="$('#creative').toggle()" class="card-header"><i class="fa fa-trophy fa-pull-left"></i>خلاقیت و نوآوری ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities.Count()))</div>
                 <div id="creative" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserCreativities)
                     {
@@ -511,7 +517,7 @@
     @*Job*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#jobs').toggle()" class="card-header">شغل های انتخاب کرده (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserJobs.Count()))</div>
+            <div onclick="$('#jobs').toggle()" class="card-header"><i class="fa fa-suitcase fa-pull-left"></i>شغل های انتخاب کرده (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserJobs.Count()))</div>
             <div id="jobs" style="display:none" class="card-body">
                 @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserJobs)
                 {
@@ -564,7 +570,7 @@
     @*Language*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#langs').toggle()" class="card-header">زبان ها (@(Model.TblEmployeeRequestUserLanguages.Count()))</div>
+            <div onclick="$('#langs').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (@(Model.TblEmployeeRequestUserLanguages.Count()))</div>
             <div id="langs" style="display:none" class="card-body">
                 @foreach (var item in Model.TblEmployeeRequestUserLanguages)
                 {
@@ -631,13 +637,13 @@
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries.FirstOrDefault().FldEmployeeRequestMilitaryId == null)
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">سوابق سربازی (0)</div>
+                <div class="card-header">سوابق سربازی (0)<i class="fa-pull-left"><img src="~/img/soldier.png" width="20" height="20" /></i></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#milit').toggle()" class="card-header">سوابق سربازی</div>
+                <div onclick="$('#milit').toggle()" class="card-header">سوابق سربازی<i class="fa-pull-left"><img src="~/img/soldier.png" width="20" height="20" /></i></div>
                 <div id="milit" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserMilitaries)
                     {
@@ -712,13 +718,13 @@
         @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.FirstOrDefault().FldEmployeeRequestUserSkillSkillTitle))
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">مهارت ها (0)</div>
+                <div class="card-header">مهارت ها (0)<i class="fa fa-cogs fa-pull-left"></i></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#skills').toggle()" class="card-header">مهارت ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Count()))</div>
+                <div onclick="$('#skills').toggle()" class="card-header"><i class="fa fa-cogs fa-pull-left"></i>مهارت ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills.Count()))</div>
                 <div id="skills" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserSkills)
                     {
@@ -797,13 +803,13 @@
         @if (string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblWorkExperiences.FirstOrDefault().FldCompanyName) && Model.TblEmployeeRequestEmployee.TblWorkExperiences.Count() < 2)
         {
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">سوابق شغلی (0)</div>
+                <div class="card-header">سوابق شغلی (0)<i class="fa-pull-left"><img src="~/img/workexperience.png" height="20" width="20" /></i></div>
             </div>
         }
         else
         {
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#works').toggle()" class="card-header">سوابق شغلی (@(Model.TblEmployeeRequestEmployee.TblWorkExperiences.Count()))</div>
+                <div onclick="$('#works').toggle()" class="card-header"><i class="fa-pull-left"><img src="~/img/workexperience.png" height="20" width="20" /></i>سوابق شغلی (@(Model.TblEmployeeRequestEmployee.TblWorkExperiences.Count()))</div>
                 <div id="works" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblWorkExperiences)
                     {
