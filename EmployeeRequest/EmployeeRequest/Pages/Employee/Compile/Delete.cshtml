@@ -1,0 +1,58 @@
+﻿@page
+@model Employee.Compile.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>حذف</h1>
+
+<h3>آیا از حذف این مورد مطمئن میباشید؟</h3>
+<div>
+    <h4>جدول تالیف های کاربر</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            عنوان تالیف
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationTitle)
+        </dd>
+        <dt class="col-sm-2">
+            توضیح تالیف
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationExplanation)
+        </dd>
+        <dt class="col-sm-2">
+            تاریخ تالیف
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationDate)
+        </dd>
+        <dt class="col-sm-2">
+            انتشارات
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationAuthor)
+        </dd>
+        <dt class="col-sm-2">
+            توضیحات بیشتر
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationDescription)
+        </dd>
+        <dt class="col-sm-2">
+            نوع تالیف
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationId" />
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestUserCompilation.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
+    </form>
+</div>

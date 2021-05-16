@@ -20,4 +20,18 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Employee\Education\" />
+    <Folder Include="Pages\Employee\Emergency\" />
+    <Folder Include="Pages\Employee\General\" />
+    <Folder Include="Pages\Employee\Medical\" />
+    <Folder Include="Pages\Employee\Creative\" />
+    <Folder Include="Pages\Employee\Job\" />
+    <Folder Include="Pages\Employee\Language\" />
+    <Folder Include="Pages\Employee\Military\" />
+    <Folder Include="Pages\Employee\WorkExperience\" />
+    <Folder Include="Pages\Employee\Skill\" />
+    <Folder Include="Pages\Employee\PrimaryInformation\" />
+  </ItemGroup>
+
 </Project>
