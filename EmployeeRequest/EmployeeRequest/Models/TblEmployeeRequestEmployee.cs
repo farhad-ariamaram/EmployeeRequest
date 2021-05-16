@@ -11,6 +11,7 @@ namespace EmployeeRequest.Models
         {
             TblCustomerDegrees = new HashSet<TblCustomerDegree>();
             TblEmployeeRequestEmergencyCalls = new HashSet<TblEmployeeRequestEmergencyCall>();
+            TblEmployeeRequestEmployeeEditLogs = new HashSet<TblEmployeeRequestEmployeeEditLog>();
             TblEmployeeRequestGeneralRecords = new HashSet<TblEmployeeRequestGeneralRecord>();
             TblEmployeeRequestHowFinds = new HashSet<TblEmployeeRequestHowFind>();
             TblEmployeeRequestInterviewSessions = new HashSet<TblEmployeeRequestInterviewSession>();
@@ -50,6 +51,7 @@ namespace EmployeeRequest.Models
         public virtual TblEmployeeRequestUser FldEmployeeRequestUserPrimaryAccepter { get; set; }
         public virtual ICollection<TblCustomerDegree> TblCustomerDegrees { get; set; }
         public virtual ICollection<TblEmployeeRequestEmergencyCall> TblEmployeeRequestEmergencyCalls { get; set; }
+        public virtual ICollection<TblEmployeeRequestEmployeeEditLog> TblEmployeeRequestEmployeeEditLogs { get; set; }
         public virtual ICollection<TblEmployeeRequestGeneralRecord> TblEmployeeRequestGeneralRecords { get; set; }
         public virtual ICollection<TblEmployeeRequestHowFind> TblEmployeeRequestHowFinds { get; set; }
         public virtual ICollection<TblEmployeeRequestInterviewSession> TblEmployeeRequestInterviewSessions { get; set; }

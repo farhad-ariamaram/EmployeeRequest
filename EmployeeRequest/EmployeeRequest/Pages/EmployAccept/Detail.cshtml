@@ -428,7 +428,7 @@
     @*HowFind*@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div onclick="$('#howfind').toggle()" class="card-header"><i class="fa fa-info fa-pull-left"></i>آشنایی با سایت</div>
+            <div onclick="$('#howfind').toggle()" class="card-header"><i class="fa fa-info fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/HowFind/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a>آشنایی با سایت</div>
             <div id="howfind" style="display:none" class="card-body">
                 <table class="table text-white">
                     <tbody>

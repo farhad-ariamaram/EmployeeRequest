@@ -27,6 +27,7 @@ namespace EmployeeRequest.Models
         public virtual DbSet<TblEmployeeRequestCreativityType> TblEmployeeRequestCreativityTypes { get; set; }
         public virtual DbSet<TblEmployeeRequestEmergencyCall> TblEmployeeRequestEmergencyCalls { get; set; }
         public virtual DbSet<TblEmployeeRequestEmployee> TblEmployeeRequestEmployees { get; set; }
+        public virtual DbSet<TblEmployeeRequestEmployeeEditLog> TblEmployeeRequestEmployeeEditLogs { get; set; }
         public virtual DbSet<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequests { get; set; }
         public virtual DbSet<TblEmployeeRequestFinalAcception> TblEmployeeRequestFinalAcceptions { get; set; }
         public virtual DbSet<TblEmployeeRequestGeneralRecord> TblEmployeeRequestGeneralRecords { get; set; }
@@ -406,6 +407,39 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblEmployeeRequestEmployeeFldEmployeeRequestUserPrimaryAccepters)
                     .HasForeignKey(d => d.FldEmployeeRequestUserPrimaryAccepterId)
                     .HasConstraintName("FK_Tbl_EmployeeRequest_Employee_Tbl_EmployeeRequest_User1");
+            });
+
+            modelBuilder.Entity<TblEmployeeRequestEmployeeEditLog>(entity =>
+            {
+                entity.HasKey(e => e.FldEmployeeRequestEmployeeEditLogId);
+
+                entity.ToTable("Tbl_EmployeeRequest_EmployeeEditLog");
+
+                entity.Property(e => e.FldEmployeeRequestEmployeeEditLogId).HasColumnName("Fld_EmployeeRequest_EmployeeEditLog_Id");
+
+                entity.Property(e => e.FldEmployeeRequestEmployeeEditLogDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EmployeeRequest_EmployeeEditLog_Date");
+
+                entity.Property(e => e.FldEmployeeRequestEmployeeEditLogSection)
+                    .HasMaxLength(50)
+                    .HasColumnName("Fld_EmployeeRequest_EmployeeEditLog_Section");
+
+                entity.Property(e => e.FldEmployeeRequestEmployeeId)
+                    .HasMaxLength(50)
+                    .HasColumnName("Fld_EmployeeRequest_Employee_Id");
+
+                entity.Property(e => e.FldEmployeeRequestUserId).HasColumnName("Fld_EmployeeRequest_User_Id");
+
+                entity.HasOne(d => d.FldEmployeeRequestEmployee)
+                    .WithMany(p => p.TblEmployeeRequestEmployeeEditLogs)
+                    .HasForeignKey(d => d.FldEmployeeRequestEmployeeId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_EmployeeEditLog_Tbl_EmployeeRequest_Employee");
+
+                entity.HasOne(d => d.FldEmployeeRequestUser)
+                    .WithMany(p => p.TblEmployeeRequestEmployeeEditLogs)
+                    .HasForeignKey(d => d.FldEmployeeRequestUserId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_EmployeeEditLog_Tbl_EmployeeRequest_User");
             });
 
             modelBuilder.Entity<TblEmployeeRequestEmployeeRequest>(entity =>
