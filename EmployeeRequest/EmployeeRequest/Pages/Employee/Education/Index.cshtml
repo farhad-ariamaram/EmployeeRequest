@@ -1,0 +1,96 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>جدول سوابق تحصیلی کاربر</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblCustomerDegree.FirstOrDefault().UserId">ایجاد</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                نام رشته تحصیلی
+            </th>
+            <th>
+                تاریخ شروع
+            </th>
+            <th>
+                تاریخ پایان
+            </th>
+            <th>
+                شماره مدرک
+            </th>
+            <th>
+                تاریخ اخذ مدرک
+            </th>
+            <th>
+                نمره
+            </th>
+            <th>
+                توشیحات بیشتر
+            </th>
+            <th>
+                محل تحصیل
+            </th>
+            <th>
+                شهر محل تحصیل
+            </th>
+            <th>
+                مقطع تحصیلی
+            </th>
+            <th>
+                رشته تحصیلی (جدول)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TblCustomerDegree)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEducationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldExportNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldExportDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldDes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldStudyPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldStudyCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diploma.DiplomaName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Education.EducationName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldCustomerDegreeId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldCustomerDegreeId">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

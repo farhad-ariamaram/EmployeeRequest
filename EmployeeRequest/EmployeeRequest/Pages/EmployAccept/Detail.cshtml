@@ -108,7 +108,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#education').toggle()" class="card-header"> سوابق تحصیلی<i class="fa fa-graduation-cap fa-pull-left"></i> (@(Model.TblEmployeeRequestEmployee.TblCustomerDegrees.Count()))</div>
+                <div onclick="$('#education').toggle()" class="card-header"> سوابق تحصیلی<i class="fa fa-graduation-cap fa-pull-left"></i> (@(Model.TblEmployeeRequestEmployee.TblCustomerDegrees.Count())) <a class="fa-pull-left text-white mr-2" asp-page="../Employee/Education/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                 <div id="education" style="display:none" class="card-body">
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblCustomerDegrees)
                     {
@@ -205,7 +205,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div class="card-header"> سوابق تحصیلی<i class="fa fa-graduation-cap fa-pull-left"></i> (0)</div>
+                <div class="card-header"> سوابق تحصیلی<i class="fa fa-graduation-cap fa-pull-left"></i> (0) <a class="fa-pull-left text-white mr-2" asp-page="../Employee/Education/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
 
