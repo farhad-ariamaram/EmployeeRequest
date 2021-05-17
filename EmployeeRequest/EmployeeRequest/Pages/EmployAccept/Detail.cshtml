@@ -17,7 +17,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#primaryInfos').toggle()" class="card-header"><i class="fa fa-user-circle fa-pull-left"></i>اطلاعات اولیه</div>
+                <div onclick="$('#primaryInfos').toggle()" class="card-header"><i class="fa fa-user-circle fa-pull-left"></i>اطلاعات اولیه <a class="fa-pull-left text-white mr-2" asp-page="../Employee/PrimaryInformation/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                 <div id="primaryInfos" style="display:none" class="card-body">
                     <table class="table text-white">
                         <tbody>
@@ -96,7 +96,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div class="card-header"><i class="fa fa-user-circle fa-pull-left"></i>اطلاعات اولیه</div>
+                <div class="card-header"><i class="fa fa-user-circle fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/PrimaryInformation/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a> اطلاعات اولیه</div>
             </div>
         </div>
     }
