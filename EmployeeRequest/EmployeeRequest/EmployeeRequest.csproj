@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Employee\Military\" />
     <Folder Include="Pages\Employee\WorkExperience\" />
     <Folder Include="Pages\Employee\Skill\" />
     <Folder Include="Pages\Employee\PrimaryInformation\" />
