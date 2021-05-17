@@ -1,0 +1,78 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>جدول زبان های کاربر</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestUserLanguage.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                سطح خواندن
+            </th>
+            <th>
+                سطح نوشتن
+            </th>
+            <th>
+                سطح شنیداری
+            </th>
+            <th>
+                سطح صحبت کردن
+            </th>
+            <th>
+                توضیحات بیشتر
+            </th>
+            <th>
+                زبان مادری
+            </th>
+            <th>
+                نام و نام خانوادگی
+            </th>
+            <th>
+                زبان
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TblEmployeeRequestUserLanguage) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserLanguageReadingLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserLanguageWritingLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserLanguageListeningLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserLanguageSpeakingLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserLanguageDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserLanguageIsNative)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserLanguageLanguageType.FldEmployeeRequestLanguageTypeLanguageType)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserLanguageId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserLanguageId">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

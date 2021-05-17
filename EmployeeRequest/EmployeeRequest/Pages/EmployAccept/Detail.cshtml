@@ -672,7 +672,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#langs').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages.Count()))</div>
+                <div onclick="$('#langs').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages.Count()))<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Language/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                 <div id="langs" style="display:none" class="card-body">
 
                     @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages)
@@ -756,7 +756,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (0)</div>
+                <div class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (0)<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Language/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
     }

@@ -39,7 +39,7 @@
         //    PushIndent("    ");
     }
 @:<p>
-    @:<a class="btn btn-primary" asp-page="Create" asp-route-id="@Model..FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+    @:<a class="btn btn-primary" asp-page="Create" asp-route-id="@@Model.@(Model.ModelMetadata.ModelType.GetProperties()).FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
 
 @:</p>
 @:<table class="table">
