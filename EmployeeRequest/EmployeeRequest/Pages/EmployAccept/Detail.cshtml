@@ -273,13 +273,13 @@
             @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count() < 2 && string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.FirstOrDefault().FldEmployeeRequestGeneralRecordCriminalTiltle))
             {
                 <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                    <div class="card-header">سوابق کیفری (0)<i class="fa fa-balance-scale fa-pull-left"></i></div>
+                    <div class="card-header">سوابق کیفری (0)<i class="fa fa-balance-scale fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/General/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                 </div>
             }
             else
             {
                 <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                    <div onclick="$('#general').toggle()" class="card-header"><i class="fa fa-balance-scale fa-pull-left"></i>سوابق کیفری (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()))</div>
+                    <div onclick="$('#general').toggle()" class="card-header"><i class="fa fa-balance-scale fa-pull-left"></i>سوابق کیفری (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords.Count()))<a class="fa-pull-left text-white mr-2" asp-page="../Employee/General/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                     <div id="general" style="display:none" class="card-body">
                         @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestGeneralRecords)
                         {

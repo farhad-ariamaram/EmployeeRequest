@@ -1,0 +1,54 @@
+﻿@page
+@model Employee.General.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <h1>جدول سوابق عمومی (کیفری) کاربر</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestGeneralRecord.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                عنوان جرم
+            </th>
+            <th>
+                توضیحات جرم
+            </th>
+            <th>
+                توضیحات بیشتر
+            </th>
+            <th>
+                نام و نام خانوادگی
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TblEmployeeRequestGeneralRecord) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordCriminalTiltle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordCriminalDes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestGeneralRecordId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestGeneralRecordId">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
