@@ -1,0 +1,161 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>جدول سوابق شغلی کاربر</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblWorkExperience.FirstOrDefault().UserId">ایجاد</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                نام شرکت
+            </th>
+            <th>
+                تاریخ شروع
+            </th>
+            <th>
+                تاریخ پایان
+            </th>
+            <th>
+                توضیحات بیشتر
+            </th>
+            <th>
+                شماره تماس شرکت
+            </th>
+            <th>
+                شماره داخلی شرکت
+            </th>
+            <th>
+                افراد مرتبط
+            </th>
+            <th>
+                عنوان شغل
+            </th>
+            <th>
+                مقدار حقوق دریافتی ماهیانه
+            </th>
+            <th>
+                آخرین حقوق ماهیانه دریافتی
+            </th>
+            <th>
+                دلیل ترک کار
+            </th>
+            <th>
+                تعداد روز های بیمه شده
+            </th>
+            <th>
+                ساعت کاری روزانه
+            </th>
+            <th>
+                تعداد روز کار در هفته
+            </th>
+            <th>
+                نام واحد
+            </th>
+            <th>
+                مشغول به کار
+            </th>
+            <th>
+                بیمه
+            </th>
+            <th>
+                شماره بیمه
+            </th>
+            <th>
+                دلیل تغییر کار
+            </th>
+            <th>
+                دستاورد های قبلی
+            </th>
+            <th>
+                دلیل ترک کار
+            </th>
+            <th>
+                عنوان شغل از جدول
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TblWorkExperience) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldCompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldContactNumberOfCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldContactInnerNumberOfCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldRelatedPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldJobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEarlySalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldLateSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldReasonsToLeaveJob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldAmountOfDailyInsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldWorkTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldWorkDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldUnitName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsWorking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasInsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsuranceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WhyWantChangeJob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousJobAchievements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldLeaveJob.FldLeaveJobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldTaminJob.FldTaminJobName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldWorkExperienceId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldWorkExperienceId">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
