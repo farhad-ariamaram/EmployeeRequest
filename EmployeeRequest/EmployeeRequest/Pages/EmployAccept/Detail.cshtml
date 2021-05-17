@@ -319,7 +319,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">سوابق کیفری (0)<i class="fa fa-balance-scale fa-pull-left"></i></div>
+                <div class="card-header">سوابق کیفری (0)<i class="fa fa-balance-scale fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/General/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
 
@@ -332,13 +332,13 @@
             @if ((Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count() < 2) && (string.IsNullOrEmpty(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.FirstOrDefault().FldEmployeeRequestMedicalRecordDisease)))
             {
                 <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                    <div class="card-header">سوابق پزشکی (0)<i class="fa fa-medkit fa-pull-left"></i></div>
+                    <div class="card-header">سوابق پزشکی (0)<i class="fa fa-medkit fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/Medical/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                 </div>
             }
             else
             {
                 <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                    <div onclick="$('#medical').toggle()" class="card-header">سوابق پزشکی<i class="fa fa-medkit fa-pull-left"></i> (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count()))</div>
+                    <div onclick="$('#medical').toggle()" class="card-header">سوابق پزشکی<i class="fa fa-medkit fa-pull-left"></i> (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords.Count()))<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Medical/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                     <div id="medical" style="display:none" class="card-body">
                         @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestMedicalRecords)
                         {
@@ -408,7 +408,7 @@
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-                <div class="card-header">سوابق پزشکی (0)<i class="fa fa-medkit fa-pull-left"></i></div>
+                <div class="card-header">سوابق پزشکی (0)<i class="fa fa-medkit fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/Medical/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
     }

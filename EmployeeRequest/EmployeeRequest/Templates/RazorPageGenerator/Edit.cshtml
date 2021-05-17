@@ -3,7 +3,7 @@
 @using System.Collections.Generic
 @using System.Linq
 @@page
-@@model @Model.NamespaceName.@Model.PageModelClassName
+@@model @Model.PageModelClassName
 
 @{
     if (Model.IsPartialView)
@@ -33,13 +33,13 @@
 @:<html>
 @:<head>
     @:<meta name="viewport" content="width=device-width" />
-    @:<title>Table NAME</title>
+    @:<title></title>
 @:</head>
 @:<body>
 @:
         //    PushIndent("    ");
     }
-@:<h4>@Model.ViewDataTypeShortName</h4>
+@:<h4>############################################################</h4>
 @:<hr />
 @:<div class="row">
     @:<div class="col-md-4">

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 @{
     var primaryKeyName = Model.ModelMetadata.PrimaryKeys[0].PropertyName;
     var primaryKeyShortTypeName = Model.ModelMetadata.PrimaryKeys[0].ShortTypeName;
@@ -30,7 +31,7 @@ using Microsoft.EntityFrameworkCore;
 
     foreach (var namespaceName in Model.RequiredNamespaces)
     {
-@:using @namespaceName;
+        @:using @namespaceName;
     }
 }
 
@@ -38,122 +39,120 @@ namespace @Model.NamespaceName
 {
     public class @Model.PageModelClassName : PageModel
     {
-        private readonly @Model.ContextTypeName _context;
+    private readonly @Model.ContextTypeName _context;
 
-        public @(Model.PageModelClassName)(@Model.ContextTypeName context)
+    public @(Model.PageModelClassName)(@Model.ContextTypeName context)
+    {
+    _context = context;
+    }
+
+    [BindProperty]
+    public @Model.ViewDataTypeShortName @Model.ViewDataTypeShortName { get; set; }
+
+    public async Task<IActionResult> OnGetAsync(@primaryKeyNullableTypeName id)
         {
-            _context = context;
+        string uid = HttpContext.Session.GetString("uid");
+        if (uid == null)
+        {
+        return RedirectToPage("../../Index");
         }
 
-        [BindProperty]
-        public @Model.ViewDataTypeShortName @Model.ViewDataTypeShortName { get; set; }
-
-        public async Task<IActionResult>
-    OnGetAsync(@primaryKeyNullableTypeName id)
-    {
-    string uid = HttpContext.Session.GetString("uid");
-    if (uid == null)
-    {
-    return RedirectToPage("../../Index");
-    }
-
-    if (id == null)
-    {
-    return NotFound();
-    }
-
-    @Model.ViewDataTypeShortName = await _context.@(entitySetName)@(inlineIncludes).FirstOrDefaultAsync(m => m.@(primaryKeyName) == id);
-
-    if (@Model.ViewDataTypeShortName == null)
-    {
-    return NotFound();
-    }
-    @{
-        foreach (var property in relatedProperties.Values)
+        if (id == null)
         {
-            @:ViewData["@(property.ForeignKeyPropertyNames[0])"] = new SelectList(_context.@property.EntitySetName, "@property.PrimaryKeyNames[0]", "@property.DisplayPropertyName");
+        return NotFound();
         }
-    }
-    return Page();
-    }
 
-    public async Task<IActionResult>
-    OnPostAsync()
-    {
+        @Model.ViewDataTypeShortName = await _context.@(entitySetName)@(inlineIncludes).FirstOrDefaultAsync(m => m.@(primaryKeyName) == id);
 
-    string uid = HttpContext.Session.GetString("uid");
-    if (uid == null)
-    {
-    return RedirectToPage("../../Index");
-    }
-
-    if (!ModelState.IsValid)
-    {
-    return Page();
-    }
-
-    _context.Attach(@(Model.ModelTypeName)).State = EntityState.Modified;
-
-    TblEmployeeRequestEmployeeEditLog t = new TblEmployeeRequestEmployeeEditLog()
-    {
-    FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,
-    FldEmployeeRequestUserId = Int64.Parse(uid),
-    FldEmployeeRequestEmployeeId = @(Model.ModelTypeName).FldEmployeeRequestEmployeeId,
-    FldEmployeeRequestEmployeeEditLogSection = "NAME-Edit"
-    };
-
-    _context.TblEmployeeRequestEmployeeEditLogs.Add(t);
-
-    try
-    {
-    await _context.SaveChangesAsync();
-    }
-    catch (DbUpdateConcurrencyException)
-    {
-    if (!@(Model.ModelTypeName)Exists(@Model.ViewDataTypeShortName.@primaryKeyName))
-    {
-    return NotFound();
-    }
-    else
-    {
-    throw;
-    }
-    }
-
-    return RedirectToPage("Index", new { id = @(Model.ModelTypeName).FldEmployeeRequestEmployeeId });
-    }
-
-    private bool @(Model.ModelTypeName)Exists(@primaryKeyShortTypeName id)
-    {
-    return _context.@(entitySetName).Any(e => e.@primaryKeyName == id);
-    }
-    }
-    }
-    @functions
-{
-        // This function converts the primary key short type name to its nullable equivalent when possible. This is required to make
-        // sure that an HTTP 400 error is thrown when the user tries to access the edit, delete, or details action with null values.
-        string GetNullableTypeName(string typeName, string shortTypeName)
+        if (@Model.ViewDataTypeShortName == null)
         {
-            // The exceptions are caught because if for any reason the type is user defined, then the short type name will be used.
-            // In that case the user will receive a server error if null is passed to the edit, delete, or details actions.
-            Type primaryKeyType = null;
+        return NotFound();
+        }
+        @{
+            foreach (var property in relatedProperties.Values)
+            {
+                @:ViewData["@(property.ForeignKeyPropertyNames[0])"] = new SelectList(_context.@property.EntitySetName, "@property.PrimaryKeyNames[0]", "@property.DisplayPropertyName");
+            }
+        }
+        return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+            {
+
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+            return RedirectToPage("../../Index");
+            }
+
+            if (!ModelState.IsValid)
+            {
+            return Page();
+            }
+
+            _context.Attach(@(Model.ModelTypeName)).State = EntityState.Modified;
+
+            TblEmployeeRequestEmployeeEditLog t = new TblEmployeeRequestEmployeeEditLog()
+            {
+            FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,
+            FldEmployeeRequestUserId = Int64.Parse(uid),
+            FldEmployeeRequestEmployeeId = @(Model.ModelTypeName).FldEmployeeRequestEmployeeId,
+            FldEmployeeRequestEmployeeEditLogSection = "NAME-Edit"
+            };
+
+            _context.TblEmployeeRequestEmployeeEditLogs.Add(t);
+
             try
             {
-                primaryKeyType = Type.GetType(typeName);
+            await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateConcurrencyException)
             {
-            }
-            if (primaryKeyType != null && (!Microsoft.VisualStudio.Web.CodeGeneration.Templating.TypeUtilities.IsNullable(primaryKeyType) || IsGuid(typeName)))
+            if (!@(Model.ModelTypeName)Exists(@Model.ViewDataTypeShortName.@primaryKeyName))
             {
-                return shortTypeName + "?";
+            return NotFound();
             }
-            return shortTypeName;
-        }
+            else
+            {
+            throw;
+            }
+            }
 
-        bool IsGuid(string typeName)
-        {
-            return String.Equals("System.Guid", typeName, StringComparison.OrdinalIgnoreCase);
-        }
-    }
+            return RedirectToPage("Index", new { id = @(Model.ModelTypeName).FldEmployeeRequestEmployeeId });
+            }
+
+            private bool @(Model.ModelTypeName)Exists(@primaryKeyShortTypeName id)
+            {
+            return _context.@(entitySetName).Any(e => e.@primaryKeyName == id);
+            }
+            }
+            }
+            @functions
+{
+                // This function converts the primary key short type name to its nullable equivalent when possible. This is required to make
+                // sure that an HTTP 400 error is thrown when the user tries to access the edit, delete, or details action with null values.
+                string GetNullableTypeName(string typeName, string shortTypeName)
+                {
+                    // The exceptions are caught because if for any reason the type is user defined, then the short type name will be used.
+                    // In that case the user will receive a server error if null is passed to the edit, delete, or details actions.
+                    Type primaryKeyType = null;
+                    try
+                    {
+                        primaryKeyType = Type.GetType(typeName);
+                    }
+                    catch
+                    {
+                    }
+                    if (primaryKeyType != null && (!Microsoft.VisualStudio.Web.CodeGeneration.Templating.TypeUtilities.IsNullable(primaryKeyType) || IsGuid(typeName)))
+                    {
+                        return shortTypeName + "?";
+                    }
+                    return shortTypeName;
+                }
+
+                bool IsGuid(string typeName)
+                {
+                    return String.Equals("System.Guid", typeName, StringComparison.OrdinalIgnoreCase);
+                }
+            }

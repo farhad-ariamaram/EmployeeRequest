@@ -1,0 +1,90 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>جدول سوابق پزشکی کاربر</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestMedicalRecord.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                بیماری
+            </th>
+            <th>
+                توضیحات بیماری
+            </th>
+            <th>
+                اعتیاد
+            </th>
+            <th>
+                توضیحات بیشتر
+            </th>
+            <th>
+                نام بیماری
+            </th>
+            <th>
+                تاریخ شروع
+            </th>
+            <th>
+                تاریخ پایان
+            </th>
+            <th>
+                عوارض
+            </th>
+            <th>
+                توضیحات عوارض
+            </th>
+            <th>
+                نام و نام خانوادگی
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TblEmployeeRequestMedicalRecord) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasProblem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordProblemDes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordIsAddict)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDisease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasComplications)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordComplicationsDes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

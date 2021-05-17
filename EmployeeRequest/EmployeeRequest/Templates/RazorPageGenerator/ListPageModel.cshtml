@@ -43,11 +43,9 @@ namespace @Model.NamespaceName
             _context = context;
         }
 
-        public IList<@Model.ViewDataTypeShortName>
-    @Model.ViewDataTypeShortName { get;set; }
+        public IList<@Model.ViewDataTypeShortName> @Model.ViewDataTypeShortName { get;set; }
 
-    public async Task<IActionResult>
-    OnGetAsync(string id)
+    public async Task<IActionResult> OnGetAsync(string id)
     {
     string uid = HttpContext.Session.GetString("uid");
     if (uid == null)
