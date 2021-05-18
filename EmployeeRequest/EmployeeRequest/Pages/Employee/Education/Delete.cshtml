@@ -83,6 +83,9 @@
     <form method="post">
         <input type="hidden" asp-for="TblCustomerDegree.FldCustomerDegreeId" />
         <input type="submit" value="حذف" class="btn btn-danger" /> |
-        <a asp-page="Index" asp-route-id="@Model.TblCustomerDegree.UserId">بازگشت به لیست</a>
     </form>
 </div>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="Index" asp-route-id="@Model.TblCustomerDegree.UserId"><i class="fa fa-arrow-circle-left"></i></a>
+}

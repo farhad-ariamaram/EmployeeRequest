@@ -23,7 +23,7 @@
                 تاریخ ثبت
             </th>
             <th>
-               توضیحات
+                توضیحات
             </th>
             <th>
                 نوع نوآوری
@@ -37,31 +37,35 @@
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestUserCreativity)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityExplanation)
-            </td>
-            <td>
-                @item.FldEmployeeRequestUserCreativityDate.toPersianDate()
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestCreativityType.FldEmployeeRequestCreativityTypeCreativityType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserCreativityId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserCreativityId">حذف</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityExplanation)
+                </td>
+                <td>
+                    @item.FldEmployeeRequestUserCreativityDate.toPersianDate()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestCreativityType.FldEmployeeRequestCreativityTypeCreativityType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserCreativityId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserCreativityId">حذف</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.TblEmployeeRequestUserCreativity.FirstOrDefault().FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}

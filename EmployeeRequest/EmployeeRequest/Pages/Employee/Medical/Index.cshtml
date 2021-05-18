@@ -47,44 +47,49 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TblEmployeeRequestMedicalRecord) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasProblem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordProblemDes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordIsAddict)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDisease)
-            </td>
-            <td>
-                @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
-            </td>
-            <td>
-                @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasComplications)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordComplicationsDes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">حذف</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.TblEmployeeRequestMedicalRecord)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasProblem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordProblemDes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordIsAddict)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDisease)
+                </td>
+                <td>
+                    @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
+                </td>
+                <td>
+                    @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasComplications)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordComplicationsDes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">حذف</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.TblEmployeeRequestMedicalRecord.FirstOrDefault().FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}

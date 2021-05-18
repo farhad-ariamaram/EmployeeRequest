@@ -23,7 +23,7 @@
                 <input asp-for="TblEmployeeRequestHowFind.FldEmployeeRequestHowFindAdditionalDes" class="form-control" />
                 <span asp-validation-for="TblEmployeeRequestHowFind.FldEmployeeRequestHowFindAdditionalDes" class="text-danger"></span>
             </div>
-            <input type="hidden" value="@ViewData["EmployeeId"]" asp-for="TblEmployeeRequestHowFind.FldEmployeeRequestEmployeeId"/>
+            <input type="hidden" value="@ViewData["EmployeeId"]" asp-for="TblEmployeeRequestHowFind.FldEmployeeRequestEmployeeId" />
             <div class="form-group">
                 <input type="submit" value="ایجاد" class="btn btn-primary" />
             </div>
@@ -31,9 +31,9 @@
     </div>
 </div>
 
-<div>
-    <a asp-page="Index" asp-route-id="@ViewData["EmployeeId"]">بازگشت به لیست</a>
-</div>
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="Index" asp-route-id="@ViewData["EmployeeId"]"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -49,10 +49,13 @@
             @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeCompilationType)
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationId" />
         <input type="submit" value="حذف" class="btn btn-danger" /> |
-        <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestUserCompilation.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
     </form>
 </div>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="Index" asp-route-id="@Model.TblEmployeeRequestUserCompilation.FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}

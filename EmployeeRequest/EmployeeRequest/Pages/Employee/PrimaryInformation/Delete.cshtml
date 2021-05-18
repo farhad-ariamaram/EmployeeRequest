@@ -7,82 +7,85 @@
 
 <h1>حذف</h1>
 
-      <h3>آیا از حذف این مورد مطمئن میباشید؟</h3>
+<h3>آیا از حذف این مورد مطمئن میباشید؟</h3>
 <div>
     <h4>جدول اطلاعات اولیه کاربر</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-           کد ملی
+            کد ملی
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationNationalCode)
         </dd>
         <dt class="col-sm-2">
-           شماره تماس
+            شماره تماس
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationPhoneNo)
         </dd>
         <dt class="col-sm-2">
-           نام
+            نام
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationFirstName)
         </dd>
         <dt class="col-sm-2">
-           نام خانوادگی
+            نام خانوادگی
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationLastName)
         </dd>
         <dt class="col-sm-2">
-           تاریخ تولد
+            تاریخ تولد
         </dt>
         <dd class="col-sm-10">
             @Model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
-           جنسیت
+            جنسیت
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationGender)
         </dd>
         <dt class="col-sm-2">
-           تعداد فرزندان
+            تعداد فرزندان
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationChildrenNo)
         </dd>
         <dt class="col-sm-2">
-           تاهل
+            تاهل
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationMarital)
         </dd>
         <dt class="col-sm-2">
-           افراد تحت تکفل
+            افراد تحت تکفل
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationTutelage)
         </dd>
         <dt class="col-sm-2">
-           شماره پیگیری
+            شماره پیگیری
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationTrackNo)
         </dd>
         <dt class="col-sm-2">
-           کد پستی
+            کد پستی
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationPostalCode)
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationId" />
-        <input type="submit" value="حذف" class="btn btn-danger" /> |
-        <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
+        <input type="submit" value="حذف" class="btn btn-danger" /> 
     </form>
 </div>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="Index" asp-route-id="@Model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}

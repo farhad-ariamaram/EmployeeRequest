@@ -50,46 +50,51 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TblEmployeeRequestPrimaryInformation) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationNationalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPhoneNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationFirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationLastName)
-            </td>
-            <td>
-                @item.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationGender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationChildrenNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationMarital)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTutelage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTrackNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPostalCode)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">حذف</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.TblEmployeeRequestPrimaryInformation)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationNationalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationLastName)
+                </td>
+                <td>
+                    @item.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationGender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationChildrenNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationMarital)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTutelage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTrackNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPostalCode)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">حذف</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.TblEmployeeRequestPrimaryInformation.FirstOrDefault().FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}

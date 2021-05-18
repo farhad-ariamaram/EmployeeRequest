@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-    <h1>جدول سوابق عمومی (کیفری) کاربر</h1>
+<h1>جدول سوابق عمومی (کیفری) کاربر</h1>
 
 <p>
     <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestGeneralRecord.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
@@ -29,26 +29,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TblEmployeeRequestGeneralRecord) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordCriminalTiltle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordCriminalDes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestGeneralRecordId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestGeneralRecordId">حذف</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.TblEmployeeRequestGeneralRecord)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordCriminalTiltle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordCriminalDes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestGeneralRecordDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestGeneralRecordId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestGeneralRecordId">حذف</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.TblEmployeeRequestGeneralRecord.FirstOrDefault().FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}

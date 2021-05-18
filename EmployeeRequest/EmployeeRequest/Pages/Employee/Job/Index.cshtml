@@ -35,32 +35,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TblEmployeeRequestUserJob) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobRequestMoney)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobWhatKnowAbout)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.FldEmployeeRequestJobsJobTitle)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserJobId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserJobId">حذف</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.TblEmployeeRequestUserJob)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobRequestMoney)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserJobWhatKnowAbout)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestJobs.FldEmployeeRequestJobsJobTitle)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserJobId">ویرایش</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserJobId">حذف</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.TblEmployeeRequestUserJob.FirstOrDefault().FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}

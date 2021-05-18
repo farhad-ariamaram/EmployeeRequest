@@ -46,9 +46,9 @@
     </div>
 </div>
 
-<div>
-    <a asp-page="Index" asp-route-id="@ViewData["EmployeeId"]">بازگشت به لیست</a>
-</div>
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="Index" asp-route-id="@ViewData["EmployeeId"]"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
