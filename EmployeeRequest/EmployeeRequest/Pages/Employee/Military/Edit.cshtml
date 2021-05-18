@@ -25,12 +25,16 @@
             </div>
             <div class="form-group">
                 <label class="control-label">تاریخ شروع</label>
-                <input asp-for="TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryStartDate" class="form-control" />
+                <input type="hidden" asp-for="TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryStartDate" class="form-control" />
+                <input class="form-control" type="text" id="input1" readonly />
+                <span id="span1"></span>
                 <span asp-validation-for="TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryStartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">تاریخ پایان</label>
-                <input asp-for="TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryEndDate" class="form-control" />
+                <input type="hidden" asp-for="TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryEndDate" class="form-control" />
+                <input class="form-control" type="text" id="input2" readonly />
+                <span id="span2"></span>
                 <span asp-validation-for="TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryEndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -65,10 +69,26 @@
     </div>
 </div>
 
-  <div>
-      <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestUserMilitary.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
-  </div>
+<div>
+    <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestUserMilitary.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function Load() {
+            $("#input1, #span1").persianDatepicker({
+                onSelect: function () {
+                    $("#TblEmployeeRequestUserMilitary_FldEmployeeRequestUserMilitaryStartDate").val($("#input1").attr("data-gdate"));
+                }
+            });
+
+            $("#input2, #span2").persianDatepicker({
+                onSelect: function () {
+                    $("#TblEmployeeRequestUserMilitary_FldEmployeeRequestUserMilitaryEndDate").val($("#input2").attr("data-gdate"));
+                }
+            });
+        }
+    </script>
 }

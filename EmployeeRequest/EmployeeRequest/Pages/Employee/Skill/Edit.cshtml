@@ -32,7 +32,9 @@
             </div>
             <div class="form-group">
                 <label class="control-label">تاریخ</label>
-                <input asp-for="TblEmployeeRequestUserSkill.FldEmployeeRequestUserSkillDate" class="form-control" />
+                <input type="hidden" asp-for="TblEmployeeRequestUserSkill.FldEmployeeRequestUserSkillDate" class="form-control" />
+                <input class="form-control" type="text" id="input1" readonly />
+                <span id="span1"></span>
                 <span asp-validation-for="TblEmployeeRequestUserSkill.FldEmployeeRequestUserSkillDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -67,10 +69,20 @@
     </div>
 </div>
 
-  <div>
-      <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestUserSkill.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
-  </div>
+<div>
+    <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestUserSkill.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function Load() {
+            $("#input1, #span1").persianDatepicker({
+                onSelect: function () {
+                    $("#TblEmployeeRequestUserSkill_FldEmployeeRequestUserSkillDate").val($("#input1").attr("data-gdate"));
+                }
+            });
+        }
+    </script>
 }

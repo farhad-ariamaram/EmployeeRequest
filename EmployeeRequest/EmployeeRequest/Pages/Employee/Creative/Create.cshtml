@@ -29,7 +29,9 @@
             </div>
             <div class="form-group">
                 <label class="control-label">تاریخ ثبت</label>
-                <input asp-for="TblEmployeeRequestUserCreativity.FldEmployeeRequestUserCreativityDate" class="form-control" />
+                <input type="hidden" asp-for="TblEmployeeRequestUserCreativity.FldEmployeeRequestUserCreativityDate" class="form-control" />
+                <input class="form-control" type="text" id="input1" readonly />
+                <span id="span1"></span>
                 <span asp-validation-for="TblEmployeeRequestUserCreativity.FldEmployeeRequestUserCreativityDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,4 +53,14 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function Load() {
+            $("#input1, #span1").persianDatepicker({
+                onSelect: function () {
+                    $("#TblEmployeeRequestUserCreativity_FldEmployeeRequestUserCreativityDate").val($("#input1").attr("data-gdate"));
+                }
+            });
+        }
+    </script>
 }
