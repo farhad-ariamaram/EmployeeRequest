@@ -30,7 +30,6 @@ namespace EmployeeRequest.Pages.Employee.WorkExperience
             ViewData["EmployeeId"] = id;
 
             ViewData["FldLeaveJobId"] = new SelectList(_context.TblLeaveJobs, "FldLeaveJobId", "FldLeaveJobTitle");
-            //ViewData["FldTaminJobId"] = new SelectList(_context.TblJobTamins, "FldTaminJobId", "FldTaminJobName");
             return Page();
         }
 

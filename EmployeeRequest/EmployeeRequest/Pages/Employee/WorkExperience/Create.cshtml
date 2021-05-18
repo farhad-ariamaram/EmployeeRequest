@@ -50,7 +50,8 @@
             </div>
             <div class="form-group">
                 <label class="control-label">نام شغل از جدول</label>
-                <select asp-for="TblWorkExperience.FldTaminJobId" class="form-control" asp-items="ViewBag.FldTaminJobId"></select>
+                <a class="btn btn-info" onclick="loadjson()">بارگذاری</a>
+                <select asp-for="TblWorkExperience.FldTaminJobId" class="form-control select2-dropdown" id="taminjobdropdown"></select>
             </div>
             <div class="form-group">
                 <label class="control-label">عنوان شغل</label>
@@ -91,11 +92,6 @@
                 <input asp-for="TblWorkExperience.FldUnitName" class="form-control" />
                 <span asp-validation-for="TblWorkExperience.FldUnitName" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label class="control-label">مشغول به کار</label>
-                <input type="checkbox" asp-for="TblWorkExperience.IsWorking" class="form-control" />
-                <span asp-validation-for="TblWorkExperience.IsWorking" class="text-danger"></span>
-            </div>*@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="TblWorkExperience.HasInsurance" /> بیمه
@@ -126,9 +122,75 @@
 </div>
 
 <div>
-    <a asp-page="Index" asp-route-id="@ViewData[" EmployeeId"]">بازگشت به لیست</a>
+    <a asp-page="Index" asp-route-id="@ViewData["EmployeeId"]">بازگشت به لیست</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
+    <script>
+        function Load() {
+            $('.select2-dropdown').select2({
+                width: 'resolve'
+            });
+        }
+
+        async function loadjson() {
+            const { value: jobtitle } = await Swal.fire({
+                input: 'text',
+                inputLabel: 'عنوان شغل',
+                inputPlaceholder: 'عنوان شغل را وارد کنید',
+                showCancelButton: true,
+                confirmButtonText: `تایید`,
+                cancelButtonText: `انصراف`,
+            })
+            if (jobtitle) {
+                if (jobtitle == "") {
+                    Swal.fire('مقدار وارد شده اشتباه میباشد', '', 'error').then(() => {
+                        location.reload();
+                    })
+                    return false;
+                }
+                loadjson2(jobtitle);
+            }
+        }
+
+        function loadjson2(jobtitle) {
+            let dropdown = $('#taminjobdropdown');
+
+            dropdown.empty();
+
+            var data = { jobName: jobtitle };
+            $.ajax({
+                type: "GET",
+                url: "../../EmployeeRequest/Create?handler=Jobs",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: true,
+                data: data,
+                success: function (response) {
+                    $.each(response, function (key, entry) {
+                        dropdown.append($('<option></option>').attr('value', entry.fldTaminJobId).text(entry.fldTaminJobName));
+                    });
+                },
+                failure: function () {
+                    alert("Error on get tamin jobs");
+                },
+                beforeSend: function () {
+                    Swal.fire({
+                        html: 'در حال بارگذاری اطلاعات، لطفا منتظر بمانید...',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        },
+                    });
+                },
+                complete: function () {
+                    swal.close();
+                },
+            });
+        }
+    </script>
 }

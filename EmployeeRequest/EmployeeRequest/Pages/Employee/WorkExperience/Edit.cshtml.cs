@@ -46,7 +46,7 @@ namespace EmployeeRequest.Pages.Employee.WorkExperience
                 return NotFound();
             }
             ViewData["FldLeaveJobId"] = new SelectList(_context.TblLeaveJobs, "FldLeaveJobId", "FldLeaveJobTitle");
-            //ViewData["FldTaminJobId"] = new SelectList(_context.TblJobTamins, "FldTaminJobId", "FldTaminJobName");
+            ViewData["FldTaminJobId"] = new SelectList(_context.TblJobTamins.Where(a=>a.FldTaminJobId== TblWorkExperience.FldTaminJobId), "FldTaminJobId", "FldTaminJobName");
             return Page();
         }
 
