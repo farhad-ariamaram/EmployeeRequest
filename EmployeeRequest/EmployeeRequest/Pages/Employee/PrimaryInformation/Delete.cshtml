@@ -40,7 +40,7 @@
            تاریخ تولد
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationBirthDate)
+            @Model.TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
            جنسیت

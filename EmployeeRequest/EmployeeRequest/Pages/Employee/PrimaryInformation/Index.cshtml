@@ -65,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationLastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationBirthDate)
+                @item.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationGender)

@@ -60,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSkillLocation)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSkillDate)
+                    @item.FldEmployeeRequestUserSkillDate.toPersianDate()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserSkillSkillType)

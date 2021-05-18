@@ -45,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityExplanation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityDate)
+                @item.FldEmployeeRequestUserCreativityDate.toPersianDate()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCreativityDescription)

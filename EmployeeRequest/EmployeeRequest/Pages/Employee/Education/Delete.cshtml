@@ -22,13 +22,13 @@
             تاریخ شروع
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblCustomerDegree.FldStartDate)
+            @Model.TblCustomerDegree.FldStartDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
             تاریخ پایان
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblCustomerDegree.FldEndDate)
+            @Model.TblCustomerDegree.FldEndDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
             شماره مدرک
@@ -40,7 +40,7 @@
             تاریخ اخذ مدرک
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblCustomerDegree.FldExportDate)
+            @Model.TblCustomerDegree.FldExportDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
             نمره

@@ -28,7 +28,7 @@
             تاریخ ثبت
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestUserCreativity.FldEmployeeRequestUserCreativityDate)
+            @Model.TblEmployeeRequestUserCreativity.FldEmployeeRequestUserCreativityDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
             توضیحات بیشتر

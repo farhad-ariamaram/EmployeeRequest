@@ -48,10 +48,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserMilitaryStartDate)
+                    @item.FldEmployeeRequestUserMilitaryStartDate.toPersianDate()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserMilitaryEndDate)
+                    @item.FldEmployeeRequestUserMilitaryEndDate.toPersianDate()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserMilitaryCity)

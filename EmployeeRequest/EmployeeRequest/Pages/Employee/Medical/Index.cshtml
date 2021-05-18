@@ -65,10 +65,10 @@
                 @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDisease)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordStartDate)
+                @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordEndDate)
+                @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasComplications)

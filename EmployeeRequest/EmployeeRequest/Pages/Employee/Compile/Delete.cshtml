@@ -28,7 +28,7 @@
             تاریخ تالیف
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationDate)
+            @Model.TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
             انتشارات

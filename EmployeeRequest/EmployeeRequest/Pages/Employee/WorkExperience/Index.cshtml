@@ -1,6 +1,7 @@
 ﻿@page
 @model IndexModel
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -59,9 +60,6 @@
                 نام واحد
             </th>
             <th>
-                مشغول به کار
-            </th>
-            <th>
                 بیمه
             </th>
             <th>
@@ -89,10 +87,10 @@
                 @Html.DisplayFor(modelItem => item.FldCompanyName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FldStartDate)
+                @item.FldStartDate.toPersianDate()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FldEndDate)
+                @item.FldEndDate.toPersianDate()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FldDescription)
@@ -129,9 +127,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FldUnitName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsWorking)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HasInsurance)

@@ -22,13 +22,13 @@
            تاریخ شروع
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblWorkExperience.FldStartDate)
+            @Model.TblWorkExperience.FldStartDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
            تاریخ پایان
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblWorkExperience.FldEndDate)
+            @Model.TblWorkExperience.FldEndDate.toPersianDate()
         </dd>
         <dt class="col-sm-2">
            توضیحات بیشتر
@@ -101,12 +101,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TblWorkExperience.FldUnitName)
-        </dd>
-        <dt class="col-sm-2">
-           مشغول کار
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TblWorkExperience.IsWorking)
         </dd>
         <dt class="col-sm-2">
            بیمه
