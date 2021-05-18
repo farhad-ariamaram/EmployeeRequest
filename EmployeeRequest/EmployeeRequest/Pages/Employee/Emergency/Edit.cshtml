@@ -5,9 +5,9 @@
     ViewData["Title"] = "Edit";
 }
 
-    <h1>ویرایش</h1>
+<h1>ویرایش</h1>
 
-    <h4>جدول اطلاعات اشنایان کاربر</h4>
+<h4>جدول اطلاعات اشنایان کاربر</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -47,9 +47,9 @@
     </div>
 </div>
 
-<div>
-    <a asp-page="Index" asp-route-id="@Model.TblEmployeeRequestEmergencyCall.FldEmployeeRequestEmployeeId">بازگشت به لیست</a>
-</div>
+@section Botton {
+    <a class="btn btn-outline-dark rounded" asp-page="Index" asp-route-id="@Model.TblEmployeeRequestEmergencyCall.FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
