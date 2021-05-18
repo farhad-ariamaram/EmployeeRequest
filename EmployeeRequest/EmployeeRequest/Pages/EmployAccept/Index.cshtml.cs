@@ -19,7 +19,7 @@ namespace EmployeeRequest.Pages.EmployAccept
             _context = context;
         }
 
-        public IList<TblEmployeeRequestEmployee> TblEmployeeRequestEmployee { get;set; }
+        public IList<TblEmployeeRequestEmployee> TblEmployeeRequestEmployee { get; set; }
         public IList<TblEmployeeRequestPrimaryInformation> TblEmployeeRequestPrimaryInformation { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -56,7 +56,7 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptionDate = DateTime.Now;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = Int64.Parse(uid);
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
-                _context.SaveChanges(); 
+                _context.SaveChanges();
             }
             return RedirectToPage("Index");
         }
@@ -116,6 +116,68 @@ namespace EmployeeRequest.Pages.EmployAccept
                 _context.SaveChanges();
             }
             return RedirectToPage("Index");
+        }
+
+        public async Task<IActionResult> OnGetFilterAcceptedAsync()
+        {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
+            TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
+                .Where(a => a.FldEmployeeRequestEmployeeFinalAcceptionDate != null)
+                .Include(t => t.FldEmployeeRequestFinalAcception)
+                .Include(t => t.FldEmployeeRequestPagesSequence)
+                .Include(t => t.FldEmployeeRequestPrimaryAcception)
+                .Include(t => t.FldEmployeeRequestUserFinalAccepter)
+                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter).ToListAsync();
+
+            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetFilterNotAcceptedAsync()
+        {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
+            TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
+                .Where(a => a.FldEmployeeRequestEmployeeFinalAcceptionDate == null)
+                .Include(t => t.FldEmployeeRequestFinalAcception)
+                .Include(t => t.FldEmployeeRequestPagesSequence)
+                .Include(t => t.FldEmployeeRequestPrimaryAcception)
+                .Include(t => t.FldEmployeeRequestUserFinalAccepter)
+                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter).ToListAsync();
+
+            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetFilterAllAsync()
+        {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
+            TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
+                .Include(t => t.FldEmployeeRequestFinalAcception)
+                .Include(t => t.FldEmployeeRequestPagesSequence)
+                .Include(t => t.FldEmployeeRequestPrimaryAcception)
+                .Include(t => t.FldEmployeeRequestUserFinalAccepter)
+                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter).ToListAsync();
+
+            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
+
+            return Page();
         }
     }
 }

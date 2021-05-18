@@ -20,6 +20,7 @@ namespace EmployeeRequest.Pages.EmployAccept
         }
 
         public TblEmployeeRequestEmployee TblEmployeeRequestEmployee { get; set; }
+        public List<TblEmployeeRequestUserLanguage> TblEmployeeRequestUserLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -33,6 +34,8 @@ namespace EmployeeRequest.Pages.EmployAccept
             {
                 return NotFound();
             }
+
+            TblEmployeeRequestUserLanguage = _context.TblEmployeeRequestUserLanguages.Where(a=>a.FldEmployeeRequestEmployeeId == id).Include(t=>t.FldEmployeeRequestUserLanguageLanguageType).ToList();
 
             TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
                 .Include(t => t.TblEmployeeRequestPrimaryInformations)
@@ -65,8 +68,10 @@ namespace EmployeeRequest.Pages.EmployAccept
 
                 .Include(t => t.TblWorkExperiences).ThenInclude(t => t.FldTaminJob)
                 .Include(t => t.TblWorkExperiences).ThenInclude(t => t.TblWorkExperienceLeaveJobDtls).ThenInclude(t=>t.FldLeaveJobNavigation)
-
-                .FirstOrDefaultAsync(m => m.FldEmployeeRequestEmployeeId == id);
+                
+                .Where(m => m.FldEmployeeRequestEmployeeId == id)
+                
+                .FirstOrDefaultAsync();
 
             if (TblEmployeeRequestEmployee == null)
             {

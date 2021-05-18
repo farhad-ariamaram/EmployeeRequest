@@ -5,12 +5,36 @@
     ViewData["Title"] = "جزئیات";
 }
 
+@* filter for disapear null fields *@
+<script>
+    function filter() {
+        if ($("#green").prop('checked')) {
+            $('.bg-success').show();
+        } else {
+            $('.bg-success').hide();
+        }
+
+        if ($("#red").prop('checked')) {
+            $('.bg-danger').show();
+        } else {
+            $('.bg-danger').hide();
+        }
+    }
+</script>
+
 <div class="row">
+    <div class="col-12">
+        <input type="checkbox" id="green" onclick="filter()" checked/>  نمایش سبز
+        <br />
+        <input type="checkbox" id="red" onclick="filter()" checked/>  نمایش قرمز
+    </div>
+
     <div class="col-12 fixed">
         <span onclick="window.close()" class="btn btn-light">بستن پنجره &nbsp; ×</span>
     </div>
 </div>
 <br />
+
 <div class="row">
     @*Primary Informations*@
     @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault() != null)
@@ -95,13 +119,11 @@
     else
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
                 <div class="card-header"><i class="fa fa-user-circle fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/PrimaryInformation/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a> اطلاعات اولیه</div>
             </div>
         </div>
     }
-
-
 
     @*Education*@
     @if (Model.TblEmployeeRequestEmployee.TblCustomerDegrees.FirstOrDefault() != null)
@@ -204,7 +226,7 @@
     else
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
                 <div class="card-header"> سوابق تحصیلی<i class="fa fa-graduation-cap fa-pull-left"></i> (0) <a class="fa-pull-left text-white mr-2" asp-page="../Employee/Education/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
@@ -260,7 +282,7 @@
     else
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
                 <div class="card-header"><i class="fa fa-phone fa-pull-left"></i>مشخصات آشنایان (0)<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Emergency/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
@@ -522,7 +544,7 @@
     else
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
                 <div class="card-header"><i class="fa fa-info fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/HowFind/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a>آشنایی با سایت</div>
             </div>
         </div>
@@ -661,21 +683,21 @@
     else
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
                 <div class="card-header"><i class="fa fa-suitcase fa-pull-left"></i>شغل های انتخاب کرده (0) <a class="fa-pull-left text-white mr-2" asp-page="../Employee/Job/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
     }
 
     @*Language*@
-    @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages.FirstOrDefault() != null)
+    @if (Model.TblEmployeeRequestUserLanguage.Any())
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div onclick="$('#langs').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (@(Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages.Count()))<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Language/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
+                <div onclick="$('#langs').toggle()" class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (@(Model.TblEmployeeRequestUserLanguage.Count()))<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Language/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
                 <div id="langs" style="display:none" class="card-body">
 
-                    @foreach (var item in Model.TblEmployeeRequestEmployee.TblEmployeeRequestUserLanguages)
+                    @foreach (var item in Model.TblEmployeeRequestUserLanguage)
                     {
                         <table class="table text-white">
                             <tbody>
@@ -755,7 +777,7 @@
     else
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
                 <div class="card-header"><i class="fa fa-language fa-pull-left"></i>زبان ها (0)<a class="fa-pull-left text-white mr-2" asp-page="../Employee/Language/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
             </div>
         </div>
