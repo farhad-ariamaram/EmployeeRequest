@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label class="control-label">ساعت شروع مصاحبه </label>
-                <input class="form-control bs-timepicker" name="starttime" id="starttime" type="text" value="@ViewBag.starttime" autocomplete="off"/>
+                <input class="form-control bs-timepicker" name="starttime" id="starttime" type="text" value="@ViewBag.starttime" autocomplete="off" />
                 <span id="span1"></span>
             </div>
 
@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label class="control-label">ساعت پایان مصاحبه </label>
-                <input class="form-control bs-timepicker" name="endtime" id="endtime" type="text" value="@ViewBag.endtime" autocomplete="off"/>
+                <input class="form-control bs-timepicker" name="endtime" id="endtime" type="text" value="@ViewBag.endtime" autocomplete="off" />
                 <span id="span1"></span>
             </div>
 
@@ -40,6 +40,10 @@
         </form>
     </div>
 </div>
+
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

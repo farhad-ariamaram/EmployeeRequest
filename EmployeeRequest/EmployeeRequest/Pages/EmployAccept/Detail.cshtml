@@ -24,16 +24,17 @@
 
 <div class="row">
     <div class="col-12">
-        <input type="checkbox" id="green" onclick="filter()" checked/>  نمایش سبز
+        <input type="checkbox" id="green" onclick="filter()" checked />  نمایش سبز
         <br />
-        <input type="checkbox" id="red" onclick="filter()" checked/>  نمایش قرمز
+        <input type="checkbox" id="red" onclick="filter()" checked />  نمایش قرمز
     </div>
 
-    <div class="col-12 fixed">
-        <span onclick="window.close()" class="btn btn-light">بستن پنجره &nbsp; ×</span>
-    </div>
 </div>
 <br />
+
+@section Botton {
+    <a onclick="window.close()" class="btn btn-danger rounded-circle"><i class="fa fa-times"></i></a>
+}
 
 <div class="row">
     @*Primary Informations*@

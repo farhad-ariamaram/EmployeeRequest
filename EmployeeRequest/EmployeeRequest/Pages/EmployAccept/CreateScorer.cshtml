@@ -30,9 +30,9 @@
     </div>
 </div>
 
-<div>
-    <a asp-page="../Panel/Index">بازگشت به پنل کاربری</a>
-</div>
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

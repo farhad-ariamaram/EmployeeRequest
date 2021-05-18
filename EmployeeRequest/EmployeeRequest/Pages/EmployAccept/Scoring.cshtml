@@ -88,9 +88,9 @@
     </tbody>
 </table>
 
-<div>
-    <a asp-page="../Panel/Index">بازگشت به پنل کاربری</a>
-</div>
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
@@ -148,7 +148,7 @@
                     return false;
                 }
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET", "?id=" + id + "&point=" + point + "&eid=" + eid + "&handler=Point" , false);
+                xmlHttp.open("GET", "?id=" + id + "&point=" + point + "&eid=" + eid + "&handler=Point", false);
                 xmlHttp.send(null);
                 Swal.fire('نمره ثبت شد', '', 'success').then(() => {
                     location.reload();
