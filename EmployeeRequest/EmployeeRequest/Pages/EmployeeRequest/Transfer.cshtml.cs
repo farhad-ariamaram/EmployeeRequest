@@ -64,32 +64,6 @@ namespace EmployeeRequest.Pages.EmployeeRequest
                 TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestTransferDate = DateTime.Now;
                 _context.TblEmployeeRequestEmployeeRequests.Update(TblEmployeeRequestEmployeeRequest2);
                 _context.SaveChanges();
-
-                string jobTitleFrom = null;
-                if (TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestJobTitleFromId == 1)
-                {
-                    jobTitleFrom = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestJobs.JobsName;
-                }
-                else if (TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestJobTitleFromId == 2)
-                {
-                    jobTitleFrom = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestJobTamin.FldTaminJobName;
-                }
-                else
-                {
-                    jobTitleFrom = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestJobOnet.FldJobName;
-                }
-                EmployModels.TblJob newJob = new EmployModels.TblJob()
-                {
-                    JobTitle = jobTitleFrom,
-                    IsActive = true,
-                    StartDate = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestStartDate,
-                    EndDate = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestEndDate,
-                    NeedMan = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestNeedMan,
-                    NeedWoman = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestNeedWoman,
-                    Description = TblEmployeeRequestEmployeeRequest2.FldEmployeeRequestEmployeeRequestJobDescription
-                };
-                _employContext.TblJobs.Add(newJob);
-                _employContext.SaveChanges();
             }
             return RedirectToPage("Index");
         }
