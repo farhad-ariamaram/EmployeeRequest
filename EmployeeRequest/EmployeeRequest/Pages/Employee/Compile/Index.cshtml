@@ -15,6 +15,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th></th>
             <th>
                 عنوان تالیف
             </th>
@@ -36,40 +37,39 @@
             <th>
                 نام و نام خانوادگی
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestUserCompilation)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationExplanation)
-                </td>
-                <td>
-                    @item.FldEmployeeRequestUserCompilationDate.toPersianDate()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationAuthor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeCompilationType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserCompilationId">ویرایش</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserCompilationId">حذف</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestUserCompilationId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestUserCompilationId">حذف</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationExplanation)
+            </td>
+            <td>
+                @item.FldEmployeeRequestUserCompilationDate.toPersianDate()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationAuthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestUserCompilationDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestCompilationType.FldEmployeeRequestCompilationTypeCompilationType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

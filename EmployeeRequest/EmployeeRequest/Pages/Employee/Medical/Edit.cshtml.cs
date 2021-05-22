@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.Employee.Medical
 {
@@ -43,6 +44,10 @@ namespace EmployeeRequest.Pages.Employee.Medical
             {
                 return NotFound();
             }
+
+            ViewData["startdate"] = TblEmployeeRequestMedicalRecord.FldEmployeeRequestMedicalRecordStartDate.toPersianDate();
+            ViewData["enddate"] = TblEmployeeRequestMedicalRecord.FldEmployeeRequestMedicalRecordEndDate.toPersianDate();
+
             return Page();
         }
 
@@ -57,6 +62,9 @@ namespace EmployeeRequest.Pages.Employee.Medical
 
             if (!ModelState.IsValid)
             {
+                ViewData["startdate"] = TblEmployeeRequestMedicalRecord.FldEmployeeRequestMedicalRecordStartDate.toPersianDate();
+                ViewData["enddate"] = TblEmployeeRequestMedicalRecord.FldEmployeeRequestMedicalRecordEndDate.toPersianDate();
+
                 return Page();
             }
 

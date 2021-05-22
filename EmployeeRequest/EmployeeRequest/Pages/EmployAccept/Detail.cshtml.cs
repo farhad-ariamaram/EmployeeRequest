@@ -20,6 +20,9 @@ namespace EmployeeRequest.Pages.EmployAccept
         }
 
         public TblEmployeeRequestEmployee TblEmployeeRequestEmployee { get; set; }
+
+        public TblEmployeeRequestUserSetting TblEmployeeRequestUserSetting { get; set; }
+
         public List<TblEmployeeRequestUserLanguage> TblEmployeeRequestUserLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -36,6 +39,8 @@ namespace EmployeeRequest.Pages.EmployAccept
             }
 
             TblEmployeeRequestUserLanguage = _context.TblEmployeeRequestUserLanguages.Where(a=>a.FldEmployeeRequestEmployeeId == id).Include(t=>t.FldEmployeeRequestUserLanguageLanguageType).ToList();
+
+            TblEmployeeRequestUserSetting = _context.TblEmployeeRequestUserSettings.Where(a => a.FldEmployeeRequestUserId == Int64.Parse(uid)).FirstOrDefault();
 
             TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
                 .Include(t => t.TblEmployeeRequestPrimaryInformations)
@@ -78,6 +83,28 @@ namespace EmployeeRequest.Pages.EmployAccept
                 return NotFound();
             }
             return Page();
+        }
+
+        public IActionResult OnGetUpdate(bool green , bool red)
+        {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
+            TblEmployeeRequestUserSetting = _context.TblEmployeeRequestUserSettings.Where(a => a.FldEmployeeRequestUserId == Int64.Parse(uid)).FirstOrDefault();
+
+
+            TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowGreen = green;
+            TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowRed = red;
+
+            _context.Update(TblEmployeeRequestUserSetting);
+
+            _context.SaveChanges();
+
+            return RedirectToPage("Index");
+
         }
     }
 }

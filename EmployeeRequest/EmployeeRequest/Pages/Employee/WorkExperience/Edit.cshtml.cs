@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using EmployeeRequest.Models;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.Employee.WorkExperience
 {
@@ -47,6 +48,9 @@ namespace EmployeeRequest.Pages.Employee.WorkExperience
             }
             ViewData["FldLeaveJobId"] = new SelectList(_context.TblLeaveJobs, "FldLeaveJobId", "FldLeaveJobTitle");
             ViewData["FldTaminJobId"] = new SelectList(_context.TblJobTamins.Where(a=>a.FldTaminJobId== TblWorkExperience.FldTaminJobId), "FldTaminJobId", "FldTaminJobName");
+            ViewData["startdate"] = TblWorkExperience.FldStartDate.toPersianDate();
+            ViewData["enddate"] = TblWorkExperience.FldEndDate.toPersianDate();
+
             return Page();
         }
 

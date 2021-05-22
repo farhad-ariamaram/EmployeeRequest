@@ -16,6 +16,7 @@ namespace EmployeeRequest.Models
             TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserApplicants = new HashSet<TblEmployeeRequestEmployeeRequest>();
             TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserSubmitters = new HashSet<TblEmployeeRequestEmployeeRequest>();
             TblEmployeeRequestInterviewSessions = new HashSet<TblEmployeeRequestInterviewSession>();
+            TblEmployeeRequestUserSettings = new HashSet<TblEmployeeRequestUserSetting>();
         }
 
         public long FldEmployeeRequestUserId { get; set; }
@@ -29,5 +30,6 @@ namespace EmployeeRequest.Models
         public virtual ICollection<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserApplicants { get; set; }
         public virtual ICollection<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequestFldEmployeeRequestUserSubmitters { get; set; }
         public virtual ICollection<TblEmployeeRequestInterviewSession> TblEmployeeRequestInterviewSessions { get; set; }
+        public virtual ICollection<TblEmployeeRequestUserSetting> TblEmployeeRequestUserSettings { get; set; }
     }
 }

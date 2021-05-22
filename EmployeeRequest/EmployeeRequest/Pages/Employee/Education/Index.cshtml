@@ -13,6 +13,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 نام رشته تحصیلی
             </th>
@@ -46,51 +47,50 @@
             <th>
                 رشته تحصیلی (جدول)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.TblCustomerDegree)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEducationName)
-                </td>
-                <td>
-                    @item.FldStartDate.toPersianDate()
-                </td>
-                <td>
-                    @item.FldEndDate.toPersianDate()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldExportNo)
-                </td>
-                <td>
-                    @item.FldExportDate.toPersianDate()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldPoint)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldDes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldStudyPlace)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldStudyCity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Diploma.DiplomaName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Education.EducationName)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.FldCustomerDegreeId">ویرایش</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.FldCustomerDegreeId">حذف</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldCustomerDegreeId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldCustomerDegreeId">حذف</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEducationName)
+            </td>
+            <td>
+                @item.FldStartDate.toPersianDate()
+            </td>
+            <td>
+                @item.FldEndDate.toPersianDate()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldExportNo)
+            </td>
+            <td>
+                @item.FldExportDate.toPersianDate()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldDes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldStudyPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldStudyCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diploma.DiplomaName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Education.EducationName)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

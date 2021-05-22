@@ -13,6 +13,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th></th>
             <th>
                 نام
             </th>
@@ -31,37 +32,36 @@
             <th>
                 نام و نام خانوادگی
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestEmergencyCall)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallLastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallRelative)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallPhoneNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmergencyCallId">ویرایش</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmergencyCallId">حذف</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestEmergencyCallId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestEmergencyCallId">حذف</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallRelative)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmergencyCallDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

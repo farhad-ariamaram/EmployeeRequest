@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.Employee.Creative
 {
@@ -44,7 +45,10 @@ namespace EmployeeRequest.Pages.Employee.Creative
             {
                 return NotFound();
             }
-           ViewData["FldEmployeeRequestCreativityTypeId"] = new SelectList(_context.TblEmployeeRequestCreativityTypes, "FldEmployeeRequestCreativityTypeId", "FldEmployeeRequestCreativityTypeCreativityType");
+
+            ViewData["FldEmployeeRequestCreativityTypeId"] = new SelectList(_context.TblEmployeeRequestCreativityTypes, "FldEmployeeRequestCreativityTypeId", "FldEmployeeRequestCreativityTypeCreativityType");
+            ViewData["date"] = TblEmployeeRequestUserCreativity.FldEmployeeRequestUserCreativityDate.toPersianDate();
+
             return Page();
         }
 
@@ -58,6 +62,8 @@ namespace EmployeeRequest.Pages.Employee.Creative
 
             if (!ModelState.IsValid)
             {
+                ViewData["FldEmployeeRequestCreativityTypeId"] = new SelectList(_context.TblEmployeeRequestCreativityTypes, "FldEmployeeRequestCreativityTypeId", "FldEmployeeRequestCreativityTypeCreativityType");
+                ViewData["date"] = TblEmployeeRequestUserCreativity.FldEmployeeRequestUserCreativityDate.toPersianDate();
                 return Page();
             }
 

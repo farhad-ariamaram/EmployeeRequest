@@ -16,6 +16,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th></th>
             <th>
                 عنوان
             </th>
@@ -25,28 +26,29 @@
             <th>
                 نام و نام خانوادگی
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestHowFind)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestHowFindTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestHowFindAdditionalDes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestHowFindId">ویرایش</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestHowFindId">حذف</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestHowFindId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestHowFindId">حذف</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestHowFindTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestHowFindAdditionalDes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+
+        </tr>
         }
     </tbody>
 </table>

@@ -13,6 +13,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 شماره ملی
             </th>
@@ -46,51 +47,58 @@
             <th>
                 کد پستی
             </th>
-            <th></th>
+            <th>
+                آدرس
+            </th>
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestPrimaryInformation)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationNationalCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPhoneNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationLastName)
-                </td>
-                <td>
-                    @item.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationGender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationChildrenNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationMarital)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTutelage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTrackNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPostalCode)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">ویرایش</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">حذف</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">حذف</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationNationalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationLastName)
+            </td>
+            <td>
+                @item.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationChildrenNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationMarital)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTutelage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationTrackNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationPostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationAddress)
+            </td>
+
+        </tr>
         }
     </tbody>
 </table>

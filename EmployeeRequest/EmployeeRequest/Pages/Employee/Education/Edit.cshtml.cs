@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using EmployeeRequest.Models;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.Employee.Education
 {
@@ -47,6 +48,9 @@ namespace EmployeeRequest.Pages.Employee.Education
             }
             ViewData["DiplomaId"] = new SelectList(_context.PayDiplomas, "DiplomaId", "DiplomaName");
             ViewData["EducationId"] = new SelectList(_context.PayEducations, "EducationId", "EducationName");
+            ViewData["startdate"] = TblCustomerDegree.FldStartDate.toPersianDate();
+            ViewData["enddate"] = TblCustomerDegree.FldEndDate.toPersianDate();
+            ViewData["exdate"] = TblCustomerDegree.FldExportDate.toPersianDate();
             return Page();
         }
 
@@ -61,6 +65,11 @@ namespace EmployeeRequest.Pages.Employee.Education
 
             if (!ModelState.IsValid)
             {
+                ViewData["DiplomaId"] = new SelectList(_context.PayDiplomas, "DiplomaId", "DiplomaName");
+                ViewData["EducationId"] = new SelectList(_context.PayEducations, "EducationId", "EducationName");
+                ViewData["startdate"] = TblCustomerDegree.FldStartDate.toPersianDate();
+                ViewData["enddate"] = TblCustomerDegree.FldEndDate.toPersianDate();
+                ViewData["exdate"] = TblCustomerDegree.FldExportDate.toPersianDate();
                 return Page();
             }
 

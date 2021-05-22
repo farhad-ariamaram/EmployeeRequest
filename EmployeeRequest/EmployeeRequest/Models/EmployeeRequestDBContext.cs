@@ -54,6 +54,7 @@ namespace EmployeeRequest.Models
         public virtual DbSet<TblEmployeeRequestUserJob> TblEmployeeRequestUserJobs { get; set; }
         public virtual DbSet<TblEmployeeRequestUserLanguage> TblEmployeeRequestUserLanguages { get; set; }
         public virtual DbSet<TblEmployeeRequestUserMilitary> TblEmployeeRequestUserMilitaries { get; set; }
+        public virtual DbSet<TblEmployeeRequestUserSetting> TblEmployeeRequestUserSettings { get; set; }
         public virtual DbSet<TblEmployeeRequestUserSkill> TblEmployeeRequestUserSkills { get; set; }
         public virtual DbSet<TblJob> TblJobs { get; set; }
         public virtual DbSet<TblJobTamin> TblJobTamins { get; set; }
@@ -962,6 +963,10 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(50)
                     .HasColumnName("Fld_EmployeeRequest_Employee_Id");
 
+                entity.Property(e => e.FldEmployeeRequestPrimaryInformationAddress)
+                    .HasMaxLength(2000)
+                    .HasColumnName("Fld_EmployeeRequest_PrimaryInformation_Address");
+
                 entity.Property(e => e.FldEmployeeRequestPrimaryInformationBirthDate)
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_PrimaryInformation_BirthDate");
@@ -1321,6 +1326,37 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblEmployeeRequestUserMilitaries)
                     .HasForeignKey(d => d.FldEmployeeRequestMilitaryOrganizationId)
                     .HasConstraintName("FK_Tbl_UserMilitary_Tbl_MilitaryOrganization");
+            });
+
+            modelBuilder.Entity<TblEmployeeRequestUserSetting>(entity =>
+            {
+                entity.HasKey(e => e.FldEmployeeRequestUserSettingId);
+
+                entity.ToTable("Tbl_EmployeeRequest_UserSetting");
+
+                entity.Property(e => e.FldEmployeeRequestUserSettingId).HasColumnName("Fld_EmployeeRequest_UserSetting_Id");
+
+                entity.Property(e => e.FldEmployeeRequestUserId).HasColumnName("Fld_EmployeeRequest_User_Id");
+
+                entity.Property(e => e.FldEmployeeRequestUserSettingIsCollaps)
+                    .IsRequired()
+                    .HasColumnName("Fld_EmployeeRequest_UserSetting_IsCollaps")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.FldEmployeeRequestUserSettingIsShowGreen)
+                    .IsRequired()
+                    .HasColumnName("Fld_EmployeeRequest_UserSetting_IsShowGreen")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.FldEmployeeRequestUserSettingIsShowRed)
+                    .IsRequired()
+                    .HasColumnName("Fld_EmployeeRequest_UserSetting_IsShowRed")
+                    .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.FldEmployeeRequestUser)
+                    .WithMany(p => p.TblEmployeeRequestUserSettings)
+                    .HasForeignKey(d => d.FldEmployeeRequestUserId)
+                    .HasConstraintName("FK_Tbl_EmployeeRequest_UserSetting_Tbl_EmployeeRequest_User");
             });
 
             modelBuilder.Entity<TblEmployeeRequestUserSkill>(entity =>

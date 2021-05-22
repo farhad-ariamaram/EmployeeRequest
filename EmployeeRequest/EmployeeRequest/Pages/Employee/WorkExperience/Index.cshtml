@@ -14,6 +14,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 نام شرکت
             </th>
@@ -77,81 +78,82 @@
             <th>
                 عنوان شغل از جدول
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.TblWorkExperience)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldCompanyName)
-                </td>
-                <td>
-                    @item.FldStartDate.toPersianDate()
-                </td>
-                <td>
-                    @item.FldEndDate.toPersianDate()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldContactNumberOfCompany)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldContactInnerNumberOfCompany)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldRelatedPeople)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldJobTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldEarlySalary)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldLateSalary)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldReasonsToLeaveJob)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldAmountOfDailyInsurance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldWorkTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldWorkDay)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldUnitName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HasInsurance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InsuranceNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WhyWantChangeJob)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PreviousJobAchievements)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldLeaveJob.FldLeaveJobTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FldTaminJob.FldTaminJobName)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.FldWorkExperienceId">ویرایش</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.FldWorkExperienceId">حذف</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FldWorkExperienceId">ویرایش</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FldWorkExperienceId">حذف</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldCompanyName)
+            </td>
+            <td>
+                @item.FldStartDate.toPersianDate()
+            </td>
+            <td>
+                @item.FldEndDate.toPersianDate()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldContactNumberOfCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldContactInnerNumberOfCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldRelatedPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldJobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldEarlySalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldLateSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldReasonsToLeaveJob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldAmountOfDailyInsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldWorkTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldWorkDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldUnitName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasInsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsuranceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WhyWantChangeJob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousJobAchievements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldLeaveJob.FldLeaveJobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FldTaminJob.FldTaminJobName)
+            </td>
+
+        </tr>
         }
     </tbody>
 </table>

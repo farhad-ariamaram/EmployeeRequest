@@ -19,14 +19,39 @@
         } else {
             $('.bg-danger').hide();
         }
+
+        update($("#green").prop('checked'), $("#red").prop('checked'));
+    }
+
+    function Load() {
+
+        if ("@Model.TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowGreen" === "True") {
+            $("#green").prop('checked', 'true');
+        } else {
+            $("#green").removeAttr('checked');
+        }
+
+        if ("@Model.TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowRed" === "True") {
+            $("#red").prop('checked', 'true');
+        } else {
+            $("#red").removeAttr('checked');
+        }
+
+        filter();
+    }
+
+    function update(green,red) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "?red=" + red + "&green=" + green + "&handler=Update", false);
+        xmlHttp.send(null);
     }
 </script>
 
 <div class="row">
     <div class="col-12">
-        <input type="checkbox" id="green" onclick="filter()" checked />  نمایش سبز
+        <input type="checkbox" id="green" onclick="filter()" />  نمایش سبز
         <br />
-        <input type="checkbox" id="red" onclick="filter()" checked />  نمایش قرمز
+        <input type="checkbox" id="red" onclick="filter()" />  نمایش قرمز
     </div>
 
 </div>
@@ -35,6 +60,7 @@
 @section Botton {
     <a onclick="window.close()" class="btn btn-danger rounded-circle"><i class="fa fa-times"></i></a>
 }
+
 
 <div class="row">
     @*Primary Informations*@
@@ -103,6 +129,12 @@
                                 <td>کد پستی</td>
                                 <td>
                                     @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>آدرس</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationAddress)
                                 </td>
                             </tr>
                             <tr>

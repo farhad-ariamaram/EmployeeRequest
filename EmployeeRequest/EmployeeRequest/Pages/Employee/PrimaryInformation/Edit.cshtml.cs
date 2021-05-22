@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using EmployeeRequest.Models;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.Employee.PrimaryInformation
 {
@@ -43,6 +44,9 @@ namespace EmployeeRequest.Pages.Employee.PrimaryInformation
             {
                 return NotFound();
             }
+
+            ViewData["birthdate"] = TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate();
+
             return Page();
         }
 
@@ -57,6 +61,8 @@ namespace EmployeeRequest.Pages.Employee.PrimaryInformation
 
             if (!ModelState.IsValid)
             {
+                ViewData["birthdate"] = TblEmployeeRequestPrimaryInformation.FldEmployeeRequestPrimaryInformationBirthDate.toPersianDate();
+
                 return Page();
             }
 

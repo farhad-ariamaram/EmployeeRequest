@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.Employee.Compile
 {
@@ -44,7 +45,10 @@ namespace EmployeeRequest.Pages.Employee.Compile
             {
                 return NotFound();
             }
-           ViewData["FldEmployeeRequestCompilationTypeId"] = new SelectList(_context.TblEmployeeRequestCompilationTypes, "FldEmployeeRequestCompilationTypeId", "FldEmployeeRequestCompilationTypeCompilationType");
+
+            ViewData["FldEmployeeRequestCompilationTypeId"] = new SelectList(_context.TblEmployeeRequestCompilationTypes, "FldEmployeeRequestCompilationTypeId", "FldEmployeeRequestCompilationTypeCompilationType");
+            ViewData["date"] = TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationDate.toPersianDate();
+
             return Page();
         }
 
@@ -58,6 +62,8 @@ namespace EmployeeRequest.Pages.Employee.Compile
 
             if (!ModelState.IsValid)
             {
+                ViewData["FldEmployeeRequestCompilationTypeId"] = new SelectList(_context.TblEmployeeRequestCompilationTypes, "FldEmployeeRequestCompilationTypeId", "FldEmployeeRequestCompilationTypeCompilationType");
+                ViewData["date"] = TblEmployeeRequestUserCompilation.FldEmployeeRequestUserCompilationDate.toPersianDate();
                 return Page();
             }
 

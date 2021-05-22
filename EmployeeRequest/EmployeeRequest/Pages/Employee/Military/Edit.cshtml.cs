@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using EmployeeRequest.Models;
+using EmployeeRequest.Utilities;
 
 namespace EmployeeRequest.Pages.Employee.Military
 {
@@ -47,6 +48,8 @@ namespace EmployeeRequest.Pages.Employee.Military
             }
             ViewData["FldEmployeeRequestMilitaryId"] = new SelectList(_context.TblEmployeeRequestMilitaries, "FldEmployeeRequestMilitaryId", "FldEmployeeRequestMilitaryMilitaryStatus");
             ViewData["FldEmployeeRequestMilitaryOrganizationId"] = new SelectList(_context.TblEmployeeRequestMilitaryOrganizations, "FldEmployeeRequestMilitaryOrganizationId", "FldEmployeeRequestMilitaryOrganizationOrganizationName");
+            ViewData["startdate"] = TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryStartDate.toPersianDate();
+            ViewData["enddate"] = TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryEndDate.toPersianDate();
             return Page();
         }
 
@@ -60,6 +63,10 @@ namespace EmployeeRequest.Pages.Employee.Military
 
             if (!ModelState.IsValid)
             {
+                ViewData["FldEmployeeRequestMilitaryId"] = new SelectList(_context.TblEmployeeRequestMilitaries, "FldEmployeeRequestMilitaryId", "FldEmployeeRequestMilitaryMilitaryStatus");
+                ViewData["FldEmployeeRequestMilitaryOrganizationId"] = new SelectList(_context.TblEmployeeRequestMilitaryOrganizations, "FldEmployeeRequestMilitaryOrganizationId", "FldEmployeeRequestMilitaryOrganizationOrganizationName");
+                ViewData["startdate"] = TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryStartDate.toPersianDate();
+                ViewData["enddate"] = TblEmployeeRequestUserMilitary.FldEmployeeRequestUserMilitaryEndDate.toPersianDate();
                 return Page();
             }
 
