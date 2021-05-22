@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmployeeRequest.EmployModels;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +13,10 @@ namespace EmployeeRequest.Pages.EmployeeRequest
     public class TransferModel : PageModel
     {
         private readonly EmployeeRequestDBContext _context;
-        private readonly EmployDBContext _employContext;
 
-        public TransferModel(EmployeeRequestDBContext context, EmployDBContext employContext)
+        public TransferModel(EmployeeRequestDBContext context)
         {
             _context = context;
-            _employContext = employContext;
         }
 
         public IList<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequest { get; set; }

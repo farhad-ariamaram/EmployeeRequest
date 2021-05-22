@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmployeeRequest.EmployModels;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +25,6 @@ namespace EmployeeRequest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EmployeeRequestDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CS")));
-            services.AddDbContext<EmployDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CS2")));
             services.AddSession();
             services.AddRazorPages();
         }
