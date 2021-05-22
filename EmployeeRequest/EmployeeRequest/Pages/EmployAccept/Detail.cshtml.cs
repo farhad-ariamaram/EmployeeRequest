@@ -85,7 +85,7 @@ namespace EmployeeRequest.Pages.EmployAccept
             return Page();
         }
 
-        public IActionResult OnGetUpdate(bool green , bool red)
+        public IActionResult OnGetUpdate(bool green , bool red, bool openall)
         {
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
@@ -98,6 +98,7 @@ namespace EmployeeRequest.Pages.EmployAccept
 
             TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowGreen = green;
             TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowRed = red;
+            TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsCollaps = openall;
 
             _context.Update(TblEmployeeRequestUserSetting);
 

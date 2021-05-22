@@ -20,7 +20,13 @@
             $('.bg-danger').hide();
         }
 
-        update($("#green").prop('checked'), $("#red").prop('checked'));
+        if ($("#openall").prop('checked')) {
+            $('.card-body').show();
+        } else {
+            $('.card-body').hide();
+        }
+
+        update($("#green").prop('checked'), $("#red").prop('checked'), $("#openall").prop('checked'));
     }
 
     function Load() {
@@ -37,14 +43,22 @@
             $("#red").removeAttr('checked');
         }
 
+        if ("@Model.TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsCollaps" === "True") {
+            $("#openall").prop('checked', 'true');
+        } else {
+            $("#openall").removeAttr('checked');
+        }
+
         filter();
     }
 
-    function update(green,red) {
+
+    function update(green,red,openall) {
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "?red=" + red + "&green=" + green + "&handler=Update", false);
+        xmlHttp.open("GET", "?red=" + red + "&green=" + green + "&openall=" + openall + "&handler=Update", false);
         xmlHttp.send(null);
     }
+
 </script>
 
 <div class="row">
@@ -52,6 +66,8 @@
         <input type="checkbox" id="green" onclick="filter()" />  نمایش سبز
         <br />
         <input type="checkbox" id="red" onclick="filter()" />  نمایش قرمز
+        <br />
+        <input type="checkbox" id="openall" onclick="filter()" />  نمایش همه
     </div>
 
 </div>
