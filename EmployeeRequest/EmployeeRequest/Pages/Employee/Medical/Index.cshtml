@@ -50,44 +50,44 @@
     <tbody>
         @foreach (var item in Model.TblEmployeeRequestMedicalRecord)
         {
-        <tr>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestMedicalRecordId">حذف</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasProblem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordProblemDes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordIsAddict)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDisease)
-            </td>
-            <td>
-                @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
-            </td>
-            <td>
-                @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasComplications)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordComplicationsDes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
-                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
-            </td>
+            <tr>
+                <td>
+                    <a class="btn btn-warning btn-group-sm text-white" asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestMedicalRecordId"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-group-sm" asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestMedicalRecordId"><i class="fa fa-trash"></i></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasProblem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordProblemDes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordIsAddict)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordDisease)
+                </td>
+                <td>
+                    @item.FldEmployeeRequestMedicalRecordStartDate.toPersianDate()
+                </td>
+                <td>
+                    @item.FldEmployeeRequestMedicalRecordEndDate.toPersianDate()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordHasComplications)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestMedicalRecordComplicationsDes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName) &nbsp;
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName)
+                </td>
 
-        </tr>
+            </tr>
         }
     </tbody>
 </table>

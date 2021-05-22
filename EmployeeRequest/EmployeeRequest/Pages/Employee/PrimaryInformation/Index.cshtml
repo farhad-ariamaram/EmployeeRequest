@@ -58,8 +58,8 @@
         {
         <tr>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">ویرایش</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId">حذف</a>
+                <a class="btn btn-warning btn-group-sm text-white" asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId"><i class="fa fa-edit"></i></a>
+                <a class="btn btn-danger btn-group-sm" asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestPrimaryInformationId"><i class="fa fa-trash"></i></a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FldEmployeeRequestPrimaryInformationNationalCode)
