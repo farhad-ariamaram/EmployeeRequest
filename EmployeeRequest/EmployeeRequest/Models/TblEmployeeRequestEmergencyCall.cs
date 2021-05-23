@@ -14,6 +14,7 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestEmergencyCallPhoneNo { get; set; }
         public string FldEmployeeRequestEmergencyCallDescription { get; set; }
         public string FldEmployeeRequestEmployeeId { get; set; }
+        public string FldEmployeeRequestEmergencyCallInsuranceNo { get; set; }
 
         public virtual TblEmployeeRequestEmployee FldEmployeeRequestEmployee { get; set; }
     }

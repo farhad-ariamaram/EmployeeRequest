@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeRequest.Pages.EmployAccept
 {
@@ -20,8 +21,10 @@ namespace EmployeeRequest.Pages.EmployAccept
 
         public IActionResult OnGet()
         {
-        ViewData["FldEmployeeRequestEmployeeId"] = new SelectList(_context.TblEmployeeRequestEmployees.Where(a=>a.FldEmployeeRequestUserFinalAccepterId == null), "FldEmployeeRequestEmployeeId", "FldEmployeeRequestEmployeeUsername");
-        ViewData["FldEmployeeRequestUserId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
+
+
+            ViewData["FldEmployeeRequestEmployeeId"] = new SelectList(_context.TblEmployeeRequestEmployees.Where(a => a.FldEmployeeRequestUserFinalAccepterId == null), "FldEmployeeRequestEmployeeId", "FldEmployeeRequestEmployeeUsername");
+            ViewData["FldEmployeeRequestUserId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
             return Page();
         }
 

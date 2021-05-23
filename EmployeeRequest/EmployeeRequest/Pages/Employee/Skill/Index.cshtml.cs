@@ -19,9 +19,7 @@ namespace EmployeeRequest.Pages.Employee.Skill
             _context = context;
         }
 
-        public IList<TblEmployeeRequestUserSkill>
-            TblEmployeeRequestUserSkill
-        { get; set; }
+        public IList<TblEmployeeRequestUserSkill> TblEmployeeRequestUserSkill { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {

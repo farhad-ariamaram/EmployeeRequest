@@ -78,7 +78,7 @@
 }
 
 
-<div class="row">
+<div class="row d-flex">
     @*Primary Informations*@
     @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault() != null)
     {
@@ -313,6 +313,12 @@
                                     <td>شماره تماس</td>
                                     <td>
                                         @item.FldEmployeeRequestEmergencyCallPhoneNo
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>شماره بیمه</td>
+                                    <td>
+                                        @item.FldEmployeeRequestEmergencyCallInsuranceNo
                                     </td>
                                 </tr>
                                 <tr>

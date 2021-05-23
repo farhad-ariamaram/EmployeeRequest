@@ -15,12 +15,6 @@
                 نام و نام خانوادگی
             </th>
             <th>
-                کد ملی
-            </th>
-            <th>
-                شماره تماس
-            </th>
-            <th>
                 نمره ثبت شده
             </th>
             <th>
@@ -41,12 +35,6 @@
             <tr>
                 <td>
                     @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName &nbsp; @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName
-                </td>
-                <td>
-                    @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode
-                </td>
-                <td>
-                    @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo.Substring(3)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestInterviewSessionResultPoint)

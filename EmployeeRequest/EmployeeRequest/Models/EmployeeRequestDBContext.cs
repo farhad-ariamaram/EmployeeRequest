@@ -313,6 +313,10 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(50)
                     .HasColumnName("Fld_EmployeeRequest_EmergencyCall_FirstName");
 
+                entity.Property(e => e.FldEmployeeRequestEmergencyCallInsuranceNo)
+                    .HasMaxLength(50)
+                    .HasColumnName("Fld_EmployeeRequest_EmergencyCall_InsuranceNo");
+
                 entity.Property(e => e.FldEmployeeRequestEmergencyCallLastName)
                     .HasMaxLength(50)
                     .HasColumnName("Fld_EmployeeRequest_EmergencyCall_LastName");
