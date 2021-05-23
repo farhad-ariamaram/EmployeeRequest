@@ -9,15 +9,15 @@
 <script>
     function filter() {
         if ($("#green").prop('checked')) {
-            $('.bg-success').show();
+            $('.bg-success').parent().show();
         } else {
-            $('.bg-success').hide();
+            $('.bg-success').parent().hide();
         }
 
         if ($("#red").prop('checked')) {
-            $('.bg-danger').show();
+            $('.bg-danger').parent().show();
         } else {
-            $('.bg-danger').hide();
+            $('.bg-danger').parent().hide();
         }
 
         if ($("#openall").prop('checked')) {
@@ -69,7 +69,6 @@
         <br />
         <input type="checkbox" id="openall" onclick="filter()" />  نمایش همه
     </div>
-
 </div>
 <br />
 
@@ -78,7 +77,8 @@
 }
 
 
-<div class="row d-flex">
+<div class="row">
+
     @*Primary Informations*@
     @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault() != null)
     {
