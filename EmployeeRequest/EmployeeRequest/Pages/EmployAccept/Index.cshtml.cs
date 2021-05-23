@@ -179,5 +179,63 @@ namespace EmployeeRequest.Pages.EmployAccept
 
             return Page();
         }
+
+        public IActionResult OnGetFRevert(string id)
+        {
+            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
+            if (TblEmployeeRequestEmployee2 != null)
+            {
+                string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
+                TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = null;
+                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+        }
+
+
+        public IActionResult OnGetRevert(string id)
+        {
+            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
+            if (TblEmployeeRequestEmployee2 != null)
+            {
+                string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
+                TblEmployeeRequestEmployee2.FldEmployeeRequestPrimaryAcceptionId = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptionDate = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = null;
+                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+        }
+
+        public IActionResult OnGetIRevert(string id)
+        {
+            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
+            if (TblEmployeeRequestEmployee2 != null)
+            {
+                string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeInterviewEndDate = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeInterviewStartDate = null;
+                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+        }
+
     }
 }

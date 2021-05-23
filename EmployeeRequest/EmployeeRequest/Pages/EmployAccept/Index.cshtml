@@ -139,7 +139,8 @@
                         //زمان مصاحبه
                         if (item.FldEmployeeRequestEmployeeInterviewStartDate == null)
                         {
-                            <a asp-page="SetInterview" asp-route-id="@item.FldEmployeeRequestEmployeeId" class="btn btn-primary w-100">تعیین زمان مصاحبه</a>
+                            <a asp-page="SetInterview" asp-route-id="@item.FldEmployeeRequestEmployeeId" class="btn btn-success w-100">تعیین زمان مصاحبه</a>
+                            <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
                         }
                         else
                         {
@@ -148,16 +149,19 @@
                             {
                                 <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
                                 <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
+                                <a href="#" class="btn btn-info w-100" onclick="AskIRevert('@item.FldEmployeeRequestEmployeeId');">حذف زمان مصاحبه</a>
                             }
                             else
                             {
                                 if (item.FldEmployeeRequestFinalAcceptionId == 1)
                                 {
                                     <span class="badge badge-success">کاربر تایید نهایی شده</span>
+                                    <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
                                 }
                                 else
                                 {
                                     <span class="badge badge-danger">کاربر مردود شده</span>
+                                    <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از عدم تایید</a>
                                 }
                             }
                         }
@@ -166,6 +170,7 @@
                     else
                     {
                         <span class="badge badge-danger">کاربر مردود شده</span>
+                        <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
                     }
 
                     @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
@@ -262,5 +267,60 @@
                 }
             });
         }
+
+        function AskFRevert(id) {
+            Swal.fire({
+                title: 'وضعیت نهایی کاربر به حالت قبل بازگردد؟',
+                showDenyButton: true,
+                confirmButtonText: `بله`,
+                denyButtonText: `خیر`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", "?id=" + id + "&handler=FRevert", false);
+                    xmlHttp.send(null);
+                    Swal.fire('درخواست برگشت داده شد', '', 'success').then(() => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+
+        function AskRevert(id) {
+            Swal.fire({
+                title: 'وضعیت اولیه کاربر به حالت قبل بازگردد؟',
+                showDenyButton: true,
+                confirmButtonText: `بله`,
+                denyButtonText: `خیر`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", "?id=" + id + "&handler=Revert", false);
+                    xmlHttp.send(null);
+                    Swal.fire('درخواست برگشت داده شد', '', 'success').then(() => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+
+        function AskIRevert(id) {
+            Swal.fire({
+                title: 'زمان مصاحبه کاربر حذف شود؟',
+                showDenyButton: true,
+                confirmButtonText: `بله`,
+                denyButtonText: `خیر`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", "?id=" + id + "&handler=IRevert", false);
+                    xmlHttp.send(null);
+                    Swal.fire('درخواست برگشت داده شد', '', 'success').then(() => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+        
     </script>
 }
