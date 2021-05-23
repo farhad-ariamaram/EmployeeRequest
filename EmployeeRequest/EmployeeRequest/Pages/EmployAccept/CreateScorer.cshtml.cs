@@ -21,9 +21,15 @@ namespace EmployeeRequest.Pages.EmployAccept
 
         public IActionResult OnGet()
         {
+            ViewData["FldEmployee"] = (from p in _context.TblEmployeeRequestEmployees
+                                       join f in _context.TblEmployeeRequestPrimaryInformations
+                                       on p.FldEmployeeRequestEmployeeId equals f.FldEmployeeRequestEmployeeId
+                                       select new SelectListItem
+                                       {
+                                           Value = p.FldEmployeeRequestEmployeeId,
+                                           Text = f.FldEmployeeRequestPrimaryInformationFirstName + " " + f.FldEmployeeRequestPrimaryInformationLastName
+                                       });
 
-
-            ViewData["FldEmployeeRequestEmployeeId"] = new SelectList(_context.TblEmployeeRequestEmployees.Where(a => a.FldEmployeeRequestUserFinalAccepterId == null), "FldEmployeeRequestEmployeeId", "FldEmployeeRequestEmployeeUsername");
             ViewData["FldEmployeeRequestUserId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
             return Page();
         }

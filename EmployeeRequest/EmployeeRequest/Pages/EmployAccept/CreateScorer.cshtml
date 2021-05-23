@@ -16,7 +16,8 @@
             </div>
             <div class="form-group">
                 <label class="control-label">کابر متقضی شغل</label>
-                <select asp-for="TblEmployeeRequestInterviewSession.FldEmployeeRequestEmployeeId" class="form-control select2-dropdown" asp-items="ViewBag.FldEmployeeRequestEmployeeId"></select>
+                <select onchange="detail()" asp-for="TblEmployeeRequestInterviewSession.FldEmployeeRequestEmployeeId" class="form-control select2-dropdown" asp-items="ViewBag.FldEmployee"></select>
+                <a id="detailbutton" class="btn btn-info" href="#" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=600,toolbar=1,resizable=1'); return false;">جزئیات</a>
             </div>
             <div class="form-group">
                 <label class="control-label">حداکثر نمره مجاز</label>
@@ -42,6 +43,13 @@
             $('.select2-dropdown').select2({
                 width: 'resolve'
             });
+
+            $("#detailbutton").attr("href", "Detail?id=" + $('#TblEmployeeRequestInterviewSession_FldEmployeeRequestEmployeeId').val());
+            
+        }
+
+        function detail() {
+            $("#detailbutton").attr("href", "Detail?id=" + $('#TblEmployeeRequestInterviewSession_FldEmployeeRequestEmployeeId').val());
         }
     </script>
 }
