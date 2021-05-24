@@ -43,6 +43,10 @@ namespace EmployeeRequest.Models
         public DateTime? FldEmployeeRequestEmployeeFinalAcceptionDate { get; set; }
         public long? FldEmployeeRequestUserPrimaryAccepterId { get; set; }
         public long? FldEmployeeRequestUserFinalAccepterId { get; set; }
+        public string FldEmployeeRequestEmployeeFinalAcceptDescription { get; set; }
+        public string FldEmployeeRequestEmployeeFinalRejectDescription { get; set; }
+        public string FldEmployeeRequestEmployeePrimaryAcceptDescription { get; set; }
+        public string FldEmployeeRequestEmployeePrimaryRejectDescription { get; set; }
 
         public virtual TblEmployeeRequestFinalAcception FldEmployeeRequestFinalAcception { get; set; }
         public virtual TblEmployeeRequestPagesSequence FldEmployeeRequestPagesSequence { get; set; }

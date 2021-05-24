@@ -355,9 +355,13 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(20)
                     .HasColumnName("Fld_EmployeeRequest_Employee_CurrentLevel");
 
+                entity.Property(e => e.FldEmployeeRequestEmployeeFinalAcceptDescription).HasColumnName("Fld_EmployeeRequest_Employee_FinalAcceptDescription");
+
                 entity.Property(e => e.FldEmployeeRequestEmployeeFinalAcceptionDate)
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_Employee_FinalAcceptionDate");
+
+                entity.Property(e => e.FldEmployeeRequestEmployeeFinalRejectDescription).HasColumnName("Fld_EmployeeRequest_Employee_FinalRejectDescription");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeInterviewEndDate)
                     .HasColumnType("datetime")
@@ -373,9 +377,13 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(50)
                     .HasColumnName("Fld_EmployeeRequest_Employee_Password");
 
+                entity.Property(e => e.FldEmployeeRequestEmployeePrimaryAcceptDescription).HasColumnName("Fld_EmployeeRequest_Employee_PrimaryAcceptDescription");
+
                 entity.Property(e => e.FldEmployeeRequestEmployeePrimaryAcceptionDate)
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_Employee_PrimaryAcceptionDate");
+
+                entity.Property(e => e.FldEmployeeRequestEmployeePrimaryRejectDescription).HasColumnName("Fld_EmployeeRequest_Employee_PrimaryRejectDescription");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeResultPoint).HasColumnName("Fld_EmployeeRequest_Employee_ResultPoint");
 
