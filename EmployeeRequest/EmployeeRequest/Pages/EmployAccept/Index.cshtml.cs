@@ -42,7 +42,7 @@ namespace EmployeeRequest.Pages.EmployAccept
             return Page();
         }
 
-        public IActionResult OnGetAccept(string id, string description)
+        public IActionResult OnGetAccept(string id)
         {
             TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
             if (TblEmployeeRequestEmployee2 != null)
@@ -55,7 +55,6 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestPrimaryAcceptionId = 3;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptionDate = DateTime.Now;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = Int64.Parse(uid);
-                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptDescription = description;
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
