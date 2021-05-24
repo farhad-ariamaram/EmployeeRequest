@@ -21,8 +21,12 @@ namespace EmployeeRequest.Pages.Employee.HowFind
 
         public IList<TblEmployeeRequestHowFind> TblEmployeeRequestHowFind { get;set; }
 
+        public string Id { get; set; }
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
+            Id = id;
+
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
             {

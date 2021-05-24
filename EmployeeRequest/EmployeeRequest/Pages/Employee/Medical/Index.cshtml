@@ -8,7 +8,7 @@
 <h1>جدول سوابق پزشکی کاربر</h1>
 
 <p>
-    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestMedicalRecord.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+    <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.Id">ایجاد</a>
 </p>
 <table class="table">
     <thead>
@@ -93,5 +93,5 @@
 </table>
 
 @section Botton {
-    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.TblEmployeeRequestMedicalRecord.FirstOrDefault().FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.Id"><i class="fa fa-arrow-circle-left"></i></a>
 }

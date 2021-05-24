@@ -19,12 +19,14 @@ namespace EmployeeRequest.Pages.Employee.WorkExperience
             _context = context;
         }
 
-        public IList<TblWorkExperience>
-            TblWorkExperience
-        { get; set; }
+        public IList<TblWorkExperience> TblWorkExperience { get; set; }
+
+        public string Id { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
+            Id = id;
+
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
             {

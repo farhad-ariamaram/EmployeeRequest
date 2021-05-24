@@ -65,6 +65,7 @@ namespace EmployeeRequest.Pages.Employee.General
             if (TblEmployeeRequestGeneralRecord != null)
             {
                 _context.TblEmployeeRequestGeneralRecords.Remove(TblEmployeeRequestGeneralRecord);
+
                 TblEmployeeRequestEmployeeEditLog t = new TblEmployeeRequestEmployeeEditLog()
                 {
                     FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,

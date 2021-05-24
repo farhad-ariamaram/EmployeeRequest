@@ -9,7 +9,7 @@
 <br />
 <div class="row">
     <div class="col-12">
-        <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.TblEmployeeRequestHowFind.FirstOrDefault().FldEmployeeRequestEmployeeId">ایجاد</a>
+        <a class="btn btn-primary" asp-page="Create" asp-route-id="@Model.Id">ایجاد</a>
     </div>
 </div>
 
@@ -54,5 +54,5 @@
 </table>
 
 @section Botton {
-    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.TblEmployeeRequestHowFind.FirstOrDefault().FldEmployeeRequestEmployeeId"><i class="fa fa-arrow-circle-left"></i></a>
+    <a class="btn btn-outline-dark rounded" asp-page="../../EmployAccept/Detail" asp-route-id="@Model.Id"><i class="fa fa-arrow-circle-left"></i></a>
 }
