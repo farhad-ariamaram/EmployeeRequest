@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployAccept
 {
@@ -19,8 +20,18 @@ namespace EmployeeRequest.Pages.EmployAccept
             _context = context;
         }
 
+        public List<TblEmployeeRequestHelp> tblEmployeeRequestHelps { get; set; }
+
         public IActionResult OnGet()
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
+            tblEmployeeRequestHelps = _context.TblEmployeeRequestHelps.ToList();
+
             ViewData["FldEmployee"] = (from p in _context.TblEmployeeRequestEmployees
                                        join f in _context.TblEmployeeRequestPrimaryInformations
                                        on p.FldEmployeeRequestEmployeeId equals f.FldEmployeeRequestEmployeeId

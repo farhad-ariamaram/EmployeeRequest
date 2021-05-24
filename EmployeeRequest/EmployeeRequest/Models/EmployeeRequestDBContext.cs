@@ -31,6 +31,7 @@ namespace EmployeeRequest.Models
         public virtual DbSet<TblEmployeeRequestEmployeeRequest> TblEmployeeRequestEmployeeRequests { get; set; }
         public virtual DbSet<TblEmployeeRequestFinalAcception> TblEmployeeRequestFinalAcceptions { get; set; }
         public virtual DbSet<TblEmployeeRequestGeneralRecord> TblEmployeeRequestGeneralRecords { get; set; }
+        public virtual DbSet<TblEmployeeRequestHelp> TblEmployeeRequestHelps { get; set; }
         public virtual DbSet<TblEmployeeRequestHowFind> TblEmployeeRequestHowFinds { get; set; }
         public virtual DbSet<TblEmployeeRequestInterviewSession> TblEmployeeRequestInterviewSessions { get; set; }
         public virtual DbSet<TblEmployeeRequestIpLog> TblEmployeeRequestIpLogs { get; set; }
@@ -592,6 +593,21 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblEmployeeRequestGeneralRecords)
                     .HasForeignKey(d => d.FldEmployeeRequestEmployeeId)
                     .HasConstraintName("FK_Tbl_GeneralRecord_Tbl_User");
+            });
+
+            modelBuilder.Entity<TblEmployeeRequestHelp>(entity =>
+            {
+                entity.HasKey(e => e.FldEmployeeRequestHelpId);
+
+                entity.ToTable("Tbl_EmployeeRequest_Help");
+
+                entity.Property(e => e.FldEmployeeRequestHelpId).HasColumnName("Fld_EmployeeRequest_Help_Id");
+
+                entity.Property(e => e.FldEmployeeRequestHelpDescription).HasColumnName("Fld_EmployeeRequest_Help_Description");
+
+                entity.Property(e => e.FldEmployeeRequestHelpName)
+                    .HasMaxLength(100)
+                    .HasColumnName("Fld_EmployeeRequest_Help_Name");
             });
 
             modelBuilder.Entity<TblEmployeeRequestHowFind>(entity =>
