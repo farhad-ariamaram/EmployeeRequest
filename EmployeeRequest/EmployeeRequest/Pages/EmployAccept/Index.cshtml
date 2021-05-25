@@ -47,6 +47,7 @@
             </th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -182,6 +183,35 @@
                 <td>
                     <a asp-page="Detail" asp-route-id="@item.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=600,toolbar=1,resizable=1'); return false;">مشاهده جزئیات متقضی</a>
                 </td>
+                <td>
+                    @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
+                    {
+                        ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryAcceptDescription;
+                    }
+                    else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
+                    {
+                        ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryRejectDescription;
+                    }
+                    @if ((item.FldEmployeeRequestEmployeePrimaryAcceptDescription != null) || (item.FldEmployeeRequestEmployeePrimaryRejectDescription != null))
+                    {
+                        <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.PDes')">توضیحات وضعیت اولیه</a>
+                    }
+
+
+                    @if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                    {
+                        ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalAcceptDescription;
+                    }
+                    else if (item.FldEmployeeRequestFinalAcceptionId == 2)
+                    {
+                        ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalRejectDescription;
+                    }
+                    @if ((item.FldEmployeeRequestEmployeeFinalAcceptDescription != null) || (item.FldEmployeeRequestEmployeeFinalRejectDescription != null))
+                    {
+                        <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.FDes')">توضیحات وضعیت نهایی</a>
+                    }
+
+                </td>
             </tr>
         }
     </tbody>
@@ -195,6 +225,10 @@
 @section Scripts {
 
     <script>
+        function showDescriptions(desc) {
+            Swal.fire(desc, '', '')
+        }
+
 
         function AskAccept(id) {
             Swal.fire({
@@ -204,11 +238,18 @@
                 denyButtonText: `خیر`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET", "?id=" + id + "&handler=Accept", false);
-                    xmlHttp.send(null);
-                    Swal.fire('درخواست تایید شد', '', 'success').then(() => {
-                        location.reload();
+                    Swal.fire({
+                        title: 'توضیحات تایید اولیه',
+                        input: 'textarea'
+                    }).then(function (description) {
+                        if (description.value) {
+                            var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.open("GET", "?id=" + id + "&description=" + description.value + "&handler=Accept", false);
+                            xmlHttp.send(null);
+                            Swal.fire('درخواست تایید شد', '', 'success').then(() => {
+                                location.reload();
+                            })
+                        }
                     })
                 }
             });
@@ -222,11 +263,18 @@
                 denyButtonText: `خیر`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET", "?id=" + id + "&handler=Deny", false);
-                    xmlHttp.send(null);
-                    Swal.fire('درخواست رد شد', '', 'success').then(() => {
-                        location.reload();
+                    Swal.fire({
+                        title: 'توضیحات عدم تایید اولیه',
+                        input: 'textarea'
+                    }).then(function (description) {
+                        if (description.value) {
+                            var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.open("GET", "?id=" + id + "&description=" + description.value + "&handler=Deny", false);
+                            xmlHttp.send(null);
+                            Swal.fire('درخواست رد شد', '', 'success').then(() => {
+                                location.reload();
+                            })
+                        }
                     })
                 }
             });
@@ -240,11 +288,18 @@
                 denyButtonText: `خیر`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET", "?id=" + id + "&handler=FAccept", false);
-                    xmlHttp.send(null);
-                    Swal.fire('درخواست تایید شد', '', 'success').then(() => {
-                        location.reload();
+                    Swal.fire({
+                        title: 'توضیحات تایید نهایی',
+                        input: 'textarea'
+                    }).then(function (description) {
+                        if (description.value) {
+                            var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.open("GET", "?id=" + id + "&description=" + description.value + "&handler=FAccept", false);
+                            xmlHttp.send(null);
+                            Swal.fire('درخواست تایید شد', '', 'success').then(() => {
+                                location.reload();
+                            })
+                        }
                     })
                 }
             });
@@ -258,11 +313,18 @@
                 denyButtonText: `خیر`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET", "?id=" + id + "&handler=FDeny", false);
-                    xmlHttp.send(null);
-                    Swal.fire('درخواست رد شد', '', 'success').then(() => {
-                        location.reload();
+                    Swal.fire({
+                        title: 'توضیحات عدم تایید نهایی',
+                        input: 'textarea'
+                    }).then(function (description) {
+                        if (description.value) {
+                            var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.open("GET", "?id=" + id + "&description=" + description.value + "&handler=FDeny", false);
+                            xmlHttp.send(null);
+                            Swal.fire('درخواست رد شد', '', 'success').then(() => {
+                                location.reload();
+                            })
+                        }
                     })
                 }
             });
@@ -321,6 +383,6 @@
                 }
             });
         }
-        
+
     </script>
 }

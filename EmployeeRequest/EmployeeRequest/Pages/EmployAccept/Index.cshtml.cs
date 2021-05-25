@@ -42,7 +42,7 @@ namespace EmployeeRequest.Pages.EmployAccept
             return Page();
         }
 
-        public IActionResult OnGetAccept(string id)
+        public IActionResult OnGetAccept(string id, string description)
         {
             TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
             if (TblEmployeeRequestEmployee2 != null)
@@ -55,13 +55,14 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestPrimaryAcceptionId = 3;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptionDate = DateTime.Now;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = Int64.Parse(uid);
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptDescription = description;
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
             return RedirectToPage("Index");
         }
 
-        public IActionResult OnGetDeny(string id)
+        public IActionResult OnGetDeny(string id, string description)
         {
             TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
             if (TblEmployeeRequestEmployee2 != null)
@@ -74,13 +75,14 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestPrimaryAcceptionId = 2;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptionDate = DateTime.Now;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = Int64.Parse(uid);
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryRejectDescription = description;
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
             return RedirectToPage("Index");
         }
 
-        public IActionResult OnGetFAccept(string id)
+        public IActionResult OnGetFAccept(string id, string description)
         {
             TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
             if (TblEmployeeRequestEmployee2 != null)
@@ -93,13 +95,14 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = 1;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = DateTime.Now;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = Int64.Parse(uid);
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptDescription = description;
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
             return RedirectToPage("Index");
         }
 
-        public IActionResult OnGetFDeny(string id)
+        public IActionResult OnGetFDeny(string id, string description)
         {
             TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
             if (TblEmployeeRequestEmployee2 != null)
@@ -112,6 +115,7 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = 2;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = DateTime.Now;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = Int64.Parse(uid);
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalRejectDescription = description;
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
@@ -193,6 +197,8 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = null;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = null;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalRejectDescription = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptDescription = null;
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
@@ -213,6 +219,8 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestPrimaryAcceptionId = null;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptionDate = null;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptDescription = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryRejectDescription = null;
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
