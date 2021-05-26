@@ -18,6 +18,9 @@
                 <label class="control-label">کاربر ثبت کننده</label>
                 <select asp-for="TblEmployeeRequestEmployeeRequest.FldEmployeeRequestUserSubmitterId" class="form-control select2-dropdown" style="width:100%" asp-items="ViewBag.FldEmployeeRequestUserSubmitterId"></select>
             </div>
+
+            <hr />
+
             <div class="form-group">
                 <label class="control-label">نام شغل را وارد کنید</label>
                 <input id="JobName" name="JobName" type="text" class="form-control" />
@@ -30,17 +33,39 @@
                 </select>
             </div>
 
-            <div class="form-group" id="taminjobsection" style="display:none">
-                <label class="control-label">شغل تامین اجتماعی</label>
-                <select class="select2-dropdown" style="width:100%" id="taminjobdropdown" name="taminjobdropdown">
-                </select>
+            <hr />
+
+            <div id="taminjobsection" style="display:none">
+                <div class="form-group" >
+                    <label class="control-label">نام شغل تامین اجتماعی را وارد کنید</label>
+                    <input id="TaminJobName" name="TaminJobName" type="text" class="form-control" />
+                    <a class="btn btn-outline-info mt-1" onclick="loadTaminJson()">جستجو</a>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">شغل تامین اجتماعی</label>
+                    <select class="select2-dropdown" style="width:100%" id="taminjobdropdown" name="taminjobdropdown">
+                    </select>
+                </div>
             </div>
 
-            <div class="form-group" id="onetjobsection" style="display:none">
-                <label class="control-label">شغل اونت</label>
-                <select class="select2-dropdown" style="width:100%" id="onetjobdropdown" name="onetjobdropdown">
-                </select>
+            <hr />
+
+            <div id="onetjobsection" style="display:none">
+                <div class="form-group">
+                    <label class="control-label">نام شغل اونت را وارد کنید</label>
+                    <input id="OnetJobName" name="OnetJobName" type="text" class="form-control" />
+                    <a class="btn btn-outline-info mt-1" onclick="loadOnetJson()">جستجو</a>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">شغل اونت</label>
+                    <select class="select2-dropdown" style="width:100%" id="onetjobdropdown" name="onetjobdropdown">
+                    </select>
+                </div>
             </div>
+
+            <hr />
 
             <div class="form-group">
                 <label class="control-label">عنوان شغل از کدام بخش انتخاب شود</label>
@@ -224,6 +249,88 @@
                 },
                 failure: function () {
                     alert("Error on get jobs");
+                },
+                beforeSend: function () {
+                    Swal.fire({
+                        html: 'در حال بارگذاری اطلاعات، لطفا منتظر بمانید...',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        },
+                    });
+                },
+                complete: function () {
+                    swal.close();
+                },
+            });
+        }
+
+
+
+
+
+
+        
+        function loadTaminJson() {
+            let dropdown = $('#taminjobdropdown');
+
+            dropdown.empty();
+
+            var data = { jobName: $("#TaminJobName").val() };
+            $.ajax({
+                type: "GET",
+                url: "?handler=Jobs",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: true,
+                data: data,
+                success: function (response) {
+                    $.each(response, function (key, entry) {
+                        dropdown.append($('<option></option>').attr('value', entry.fldTaminJobId).text(entry.fldTaminJobName));
+                    });
+                },
+                failure: function () {
+                    alert("Error on get tamin jobs");
+                },
+                beforeSend: function () {
+                    Swal.fire({
+                        html: 'در حال بارگذاری اطلاعات، لطفا منتظر بمانید...',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        },
+                    });
+                },
+                complete: function () {
+                    swal.close();
+                },
+            });
+        }
+
+        function loadOnetJson() {
+            let dropdown = $('#onetjobdropdown');
+
+            dropdown.empty();
+
+            var data = { jobName: $("#OnetJobName").val() };
+            $.ajax({
+                type: "GET",
+                url: "?handler=Jobso",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: true,
+                data: data,
+                success: function (response) {
+                    $.each(response, function (key, entry) {
+                        dropdown.append($('<option></option>').attr('value', entry.fldJobId).text(entry.fldJobName));
+                    });
+                    $("#onetjobsection").show();
+                    loadjobs();
+                },
+                failure: function () {
+                    alert("Error on get onet jobs");
                 },
                 beforeSend: function () {
                     Swal.fire({
