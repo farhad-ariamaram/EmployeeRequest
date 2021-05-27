@@ -37,8 +37,63 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.FldEmployeeRequestUserFinalAccepter)
                 .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
                 .Include(t => t.TblEmployeeRequestPageTimeLogs)
-                .OrderBy(a=>a.TblEmployeeRequestPageTimeLogs.Where(a=>a.FldEmployeeRequestPageTimeLogPageLevel== "Level1").FirstOrDefault())
+                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
                 .ToListAsync();
+
+            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetStatusAsync(bool prim, bool final, bool noval, bool nprim , bool nfinal , bool nnoval)
+        {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
+
+            var a = _context.TblEmployeeRequestEmployees
+               .Include(t => t.FldEmployeeRequestFinalAcception)
+               .Include(t => t.FldEmployeeRequestPagesSequence)
+               .Include(t => t.FldEmployeeRequestPrimaryAcception)
+               .Include(t => t.FldEmployeeRequestUserFinalAccepter)
+               .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
+               .Include(t => t.TblEmployeeRequestPageTimeLogs)
+               .Where(t => true);
+
+            if (prim)
+            {
+                a = a.Where(b=>b.FldEmployeeRequestPrimaryAcceptionId == 3);
+            }
+
+            if (final)
+            {
+                a = a.Where(b => b.FldEmployeeRequestFinalAcceptionId == 1);
+            }
+
+            if (noval)
+            {
+                a = a.Where(b => b.FldEmployeeRequestPrimaryAcceptionId == null || b.FldEmployeeRequestPrimaryAcceptionId == 1);
+            }
+
+            if (nprim)
+            {
+                a = a.Where(b => b.FldEmployeeRequestPrimaryAcceptionId == 2);
+            }
+
+            if (nfinal)
+            {
+                a = a.Where(b => b.FldEmployeeRequestFinalAcceptionId == 2);
+            }
+
+            if (nnoval)
+            {
+                a = a.Where(b => b.FldEmployeeRequestPrimaryAcceptionId != null && b.FldEmployeeRequestPrimaryAcceptionId != 1);
+            }
+
+            TblEmployeeRequestEmployee = a.OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault()).ToList();
 
             TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
 
@@ -139,7 +194,10 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.FldEmployeeRequestPagesSequence)
                 .Include(t => t.FldEmployeeRequestPrimaryAcception)
                 .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter).ToListAsync();
+                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
+                .Include(t => t.TblEmployeeRequestPageTimeLogs)
+                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
+                .ToListAsync();
 
             TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
 
@@ -160,7 +218,10 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.FldEmployeeRequestPagesSequence)
                 .Include(t => t.FldEmployeeRequestPrimaryAcception)
                 .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter).ToListAsync();
+                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
+                .Include(t => t.TblEmployeeRequestPageTimeLogs)
+                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
+                .ToListAsync();
 
             TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
 
@@ -180,7 +241,10 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.FldEmployeeRequestPagesSequence)
                 .Include(t => t.FldEmployeeRequestPrimaryAcception)
                 .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter).ToListAsync();
+                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
+                .Include(t => t.TblEmployeeRequestPageTimeLogs)
+                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
+                .ToListAsync();
 
             TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
 

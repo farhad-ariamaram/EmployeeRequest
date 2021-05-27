@@ -8,13 +8,73 @@
 
 <h4>تایید نیرو</h4>
 <br />
-<a class="btn btn-outline-info m-1" asp-page-handler="FilterAll">مشاهده همه</a>
-<a class="btn btn-outline-info m-1" asp-page-handler="FilterAccepted">فقط تایید شده</a>
-<a class="btn btn-outline-info m-1" asp-page-handler="FilterNotAccepted">فقط تایید نشده</a>
-<br />
-<input type="checkbox" id="primaryaccept" /> تایید اولیه
-<input type="checkbox" id="finalaccept" /> تایید نهایی
-<input type="checkbox" id="novalue" /> نامشخص
+@*<div>
+    <a class="btn btn-outline-info m-1" asp-page-handler="FilterAll">مشاهده همه</a>
+    <a class="btn btn-outline-info m-1" asp-page-handler="FilterAccepted">فقط تایید شده</a>
+    <a class="btn btn-outline-info m-1" asp-page-handler="FilterNotAccepted">فقط تایید نشده</a>
+</div>
+<br />*@
+<div>
+    <input onclick="changestatusfilter()" type="checkbox" id="primaryaccept" /> تایید اولیه
+    <input onclick="changestatusfilter()" type="checkbox" id="finalaccept" /> تایید نهایی
+    <input onclick="changestatusfilter()" type="checkbox" id="novalue" /> نامشخص
+    <br />
+    <input onclick="changestatusfilter()" type="checkbox" id="nprimaryaccept" /> رد اولیه
+    <input onclick="changestatusfilter()" type="checkbox" id="nfinalaccept" /> رد نهایی
+    <input onclick="changestatusfilter()" type="checkbox" id="nnovalue" /> مشخص
+    <a id="statusfilter" class="btn btn-primary" href="?handler=Status">اعمال تغییرات</a>
+    <script>
+        function changestatusfilter() {
+            var href = "?handler=Status";
+            var prim = "&prim=";
+            var final = "&final=";
+            var noval = "&noval=";
+            var nprim = "&nprim=";
+            var nfinal = "&nfinal=";
+            var nnoval = "&nnoval=";
+
+            if ($("#primaryaccept").prop('checked')) {
+                prim += "true";
+            } else {
+                prim += "false";
+            }
+
+            if ($("#finalaccept").prop('checked')) {
+                final += "true";
+            } else {
+                final += "false";
+            }
+
+            if ($("#novalue").prop('checked')) {
+                noval += "true";
+            } else {
+                noval += "false";
+            }
+
+            if ($("#nprimaryaccept").prop('checked')) {
+                nprim += "true";
+            } else {
+                nprim += "false";
+            }
+
+            if ($("#nfinalaccept").prop('checked')) {
+                nfinal += "true";
+            } else {
+                nfinal += "false";
+            }
+
+            if ($("#nnovalue").prop('checked')) {
+                nnoval += "true";
+            } else {
+                nnoval += "false";
+            }
+
+            href += prim + final + noval + nprim + nfinal + nnoval;
+
+            $("#statusfilter").attr("href", href);
+        }
+    </script>
+</div>
 <br />
 <table class="table table-striped table-responsive">
     <thead>
