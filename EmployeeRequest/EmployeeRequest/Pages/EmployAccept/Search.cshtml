@@ -6,7 +6,7 @@
 
 <div id="result" class="row">
     <div class="col-12">
-        <a onclick="$('#filter').show();$('#result').hide();" class="w-100 btn btn-outline-primary m-2">فیلتر</a>
+        <a onclick="$('#filter').show(); $('#result').hide(); $('#backbtn').hide();" class="w-100 btn btn-outline-primary m-2">فیلتر</a>
         <table class="table table-striped table-bordered dt-responsive nowrap no-footer" id="DataT">
             <thead>
                 <tr>
@@ -447,11 +447,12 @@
     </div>
     <div class="fixed">
         <button class="btn btn-primary" onclick="filter()">اعمال فیلتر</button>
+        <a class="btn btn-danger rounded-circle" onclick="$('#filter').hide(); $('#result').show(); $('#backbtn').show();"><i class="fa fa-arrow-circle-left"></i></a>
     </div>
 </div>
 
 @section Botton {
-    <a class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+    <a id="backbtn" class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
 }
 
 @section Scripts {
@@ -472,7 +473,7 @@
         }
 
         function filter() {
-            $("#DataT").dataTable().fnDestroy();
+            $("#DataT").DataTable().destroy();
             var data = {
                 active_gender: $("#active_gender").prop('checked'), gender: $("#gender").val(),
                 active_child: $("#active_child").prop('checked'), childNo: $("#childNo").val(),
@@ -499,7 +500,10 @@
                 "language": { "emptyTable": "موردی یافت نشد", "search": "جستجو:", "paginate": { "first": "اول", "last": "آخر", "next": "بعدی", "previous": "قبلی" }, "info": "نمایش _START_ از _END_ از _TOTAL_ نتیجه", "lengthMenu": "نمایش _MENU_ نتیجه" },
                 "width": "100%"
             });
-            $('#filter').hide(); $('#result').show();
+
+            $("#DataT").addClass("w-100");
+
+            $('#filter').hide(); $('#result').show(); $('#backbtn').show();
         }
     </script>
 }
