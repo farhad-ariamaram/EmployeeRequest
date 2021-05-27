@@ -35,7 +35,10 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.FldEmployeeRequestPagesSequence)
                 .Include(t => t.FldEmployeeRequestPrimaryAcception)
                 .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter).ToListAsync();
+                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
+                .Include(t => t.TblEmployeeRequestPageTimeLogs)
+                .OrderBy(a=>a.TblEmployeeRequestPageTimeLogs.Where(a=>a.FldEmployeeRequestPageTimeLogPageLevel== "Level1").FirstOrDefault())
+                .ToListAsync();
 
             TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
 

@@ -12,11 +12,18 @@
 <a class="btn btn-outline-info m-1" asp-page-handler="FilterAccepted">فقط تایید شده</a>
 <a class="btn btn-outline-info m-1" asp-page-handler="FilterNotAccepted">فقط تایید نشده</a>
 <br />
+<input type="checkbox" id="primaryaccept" /> تایید اولیه
+<input type="checkbox" id="finalaccept" /> تایید نهایی
+<input type="checkbox" id="novalue" /> نامشخص
+<br />
 <table class="table table-striped table-responsive">
     <thead>
         <tr>
             <th>
                 نام و نام خانوادگی
+            </th>
+            <th>
+                تاریخ ثبت نام
             </th>
             <th>
                 وضعیت تایید/رد اولیه
@@ -56,6 +63,11 @@
             <tr>
                 <td>
                     @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName &nbsp; @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName
+                </td>
+                <td>
+                    @item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.toPersianDate()
+                    &nbsp;
+                    @(((DateTime)item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToString("HH:mm"))
                 </td>
                 <td>
                     @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
