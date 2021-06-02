@@ -1108,7 +1108,13 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_User");
 
-                entity.Property(e => e.FldEmployeeRequestUserId).HasColumnName("Fld_EmployeeRequest_User_Id");
+                entity.Property(e => e.FldEmployeeRequestUserId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_User_Id");
+
+                entity.Property(e => e.FldEmployeeRequestUserName)
+                    .HasMaxLength(100)
+                    .HasColumnName("Fld_EmployeeRequest_User_Name");
 
                 entity.Property(e => e.FldEmployeeRequestUserPassword)
                     .HasMaxLength(50)

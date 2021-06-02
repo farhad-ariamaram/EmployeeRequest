@@ -22,6 +22,7 @@ namespace EmployeeRequest.Models
         public long FldEmployeeRequestUserId { get; set; }
         public string FldEmployeeRequestUserUsername { get; set; }
         public string FldEmployeeRequestUserPassword { get; set; }
+        public string FldEmployeeRequestUserName { get; set; }
 
         public virtual ICollection<TblEmployeeRequestEmployeeEditLog> TblEmployeeRequestEmployeeEditLogs { get; set; }
         public virtual ICollection<TblEmployeeRequestEmployee> TblEmployeeRequestEmployeeFldEmployeeRequestUserFinalAccepters { get; set; }
