@@ -97,46 +97,72 @@ namespace EmployeeRequest.Pages
                 splashInfo.name = ApiLogin.DecryptString(splashInfo.name, key);
                 splashInfo.Status = ApiLogin.DecryptString(splashInfo.Status, key);
 
-                var user = _db.TblEmployeeRequestUsers.Where(a => a.FldEmployeeRequestUserId == int.Parse(splashInfo.id)).FirstOrDefault();
+                bool withError = false;
 
-                if (user != null)
+                if (!_db.TblEmployeeRequestUsers.Where(a => a.FldEmployeeRequestUserId == int.Parse(splashInfo.id)).Any())
                 {
-                    //check name
-                    if (!user.FldEmployeeRequestUserName.Equals(splashInfo.name))
+                    try
                     {
-                        user.FldEmployeeRequestUserName = splashInfo.name;
+                        TblEmployeeRequestUser t = new TblEmployeeRequestUser();
+
+                        t.FldEmployeeRequestUserId = Int64.Parse(splashInfo.id);
+                        t.FldEmployeeRequestUserUsername = Request.Form["loginModel.Username"];
+                        t.FldEmployeeRequestUserPassword = ApiLogin.sha512(Consts._CONST_SALT + Request.Form["loginModel.Password"] + Consts._CONST_SALT);
+                        t.FldEmployeeRequestUserName = splashInfo.name;
+
+                        _db.TblEmployeeRequestUsers.Add(t);
+                        _db.SaveChanges();
                     }
+                    catch { withError = true; }
+                }
+                //var user = _db.TblEmployeeRequestUsers.Where(a => a.FldEmployeeRequestUserId == int.Parse(splashInfo.id)).FirstOrDefault();
 
-                    //check pass
-                    if (!user.FldEmployeeRequestUserPassword.Equals(ApiLogin.sha512(Request.Form["loginModel.Password"] + Consts._CONST_SALT)))
-                    {
-                        user.FldEmployeeRequestUserPassword = ApiLogin.sha512(Request.Form["loginModel.Password"] + Consts._CONST_SALT);
-                    }
+                //if (user != null)
+                //{
+                //    //check name
+                //    if (!user.FldEmployeeRequestUserName.Equals(splashInfo.name))
+                //    {
+                //        user.FldEmployeeRequestUserName = splashInfo.name;
+                //    }
 
-                    _db.TblEmployeeRequestUsers.Update(user);
-                    _db.SaveChanges();
+                //    //check pass
+                //    if (!user.FldEmployeeRequestUserPassword.Equals(ApiLogin.sha512(Request.Form["loginModel.Password"] + Consts._CONST_SALT)))
+                //    {
+                //        user.FldEmployeeRequestUserPassword = ApiLogin.sha512(Request.Form["loginModel.Password"] + Consts._CONST_SALT);
+                //    }
 
+                //    _db.TblEmployeeRequestUsers.Update(user);
+                //    _db.SaveChanges();
+
+                //    string uid = splashInfo.id;
+                //    HttpContext.Session.SetString("uid", uid);
+                //    return RedirectToPage("Panel/Index");
+
+                //}
+                //else
+                //{
+                //TblEmployeeRequestUser t = new TblEmployeeRequestUser();
+
+                //t.FldEmployeeRequestUserId = Int64.Parse(splashInfo.id);
+                //t.FldEmployeeRequestUserUsername = Request.Form["loginModel.Username"];
+                //t.FldEmployeeRequestUserPassword = ApiLogin.sha512(Request.Form["loginModel.Password"] + Consts._CONST_SALT);
+                //t.FldEmployeeRequestUserName = splashInfo.name;
+
+                //_db.TblEmployeeRequestUsers.Add(t);
+                //_db.SaveChanges();
+
+                if (!withError)
+                {
                     string uid = splashInfo.id;
                     HttpContext.Session.SetString("uid", uid);
                     return RedirectToPage("Panel/Index");
-
                 }
                 else
                 {
-                    TblEmployeeRequestUser t = new TblEmployeeRequestUser();
-
-                    t.FldEmployeeRequestUserId = Int64.Parse(splashInfo.id);
-                    t.FldEmployeeRequestUserUsername = Request.Form["loginModel.Username"];
-                    t.FldEmployeeRequestUserPassword = ApiLogin.sha512(Request.Form["loginModel.Password"] + Consts._CONST_SALT);
-                    t.FldEmployeeRequestUserName = splashInfo.name;
-
-                    _db.TblEmployeeRequestUsers.Add(t);
-                    _db.SaveChanges();
-
-                    string uid = splashInfo.id;
-                    HttpContext.Session.SetString("uid", uid);
-                    return RedirectToPage("Panel/Index");
+                    ModelState.AddModelError("WrongUP", "در سیستم خطایی رخ داده است ! لطفا در زمان دیگری وارد شوید!");
+                    return Page();
                 }
+                //}
 
 
             }

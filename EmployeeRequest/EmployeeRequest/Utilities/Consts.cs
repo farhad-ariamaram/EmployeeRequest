@@ -9,6 +9,6 @@ namespace EmployeeRequest.Utilities
     {
         public const string _CONST_NUM = "0";
         public const string _CONST_KEY = "b14ca5898a4e4133bbce2ea2315a1916";
-        public const string _CONST_SALT = "SALT";
+        public const string _CONST_SALT = "_@Kftfd";
     }
 }
