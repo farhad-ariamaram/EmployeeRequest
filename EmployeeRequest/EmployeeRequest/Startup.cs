@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace EmployeeRequest
         {
             services.AddDbContext<EmployeeRequestDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CS")));
             services.AddSession();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages();
         }
 

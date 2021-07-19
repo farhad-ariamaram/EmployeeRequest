@@ -22,6 +22,10 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">سیستم درخواست نیرو</a>
+                @if (HttpContextAccessor.HttpContext.Session.GetString("uid")!=null)
+                {
+                    <a href="http://185.118.152.61:8081/linkg" class="btn btn-primary" target="_blank">ایجاد لینک</a>
+                }
             </div>
         </nav>
     </header>

@@ -12,6 +12,7 @@ using System.Net;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace EmployeeRequest.Pages
 {
@@ -43,7 +44,7 @@ namespace EmployeeRequest.Pages
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +54,6 @@ namespace EmployeeRequest.Pages
             string key = Consts._CONST_KEY;
             string tk = ApiLogin.rndTransferKey();
             string token = ApiLogin.EncryptString(tk, key);
-            string p0 = Consts._CONST_NUM;
             string p1 = ApiLogin.EncryptString(Request.Form["loginModel.Username"], key); ;
             string p2 = ApiLogin.EncryptString(Request.Form["loginModel.Password"], key);
             string p3 = token;
@@ -82,7 +82,7 @@ namespace EmployeeRequest.Pages
             {
                 result = "{" + result.Substring(28).Replace("}}", "}");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ModelState.AddModelError("WrongUP", "نام کاربری یا کلمه عبور اشتباه است");
                 return Page();
@@ -110,8 +110,9 @@ namespace EmployeeRequest.Pages
                         t.FldEmployeeRequestUserPassword = ApiLogin.sha512(Consts._CONST_SALT + Request.Form["loginModel.Password"] + Consts._CONST_SALT);
                         t.FldEmployeeRequestUserName = splashInfo.name;
 
-                        _db.TblEmployeeRequestUsers.Add(t);
-                        _db.SaveChanges();
+
+                        await _db.TblEmployeeRequestUsers.AddAsync(t);
+                        await _db.SaveChangesAsync();
                     }
                     catch { withError = true; }
                 }
@@ -155,6 +156,21 @@ namespace EmployeeRequest.Pages
                 {
                     string uid = splashInfo.id;
                     HttpContext.Session.SetString("uid", uid);
+
+                    var setting = _db.TblEmployeeRequestUserSettings.Where(a => a.FldEmployeeRequestUserId == Int64.Parse(uid));
+                    if (!setting.Any())
+                    {
+                        await _db.TblEmployeeRequestUserSettings.AddAsync(new TblEmployeeRequestUserSetting
+                        {
+                            FldEmployeeRequestUserId = Int64.Parse(uid),
+                            FldEmployeeRequestUserSettingIsCollaps = true,
+                            FldEmployeeRequestUserSettingIsShowGreen = true,
+                            FldEmployeeRequestUserSettingIsShowRed = true
+                        });
+
+                        await _db.SaveChangesAsync();
+                    }
+
                     return RedirectToPage("Panel/Index");
                 }
                 else
@@ -162,17 +178,12 @@ namespace EmployeeRequest.Pages
                     ModelState.AddModelError("WrongUP", "در سیستم خطایی رخ داده است ! لطفا در زمان دیگری وارد شوید!");
                     return Page();
                 }
-                //}
-
-
             }
             else
             {
                 ModelState.AddModelError("WrongUP", "نام کاربری یا کلمه عبور اشتباه است");
                 return Page();
             }
-
-            return Page();
 
             //var checkUser = _db.TblEmployeeRequestUsers
             //        .Where(a => a.FldEmployeeRequestUserUsername.Equals(loginModel.Username))

@@ -31,7 +31,7 @@
 
     function Load() {
 
-        if ("@Model.TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowGreen" === "True") {
+        @*if ("@Model.TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowGreen" === "True") {
             $("#green").prop('checked', 'true');
         } else {
             $("#green").removeAttr('checked');
@@ -47,7 +47,7 @@
             $("#openall").prop('checked', 'true');
         } else {
             $("#openall").removeAttr('checked');
-        }
+        }*@
 
         filter();
     }
@@ -63,11 +63,11 @@
 
 <div class="row">
     <div class="col-12">
-        <input type="checkbox" id="green" onclick="filter()" />  نمایش سبز
+        <input type="checkbox" id="green" onclick="filter()" checked/>  نمایش سبز
         <br />
-        <input type="checkbox" id="red" onclick="filter()" />  نمایش قرمز
+        <input type="checkbox" id="red" onclick="filter()" checked/>  نمایش قرمز
         <br />
-        <input type="checkbox" id="openall" onclick="filter()" />  نمایش همه
+        <input type="checkbox" id="openall" onclick="filter()" checked/>  نمایش همه
     </div>
 </div>
 <br />
