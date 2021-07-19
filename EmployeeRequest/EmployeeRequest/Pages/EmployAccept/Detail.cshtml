@@ -31,7 +31,7 @@
 
     function Load() {
 
-        @*if ("@Model.TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowGreen" === "True") {
+        if ("@Model.TblEmployeeRequestUserSetting.FldEmployeeRequestUserSettingIsShowGreen" === "True") {
             $("#green").prop('checked', 'true');
         } else {
             $("#green").removeAttr('checked');
@@ -47,7 +47,7 @@
             $("#openall").prop('checked', 'true');
         } else {
             $("#openall").removeAttr('checked');
-        }*@
+        }
 
         filter();
     }
