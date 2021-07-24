@@ -118,174 +118,184 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.TblEmployeeRequestEmployee)
+        @if (Model.TblEmployeeRequestEmployee != null)
         {
-            <tr>
-                <td>
-                    @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName &nbsp; @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName
-                </td>
-                <td>
-                    @item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.toPersianDate()
-                    &nbsp;
-                    @(((DateTime)item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToString("HH:mm"))
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
-                    {
-                        <span class="badge badge-success">تایید شده</span>
-                    }
-                    else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
-                    {
-                        <span class="badge badge-danger">رد شده</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning text-white">مشخص نشده</span>
-                    }
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestUserPrimaryAccepterId != null)
-                    {
-                        @item.FldEmployeeRequestUserPrimaryAccepter.FldEmployeeRequestUserUsername
-                    }
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate != null)
-                    {
-                        @item.FldEmployeeRequestEmployeePrimaryAcceptionDate.toPersianDate()
-                    }
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestFinalAcceptionId == 1)
-                    {
-                        <span class="badge badge-success">تایید شده</span>
-                    }
-                    else if (item.FldEmployeeRequestFinalAcceptionId == 2)
-                    {
-                        <span class="badge badge-danger">رد شده</span>
-                    }
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestUserFinalAccepterId != null)
-                    {
-                        @item.FldEmployeeRequestUserFinalAccepter.FldEmployeeRequestUserUsername
-                    }
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestEmployeeFinalAcceptionDate != null)
-                    {
-                        @item.FldEmployeeRequestEmployeeFinalAcceptionDate.toPersianDate()
-                    }
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
-                    {
-
-                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) <br />
-                        <i>از</i> <br />
-                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
-                    }
-
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestEmployeeInterviewStartDate != null)
-                    {
-                        @item.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewStartDate.ToString().Split(' ')[1]
-                    }
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestEmployeeInterviewEndDate != null)
-                    {
-                        @item.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewEndDate.ToString().Split(' ')[1]
-                    }
-                </td>
-                <td>
-
-                    @*تایید اولیه*@
-                    @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate == null)
-                    {
-                        <a href="#" class="btn btn-success w-100" onclick="AskAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله اولیه</a>
-                        <a href="#" class="btn btn-danger w-100" onclick="AskDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله اولیه</a>
-                    }
-                    else if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
-                    {
-                        //زمان مصاحبه
-                        if (item.FldEmployeeRequestEmployeeInterviewStartDate == null)
-                        {
-                            <a asp-page="SetInterview" asp-route-id="@item.FldEmployeeRequestEmployeeId" class="btn btn-success w-100">تعیین زمان مصاحبه</a>
-                            <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
-                        }
-                        else
-                        {
-                            //تایید نهایی
-                            if (item.FldEmployeeRequestFinalAcceptionId == null)
+            @if (@Model.TblEmployeeRequestEmployee.Count > 0)
+            {
+                @foreach (var item in Model.TblEmployeeRequestEmployee)
+                {
+                    <tr>
+                        <td>
+                            @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName &nbsp; @Model.TblEmployeeRequestPrimaryInformation.Where(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName
+                        </td>
+                        <td>
+                            @item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.toPersianDate()
+                            &nbsp;
+                            @(((DateTime)item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToString("HH:mm"))
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
                             {
-                                <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
-                                <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
-                                <a href="#" class="btn btn-info w-100" onclick="AskIRevert('@item.FldEmployeeRequestEmployeeId');">حذف زمان مصاحبه</a>
+                                <span class="badge badge-success">تایید شده</span>
+                            }
+                            else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
+                            {
+                                <span class="badge badge-danger">رد شده</span>
                             }
                             else
                             {
-                                if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                                <span class="badge badge-warning text-white">مشخص نشده</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestUserPrimaryAccepterId != null)
+                            {
+                                @item.FldEmployeeRequestUserPrimaryAccepter.FldEmployeeRequestUserUsername
+                            }
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate != null)
+                            {
+                                @item.FldEmployeeRequestEmployeePrimaryAcceptionDate.toPersianDate()
+                            }
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                            {
+                                <span class="badge badge-success">تایید شده</span>
+                            }
+                            else if (item.FldEmployeeRequestFinalAcceptionId == 2)
+                            {
+                                <span class="badge badge-danger">رد شده</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestUserFinalAccepterId != null)
+                            {
+                                @item.FldEmployeeRequestUserFinalAccepter.FldEmployeeRequestUserUsername
+                            }
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestEmployeeFinalAcceptionDate != null)
+                            {
+                                @item.FldEmployeeRequestEmployeeFinalAcceptionDate.toPersianDate()
+                            }
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
+                            {
+
+                                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) <br />
+                                <i>از</i> <br />
+                                @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
+                            }
+
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestEmployeeInterviewStartDate != null)
+                            {
+                                @item.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewStartDate.ToString().Split(' ')[1]
+                            }
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestEmployeeInterviewEndDate != null)
+                            {
+                                @item.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewEndDate.ToString().Split(' ')[1]
+                            }
+                        </td>
+                        <td>
+
+                            @*تایید اولیه*@
+                            @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate == null)
+                            {
+                                <a href="#" class="btn btn-success w-100" onclick="AskAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله اولیه</a>
+                                <a href="#" class="btn btn-danger w-100" onclick="AskDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله اولیه</a>
+                            }
+                            else if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
+                            {
+                                //زمان مصاحبه
+                                if (item.FldEmployeeRequestEmployeeInterviewStartDate == null)
                                 {
-                                    <span class="badge badge-success">کاربر تایید نهایی شده</span>
-                                    <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
+                                    <a asp-page="SetInterview" asp-route-id="@item.FldEmployeeRequestEmployeeId" class="btn btn-success w-100">تعیین زمان مصاحبه</a>
+                                    <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
                                 }
                                 else
                                 {
-                                    <span class="badge badge-danger">کاربر مردود شده</span>
-                                    <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از عدم تایید</a>
+                                    //تایید نهایی
+                                    if (item.FldEmployeeRequestFinalAcceptionId == null)
+                                    {
+                                        <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
+                                        <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
+                                        <a href="#" class="btn btn-info w-100" onclick="AskIRevert('@item.FldEmployeeRequestEmployeeId');">حذف زمان مصاحبه</a>
+                                    }
+                                    else
+                                    {
+                                        if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                                        {
+                                            <span class="badge badge-success">کاربر تایید نهایی شده</span>
+                                            <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">کاربر مردود شده</span>
+                                            <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از عدم تایید</a>
+                                        }
+                                    }
                                 }
+
                             }
-                        }
+                            else
+                            {
+                                <span class="badge badge-danger">کاربر مردود شده</span>
+                                <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
+                            }
 
-                    }
-                    else
-                    {
-                        <span class="badge badge-danger">کاربر مردود شده</span>
-                        <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
-                    }
+                            @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
+                            {
+                                <a asp-page="Scores" asp-route-id="@item.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=500,toolbar=1,resizable=1'); return false;">مشاهده امتیاز ها</a>
+                            }
 
-                    @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
-                    {
-                        <a asp-page="Scores" asp-route-id="@item.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=500,toolbar=1,resizable=1'); return false;">مشاهده امتیاز ها</a>
-                    }
-
-                </td>
-                <td>
-                    <a asp-page="Detail" asp-route-id="@item.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=600,toolbar=1,resizable=1'); return false;">مشاهده جزئیات متقضی</a>
-                </td>
-                <td>
-                    @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
-                    {
-                        ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryAcceptDescription;
-                    }
-                    else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
-                    {
-                        ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryRejectDescription;
-                    }
-                    @if ((item.FldEmployeeRequestEmployeePrimaryAcceptDescription != null) || (item.FldEmployeeRequestEmployeePrimaryRejectDescription != null))
-                    {
-                        <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.PDes')">توضیحات وضعیت اولیه</a>
-                    }
+                        </td>
+                        <td>
+                            <a asp-page="Detail" asp-route-id="@item.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=600,toolbar=1,resizable=1'); return false;">مشاهده جزئیات متقضی</a>
+                        </td>
+                        <td>
+                            @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
+                            {
+                                ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryAcceptDescription;
+                            }
+                            else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
+                            {
+                                ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryRejectDescription;
+                            }
+                            @if ((item.FldEmployeeRequestEmployeePrimaryAcceptDescription != null) || (item.FldEmployeeRequestEmployeePrimaryRejectDescription != null))
+                            {
+                                <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.PDes')">توضیحات وضعیت اولیه</a>
+                            }
 
 
-                    @if (item.FldEmployeeRequestFinalAcceptionId == 1)
-                    {
-                        ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalAcceptDescription;
-                    }
-                    else if (item.FldEmployeeRequestFinalAcceptionId == 2)
-                    {
-                        ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalRejectDescription;
-                    }
-                    @if ((item.FldEmployeeRequestEmployeeFinalAcceptDescription != null) || (item.FldEmployeeRequestEmployeeFinalRejectDescription != null))
-                    {
-                        <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.FDes')">توضیحات وضعیت نهایی</a>
-                    }
+                            @if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                            {
+                                ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalAcceptDescription;
+                            }
+                            else if (item.FldEmployeeRequestFinalAcceptionId == 2)
+                            {
+                                ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalRejectDescription;
+                            }
+                            @if ((item.FldEmployeeRequestEmployeeFinalAcceptDescription != null) || (item.FldEmployeeRequestEmployeeFinalRejectDescription != null))
+                            {
+                                <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.FDes')">توضیحات وضعیت نهایی</a>
+                            }
 
-                </td>
-            </tr>
+                        </td>
+                    </tr>
+                }
+            }
+
+
+
         }
+
     </tbody>
 </table>
 

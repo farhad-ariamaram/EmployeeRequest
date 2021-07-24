@@ -36,6 +36,18 @@
                     <tbody>
                         <tr>
                             <td>
+                                تاریخ ثبت نام
+                                <input type="checkbox" id="active_rdate" />
+                            </td>
+                            <td>
+                                <div>
+                                    <input class="form-control" type="text" id="input1" readonly />
+                                    <input class="form-control" type="hidden" id="rdate" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 جنسیت
                                 <input type="checkbox" id="active_gender" />
                             </td>
@@ -95,7 +107,8 @@
                             </td>
                             <td>
                                 <div>
-                                    <input class="form-control" type="date" id="birthDate" value="0" />
+                                    <input class="form-control" type="hidden" id="birthDate" value="0" />
+                                    <input class="form-control" type="text" id="input2" readonly />
                                 </div>
                             </td>
                         </tr>
@@ -461,7 +474,21 @@
     <script>
         function Load() {
             loadDataT();
+
+            $("#input1, #span1").persianDatepicker({
+                onSelect: function () {
+                    $("#rdate").val($("#input1").attr("data-gdate"));
+                }
+            });
+
+            $("#input2, #span2").persianDatepicker({
+                onSelect: function () {
+                    $("#birthDate").val($("#input2").attr("data-gdate"));
+                }
+            });
         }
+
+        
 
         function loadDataT() {
             dataTable = $("#DataT").DataTable({
@@ -475,6 +502,7 @@
         function filter() {
             $("#DataT").DataTable().destroy();
             var data = {
+                active_rdate: $("#active_rdate").prop('checked'), rdate: $("#rdate").val(),
                 active_gender: $("#active_gender").prop('checked'), gender: $("#gender").val(),
                 active_child: $("#active_child").prop('checked'), childNo: $("#childNo").val(),
                 active_Marital: $("#active_marital").prop('checked'), marital: $("#marital").val(),
