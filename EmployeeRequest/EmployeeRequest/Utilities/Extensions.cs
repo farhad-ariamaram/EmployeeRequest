@@ -19,5 +19,12 @@ namespace EmployeeRequest.Utilities
             return string.Format("{0}/{1}/{2}", pc.GetYear(date), pc.GetMonth(date), pc.GetDayOfMonth(date));
         }
 
+        public static string toPersianDate(this DateTime datetime)
+        {
+            PersianCalendar pc = new PersianCalendar();
+            DateTime date = (DateTime)datetime;
+            return string.Format("{0}/{1}/{2}", pc.GetYear(date), pc.GetMonth(date), pc.GetDayOfMonth(date));
+        }
+
     }
 }

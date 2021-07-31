@@ -25,6 +25,12 @@ namespace EmployeeRequest.Pages.EmployAccept
 
         public List<TblEmployeeRequestUserLanguage> TblEmployeeRequestUserLanguage { get; set; }
 
+        public DateTime RegDate { get; set; }
+        public string RegTime { get; set; }
+        public int repeatNo { get; set; }
+        public int repeatNo2 { get; set; }
+        public int repeatNo3 { get; set; }
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
             string uid = HttpContext.Session.GetString("uid");
@@ -82,6 +88,20 @@ namespace EmployeeRequest.Pages.EmployAccept
             {
                 return NotFound();
             }
+
+            RegDate = _context.TblEmployeeRequestPageTimeLogs.FirstOrDefault(a => a.FldEmployeeRequestEmployeeId == id).FldEmployeeRequestPageTimeLogStartTime.Value;
+
+            RegTime = RegDate.ToString("HH:mm");
+
+            var natcode = TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode;
+            repeatNo = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationNationalCode == natcode).Count();
+
+            var mobNo = TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo;
+            repeatNo2 = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationPhoneNo == mobNo).Count();
+
+            var poscode = TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode;
+            repeatNo3 = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationPostalCode == poscode).Count();
+
             return Page();
         }
 

@@ -45,7 +45,7 @@ namespace EmployeeRequest.Pages.EmployAccept
             return new JsonResult(new { data = await _context.TblEmployeeRequestEmployees.Include(a => a.TblEmployeeRequestPrimaryInformations).Select(a => new { a.FldEmployeeRequestEmployeeId, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode, a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo }).ToListAsync() });
         }
 
-        public async Task<IActionResult> OnGetFilterSearchAsync(bool active_rdate, string rdate,
+        public async Task<IActionResult> OnGetFilterSearchAsync(bool active_rdate, string rdate, string rdate2,
                                                                 bool active_gender, string gender,
                                                                 bool active_child, string childNo,
                                                                 bool active_marital, string marital,
@@ -83,7 +83,22 @@ namespace EmployeeRequest.Pages.EmployAccept
             #region Based On Primary Informations
             if (active_rdate)
             {
-                result = result.Where(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime >= DateTime.Parse(rdate));
+                if (rdate != null && rdate2 != null)
+                {
+                    result = result.Where(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime >= DateTime.Parse(rdate)
+                    && a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime < DateTime.Parse(rdate2)
+                    );
+                }
+
+                if(rdate != null && rdate2 == null)
+                {
+                    result = result.Where(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime >= DateTime.Parse(rdate));
+                }
+
+                if (rdate == null && rdate2 != null)
+                {
+                    result = result.Where(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime <= DateTime.Parse(rdate2));
+                }
             }
 
             if (active_gender)

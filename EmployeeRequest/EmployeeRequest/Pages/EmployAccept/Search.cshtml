@@ -41,8 +41,13 @@
                             </td>
                             <td>
                                 <div>
+                                    تاریخ شروع:
                                     <input class="form-control" type="text" id="input1" readonly />
                                     <input class="form-control" type="hidden" id="rdate" />
+                                    <br />
+                                    تاریخ پایان:
+                                    <input class="form-control" type="text" id="input3" readonly />
+                                    <input class="form-control" type="hidden" id="rdate2" />
                                 </div>
                             </td>
                         </tr>
@@ -481,6 +486,12 @@
                 }
             });
 
+            $("#input3, #span3").persianDatepicker({
+                onSelect: function () {
+                    $("#rdate2").val($("#input3").attr("data-gdate"));
+                }
+            });
+
             $("#input2, #span2").persianDatepicker({
                 onSelect: function () {
                     $("#birthDate").val($("#input2").attr("data-gdate"));
@@ -502,7 +513,7 @@
         function filter() {
             $("#DataT").DataTable().destroy();
             var data = {
-                active_rdate: $("#active_rdate").prop('checked'), rdate: $("#rdate").val(),
+                active_rdate: $("#active_rdate").prop('checked'), rdate: $("#rdate").val(), rdate2: $("#rdate2").val(),
                 active_gender: $("#active_gender").prop('checked'), gender: $("#gender").val(),
                 active_child: $("#active_child").prop('checked'), childNo: $("#childNo").val(),
                 active_Marital: $("#active_marital").prop('checked'), marital: $("#marital").val(),

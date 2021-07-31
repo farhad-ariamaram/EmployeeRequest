@@ -20,9 +20,12 @@ namespace EmployeeRequest.Pages.EmployAccept
         }
 
         public IList<TblEmployeeRequestEmployee> TblEmployeeRequestEmployee { get; set; }
-        public IList<TblEmployeeRequestPrimaryInformation> TblEmployeeRequestPrimaryInformation { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public string currentFilter { get; set; }
+        public string currentprim { get; set; }
+        public string currentfinal { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(string duplicate, string search, string prim, string final)
         {
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
@@ -41,62 +44,72 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
                 .ToListAsync();
 
-            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
+            currentFilter = search;
+            currentprim = prim;
+            currentfinal = final;
 
-            return Page();
-        }
-
-        public async Task<IActionResult> OnGetStatusAsync(bool prim, bool final, bool noval, bool nprim , bool nfinal , bool nnoval)
-        {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
+            //duplicate
+            if (!string.IsNullOrEmpty(duplicate))
             {
-                return RedirectToPage("../Index");
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a =>
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode==duplicate ||
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo==duplicate ||
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode==duplicate)
+                    .ToList();
             }
 
-
-            var a = _context.TblEmployeeRequestEmployees
-               .Include(t => t.FldEmployeeRequestFinalAcception)
-               .Include(t => t.FldEmployeeRequestPagesSequence)
-               .Include(t => t.FldEmployeeRequestPrimaryAcception)
-               .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-               .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
-               .Include(t => t.TblEmployeeRequestPageTimeLogs)
-               .Where(t => true);
-
-            if (prim)
+            //search
+            if (!string.IsNullOrEmpty(search))
             {
-                a = a.Where(b=>b.FldEmployeeRequestPrimaryAcceptionId == 3);
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a =>
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName.Contains(search) ||
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationLastName.Contains(search))
+                    .ToList();
             }
 
-            if (final)
+            //primary
+            if (prim == "0")
             {
-                a = a.Where(b => b.FldEmployeeRequestFinalAcceptionId == 1);
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a => a.FldEmployeeRequestPrimaryAcceptionId == null || a.FldEmployeeRequestPrimaryAcceptionId == 1)
+                    .ToList();
+
+            }
+            else if (prim == "1")
+            {
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a => a.FldEmployeeRequestPrimaryAcceptionId == 3)
+                    .ToList();
+            }
+            else if (prim == "2")
+            {
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a => a.FldEmployeeRequestPrimaryAcceptionId == 2)
+                    .ToList();
             }
 
-            if (noval)
+            //final
+            if (final == "0")
             {
-                a = a.Where(b => b.FldEmployeeRequestPrimaryAcceptionId == null || b.FldEmployeeRequestPrimaryAcceptionId == 1);
-            }
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a => a.FldEmployeeRequestFinalAcceptionId == null)
+                    .ToList();
 
-            if (nprim)
+            }
+            else if (final == "1")
             {
-                a = a.Where(b => b.FldEmployeeRequestPrimaryAcceptionId == 2);
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a => a.FldEmployeeRequestFinalAcceptionId == 1)
+                    .ToList();
             }
-
-            if (nfinal)
+            else if (final == "2")
             {
-                a = a.Where(b => b.FldEmployeeRequestFinalAcceptionId == 2);
+                TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
+                    .Where(a => a.FldEmployeeRequestFinalAcceptionId == 2)
+                    .ToList();
             }
-
-            if (nnoval)
-            {
-                a = a.Where(b => b.FldEmployeeRequestPrimaryAcceptionId != null && b.FldEmployeeRequestPrimaryAcceptionId != 1);
-            }
-
-            TblEmployeeRequestEmployee = a.OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault()).ToList();
-
-            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
 
             return Page();
         }
@@ -179,77 +192,6 @@ namespace EmployeeRequest.Pages.EmployAccept
                 _context.SaveChanges();
             }
             return RedirectToPage("Index");
-        }
-
-        public async Task<IActionResult> OnGetFilterAcceptedAsync()
-        {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
-            TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
-                .Where(a => a.FldEmployeeRequestEmployeeFinalAcceptionDate != null)
-                .Include(t => t.FldEmployeeRequestFinalAcception)
-                .Include(t => t.FldEmployeeRequestPagesSequence)
-                .Include(t => t.FldEmployeeRequestPrimaryAcception)
-                .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
-                .Include(t => t.TblEmployeeRequestPageTimeLogs)
-                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
-                .ToListAsync();
-
-            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
-
-            return Page();
-        }
-
-        public async Task<IActionResult> OnGetFilterNotAcceptedAsync()
-        {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
-            TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
-                .Where(a => a.FldEmployeeRequestEmployeeFinalAcceptionDate == null)
-                .Include(t => t.FldEmployeeRequestFinalAcception)
-                .Include(t => t.FldEmployeeRequestPagesSequence)
-                .Include(t => t.FldEmployeeRequestPrimaryAcception)
-                .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
-                .Include(t => t.TblEmployeeRequestPageTimeLogs)
-                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
-                .ToListAsync();
-
-            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
-
-            return Page();
-        }
-
-        public async Task<IActionResult> OnGetFilterAllAsync()
-        {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
-            TblEmployeeRequestEmployee = await _context.TblEmployeeRequestEmployees
-                .Include(t => t.FldEmployeeRequestFinalAcception)
-                .Include(t => t.FldEmployeeRequestPagesSequence)
-                .Include(t => t.FldEmployeeRequestPrimaryAcception)
-                .Include(t => t.FldEmployeeRequestUserFinalAccepter)
-                .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
-                .Include(t => t.TblEmployeeRequestPageTimeLogs)
-                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
-                .ToListAsync();
-
-            TblEmployeeRequestPrimaryInformation = await _context.TblEmployeeRequestPrimaryInformations.ToListAsync();
-
-            return Page();
         }
 
         public IActionResult OnGetFRevert(string id)
