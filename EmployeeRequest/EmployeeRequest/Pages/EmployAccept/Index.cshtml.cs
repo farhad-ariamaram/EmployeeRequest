@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
+using JW;
 
 namespace EmployeeRequest.Pages.EmployAccept
 {
@@ -24,8 +25,23 @@ namespace EmployeeRequest.Pages.EmployAccept
         public string currentFilter { get; set; }
         public string currentprim { get; set; }
         public string currentfinal { get; set; }
+        public int currentpagesize { get; set; }
+        public int currentpage { get; set; }
+        public string currentorderBy { get; set; }
+        public string currentorderType { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string duplicate, string search, string prim, string final)
+        //paging
+        public IEnumerable<TblEmployeeRequestEmployee> Items { get; set; }
+        public Pager Pager { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(string duplicate,
+                                                    string search,
+                                                    string prim,
+                                                    string final,
+                                                    string orderType,
+                                                    string orderBy,
+                                                    int pagesize = 5,
+                                                    int p = 1)
         {
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
@@ -47,6 +63,10 @@ namespace EmployeeRequest.Pages.EmployAccept
             currentFilter = search;
             currentprim = prim;
             currentfinal = final;
+            currentpagesize = pagesize;
+            currentpage = p;
+            currentorderBy = orderBy;
+            currentorderType = orderType;
 
             //duplicate
             if (!string.IsNullOrEmpty(duplicate))
@@ -110,6 +130,108 @@ namespace EmployeeRequest.Pages.EmployAccept
                     .Where(a => a.FldEmployeeRequestFinalAcceptionId == 2)
                     .ToList();
             }
+
+            //sort
+            if (!string.IsNullOrEmpty(orderBy)) 
+            {
+                switch (orderBy)
+                {
+                    case "name":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationFirstName).ToList();
+                        }
+                        break;
+                    case "regdate":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToList();
+                        }
+                        break;
+                    case "primacc":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.FldEmployeeRequestUserPrimaryAccepterId).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.FldEmployeeRequestUserPrimaryAccepterId).ToList();
+                        }
+                        break;
+                    case "finalacc":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.FldEmployeeRequestUserFinalAccepterId).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.FldEmployeeRequestUserFinalAccepterId).ToList();
+                        }
+                        break;
+                    case "primaccdate":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.FldEmployeeRequestEmployeePrimaryAcceptionDate).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.FldEmployeeRequestEmployeePrimaryAcceptionDate).ToList();
+                        }
+                        break;
+                    case "finalaccdate":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.FldEmployeeRequestEmployeeFinalAcceptionDate).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.FldEmployeeRequestEmployeeFinalAcceptionDate).ToList();
+                        }
+                        break;
+                    case "interstartdate":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.FldEmployeeRequestEmployeeInterviewStartDate).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.FldEmployeeRequestEmployeeInterviewStartDate).ToList();
+                        }
+                        break;
+                    case "interenddate":
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.FldEmployeeRequestEmployeeInterviewEndDate).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.FldEmployeeRequestEmployeeInterviewEndDate).ToList();
+                        }
+                        break;
+                    default:
+                        if (orderType == "desc")
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderByDescending(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToList();
+                        }
+                        else
+                        {
+                            TblEmployeeRequestEmployee = TblEmployeeRequestEmployee.OrderBy(a => a.TblEmployeeRequestPageTimeLogs.FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToList();
+                        }
+                        break;
+                }
+            }
+
+            // paging
+            Pager = new Pager(TblEmployeeRequestEmployee.Count(), p, pagesize);
+            Items = TblEmployeeRequestEmployee.Skip((Pager.CurrentPage - 1) * Pager.PageSize).Take(Pager.PageSize);
 
             return Page();
         }
@@ -215,7 +337,6 @@ namespace EmployeeRequest.Pages.EmployAccept
             return RedirectToPage("Index");
         }
 
-
         public IActionResult OnGetRevert(string id)
         {
             TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
@@ -231,6 +352,16 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = null;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptDescription = null;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryRejectDescription = null;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeRejectFromUserDescription = null;
+                if (TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId != null)
+                {
+                    TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = null;
+                    TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = null;
+                    TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = null;
+                    TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalRejectDescription = null;
+                    TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptDescription = null;
+                }
+
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }
@@ -249,6 +380,29 @@ namespace EmployeeRequest.Pages.EmployAccept
                 }
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeInterviewEndDate = null;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeInterviewStartDate = null;
+                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+        }
+
+        public IActionResult OnGetRejectFromUser(string id, string description)
+        {
+            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
+            if (TblEmployeeRequestEmployee2 != null)
+            {
+                string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
+                TblEmployeeRequestEmployee2.FldEmployeeRequestPrimaryAcceptionId = 2;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeePrimaryAcceptionDate = DateTime.Now;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestUserPrimaryAccepterId = Int64.Parse(uid);
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeRejectFromUserDescription = description;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestFinalAcceptionId = 2;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = DateTime.Now;
+                TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = Int64.Parse(uid);
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
                 _context.SaveChanges();
             }

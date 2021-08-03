@@ -81,21 +81,22 @@
 
 
     <div class="row">
-        <div class="col-12 bg-dark text-white rounded">
-            متقضی دارای بیش از یک اطلاعات ثبت نامی می‌باشد
-            @if (Model.repeatNo > 1)
-            {
-                <a asp-page="./Index" asp-route-duplicate="@Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode">مشاهده همه</a>
-            }
-            else if (Model.repeatNo2 > 1)
-            {
-                <a asp-page="./Index" asp-route-duplicate="@Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo">مشاهده همه</a>
-            }
-            else if (Model.repeatNo3 > 1)
-            {
-                <a asp-page="./Index" asp-route-duplicate="@Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode">مشاهده همه</a>
-            }
-
+        <div class="col-12">
+            <div class="alert alert-warning">
+                متقضی دارای بیش از یک اطلاعات ثبت نامی می‌باشد
+                @if (Model.repeatNo > 1)
+                {
+                    <a asp-page="./Index" asp-route-duplicate="@Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode">مشاهده همه</a>
+                }
+                else if (Model.repeatNo2 > 1)
+                {
+                    <a asp-page="./Index" asp-route-duplicate="@Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo">مشاهده همه</a>
+                }
+                else if (Model.repeatNo3 > 1)
+                {
+                    <a asp-page="./Index" asp-route-duplicate="@Model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode">مشاهده همه</a>
+                }
+            </div>
         </div>
     </div>
     <br />

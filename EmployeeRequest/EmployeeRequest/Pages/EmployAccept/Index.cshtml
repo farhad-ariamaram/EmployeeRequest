@@ -22,15 +22,74 @@
         </div>
         <div class="card">
             <div class="card-body">
+                <h5 class="card-title">صفحه بندی</h5>
+                <p class="card-text">
+                    <div class="form-group">
+                        <label for="inputGroupSelect01">تعداد در صفحه</label>
+                        <select class="form-select w-100" name="pagesize" id="inputGroupSelect01" asp-for="@Model.currentpagesize">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputGroupSelect01">مرتب سازی بر اساس</label>
+                        <select class="form-select w-100" name="orderBy" id="inputGroupSelect01" asp-for="@Model.currentorderBy">
+                            <option value="name">نام و نام خانوادگی</option>
+                            <option value="regdate">تاریخ ثبت نام</option>
+                            <option value="primacc">تایید کننده اولیه</option>
+                            <option value="finalacc">تایید کننده نهایی</option>
+                            <option value="primaccdate">تاریخ تایید اولیه</option>
+                            <option value="finalaccdate">تاریخ تایید نهایی</option>
+                            <option value="interstartdate">تاریخ شروع مصاحبه</option>
+                            <option value="interenddate">تاریخ پایان مصاحبه</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputGroupSelect01">مرتب سازی به صورت</label>
+                        <select class="form-select w-100" name="orderType" id="inputGroupSelect01" asp-for="@Model.currentorderType">
+                            <option value="asc">صعودی</option>
+                            <option value="desc">نزولی</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputGroupSelect01">
+                            موارد &nbsp;
+                            @(Model.currentpagesize*(Model.currentpage-1)+1) تا
+
+                            @if (Model.currentpagesize * (Model.currentpage - 1) + Model.currentpagesize > Model.TblEmployeeRequestEmployee.Count)
+                            {
+                                @Model.TblEmployeeRequestEmployee.Count
+                            }
+                            else
+                            {
+                                @(Model.currentpagesize * (Model.currentpage - 1) + Model.currentpagesize)
+                            }
+
+                            &nbsp; از &nbsp;
+                            @(Model.TblEmployeeRequestEmployee.Count)
+                        </label>
+                    </div>
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
                 <h5 class="card-title">وضعیت اولیه</h5>
                 <p class="card-text">
-                    <input type="radio" id="prim1" name="prim" value="0" @(Model.currentprim=="0"?"checked":"")>
+                    <input type="radio" id="prim1" name="prim" value="0" @(Model.currentprim == "0" ? "checked" : "")>
                     <label for="prim1">نامشخص</label><br>
-                    <input type="radio" id="prim2" name="prim" value="1" @(Model.currentprim=="1"?"checked":"")>
+                    <input type="radio" id="prim2" name="prim" value="1" @(Model.currentprim == "1" ? "checked" : "")>
                     <label for="prim2">تایید شده</label><br>
-                    <input type="radio" id="prim3" name="prim" value="2" @(Model.currentprim=="2"?"checked":"")>
+                    <input type="radio" id="prim3" name="prim" value="2" @(Model.currentprim == "2" ? "checked" : "")>
                     <label for="prim3">رد شده</label><br>
-                    <input type="radio" id="prim4" name="prim" value="3" @((Model.currentprim!="0")&&(Model.currentprim!="1")&&(Model.currentprim!="2")?"checked":"")>
+                    <input type="radio" id="prim4" name="prim" value="3" @((Model.currentprim != "0") && (Model.currentprim != "1") && (Model.currentprim != "2") ? "checked" : "")>
                     <label for="prim4">همه</label><br><br>
                 </p>
             </div>
@@ -39,13 +98,13 @@
             <div class="card-body">
                 <h5 class="card-title">وضعیت نهایی</h5>
                 <p class="card-text">
-                    <input type="radio" id="final1" name="final" value="0" @(Model.currentfinal=="0"?"checked":"")>
+                    <input type="radio" id="final1" name="final" value="0" @(Model.currentfinal == "0" ? "checked" : "")>
                     <label for="final1">نامشخص</label><br>
-                    <input type="radio" id="final2" name="final" value="1" @(Model.currentfinal=="1"?"checked":"")>
+                    <input type="radio" id="final2" name="final" value="1" @(Model.currentfinal == "1" ? "checked" : "")>
                     <label for="final2">تایید شده</label><br>
-                    <input type="radio" id="final3" name="final" value="2" @(Model.currentfinal=="2"?"checked":"")>
+                    <input type="radio" id="final3" name="final" value="2" @(Model.currentfinal == "2" ? "checked" : "")>
                     <label for="final3">رد شده</label><br>
-                    <input type="radio" id="final4" name="final" value="3" @((Model.currentfinal!="0")&&(Model.currentfinal!="1")&&(Model.currentfinal!="2")?"checked":"")>
+                    <input type="radio" id="final4" name="final" value="3" @((Model.currentfinal != "0") && (Model.currentfinal != "1") && (Model.currentfinal != "2") ? "checked" : "")>
                     <label for="final4">همه</label><br><br>
                 </p>
             </div>
@@ -61,6 +120,7 @@
 <table class="table table-striped table-responsive">
     <thead>
         <tr>
+            <th></th>
             <th>
                 نام و نام خانوادگی
             </th>
@@ -100,25 +160,28 @@
     <tbody>
         @try
         {
-            @foreach (var item in Model.TblEmployeeRequestEmployee)
+            @foreach (var item in Model.Items.Select((value, i) => new { i, value }))
             {
                 <tr>
                     <td>
-                        @item.TblEmployeeRequestPrimaryInformations.FirstOrDefault(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FldEmployeeRequestPrimaryInformationFirstName
+                        @(item.i+(Model.currentpagesize*(Model.currentpage-1))+1)
+                    </td>
+                    <td>
+                        @item.value.TblEmployeeRequestPrimaryInformations.FirstOrDefault(a => a.FldEmployeeRequestEmployeeId == item.value.FldEmployeeRequestEmployeeId).FldEmployeeRequestPrimaryInformationFirstName
                         <br />
-                        @item.TblEmployeeRequestPrimaryInformations.FirstOrDefault(a => a.FldEmployeeRequestEmployeeId == item.FldEmployeeRequestEmployeeId).FldEmployeeRequestPrimaryInformationLastName
+                        @item.value.TblEmployeeRequestPrimaryInformations.FirstOrDefault(a => a.FldEmployeeRequestEmployeeId == item.value.FldEmployeeRequestEmployeeId).FldEmployeeRequestPrimaryInformationLastName
                     </td>
                     <td>
-                        @item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.toPersianDate()
+                        @item.value.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.toPersianDate()
                         &nbsp;
-                        @(((DateTime)item.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToString("HH:mm"))
+                        @(((DateTime)item.value.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime).ToString("HH:mm"))
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
+                        @if (item.value.FldEmployeeRequestPrimaryAcceptionId == 3)
                         {
                             <span class="badge badge-success">تایید شده</span>
                         }
-                        else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
+                        else if (item.value.FldEmployeeRequestPrimaryAcceptionId == 2)
                         {
                             <span class="badge badge-danger">رد شده</span>
                         }
@@ -128,97 +191,109 @@
                         }
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestUserPrimaryAccepterId != null)
+                        @if (item.value.FldEmployeeRequestUserPrimaryAccepterId != null)
                         {
-                            @item.FldEmployeeRequestUserPrimaryAccepter.FldEmployeeRequestUserUsername
+                            @item.value.FldEmployeeRequestUserPrimaryAccepter.FldEmployeeRequestUserUsername
                         }
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate != null)
+                        @if (item.value.FldEmployeeRequestEmployeePrimaryAcceptionDate != null)
                         {
-                            @item.FldEmployeeRequestEmployeePrimaryAcceptionDate.toPersianDate()
+                            @item.value.FldEmployeeRequestEmployeePrimaryAcceptionDate.toPersianDate()
                         }
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                        @if (item.value.FldEmployeeRequestFinalAcceptionId == 1)
                         {
                             <span class="badge badge-success">تایید شده</span>
                         }
-                        else if (item.FldEmployeeRequestFinalAcceptionId == 2)
+                        else if (item.value.FldEmployeeRequestFinalAcceptionId == 2)
                         {
                             <span class="badge badge-danger">رد شده</span>
                         }
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestUserFinalAccepterId != null)
+                        @if (item.value.FldEmployeeRequestUserFinalAccepterId != null)
                         {
-                            @item.FldEmployeeRequestUserFinalAccepter.FldEmployeeRequestUserUsername
+                            @item.value.FldEmployeeRequestUserFinalAccepter.FldEmployeeRequestUserUsername
                         }
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestEmployeeFinalAcceptionDate != null)
+                        @if (item.value.FldEmployeeRequestEmployeeFinalAcceptionDate != null)
                         {
-                            @item.FldEmployeeRequestEmployeeFinalAcceptionDate.toPersianDate()
+                            @item.value.FldEmployeeRequestEmployeeFinalAcceptionDate.toPersianDate()
                         }
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
+                        @if (item.value.FldEmployeeRequestEmployeeMaxPoint != null)
                         {
 
-                            @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeResultPoint) <br />
+                            @Html.DisplayFor(modelItem => item.value.FldEmployeeRequestEmployeeResultPoint) <br />
                             <i>از</i> <br />
-                            @Html.DisplayFor(modelItem => item.FldEmployeeRequestEmployeeMaxPoint)
+                            @Html.DisplayFor(modelItem => item.value.FldEmployeeRequestEmployeeMaxPoint)
                         }
 
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestEmployeeInterviewStartDate != null)
+                        @if (item.value.FldEmployeeRequestEmployeeInterviewStartDate != null)
                         {
-                            @item.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewStartDate.ToString().Split(' ')[1]
+                            @item.value.FldEmployeeRequestEmployeeInterviewStartDate.toPersianDate() <br /> @item.value.FldEmployeeRequestEmployeeInterviewStartDate.ToString().Split(' ')[1]
                         }
                     </td>
                     <td>
-                        @if (item.FldEmployeeRequestEmployeeInterviewEndDate != null)
+                        @if (item.value.FldEmployeeRequestEmployeeInterviewEndDate != null)
                         {
-                            @item.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate() <br /> @item.FldEmployeeRequestEmployeeInterviewEndDate.ToString().Split(' ')[1]
+                            @item.value.FldEmployeeRequestEmployeeInterviewEndDate.toPersianDate() <br /> @item.value.FldEmployeeRequestEmployeeInterviewEndDate.ToString().Split(' ')[1]
                         }
                     </td>
                     <td>
+
+                        @*رد از طرف متقضی*@
+                        @if (item.value.FldEmployeeRequestEmployeeRejectFromUserDescription == null)
+                        {
+                            <a href="#" class="btn btn-danger w-100" onclick="AskRejectFromUser('@item.value.FldEmployeeRequestEmployeeId');">رد از طرف متقضی</a>
+                        }
+                        else
+                        {
+                            ViewBag.UDes = item.value.FldEmployeeRequestEmployeeRejectFromUserDescription;
+                            <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.UDes')">توضیحات رد از طرف متقضی</a>
+                        }
+
 
                         @*تایید اولیه*@
-                        @if (item.FldEmployeeRequestEmployeePrimaryAcceptionDate == null)
+                        @if (item.value.FldEmployeeRequestEmployeePrimaryAcceptionDate == null)
                         {
-                            <a href="#" class="btn btn-success w-100" onclick="AskAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله اولیه</a>
-                            <a href="#" class="btn btn-danger w-100" onclick="AskDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله اولیه</a>
+                            <a href="#" class="btn btn-success w-100" onclick="AskAccept('@item.value.FldEmployeeRequestEmployeeId');">تایید مرحله اولیه</a>
+                            <a href="#" class="btn btn-danger w-100" onclick="AskDeny('@item.value.FldEmployeeRequestEmployeeId');">رد مرحله اولیه</a>
                         }
-                        else if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
+                        else if (item.value.FldEmployeeRequestPrimaryAcceptionId == 3)
                         {
                             //زمان مصاحبه
-                            if (item.FldEmployeeRequestEmployeeInterviewStartDate == null)
+                            if (item.value.FldEmployeeRequestEmployeeInterviewStartDate == null)
                             {
-                                <a asp-page="SetInterview" asp-route-id="@item.FldEmployeeRequestEmployeeId" class="btn btn-success w-100">تعیین زمان مصاحبه</a>
-                                <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
+                                <a asp-page="SetInterview" asp-route-id="@item.value.FldEmployeeRequestEmployeeId" class="btn btn-success w-100">تعیین زمان مصاحبه</a>
+                                <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.value.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
                             }
                             else
                             {
                                 //تایید نهایی
-                                if (item.FldEmployeeRequestFinalAcceptionId == null)
+                                if (item.value.FldEmployeeRequestFinalAcceptionId == null)
                                 {
-                                    <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
-                                    <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
-                                    <a href="#" class="btn btn-info w-100" onclick="AskIRevert('@item.FldEmployeeRequestEmployeeId');">حذف زمان مصاحبه</a>
+                                    <a href="#" class="btn btn-success w-100" onclick="AskFAccept('@item.value.FldEmployeeRequestEmployeeId');">تایید مرحله نهایی</a>
+                                    <a href="#" class="btn btn-danger w-100" onclick="AskFDeny('@item.value.FldEmployeeRequestEmployeeId');">رد مرحله نهایی</a>
+                                    <a href="#" class="btn btn-info w-100" onclick="AskIRevert('@item.value.FldEmployeeRequestEmployeeId');">حذف زمان مصاحبه</a>
                                 }
                                 else
                                 {
-                                    if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                                    if (item.value.FldEmployeeRequestFinalAcceptionId == 1)
                                     {
                                         <span class="badge badge-success">کاربر تایید نهایی شده</span>
-                                        <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
+                                        <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.value.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
                                     }
                                     else
                                     {
                                         <span class="badge badge-danger">کاربر مردود شده</span>
-                                        <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از عدم تایید</a>
+                                        <a href="#" class="btn btn-primary w-100" onclick="AskFRevert('@item.value.FldEmployeeRequestEmployeeId');">برگشت از عدم تایید</a>
                                     }
                                 }
                             }
@@ -227,43 +302,43 @@
                         else
                         {
                             <span class="badge badge-danger">کاربر مردود شده</span>
-                            <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
+                            <a href="#" class="btn btn-info w-100" onclick="AskRevert('@item.value.FldEmployeeRequestEmployeeId');">برگشت از تایید</a>
                         }
 
-                        @if (item.FldEmployeeRequestEmployeeMaxPoint != null)
+                        @if (item.value.FldEmployeeRequestEmployeeMaxPoint != null)
                         {
-                            <a asp-page="Scores" asp-route-id="@item.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=500,toolbar=1,resizable=1'); return false;">مشاهده امتیاز ها</a>
+                            <a asp-page="Scores" asp-route-id="@item.value.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=500,toolbar=1,resizable=1'); return false;">مشاهده امتیاز ها</a>
                         }
 
                         <br />
-                        @if (item.FldEmployeeRequestPrimaryAcceptionId == 3)
+                        @if (item.value.FldEmployeeRequestPrimaryAcceptionId == 3)
                         {
-                            ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryAcceptDescription;
+                            ViewBag.PDes = item.value.FldEmployeeRequestEmployeePrimaryAcceptDescription;
                         }
-                        else if (item.FldEmployeeRequestPrimaryAcceptionId == 2)
+                        else if (item.value.FldEmployeeRequestPrimaryAcceptionId == 2)
                         {
-                            ViewBag.PDes = item.FldEmployeeRequestEmployeePrimaryRejectDescription;
+                            ViewBag.PDes = item.value.FldEmployeeRequestEmployeePrimaryRejectDescription;
                         }
-                        @if ((item.FldEmployeeRequestEmployeePrimaryAcceptDescription != null) || (item.FldEmployeeRequestEmployeePrimaryRejectDescription != null))
+                        @if ((item.value.FldEmployeeRequestEmployeePrimaryAcceptDescription != null) || (item.value.FldEmployeeRequestEmployeePrimaryRejectDescription != null))
                         {
                             <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.PDes')">توضیحات وضعیت اولیه</a>
                         }
 
 
-                        @if (item.FldEmployeeRequestFinalAcceptionId == 1)
+                        @if (item.value.FldEmployeeRequestFinalAcceptionId == 1)
                         {
-                            ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalAcceptDescription;
+                            ViewBag.FDes = item.value.FldEmployeeRequestEmployeeFinalAcceptDescription;
                         }
-                        else if (item.FldEmployeeRequestFinalAcceptionId == 2)
+                        else if (item.value.FldEmployeeRequestFinalAcceptionId == 2)
                         {
-                            ViewBag.FDes = item.FldEmployeeRequestEmployeeFinalRejectDescription;
+                            ViewBag.FDes = item.value.FldEmployeeRequestEmployeeFinalRejectDescription;
                         }
-                        @if ((item.FldEmployeeRequestEmployeeFinalAcceptDescription != null) || (item.FldEmployeeRequestEmployeeFinalRejectDescription != null))
+                        @if ((item.value.FldEmployeeRequestEmployeeFinalAcceptDescription != null) || (item.value.FldEmployeeRequestEmployeeFinalRejectDescription != null))
                         {
                             <a class="btn btn-outline-info" href="#" onclick="showDescriptions('@ViewBag.FDes')">توضیحات وضعیت نهایی</a>
                         }
                         <br />
-                        <a asp-page="Detail" asp-route-id="@item.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=600,toolbar=1,resizable=1'); return false;">مشاهده جزئیات متقضی</a>
+                        <a asp-page="Detail" asp-route-id="@item.value.FldEmployeeRequestEmployeeId" onclick="window.open(this.href, 'mywin','left=20,top=20,width=800,height=600,toolbar=1,resizable=1'); return false;">مشاهده جزئیات متقضی</a>
 
                     </td>
 
@@ -279,6 +354,40 @@
     </tbody>
 </table>
 
+@if (Model.Pager.Pages.Any())
+{
+    <nav class="table-responsive">
+        <ul class="pagination justify-content-center d-flex flex-wrap">
+            @if (Model.Pager.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-page="./Index" asp-route-orderType="@Model.currentorderType" asp-route-orderBy="@Model.currentorderBy" asp-route-search="@Model.currentFilter" asp-route-prim="@Model.currentprim" asp-route-final="@Model.currentfinal" asp-route-pagesize="@Model.currentpagesize">اول</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-page="./Index" asp-route-orderType="@Model.currentorderType" asp-route-orderBy="@Model.currentorderBy" asp-route-search="@Model.currentFilter" asp-route-prim="@Model.currentprim" asp-route-final="@Model.currentfinal" asp-route-pagesize="@Model.currentpagesize" asp-route-p="@(Model.Pager.CurrentPage - 1)">قبلی</a>
+                </li>
+            }
+
+            @foreach (var p in Model.Pager.Pages)
+            {
+                <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-page="./Index" asp-route-orderType="@Model.currentorderType" asp-route-orderBy="@Model.currentorderBy" asp-route-search="@Model.currentFilter" asp-route-prim="@Model.currentprim" asp-route-final="@Model.currentfinal" asp-route-pagesize="@Model.currentpagesize" asp-route-p="@p">@p</a>
+                </li>
+            }
+
+            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-page="./Index" asp-route-orderType="@Model.currentorderType" asp-route-orderBy="@Model.currentorderBy" asp-route-search="@Model.currentFilter" asp-route-prim="@Model.currentprim" asp-route-final="@Model.currentfinal" asp-route-pagesize="@Model.currentpagesize" asp-route-p="@(Model.Pager.CurrentPage + 1)">بعدی</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-page="./Index" asp-route-orderType="@Model.currentorderType" asp-route-orderBy="@Model.currentorderBy" asp-route-search="@Model.currentFilter" asp-route-prim="@Model.currentprim" asp-route-final="@Model.currentfinal" asp-route-pagesize="@Model.currentpagesize" asp-route-p="@(Model.Pager.TotalPages)">آخر</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
+
 @section Botton {
     <a class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
 }
@@ -291,6 +400,30 @@
             Swal.fire(desc, '', '')
         }
 
+        function AskRejectFromUser(id) {
+            Swal.fire({
+                title: 'کاربر رد شود؟',
+                showDenyButton: true,
+                confirmButtonText: `بله`,
+                denyButtonText: `خیر`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'توضیحات رد از طرف متقضی',
+                        input: 'textarea'
+                    }).then(function (description) {
+                        if (description.value) {
+                            var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.open("GET", "?id=" + id + "&description=" + description.value + "&handler=RejectFromUser", false);
+                            xmlHttp.send(null);
+                            Swal.fire('درخواست تایید شد', '', 'success').then(() => {
+                                location.reload();
+                            })
+                        }
+                    })
+                }
+            });
+        }
 
         function AskAccept(id) {
             Swal.fire({

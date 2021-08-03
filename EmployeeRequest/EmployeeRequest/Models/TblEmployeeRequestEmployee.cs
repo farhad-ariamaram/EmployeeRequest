@@ -47,6 +47,7 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestEmployeeFinalRejectDescription { get; set; }
         public string FldEmployeeRequestEmployeePrimaryAcceptDescription { get; set; }
         public string FldEmployeeRequestEmployeePrimaryRejectDescription { get; set; }
+        public string FldEmployeeRequestEmployeeRejectFromUserDescription { get; set; }
 
         public virtual TblEmployeeRequestFinalAcception FldEmployeeRequestFinalAcception { get; set; }
         public virtual TblEmployeeRequestPagesSequence FldEmployeeRequestPagesSequence { get; set; }

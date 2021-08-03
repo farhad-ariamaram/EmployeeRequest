@@ -385,6 +385,8 @@ namespace EmployeeRequest.Models
 
                 entity.Property(e => e.FldEmployeeRequestEmployeePrimaryRejectDescription).HasColumnName("Fld_EmployeeRequest_Employee_PrimaryRejectDescription");
 
+                entity.Property(e => e.FldEmployeeRequestEmployeeRejectFromUserDescription).HasColumnName("Fld_EmployeeRequest_Employee_RejectFromUserDescription");
+
                 entity.Property(e => e.FldEmployeeRequestEmployeeResultPoint).HasColumnName("Fld_EmployeeRequest_Employee_ResultPoint");
 
                 entity.Property(e => e.FldEmployeeRequestEmployeeUsername)
@@ -731,7 +733,9 @@ namespace EmployeeRequest.Models
 
                 entity.ToTable("Tbl_EmployeeRequest_Jobs");
 
-                entity.Property(e => e.FldEmployeeRequestJobsId).HasColumnName("Fld_EmployeeRequest_Jobs_Id");
+                entity.Property(e => e.FldEmployeeRequestJobsId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_EmployeeRequest_Jobs_Id");
 
                 entity.Property(e => e.FldEmployeeRequestJobsDescription)
                     .HasMaxLength(1000)
@@ -1113,11 +1117,11 @@ namespace EmployeeRequest.Models
                     .HasColumnName("Fld_EmployeeRequest_User_Id");
 
                 entity.Property(e => e.FldEmployeeRequestUserName)
-                    .HasMaxLength(100)
+                    .HasMaxLength(3000)
                     .HasColumnName("Fld_EmployeeRequest_User_Name");
 
                 entity.Property(e => e.FldEmployeeRequestUserPassword)
-                    .HasMaxLength(50)
+                    .HasMaxLength(1000)
                     .HasColumnName("Fld_EmployeeRequest_User_Password");
 
                 entity.Property(e => e.FldEmployeeRequestUserUsername)
