@@ -1391,6 +1391,10 @@ namespace EmployeeRequest.Models
                     .HasColumnName("Fld_EmployeeRequest_UserSetting_IsShowRed")
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.FldEmployeeRequestUserSettingPageSize)
+                    .HasColumnName("Fld_EmployeeRequest_UserSetting_PageSize")
+                    .HasDefaultValueSql("((5))");
+
                 entity.HasOne(d => d.FldEmployeeRequestUser)
                     .WithMany(p => p.TblEmployeeRequestUserSettings)
                     .HasForeignKey(d => d.FldEmployeeRequestUserId)

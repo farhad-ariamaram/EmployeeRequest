@@ -40,7 +40,7 @@ namespace EmployeeRequest.Pages.EmployAccept
                                                     string final,
                                                     string orderType,
                                                     string orderBy,
-                                                    int pagesize = 5,
+                                                    string pagesize,
                                                     int p = 1)
         {
             string uid = HttpContext.Session.GetString("uid");
@@ -63,19 +63,60 @@ namespace EmployeeRequest.Pages.EmployAccept
             currentFilter = search;
             currentprim = prim;
             currentfinal = final;
-            currentpagesize = pagesize;
             currentpage = p;
             currentorderBy = orderBy;
             currentorderType = orderType;
+
+            //setting & pagesize
+            if (!string.IsNullOrEmpty(pagesize))
+            {
+                currentpagesize = int.Parse(pagesize);
+                if (await _context.TblEmployeeRequestUserSettings.Where(a => a.FldEmployeeRequestUserId == Int64.Parse(uid)).AnyAsync())
+                {
+                    var t = await _context.TblEmployeeRequestUserSettings.Where(a => a.FldEmployeeRequestUserId == Int64.Parse(uid)).FirstOrDefaultAsync();
+                    t.FldEmployeeRequestUserSettingPageSize = int.Parse(pagesize);
+                    _context.Update(t);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    await _context.TblEmployeeRequestUserSettings.AddAsync(new TblEmployeeRequestUserSetting
+                    {
+                        FldEmployeeRequestUserId = Int64.Parse(uid),
+                        FldEmployeeRequestUserSettingPageSize = int.Parse(pagesize)
+                    });
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            else
+            {
+                if (await _context.TblEmployeeRequestUserSettings.Where(a => a.FldEmployeeRequestUserId == Int64.Parse(uid)).AnyAsync())
+                {
+                    var t = await _context.TblEmployeeRequestUserSettings.Where(a => a.FldEmployeeRequestUserId == Int64.Parse(uid)).FirstOrDefaultAsync();
+                    currentpagesize = t.FldEmployeeRequestUserSettingPageSize;
+                }
+                else
+                {
+                    await _context.TblEmployeeRequestUserSettings.AddAsync(new TblEmployeeRequestUserSetting
+                    {
+                        FldEmployeeRequestUserId = Int64.Parse(uid),
+                        FldEmployeeRequestUserSettingPageSize = 5
+                    });
+
+                    await _context.SaveChangesAsync();
+                    currentpagesize = 5;
+                }
+            }
 
             //duplicate
             if (!string.IsNullOrEmpty(duplicate))
             {
                 TblEmployeeRequestEmployee = TblEmployeeRequestEmployee
                     .Where(a =>
-                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode==duplicate ||
-                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo==duplicate ||
-                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode==duplicate)
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationNationalCode == duplicate ||
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPhoneNo == duplicate ||
+                        a.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationPostalCode == duplicate)
                     .ToList();
             }
 
@@ -132,7 +173,7 @@ namespace EmployeeRequest.Pages.EmployAccept
             }
 
             //sort
-            if (!string.IsNullOrEmpty(orderBy)) 
+            if (!string.IsNullOrEmpty(orderBy))
             {
                 switch (orderBy)
                 {
@@ -230,7 +271,7 @@ namespace EmployeeRequest.Pages.EmployAccept
             }
 
             // paging
-            Pager = new Pager(TblEmployeeRequestEmployee.Count(), p, pagesize);
+            Pager = new Pager(TblEmployeeRequestEmployee.Count(), p, currentpagesize);
             Items = TblEmployeeRequestEmployee.Skip((Pager.CurrentPage - 1) * Pager.PageSize).Take(Pager.PageSize);
 
             return Page();
