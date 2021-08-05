@@ -9,7 +9,7 @@
 <h4>تایید نیرو</h4>
 <br />
 
-<form class="w-100" asp-page="./Index" method="get">
+<form id="myForm" class="w-100" asp-page="./Index" method="get">
 
     <div class="row">
         <div class="col-4">
@@ -49,7 +49,7 @@
                     </select>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <div class="row mt-2">
@@ -113,9 +113,6 @@
             </div>
         </div>
     </div>
-
-    <input class="btn btn-primary m-1" type="submit" value="اعمال فیلتر ها" />
-    <a class="btn btn-link" asp-page="./Index">حذف فیلتر ها</a>
 </form>
 
 
@@ -393,7 +390,17 @@
 }
 
 @section Botton {
-    <a class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+<div class="row">
+    <div class="col-4">
+        <a class="btn btn-danger rounded-circle" asp-page="../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+    </div>
+    <div class="col-4">
+        <a class="btn btn-success rounded-circle" onclick="document.getElementById('myForm').submit();" href="#"><i class="fa fa-filter"></i></a>
+    </div>
+    <div class="col-4">
+        <a class="btn btn-danger rounded-circle" asp-page="./Index"><i class="fa fa-filter"></i></a>
+    </div>
+</div>
 }
 
 <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
