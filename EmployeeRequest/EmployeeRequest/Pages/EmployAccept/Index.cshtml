@@ -10,106 +10,110 @@
 <br />
 
 <form class="w-100" asp-page="./Index" method="get">
-    <div class="card-group">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">جستجو</h5>
-                <p class="card-text">
-                    <label for="search">جستجو:</label>
-                    <input class="form-control" type="text" name="search" placeholder="جستجو..." value="@(Model.currentFilter)" />
-                </p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">صفحه بندی</h5>
-                <p class="card-text">
-                    <div class="form-group">
-                        <label for="inputGroupSelect01">تعداد در صفحه</label>
-                        <select class="form-select w-100" name="pagesize" id="inputGroupSelect01" asp-for="@Model.currentpagesize">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="40">40</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputGroupSelect01">مرتب سازی بر اساس</label>
-                        <select class="form-select w-100" name="orderBy" id="inputGroupSelect01" asp-for="@Model.currentorderBy">
-                            <option value="name">نام و نام خانوادگی</option>
-                            <option value="regdate">تاریخ ثبت نام</option>
-                            <option value="primacc">تایید کننده اولیه</option>
-                            <option value="finalacc">تایید کننده نهایی</option>
-                            <option value="primaccdate">تاریخ تایید اولیه</option>
-                            <option value="finalaccdate">تاریخ تایید نهایی</option>
-                            <option value="interstartdate">تاریخ شروع مصاحبه</option>
-                            <option value="interenddate">تاریخ پایان مصاحبه</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputGroupSelect01">مرتب سازی به صورت</label>
-                        <select class="form-select w-100" name="orderType" id="inputGroupSelect01" asp-for="@Model.currentorderType">
-                            <option value="asc">صعودی</option>
-                            <option value="desc">نزولی</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputGroupSelect01">
-                            موارد &nbsp;
-                            @(Model.currentpagesize*(Model.currentpage-1)+1) تا
 
-                            @if (Model.currentpagesize * (Model.currentpage - 1) + Model.currentpagesize > Model.TblEmployeeRequestEmployee.Count)
-                            {
-                                @Model.TblEmployeeRequestEmployee.Count
-                            }
-                            else
-                            {
-                                @(Model.currentpagesize * (Model.currentpage - 1) + Model.currentpagesize)
-                            }
-
-                            &nbsp; از &nbsp;
-                            @(Model.TblEmployeeRequestEmployee.Count)
-                        </label>
-                    </div>
-                </p>
+    <div class="row">
+        <div class="col-4">
+            <input class="form-control" type="text" name="search" placeholder="جستجو..." value="@(Model.currentFilter)" />
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <label data-toggle="tooltip" title="تعداد در صفحه" for="inputGroupSelect01" class="col-1 col-form-label"><i class="fa fa-file"></i></label>
+                <div class="col-11">
+                    <select class="form-select w-100" name="pagesize" id="inputGroupSelect01" asp-for="@Model.currentpagesize">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">وضعیت اولیه</h5>
-                <p class="card-text">
-                    <input type="radio" id="prim1" name="prim" value="0" @(Model.currentprim == "0" ? "checked" : "")>
-                    <label for="prim1">نامشخص</label><br>
-                    <input type="radio" id="prim2" name="prim" value="1" @(Model.currentprim == "1" ? "checked" : "")>
-                    <label for="prim2">تایید شده</label><br>
-                    <input type="radio" id="prim3" name="prim" value="2" @(Model.currentprim == "2" ? "checked" : "")>
-                    <label for="prim3">رد شده</label><br>
-                    <input type="radio" id="prim4" name="prim" value="3" @((Model.currentprim != "0") && (Model.currentprim != "1") && (Model.currentprim != "2") ? "checked" : "")>
-                    <label for="prim4">همه</label><br><br>
-                </p>
+        <div class="col-4">
+            <div class="row">
+                <label data-toggle="tooltip" title="مرتب سازی بر اساس" for="inputGroupSelect02" class="col-sm-1 col-form-label"><i class="fa fa-filter"></i></label>
+                <div class="col-sm-11">
+                    <select class="form-select w-100" name="orderBy" id="inputGroupSelect02" asp-for="@Model.currentorderBy">
+                        <option value="name">نام و نام خانوادگی</option>
+                        <option value="regdate">تاریخ ثبت نام</option>
+                        <option value="primacc">تایید کننده اولیه</option>
+                        <option value="finalacc">تایید کننده نهایی</option>
+                        <option value="primaccdate">تاریخ تایید اولیه</option>
+                        <option value="finalaccdate">تاریخ تایید نهایی</option>
+                        <option value="interstartdate">تاریخ شروع مصاحبه</option>
+                        <option value="interenddate">تاریخ پایان مصاحبه</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <div class="row">
+                <label data-toggle="tooltip" title="مرتب سازی به صورت" for="inputGroupSelect03" class="col-sm-1 col-form-label"><i class="fa fa-sort"></i></label>
+                <div class="col-sm-11">
+                    <select class="form-select w-100" name="orderType" id="inputGroupSelect03" asp-for="@Model.currentorderType">
+                        <option value="asc">صعودی</option>
+                        <option value="desc">نزولی</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">وضعیت نهایی</h5>
-                <p class="card-text">
-                    <input type="radio" id="final1" name="final" value="0" @(Model.currentfinal == "0" ? "checked" : "")>
-                    <label for="final1">نامشخص</label><br>
-                    <input type="radio" id="final2" name="final" value="1" @(Model.currentfinal == "1" ? "checked" : "")>
-                    <label for="final2">تایید شده</label><br>
-                    <input type="radio" id="final3" name="final" value="2" @(Model.currentfinal == "2" ? "checked" : "")>
-                    <label for="final3">رد شده</label><br>
-                    <input type="radio" id="final4" name="final" value="3" @((Model.currentfinal != "0") && (Model.currentfinal != "1") && (Model.currentfinal != "2") ? "checked" : "")>
-                    <label for="final4">همه</label><br><br>
-                </p>
+        <div class="col-4">
+            <div class="row">
+                <label data-toggle="tooltip" title="وضعیت اولیه" for="inputGroupSelect03" class="col-sm-1 col-form-label"><i class="	fa fa-quote-left"></i></label>
+                <div class="col-sm-11">
+                    <select class="form-select w-100" name="final" id="inputGroupSelect05" asp-for="@Model.currentfinal">
+                        <option value="3">همه</option>
+                        <option value="0">نامشخص</option>
+                        <option value="1">تایید شده</option>
+                        <option value="2">رد شده</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <label data-toggle="tooltip" title="وضعیت نهایی" for="inputGroupSelect03" class="col-sm-1 col-form-label"><i class="fa fa-quote-right"></i></label>
+                <div class="col-sm-11">
+                    <select class="form-select w-100" name="prim" id="inputGroupSelect04" asp-for="@Model.currentprim">
+                        <option value="3">همه</option>
+                        <option value="0">نامشخص</option>
+                        <option value="1">تایید شده</option>
+                        <option value="2">رد شده</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <div class="row">
+                <label class="badge badge-info" for="inputGroupSelect01">
+                    موارد &nbsp;
+                    @(Model.currentpagesize*(Model.currentpage-1)+1) تا
+
+                    @if (Model.currentpagesize * (Model.currentpage - 1) + Model.currentpagesize > Model.TblEmployeeRequestEmployee.Count)
+                    {
+                        @Model.TblEmployeeRequestEmployee.Count
+                    }
+                    else
+                    {
+                        @(Model.currentpagesize * (Model.currentpage - 1) + Model.currentpagesize)
+                    }
+
+                    &nbsp; از &nbsp;
+                    @(Model.TblEmployeeRequestEmployee.Count)
+                </label>
+            </div>
+        </div>
+    </div>
+
     <input class="btn btn-primary m-1" type="submit" value="اعمال فیلتر ها" />
     <a class="btn btn-link" asp-page="./Index">حذف فیلتر ها</a>
 </form>
