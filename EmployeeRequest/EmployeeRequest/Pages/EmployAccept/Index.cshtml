@@ -437,6 +437,14 @@
         }
 
         function AskAccept(id) {
+            const inputOptions = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        'جهت مصاحبه حضوری هماهنگ شود': 'جهت مصاحبه حضوری هماهنگ شود'
+                    })
+                }, 1000)
+            })
+
             Swal.fire({
                 title: 'کاربر تایید اولیه شود؟',
                 showDenyButton: true,
@@ -446,7 +454,8 @@
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: 'توضیحات تایید اولیه',
-                        input: 'textarea'
+                        input: 'radio',
+                        inputOptions: inputOptions
                     }).then(function (description) {
                         if (description.value) {
                             var xmlHttp = new XMLHttpRequest();
@@ -455,6 +464,20 @@
                             Swal.fire('درخواست تایید شد', '', 'success').then(() => {
                                 location.reload();
                             })
+                        } else {
+                            Swal.fire({
+                                title: 'توضیحات تایید اولیه',
+                                input: 'textarea'
+                            }).then(function (description) {
+                                if (description.value) {
+                                    var xmlHttp = new XMLHttpRequest();
+                                    xmlHttp.open("GET", "?id=" + id + "&description=" + description.value + "&handler=Accept", false);
+                                    xmlHttp.send(null);
+                                    Swal.fire('درخواست تایید شد', '', 'success').then(() => {
+                                        location.reload();
+                                    })
+                                }
+                            })
                         }
                     })
                 }
@@ -462,6 +485,18 @@
         }
 
         function AskDeny(id) {
+            const inputOptions = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        'متاهل بودن': 'متاهل بودن',
+                        'نامرتبط بودن رشته تحصیلی': 'نامرتبط بودن رشته تحصیلی',
+                        'غیر بومی بودن': 'غیر بومی بودن',
+                        'عدم داشتن سابقه کاری': 'عدم داشتن سابقه کاری',
+                        'عدم داشتن مهارت': 'عدم داشتن مهارت'
+                    })
+                }, 1000)
+            })
+
             Swal.fire({
                 title: 'وضعیت اولیه کاربر رد شود؟',
                 showDenyButton: true,
@@ -471,7 +506,8 @@
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: 'توضیحات عدم تایید اولیه',
-                        input: 'textarea'
+                        input: 'radio',
+                        inputOptions: inputOptions
                     }).then(function (description) {
                         if (description.value) {
                             var xmlHttp = new XMLHttpRequest();
@@ -480,7 +516,22 @@
                             Swal.fire('درخواست رد شد', '', 'success').then(() => {
                                 location.reload();
                             })
+                        } else {
+                            Swal.fire({
+                                title: 'توضیحات عدم تایید اولیه',
+                                input: 'textarea'
+                            }).then(function (description) {
+                                if (description.value) {
+                                    var xmlHttp = new XMLHttpRequest();
+                                    xmlHttp.open("GET", "?id=" + id + "&description=" + description.value + "&handler=Deny", false);
+                                    xmlHttp.send(null);
+                                    Swal.fire('درخواست رد شد', '', 'success').then(() => {
+                                        location.reload();
+                                    })
+                                }
+                            })
                         }
+
                     })
                 }
             });
