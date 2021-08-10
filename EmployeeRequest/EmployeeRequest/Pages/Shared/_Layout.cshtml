@@ -21,11 +21,24 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">سیستم درخواست نیرو</a>
-                @if (HttpContextAccessor.HttpContext.Session.GetString("uid")!=null)
-                {
-                    <a href="http://185.118.152.61:8081/linkg" class="btn btn-primary" target="_blank">ایجاد لینک</a>
-                }
+                <div class="row">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">سیستم درخواست نیرو</a>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("uid") != null)
+                    {
+                        <a href="http://185.118.152.61:8081/linkg" class="btn btn-primary ml-3" target="_blank">ایجاد لینک</a>
+                    }
+                    <div class="ml-4">
+                        سرور
+                        <div id="serok" class="rounded-circle bg-success" style="width:20px;height:20px"></div>
+                        <div id="serno" class="rounded-circle bg-danger" style="width:20px;height:20px"></div>
+                    </div>
+                    <div class="ml-4">
+                        اینترنت
+                        <div id="netok" class="rounded-circle bg-success" style="width:20px;height:20px"></div>
+                        <div id="netno" class="rounded-circle bg-danger" style="width:20px;height:20px"></div>
+                    </div>
+
+                </div>
             </div>
         </nav>
     </header>
@@ -53,5 +66,66 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        window.addEventListener('load', (event) => {
+            $("#netok").hide();
+            $("#netno").hide();
+            $("#serok").hide();
+            $("#serno").hide();
+
+            fetch('https://google.com', {
+                mode: 'no-cors',
+                method: "get"
+            }).then(function () {
+                $("#netok").show();
+                $("#netno").hide();
+            }).catch(function () {
+                $("#netok").hide();
+                $("#netno").show();
+            });
+
+
+            fetch("http://185.118.152.61/", {
+                mode: 'no-cors',
+                method: "get"
+            })
+                .then(function () {
+                    $("#serok").show();
+                    $("#serno").hide();
+                })
+                .catch(function () {
+                    $("#serok").hide();
+                    $("#serno").show();
+                });
+
+        });
+
+        setInterval(function () {
+            fetch('https://google.com', {
+                mode: 'no-cors',
+                method: "get"
+            }).then(function () {
+                $("#netok").show();
+                $("#netno").hide();
+            }).catch(function () {
+                $("#netok").hide();
+                $("#netno").show();
+            });
+
+            fetch("http://185.118.152.61/", {
+                mode: 'no-cors',
+                method: "get"
+            })
+                .then(function () {
+                    $("#serok").show();
+                    $("#serno").hide();
+                })
+                .catch(function () {
+                    $("#serok").hide();
+                    $("#serno").show();
+                });
+        }, 15000);
+    </script>
 </body>
 </html>
