@@ -17,6 +17,7 @@ namespace EmployeeRequest.Models
         {
         }
 
+        public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<PayDeanery> PayDeaneries { get; set; }
         public virtual DbSet<PayDiploma> PayDiplomas { get; set; }
         public virtual DbSet<PayEducation> PayEducations { get; set; }
@@ -75,6 +76,17 @@ namespace EmployeeRequest.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Persian_100_CI_AS");
+
+            modelBuilder.Entity<Log>(entity =>
+            {
+                entity.ToTable("Log");
+
+                entity.Property(e => e.DateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Type)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
 
             modelBuilder.Entity<PayDeanery>(entity =>
             {

@@ -200,6 +200,16 @@ namespace EmployeeRequest.Pages
 
             //return RedirectToPage("Panel/Index");
         }
+
+        public async Task OnGetLogAsync(string type)
+        {
+            await _db.Logs.AddAsync(new Log
+            {
+                DateTime = DateTime.Now,
+                Type = type
+            });
+            await _db.SaveChangesAsync();
+        }
     }
 
     public class LoginModel

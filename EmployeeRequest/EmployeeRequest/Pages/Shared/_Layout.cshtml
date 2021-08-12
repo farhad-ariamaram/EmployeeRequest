@@ -67,8 +67,8 @@
 
     @RenderSection("Scripts", required: false)
 
-    <script>
-        window.addEventListener('load', (event) => {
+<script>
+    window.addEventListener('load', (event) => {
             $("#netok").hide();
             $("#netno").hide();
             $("#serok").hide();
@@ -85,47 +85,56 @@
                 $("#netno").show();
             });
 
-
             fetch("http://185.118.152.61/", {
-                mode: 'no-cors',
-                method: "get"
-            })
-                .then(function () {
-                    $("#serok").show();
-                    $("#serno").hide();
-                })
-                .catch(function () {
-                    $("#serok").hide();
-                    $("#serno").show();
-                });
-
-        });
-
-        setInterval(function () {
-            fetch('https://google.com', {
                 mode: 'no-cors',
                 method: "get"
             }).then(function () {
-                $("#netok").show();
-                $("#netno").hide();
+                $("#serok").show();
+                $("#serno").hide();
             }).catch(function () {
-                $("#netok").hide();
-                $("#netno").show();
+                $("#serok").hide();
+                $("#serno").show();
             });
+        });
 
+    var t = 0;
+    setInterval(function () {
+        var flagstatus = true;
+
+        fetch('https://google.com', {
+            mode: 'no-cors',
+            method: "get"
+        }).then(function () {
+            $("#netok").show();
+            $("#netno").hide();
+        }).catch(function () {
+            flagstatus = false;
+            if (t > 90) {
+                fetch('http://@(Context.Request.Host)/Index?handler=Log&type=Internet');
+                t = 0;
+            }
+            $("#netok").hide();
+            $("#netno").show();
+        }).then(function () {
             fetch("http://185.118.152.61/", {
-                mode: 'no-cors',
-                method: "get"
-            })
-                .then(function () {
-                    $("#serok").show();
-                    $("#serno").hide();
-                })
-                .catch(function () {
-                    $("#serok").hide();
-                    $("#serno").show();
-                });
-        }, 15000);
-    </script>
+            mode: 'no-cors',
+            method: "get"
+            }).then(function () {
+                $("#serok").show();
+                $("#serno").hide();
+            }).catch(function () {
+                if (t > 90) {
+                    if (flagstatus) {
+                        fetch('http://@(Context.Request.Host)/Index?handler=Log&type=Server');
+                        t = 0;
+                    }
+                }
+                $("#serok").hide();
+                $("#serno").show();
+            });
+        });
+        t++;
+    }, 10000);
+</script>
 </body>
 </html>
