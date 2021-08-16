@@ -1,0 +1,53 @@
+﻿@page
+@model EmployeeRequest.SkillPage.OutlineVersionPage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>OutlineVersion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="OutlineVersion.VersionId" value="@Model.VersionId"/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OutlineVersion.Score" class="control-label"></label>
+                <input asp-for="OutlineVersion.Score" class="form-control" />
+                <span asp-validation-for="OutlineVersion.Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutlineVersion.ActiveScore" class="control-label"></label>
+                <input asp-for="OutlineVersion.ActiveScore" class="form-control" />
+                <span asp-validation-for="OutlineVersion.ActiveScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutlineVersion.ActiveUser" class="control-label"></label>
+                <input asp-for="OutlineVersion.ActiveUser" class="form-control" />
+                <span asp-validation-for="OutlineVersion.ActiveUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutlineVersion.OutlineId" class="control-label"></label>
+                <select asp-for="OutlineVersion.OutlineId" class="form-control" asp-items="ViewBag.OutlineId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutlineVersion.TopicId" class="control-label"></label>
+                <select asp-for="OutlineVersion.TopicId" class="form-control" asp-items="ViewBag.TopicId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

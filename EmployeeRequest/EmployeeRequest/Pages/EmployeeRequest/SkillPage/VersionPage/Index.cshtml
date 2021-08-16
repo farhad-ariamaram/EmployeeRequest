@@ -1,0 +1,94 @@
+﻿@page
+@model EmployeeRequest.SkillPage.VersionPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>ورژن ها</h1>
+
+<p>
+    @if (Model.SkillId != null)
+    {
+        <a class="btn btn-success m-1" asp-page="Create" asp-route-id="@Model.SkillId"><i class="fa fa-plus"></i></a>
+    }
+    else
+    {
+        <a class="btn btn-success m-1" asp-page="Create"><i class="fa fa-plus"></i></a>
+    }
+    <a class="btn btn-primary m-1" target="_blank" asp-page="../OutlinePage/Index">تعریف رئوس</a>
+</p>
+<p>
+    <span class="badge badge-info text-white">
+        مهارت انتخاب شده: @Model.SkillTitle
+    </span>
+</p>
+<table class="table table-responsive table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                ورژن انگلیسی
+            </th>
+            <th>
+                ورژن فارسی
+            </th>
+            <th>
+                تاریخ شروع
+            </th>
+            <th>
+                تاریخ پایان
+            </th>
+            <th>
+                توضیحات فارسی
+            </th>
+            <th>
+                توضیحات انگلیسی
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Version)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Version1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersianVersion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnglishDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-block m-1" target="_blank" asp-page="../TopicPage/Index" asp-route-id="@item.Id">سرفصل</a>
+                    <a class="btn btn-primary btn-block m-1" target="_blank" asp-page="../OutlineVersionPage/Index" asp-route-id="@item.Id">رئوس ورژن</a>
+                </td>
+                <td>
+                    <a class="btn btn-warning text-white" asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="../Index"><i class="fa fa-arrow-circle-left"></i></a>
+}

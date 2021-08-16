@@ -18,6 +18,8 @@ namespace EmployeeRequest.Models
         }
 
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Outline> Outlines { get; set; }
+        public virtual DbSet<OutlineVersion> OutlineVersions { get; set; }
         public virtual DbSet<PayDeanery> PayDeaneries { get; set; }
         public virtual DbSet<PayDiploma> PayDiplomas { get; set; }
         public virtual DbSet<PayEducation> PayEducations { get; set; }
@@ -63,6 +65,8 @@ namespace EmployeeRequest.Models
         public virtual DbSet<TblLeaveJob> TblLeaveJobs { get; set; }
         public virtual DbSet<TblWorkExperience> TblWorkExperiences { get; set; }
         public virtual DbSet<TblWorkExperienceLeaveJobDtl> TblWorkExperienceLeaveJobDtls { get; set; }
+        public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<Version> Versions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -86,6 +90,49 @@ namespace EmployeeRequest.Models
                 entity.Property(e => e.Type)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Outline>(entity =>
+            {
+                entity.ToTable("Outline");
+
+                entity.Property(e => e.Description).HasMaxLength(1000);
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.EnglishDescription).HasMaxLength(1000);
+
+                entity.Property(e => e.EnglishTitle).HasMaxLength(50);
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Title).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<OutlineVersion>(entity =>
+            {
+                entity.ToTable("Outline_Version");
+
+                entity.Property(e => e.OutlineId).HasColumnName("Outline_Id");
+
+                entity.Property(e => e.TopicId).HasColumnName("Topic_Id");
+
+                entity.Property(e => e.VersionId).HasColumnName("Version_Id");
+
+                entity.HasOne(d => d.Outline)
+                    .WithMany(p => p.OutlineVersions)
+                    .HasForeignKey(d => d.OutlineId)
+                    .HasConstraintName("FK_Outline_Version_Outline");
+
+                entity.HasOne(d => d.Topic)
+                    .WithMany(p => p.OutlineVersions)
+                    .HasForeignKey(d => d.TopicId)
+                    .HasConstraintName("FK_Outline_Version_Topic");
+
+                entity.HasOne(d => d.Version)
+                    .WithMany(p => p.OutlineVersions)
+                    .HasForeignKey(d => d.VersionId)
+                    .HasConstraintName("FK_Outline_Version_Version");
             });
 
             modelBuilder.Entity<PayDeanery>(entity =>
@@ -1707,6 +1754,52 @@ namespace EmployeeRequest.Models
                     .HasForeignKey(d => d.FldWorkExperienceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Tbl_WorkExperienceLeaveJobDtl_Tbl_WorkExperience");
+            });
+
+            modelBuilder.Entity<Topic>(entity =>
+            {
+                entity.ToTable("Topic");
+
+                entity.Property(e => e.Description).HasMaxLength(1000);
+
+                entity.Property(e => e.EnglishDescription).HasMaxLength(1000);
+
+                entity.Property(e => e.EnglishTitle).HasMaxLength(50);
+
+                entity.Property(e => e.Title).HasMaxLength(50);
+
+                entity.Property(e => e.VersionId).HasColumnName("Version_Id");
+
+                entity.HasOne(d => d.Version)
+                    .WithMany(p => p.Topics)
+                    .HasForeignKey(d => d.VersionId)
+                    .HasConstraintName("FK_Topic_Version");
+            });
+
+            modelBuilder.Entity<Version>(entity =>
+            {
+                entity.ToTable("Version");
+
+                entity.Property(e => e.Description).HasMaxLength(1000);
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.EnglishDescription).HasMaxLength(1000);
+
+                entity.Property(e => e.PersianVersion).HasMaxLength(50);
+
+                entity.Property(e => e.SkillId).HasColumnName("Skill_Id");
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Version1)
+                    .HasMaxLength(50)
+                    .HasColumnName("Version");
+
+                entity.HasOne(d => d.Skill)
+                    .WithMany(p => p.Versions)
+                    .HasForeignKey(d => d.SkillId)
+                    .HasConstraintName("FK_Version_Tbl_EmployeeRequest_Skills");
             });
 
             OnModelCreatingPartial(modelBuilder);

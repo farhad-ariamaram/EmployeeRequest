@@ -1,0 +1,44 @@
+﻿@page
+@model EmployeeRequest.SkillPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>مهارت ها</h1>
+
+<p>
+    <a class="btn btn-success" asp-page="Create"><i class="fa fa-plus"></i></a>
+</p>
+<table class="table table-responsive table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                عنوان مهارت
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TblEmployeeRequestSkill)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillTitle)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-page="./VersionPage/Index" asp-route-id="@item.FldEmployeeRequestSkillsId">ورژن</a>
+                </td>
+                <td>
+                    <a class="btn btn-warning text-white" asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestSkillsId"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.FldEmployeeRequestSkillsId"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="../../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+}

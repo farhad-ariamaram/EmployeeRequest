@@ -1,0 +1,65 @@
+﻿@page
+@model EmployeeRequest.SkillPage.TopicPage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Topic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Topic.Id" />
+            <div class="form-group">
+                <label asp-for="Topic.Title" class="control-label"></label>
+                <input asp-for="Topic.Title" class="form-control" />
+                <span asp-validation-for="Topic.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.EnglishTitle" class="control-label"></label>
+                <input asp-for="Topic.EnglishTitle" class="form-control" />
+                <span asp-validation-for="Topic.EnglishTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.Description" class="control-label"></label>
+                <input asp-for="Topic.Description" class="form-control" />
+                <span asp-validation-for="Topic.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.EnglishDescription" class="control-label"></label>
+                <input asp-for="Topic.EnglishDescription" class="form-control" />
+                <span asp-validation-for="Topic.EnglishDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.Active" class="control-label"></label>
+                <input asp-for="Topic.Active" class="form-control" />
+                <span asp-validation-for="Topic.Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.Number" class="control-label"></label>
+                <input asp-for="Topic.Number" class="form-control" />
+                <span asp-validation-for="Topic.Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.VersionId" class="control-label"></label>
+                <select asp-for="Topic.VersionId" class="form-control" asp-items="ViewBag.VersionId"></select>
+                <span asp-validation-for="Topic.VersionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

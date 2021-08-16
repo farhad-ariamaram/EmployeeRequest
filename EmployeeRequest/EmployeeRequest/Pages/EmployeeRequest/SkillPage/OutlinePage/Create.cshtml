@@ -1,0 +1,64 @@
+﻿@page
+@model EmployeeRequest.SkillPage.OutlinePage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Outline</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Outline.Title" class="control-label"></label>
+                <input asp-for="Outline.Title" class="form-control" />
+                <span asp-validation-for="Outline.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Outline.EnglishTitle" class="control-label"></label>
+                <input asp-for="Outline.EnglishTitle" class="form-control" />
+                <span asp-validation-for="Outline.EnglishTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Outline.StartDate" class="control-label"></label>
+                <input asp-for="Outline.StartDate" class="form-control" />
+                <span asp-validation-for="Outline.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Outline.EndDate" class="control-label"></label>
+                <input asp-for="Outline.EndDate" class="form-control" />
+                <span asp-validation-for="Outline.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Outline.Active" class="control-label"></label>
+                <input asp-for="Outline.Active" class="form-control" />
+                <span asp-validation-for="Outline.Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Outline.Description" class="control-label"></label>
+                <input asp-for="Outline.Description" class="form-control" />
+                <span asp-validation-for="Outline.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Outline.EnglishDescription" class="control-label"></label>
+                <input asp-for="Outline.EnglishDescription" class="form-control" />
+                <span asp-validation-for="Outline.EnglishDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

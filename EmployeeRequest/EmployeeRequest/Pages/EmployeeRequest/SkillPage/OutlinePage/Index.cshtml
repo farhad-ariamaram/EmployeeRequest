@@ -1,0 +1,76 @@
+﻿@page
+@model EmployeeRequest.SkillPage.OutlinePage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Outline[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outline[0].EnglishTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outline[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outline[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outline[0].Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outline[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outline[0].EnglishDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Outline)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnglishTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnglishDescription)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="../Index"><i class="fa fa-arrow-circle-left"></i></a>
+}

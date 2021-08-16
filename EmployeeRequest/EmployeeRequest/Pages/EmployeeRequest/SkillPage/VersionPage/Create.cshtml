@@ -1,0 +1,65 @@
+﻿@page
+@model EmployeeRequest.SkillPage.VersionPage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Version</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="Version.SkillId" value="@Model.SkillId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Version.Version1" class="control-label"></label>
+                <input asp-for="Version.Version1" class="form-control" />
+                <span asp-validation-for="Version.Version1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version.PersianVersion" class="control-label"></label>
+                <input asp-for="Version.PersianVersion" class="form-control" />
+                <span asp-validation-for="Version.PersianVersion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version.StartDate" class="control-label"></label>
+                <input asp-for="Version.StartDate" class="form-control" />
+                <span asp-validation-for="Version.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version.EndDate" class="control-label"></label>
+                <input asp-for="Version.EndDate" class="form-control" />
+                <span asp-validation-for="Version.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version.Description" class="control-label"></label>
+                <input asp-for="Version.Description" class="form-control" />
+                <span asp-validation-for="Version.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version.EnglishDescription" class="control-label"></label>
+                <input asp-for="Version.EnglishDescription" class="form-control" />
+                <span asp-validation-for="Version.EnglishDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Version.Active" class="control-label"></label>
+                <input asp-for="Version.Active" class="form-control" />
+                <span asp-validation-for="Version.Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
