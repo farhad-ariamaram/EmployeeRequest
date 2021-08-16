@@ -28,14 +28,12 @@
                         <a href="http://185.118.152.61:8081/linkg" class="btn btn-primary ml-3" target="_blank">ایجاد لینک</a>
                     }
                     <div class="ml-4">
-                        <i class="fa fa-server" data-toggle="tooltip" title="سرور"></i>
-                        <div id="serok" class="rounded-circle bg-success" style="width:20px;height:20px"></div>
-                        <div id="serno" class="rounded-circle bg-danger" style="width:20px;height:20px"></div>
+                        <div id="serok" class="fa fa-server text-success" style="width:20px;height:20px" data-toggle="tooltip" title="سرور"></div>
+                        <div id="serno" class="fa fa-server text-danger" style="width:20px;height:20px" data-toggle="tooltip" title="سرور"></div>
                     </div>
                     <div class="ml-4">
-                        <i class="fa fa-globe" data-toggle="tooltip" title="اینترنت"></i>
-                        <div id="netok" class="rounded-circle bg-success" style="width:20px;height:20px"></div>
-                        <div id="netno" class="rounded-circle bg-danger" style="width:20px;height:20px"></div>
+                        <div id="netok" class="fa fa-globe text-success" style="width:20px;height:20px" data-toggle="tooltip" title="اینترنت"></div>
+                        <div id="netno" class="fa fa-globe text-danger" style="width:20px;height:20px" data-toggle="tooltip" title="اینترنت"></div>
                     </div>
 
                 </div>
@@ -109,10 +107,6 @@
             $("#netno").hide();
         }).catch(function () {
             flagstatus = false;
-            if (t > 90) {
-                fetch('http://@(Context.Request.Host)/Index?handler=Log&type=Internet');
-                t = 0;
-            }
             $("#netok").hide();
             $("#netno").show();
         }).then(function () {
@@ -123,12 +117,6 @@
                 $("#serok").show();
                 $("#serno").hide();
             }).catch(function () {
-                if (t > 90) {
-                    if (flagstatus) {
-                        fetch('http://@(Context.Request.Host)/Index?handler=Log&type=Server');
-                        t = 0;
-                    }
-                }
                 $("#serok").hide();
                 $("#serno").show();
             });

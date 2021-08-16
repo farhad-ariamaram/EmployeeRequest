@@ -23,6 +23,9 @@ namespace EmployeeRequest.Pages.Panel
             _context = context;
         }
 
+        public int MenPercent { get; set; }
+        public int WomenPercent { get; set; }
+
         public IActionResult OnGet()
         {
             string uid = HttpContext.Session.GetString("uid");
@@ -30,6 +33,12 @@ namespace EmployeeRequest.Pages.Panel
             {
                 return RedirectToPage("../Index");
             }
+
+            int AllMen = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationGender == "آقا").Count();
+            int AllWomen = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationGender == "خانم").Count();
+
+            MenPercent = (AllMen * 100) / (AllMen + AllWomen);
+            WomenPercent = (AllWomen * 100) / (AllMen + AllWomen);
 
             ViewData["AllRegisteredUsers"] = _context.TblEmployeeRequestEmployees.Count();
             ViewData["MenRegisteredUsers"] = _context.TblEmployeeRequestPrimaryInformations.Where(a=>a.FldEmployeeRequestPrimaryInformationGender=="آقا").Count();
