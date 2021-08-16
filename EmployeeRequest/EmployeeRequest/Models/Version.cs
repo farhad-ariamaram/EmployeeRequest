@@ -20,7 +20,7 @@ namespace EmployeeRequest.Models
         public DateTime? EndDate { get; set; }
         public string Description { get; set; }
         public string EnglishDescription { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public int? SkillId { get; set; }
 
         public virtual TblEmployeeRequestSkill Skill { get; set; }

@@ -14,7 +14,25 @@
     <thead>
         <tr>
             <th>
-                عنوان مهارت
+                عنوان فارسی
+            </th>
+            <th>
+                عنوان انگلیسی
+            </th>
+            <th>
+                توضیحات فارسی
+            </th>
+            <th>
+                توضیحات انگلیسی
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                تاریخ شروع
+            </th>
+            <th>
+                تاریخ پایان
             </th>
             <th></th>
             <th></th>
@@ -26,6 +44,38 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillEnglishTitle)
+                </td>
+                <td>
+                    @if (item.FldEmployeeRequestSkillsSkillDescription != null && item.FldEmployeeRequestSkillsSkillDescription.Length > 50)
+                    {
+                        @(item.FldEmployeeRequestSkillsSkillDescription.Substring(0, 50)+ "...");
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillDescription)
+                    }
+                </td>
+                <td>
+                    @if (item.FldEmployeeRequestSkillsSkillEnglishDescription != null && item.FldEmployeeRequestSkillsSkillEnglishDescription.Length > 50)
+                    {
+                        @(item.FldEmployeeRequestSkillsSkillEnglishDescription.Substring(0, 50)+ "...");
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillEnglishDescription)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillEndDate)
                 </td>
                 <td>
                     <a class="btn btn-primary" asp-page="./VersionPage/Index" asp-route-id="@item.FldEmployeeRequestSkillsId">ورژن</a>
@@ -40,5 +90,5 @@
 </table>
 
 @section Botton {
-    <a class="btn btn-danger rounded-circle" asp-page="../../Panel/Index"><i class="fa fa-arrow-circle-left"></i></a>
+    <a class="btn btn-danger rounded-circle" asp-page="../Index"><i class="fa fa-arrow-circle-left"></i></a>
 }

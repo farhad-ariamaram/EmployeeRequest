@@ -20,6 +20,36 @@
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillActive" /> @Html.DisplayNameFor(model => model.TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillStartDate" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillStartDate" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEndDate" class="control-label"></label>
+                <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEndDate" class="form-control" />
+                <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

@@ -18,16 +18,22 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
             _context = context;
         }
 
-        public IActionResult OnGet()
+        [BindProperty]
+        public long VersionId { get; set; }
+
+        public IActionResult OnGet(long? id)
         {
-        ViewData["VersionId"] = new SelectList(_context.Versions, "Id", "Id");
+            if (id.HasValue)
+            {
+                VersionId = id.Value;
+            }
+            
             return Page();
         }
 
         [BindProperty]
         public Topic Topic { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

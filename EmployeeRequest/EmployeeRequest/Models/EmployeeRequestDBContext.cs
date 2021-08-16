@@ -1113,8 +1113,30 @@ namespace EmployeeRequest.Models
 
                 entity.Property(e => e.FldEmployeeRequestSkillsId).HasColumnName("Fld_EmployeeRequest_Skills_Id");
 
+                entity.Property(e => e.FldEmployeeRequestSkillsSkillActive).HasColumnName("Fld_EmployeeRequest_Skills_SkillActive");
+
+                entity.Property(e => e.FldEmployeeRequestSkillsSkillDescription)
+                    .HasMaxLength(1000)
+                    .HasColumnName("Fld_EmployeeRequest_Skills_SkillDescription");
+
+                entity.Property(e => e.FldEmployeeRequestSkillsSkillEndDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EmployeeRequest_Skills_SkillEndDate");
+
+                entity.Property(e => e.FldEmployeeRequestSkillsSkillEnglishDescription)
+                    .HasMaxLength(1000)
+                    .HasColumnName("Fld_EmployeeRequest_Skills_SkillEnglishDescription");
+
+                entity.Property(e => e.FldEmployeeRequestSkillsSkillEnglishTitle)
+                    .HasMaxLength(50)
+                    .HasColumnName("Fld_EmployeeRequest_Skills_SkillEnglishTitle");
+
+                entity.Property(e => e.FldEmployeeRequestSkillsSkillStartDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Fld_EmployeeRequest_Skills_SkillStartDate");
+
                 entity.Property(e => e.FldEmployeeRequestSkillsSkillTitle)
-                    .HasMaxLength(100)
+                    .HasMaxLength(50)
                     .HasColumnName("Fld_EmployeeRequest_Skills_SkillTitle");
             });
 

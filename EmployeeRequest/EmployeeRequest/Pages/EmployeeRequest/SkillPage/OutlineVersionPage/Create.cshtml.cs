@@ -25,16 +25,16 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
             if (id.HasValue)
             {
                 VersionId = id.Value;
-                ViewData["OutlineId"] = new SelectList(_context.Outlines, "Id", "Id");
-                ViewData["TopicId"] = new SelectList(_context.Topics, "Id", "Id");
+                ViewData["OutlineId"] = new SelectList(_context.Outlines, "Id", "Title");
+                ViewData["TopicId"] = new SelectList(_context.Topics.Where(a => a.VersionId == id.Value), "Id", "Title");
             }
             else
             {
-                ViewData["OutlineId"] = new SelectList(_context.Outlines, "Id", "Id");
-                ViewData["TopicId"] = new SelectList(_context.Topics, "Id", "Id");
-                ViewData["VersionId"] = new SelectList(_context.Versions.Where(a => a.Id == id.Value), "Id", "Id");
+                ViewData["OutlineId"] = new SelectList(_context.Outlines, "Id", "Title");
+                ViewData["TopicId"] = new SelectList(_context.Topics, "Id", "Title");
+                ViewData["VersionId"] = new SelectList(_context.Versions.Where(a => a.Id == id.Value), "Id", "Version1");
             }
-            
+
             return Page();
         }
 

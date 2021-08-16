@@ -68,10 +68,24 @@
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @if (item.Description != null && item.Description.Length > 50)
+                    {
+                        @(item.Description.Substring(0, 50)+ "...");
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Description)
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EnglishDescription)
+                    @if (item.EnglishDescription != null && item.EnglishDescription.Length > 50)
+                    {
+                        @(item.EnglishDescription.Substring(0, 50)+"...");
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.EnglishDescription)
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Active)

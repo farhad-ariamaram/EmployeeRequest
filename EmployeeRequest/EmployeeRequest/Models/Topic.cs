@@ -17,7 +17,7 @@ namespace EmployeeRequest.Models
         public string EnglishTitle { get; set; }
         public string Description { get; set; }
         public string EnglishDescription { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public int? Number { get; set; }
         public long? VersionId { get; set; }
 

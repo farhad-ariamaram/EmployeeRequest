@@ -5,58 +5,54 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>افزودن سرفصل</h1>
 
-<h4>Topic</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
+            <input type="hidden" asp-for="Topic.VersionId" value="@Model.VersionId" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Topic.Title" class="control-label"></label>
+                <label asp-for="Topic.Title" class="control-label">عنوان فارسی</label>
                 <input asp-for="Topic.Title" class="form-control" />
                 <span asp-validation-for="Topic.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic.EnglishTitle" class="control-label"></label>
+                <label asp-for="Topic.EnglishTitle" class="control-label">عنوان انگلیسی</label>
                 <input asp-for="Topic.EnglishTitle" class="form-control" />
                 <span asp-validation-for="Topic.EnglishTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic.Description" class="control-label"></label>
-                <input asp-for="Topic.Description" class="form-control" />
+                <label asp-for="Topic.Description" class="control-label">توضیحات فارسی</label>
+                <textarea asp-for="Topic.Description" class="form-control"></textarea>
                 <span asp-validation-for="Topic.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic.EnglishDescription" class="control-label"></label>
-                <input asp-for="Topic.EnglishDescription" class="form-control" />
+                <label asp-for="Topic.EnglishDescription" class="control-label">توضیحات انگلیسی</label>
+                <textarea asp-for="Topic.EnglishDescription" class="form-control"></textarea>
                 <span asp-validation-for="Topic.EnglishDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic.Active" class="control-label"></label>
+                <label asp-for="Topic.Active" class="control-label">وضعیت</label>
                 <input asp-for="Topic.Active" class="form-control" />
                 <span asp-validation-for="Topic.Active" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic.Number" class="control-label"></label>
+                <label asp-for="Topic.Number" class="control-label">شماره</label>
                 <input asp-for="Topic.Number" class="form-control" />
                 <span asp-validation-for="Topic.Number" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic.VersionId" class="control-label"></label>
-                <select asp-for="Topic.VersionId" class ="form-control" asp-items="ViewBag.VersionId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="افزودن" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="../Index"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

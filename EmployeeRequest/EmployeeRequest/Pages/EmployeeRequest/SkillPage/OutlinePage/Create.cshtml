@@ -5,59 +5,58 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>افزودن رئوس</h1>
 
-<h4>Outline</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Outline.Title" class="control-label"></label>
+                <label asp-for="Outline.Title" class="control-label">عنوان فارسی</label>
                 <input asp-for="Outline.Title" class="form-control" />
                 <span asp-validation-for="Outline.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.EnglishTitle" class="control-label"></label>
+                <label asp-for="Outline.EnglishTitle" class="control-label">عنوان انگلیسی</label>
                 <input asp-for="Outline.EnglishTitle" class="form-control" />
                 <span asp-validation-for="Outline.EnglishTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.StartDate" class="control-label"></label>
+                <label asp-for="Outline.StartDate" class="control-label">تاریخ شروع</label>
                 <input asp-for="Outline.StartDate" class="form-control" />
                 <span asp-validation-for="Outline.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.EndDate" class="control-label"></label>
+                <label asp-for="Outline.EndDate" class="control-label">تاریخ پایان</label>
                 <input asp-for="Outline.EndDate" class="form-control" />
                 <span asp-validation-for="Outline.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.Active" class="control-label"></label>
+                <label asp-for="Outline.Active" class="control-label">وضعیت</label>
                 <input asp-for="Outline.Active" class="form-control" />
                 <span asp-validation-for="Outline.Active" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.Description" class="control-label"></label>
-                <input asp-for="Outline.Description" class="form-control" />
+                <label asp-for="Outline.Description" class="control-label">توضیحات فارسی</label>
+                <textarea asp-for="Outline.Description" class="form-control"></textarea>
                 <span asp-validation-for="Outline.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.EnglishDescription" class="control-label"></label>
-                <input asp-for="Outline.EnglishDescription" class="form-control" />
+                <label asp-for="Outline.EnglishDescription" class="control-label">توضیحات انگلیسی</label>
+                <textarea asp-for="Outline.EnglishDescription" class="form-control"></textarea>
                 <span asp-validation-for="Outline.EnglishDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="افزودن" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="./Index"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

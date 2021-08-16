@@ -9,8 +9,8 @@ namespace EmployeeRequest.Models
     {
         public long Id { get; set; }
         public int? Score { get; set; }
-        public bool? ActiveScore { get; set; }
-        public bool? ActiveUser { get; set; }
+        public bool ActiveScore { get; set; }
+        public bool ActiveUser { get; set; }
         public long? VersionId { get; set; }
         public long? OutlineId { get; set; }
         public long? TopicId { get; set; }

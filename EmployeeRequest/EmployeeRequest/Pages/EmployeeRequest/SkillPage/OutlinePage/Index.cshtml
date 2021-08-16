@@ -5,34 +5,34 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>رئوس</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn btn-success m-1" asp-page="Create"><i class="fa fa-plus"></i></a>
 </p>
-<table class="table">
+<table class="table table-responsive table-striped table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Outline[0].Title)
+                عنوان فارسی
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Outline[0].EnglishTitle)
+                عنوان انگلیسی
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Outline[0].StartDate)
+                تاریخ شروع
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Outline[0].EndDate)
+                تاریخ پایان
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Outline[0].Active)
+                وضعیت
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Outline[0].Description)
+                توضیحات فارسی
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Outline[0].EnglishDescription)
+                توضیحات انگلیسی
             </th>
             <th></th>
         </tr>
@@ -57,14 +57,28 @@
                     @Html.DisplayFor(modelItem => item.Active)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @if (item.Description != null && item.Description.Length > 50)
+                    {
+                        @(item.Description.Substring(0, 50)+ "...");
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Description)
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EnglishDescription)
+                    @if (item.EnglishDescription != null && item.EnglishDescription.Length > 50)
+                    {
+                        @(item.EnglishDescription.Substring(0, 50)+"...");
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.EnglishDescription)
+                    }
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-warning text-white" asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         }
