@@ -38,9 +38,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
             {
                 return NotFound();
             }
-           ViewData["OutlineId"] = new SelectList(_context.Outlines, "Id", "Id");
-           ViewData["TopicId"] = new SelectList(_context.Topics, "Id", "Id");
-           ViewData["VersionId"] = new SelectList(_context.Versions, "Id", "Id");
+            ViewData["OutlineId"] = new SelectList(_context.Outlines, "Id", "Title");
+            ViewData["TopicId"] = new SelectList(_context.Topics, "Id", "Title");
             return Page();
         }
 
