@@ -5,9 +5,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>ویرایش مهارت</h1>
 
-<h4>TblEmployeeRequestSkill</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,50 +14,49 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsId" />
             <div class="form-group">
-                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillTitle" class="control-label"></label>
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillTitle" class="control-label">عنوان فارسی</label>
                 <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillTitle" class="form-control" />
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle" class="control-label"></label>
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle" class="control-label">عنوان انگلیسی</label>
                 <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle" class="form-control" />
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="control-label"></label>
-                <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="form-control" />
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="control-label">توضیحات فارسی</label>
+                <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="form-control"></textarea>
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="control-label"></label>
-                <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="form-control" />
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="control-label">توضیحات انگلیسی</label>
+                <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="form-control"></textarea>
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillActive" /> @Html.DisplayNameFor(model => model.TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillActive)
-                </label>
+            <div class="form-group">
+                <label class="control-label">وضعیت</label>
+                <input class="form-control" asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillActive" />
             </div>
             <div class="form-group">
-                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillStartDate" class="control-label"></label>
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillStartDate" class="control-label">تاریخ شروع</label>
                 <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillStartDate" class="form-control" />
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillStartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEndDate" class="control-label"></label>
+                <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEndDate" class="control-label">تاریخ پایان</label>
                 <input asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEndDate" class="form-control" />
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="ثبت" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+@section Botton {
+    <a class="btn btn-danger rounded-circle" asp-page="./Index"><i class="fa fa-arrow-circle-left"></i></a>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
