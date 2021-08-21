@@ -26,8 +26,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest
             {
                 return RedirectToPage("../Index");
             }
-            ViewData["FldEmployeeRequestUserApplicantId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
-            ViewData["FldEmployeeRequestUserSubmitterId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserUsername");
+            ViewData["FldEmployeeRequestUserApplicantId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserName");
+            ViewData["FldEmployeeRequestUserSubmitterId"] = new SelectList(_context.TblEmployeeRequestUsers, "FldEmployeeRequestUserId", "FldEmployeeRequestUserName");
             ViewData["FldEmployeeRequestJobTitleFromId"] = new SelectList(_context.TblEmployeeRequestJobTitleFroms, "TblEmployeeRequestJobTitleFromId", "TblEmployeeRequestJobTitleFromTitle");
             return Page();
         }

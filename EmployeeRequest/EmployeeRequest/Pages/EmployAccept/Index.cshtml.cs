@@ -58,6 +58,7 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.TblEmployeeRequestPageTimeLogs)
                 .Include(t => t.TblEmployeeRequestPrimaryInformations)
                 .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
+                .Where(a=>!a.IsDelete.Value)
                 .ToListAsync();
 
             currentFilter = search;
@@ -445,6 +446,35 @@ namespace EmployeeRequest.Pages.EmployAccept
                 TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeFinalAcceptionDate = DateTime.Now;
                 TblEmployeeRequestEmployee2.FldEmployeeRequestUserFinalAccepterId = Int64.Parse(uid);
                 _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+            }
+            return RedirectToPage("Index");
+        }
+
+        public IActionResult OnGetDeleteUser(string id, string description)
+        {
+            TblEmployeeRequestEmployee TblEmployeeRequestEmployee2 = _context.TblEmployeeRequestEmployees.Find(id);
+            if (TblEmployeeRequestEmployee2 != null)
+            {
+                string uid = HttpContext.Session.GetString("uid");
+                if (uid == null)
+                {
+                    return RedirectToPage("../Index");
+                }
+
+                TblEmployeeRequestEmployee2.IsDelete = true;
+                TblEmployeeRequestEmployee2.DeleteDescription = description;
+               
+                _context.TblEmployeeRequestEmployees.Update(TblEmployeeRequestEmployee2);
+                _context.SaveChanges();
+
+                _context.TblEmployeeRequestEmployeeEditLogs.Add(new TblEmployeeRequestEmployeeEditLog
+                {
+                    FldEmployeeRequestUserId = Int64.Parse(uid),
+                    FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,
+                    FldEmployeeRequestEmployeeEditLogSection = "Delete",
+                    FldEmployeeRequestEmployeeId = TblEmployeeRequestEmployee2.FldEmployeeRequestEmployeeId
+                });
                 _context.SaveChanges();
             }
             return RedirectToPage("Index");
