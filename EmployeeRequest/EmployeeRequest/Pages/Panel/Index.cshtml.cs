@@ -23,6 +23,9 @@ namespace EmployeeRequest.Pages.Panel
             _context = context;
         }
 
+        public DateTime LastUpdate { get; set; }
+        public DateTime LastRegister { get; set; }
+
         public int MenPercent { get; set; }
         public int WomenPercent { get; set; }
 
@@ -39,6 +42,8 @@ namespace EmployeeRequest.Pages.Panel
 
             MenPercent = (AllMen * 100) / (AllMen + AllWomen);
             WomenPercent = (AllWomen * 100) / (AllMen + AllWomen);
+            LastUpdate = _context.TblEmployeeRequestEmployees.OrderByDescending(a => a.TransferedDate).FirstOrDefault().TransferedDate.Value;
+            LastRegister = _context.TblEmployeeRequestPageTimeLogs.OrderBy(a => a.FldEmployeeRequestPageTimeLogStartTime).FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.Value;
 
             ViewData["AllRegisteredUsers"] = _context.TblEmployeeRequestEmployees.Count();
             ViewData["MenRegisteredUsers"] = _context.TblEmployeeRequestPrimaryInformations.Where(a=>a.FldEmployeeRequestPrimaryInformationGender=="آقا").Count();
