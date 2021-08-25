@@ -14,6 +14,32 @@
         </div>
         <div class="col-4">
             <div class="row">
+                <label data-toggle="tooltip" title="مرتب سازی بر اساس" for="inputGroupSelect02" class="col-sm-1 col-form-label"><i class="fa fa-filter"></i></label>
+                <div class="col-sm-11">
+                    <select class="form-select w-100" name="orderBy" id="inputGroupSelect02" asp-for="@Model.currentorderBy">
+                        <option value="name">نام و نام خانوادگی</option>
+                        <option value="deldate">تاریخ حذف</option>
+                        <option value="deleter">حذف کننده</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <label data-toggle="tooltip" title="مرتب سازی به صورت" for="inputGroupSelect03" class="col-sm-1 col-form-label"><i class="fa fa-sort"></i></label>
+                <div class="col-sm-11">
+                    <select class="form-select w-100" name="orderType" id="inputGroupSelect03" asp-for="@Model.currentorderType">
+                        <option value="asc">صعودی</option>
+                        <option value="desc">نزولی</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-4">
+            <div class="row">
                 <label data-toggle="tooltip" title="تعداد در صفحه" for="inputGroupSelect01" class="col-1 col-form-label"><i class="fa fa-file"></i></label>
                 <div class="col-11">
                     <select class="form-select w-100" name="pagesize" id="inputGroupSelect01" asp-for="@Model.currentpagesize">
@@ -30,34 +56,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="row">
-                <label data-toggle="tooltip" title="مرتب سازی بر اساس" for="inputGroupSelect02" class="col-sm-1 col-form-label"><i class="fa fa-filter"></i></label>
-                <div class="col-sm-11">
-                    <select class="form-select w-100" name="orderBy" id="inputGroupSelect02" asp-for="@Model.currentorderBy">
-                        <option value="name">نام و نام خانوادگی</option>
-                        <option value="deldate">تاریخ حذف</option>
-                        <option value="deleter">حذف کننده</option>
-                    </select>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-4">
-            <div class="row">
-                <label data-toggle="tooltip" title="مرتب سازی به صورت" for="inputGroupSelect03" class="col-sm-1 col-form-label"><i class="fa fa-sort"></i></label>
-                <div class="col-sm-11">
-                    <select class="form-select w-100" name="orderType" id="inputGroupSelect03" asp-for="@Model.currentorderType">
-                        <option value="asc">صعودی</option>
-                        <option value="desc">نزولی</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-2">
         <div class="col-4">
             <div class="row">
                 <label class="badge badge-info" for="inputGroupSelect01">
@@ -119,8 +117,8 @@
                     </td>
                     <td>
                         @*@item.value.TblEmployeeRequestEmployeeEditLogs.FirstOrDefault().FldEmployeeRequestEmployeeEditLogDate.toPersianDate()
-                        <br />
-                        @item.value.TblEmployeeRequestEmployeeEditLogs.FirstOrDefault().FldEmployeeRequestEmployeeEditLogDate.Value.ToString("HH:mm")*@
+                            <br />
+                            @item.value.TblEmployeeRequestEmployeeEditLogs.FirstOrDefault().FldEmployeeRequestEmployeeEditLogDate.Value.ToString("HH:mm")*@
                     </td>
                     <td>
                         @item.value.TblEmployeeRequestPrimaryInformations.FirstOrDefault(a => a.FldEmployeeRequestEmployeeId == item.value.FldEmployeeRequestEmployeeId).FldEmployeeRequestPrimaryInformationNationalCode

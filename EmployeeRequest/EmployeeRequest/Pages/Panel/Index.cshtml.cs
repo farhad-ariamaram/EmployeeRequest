@@ -42,13 +42,25 @@ namespace EmployeeRequest.Pages.Panel
 
             MenPercent = (AllMen * 100) / (AllMen + AllWomen);
             WomenPercent = (AllWomen * 100) / (AllMen + AllWomen);
-            LastUpdate = _context.TblEmployeeRequestEmployees.OrderByDescending(a => a.TransferedDate).FirstOrDefault().TransferedDate.Value;
-            LastRegister = _context.TblEmployeeRequestPageTimeLogs.OrderBy(a => a.FldEmployeeRequestPageTimeLogStartTime).FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.Value;
+            if ((MenPercent + WomenPercent) < 100)
+            {
+                if (MenPercent > WomenPercent)
+                {
+                    MenPercent += 1;
+                }
+                else
+                {
+                    WomenPercent += 1;
+                }
+            }
+
+            LastUpdate = _context.Logs.Where(a => a.Type == "Update").OrderByDescending(a => a.DateTime).FirstOrDefault().DateTime;
+            LastRegister = _context.TblEmployeeRequestPageTimeLogs.OrderByDescending(a => a.FldEmployeeRequestPageTimeLogStartTime).FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.Value;
 
             ViewData["AllRegisteredUsers"] = _context.TblEmployeeRequestEmployees.Count();
-            ViewData["MenRegisteredUsers"] = _context.TblEmployeeRequestPrimaryInformations.Where(a=>a.FldEmployeeRequestPrimaryInformationGender=="آقا").Count();
+            ViewData["MenRegisteredUsers"] = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationGender == "آقا").Count();
             ViewData["WomenRegisteredUsers"] = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationGender == "خانم").Count();
-            ViewData["AcceptedRegisteredUsers"] = _context.TblEmployeeRequestEmployees.Where(a=>a.FldEmployeeRequestFinalAcceptionId==1).Count();
+            ViewData["AcceptedRegisteredUsers"] = _context.TblEmployeeRequestEmployees.Where(a => a.FldEmployeeRequestFinalAcceptionId == 1).Count();
 
             ViewData["AllRequestedJobs"] = _context.TblEmployeeRequestEmployeeRequests.Count();
             ViewData["AcceptedJobs"] = _context.TblEmployeeRequestEmployeeRequests.Where(a => a.FldEmployeeRequestEmployeeRequestIsAccept == true).Count();
@@ -62,6 +74,19 @@ namespace EmployeeRequest.Pages.Panel
         {
             HttpContext.Session.Clear();
             return RedirectToPage("../Index");
+        }
+
+        public async Task<IActionResult> OnGetLog()
+        {
+            await _context.Logs.AddAsync(new Models.Log
+            {
+                DateTime = DateTime.Now,
+                Type = "Update"
+            });
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
         }
     }
 }

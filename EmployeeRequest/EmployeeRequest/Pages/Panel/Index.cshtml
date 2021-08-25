@@ -34,7 +34,7 @@
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                             مرد
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.MenRegisteredUsers &nbsp;&nbsp;&nbsp; @(Model.MenPercent+"%")</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.MenRegisteredUsers &nbsp;-&nbsp; @(Model.MenPercent+"%")</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-male fa-2x text-gray-300 text-warning"></i>
@@ -53,7 +53,7 @@
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                             زن
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.WomenRegisteredUsers &nbsp;&nbsp;&nbsp; @(Model.WomenPercent + "%")</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.WomenRegisteredUsers &nbsp;-&nbsp; @(Model.WomenPercent + "%")</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-female fa-2x text-gray-300 text-info"></i>
@@ -171,10 +171,10 @@
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             تاریخ آخرین بروزرسانی
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.LastUpdate.toPersianDate() <br /> @Model.LastUpdate.ToString("HH:mm:ss")</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.LastUpdate.toPersianDate() <br /> @Model.LastUpdate.ToString("HH:mm")</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fa fa-check fa-2x text-gray-300 text-primary"></i>
+                        <i class="fa fa-check fa-2x text-gray-300 text-primary"></i><br /><a asp-page-handler="Log" style="font-size:10px">بروزرسانی</a>
                     </div>
                 </div>
             </div>
@@ -189,7 +189,7 @@
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                             تاریخ آخرین ثبت نام
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.LastRegister.toPersianDate() <br /> @Model.LastRegister.ToString("HH:mm:ss")</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.LastRegister.toPersianDate() <br /> @Model.LastRegister.ToString("HH:mm")</div>
                     </div>
                     <div class="col-auto">
                         <i class="fa fa-clock fa-2x text-gray-300 text-success"></i>

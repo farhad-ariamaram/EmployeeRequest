@@ -17,24 +17,6 @@
         </div>
         <div class="col-4">
             <div class="row">
-                <label data-toggle="tooltip" title="تعداد در صفحه" for="inputGroupSelect01" class="col-1 col-form-label"><i class="fa fa-file"></i></label>
-                <div class="col-11">
-                    <select class="form-select w-100" name="pagesize" id="inputGroupSelect01" asp-for="@Model.currentpagesize">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="row">
                 <label data-toggle="tooltip" title="مرتب سازی بر اساس" for="inputGroupSelect02" class="col-sm-1 col-form-label"><i class="fa fa-filter"></i></label>
                 <div class="col-sm-11">
                     <select class="form-select w-100" name="orderBy" id="inputGroupSelect02" asp-for="@Model.currentorderBy">
@@ -49,10 +31,7 @@
                     </select>
                 </div>
             </div>
-
         </div>
-    </div>
-    <div class="row mt-2">
         <div class="col-4">
             <div class="row">
                 <label data-toggle="tooltip" title="مرتب سازی به صورت" for="inputGroupSelect03" class="col-sm-1 col-form-label"><i class="fa fa-sort"></i></label>
@@ -60,6 +39,26 @@
                     <select class="form-select w-100" name="orderType" id="inputGroupSelect03" asp-for="@Model.currentorderType">
                         <option value="asc">صعودی</option>
                         <option value="desc">نزولی</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <div class="row">
+                <label data-toggle="tooltip" title="تعداد در صفحه" for="inputGroupSelect01" class="col-1 col-form-label"><i class="fa fa-file"></i></label>
+                <div class="col-11">
+                    <select class="form-select w-100" name="pagesize" id="inputGroupSelect01" asp-for="@Model.currentpagesize">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
                     </select>
                 </div>
             </div>

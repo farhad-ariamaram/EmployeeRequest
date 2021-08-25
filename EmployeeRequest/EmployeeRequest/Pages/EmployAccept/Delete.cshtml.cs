@@ -44,7 +44,7 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.TblEmployeeRequestPrimaryInformations)
                 .Include(t => t.TblEmployeeRequestEmployeeEditLogs.Where(a => a.FldEmployeeRequestEmployeeEditLogSection == "Delete").OrderByDescending(s => s.FldEmployeeRequestEmployeeEditLogDate)).ThenInclude(c => c.FldEmployeeRequestUser)
                 .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
-                .Where(a => !a.IsDelete.Value)
+                .Where(a => a.IsDelete.Value)
                 .ToListAsync();
 
             currentpage = p;
