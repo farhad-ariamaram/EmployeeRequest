@@ -24,12 +24,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="control-label">توضیحات فارسی</label>
-                <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="form-control"></textarea>
+                <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" maxlength="5000" class="form-control"></textarea>
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="control-label">توضیحات انگلیسی</label>
-                <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="form-control"></textarea>
+                <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" maxlength="5000" class="form-control"></textarea>
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="text-danger"></span>
             </div>
             <div class="form-group">

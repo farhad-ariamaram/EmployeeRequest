@@ -26,7 +26,6 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage
         [BindProperty]
         public TblEmployeeRequestSkill TblEmployeeRequestSkill { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -36,6 +35,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage
 
             _context.TblEmployeeRequestSkills.Add(TblEmployeeRequestSkill);
             await _context.SaveChangesAsync();
+
 
             return RedirectToPage("./Index");
         }
