@@ -11,6 +11,7 @@ namespace EmployeeRequest.Models
         {
             OutlineVersions = new HashSet<OutlineVersion>();
             Topics = new HashSet<Topic>();
+            VersionWebsiteTables = new HashSet<VersionWebsiteTable>();
         }
 
         public long Id { get; set; }
@@ -26,5 +27,6 @@ namespace EmployeeRequest.Models
         public virtual TblEmployeeRequestSkill Skill { get; set; }
         public virtual ICollection<OutlineVersion> OutlineVersions { get; set; }
         public virtual ICollection<Topic> Topics { get; set; }
+        public virtual ICollection<VersionWebsiteTable> VersionWebsiteTables { get; set; }
     }
 }
