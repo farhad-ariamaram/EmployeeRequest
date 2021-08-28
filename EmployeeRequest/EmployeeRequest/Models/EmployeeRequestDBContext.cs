@@ -1091,6 +1091,10 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(2000)
                     .HasColumnName("Fld_EmployeeRequest_PrimaryInformation_Address");
 
+                entity.Property(e => e.FldEmployeeRequestPrimaryInformationAddress2)
+                    .HasMaxLength(2000)
+                    .HasColumnName("Fld_EmployeeRequest_PrimaryInformation_Address2");
+
                 entity.Property(e => e.FldEmployeeRequestPrimaryInformationBirthDate)
                     .HasColumnType("datetime")
                     .HasColumnName("Fld_EmployeeRequest_PrimaryInformation_BirthDate");

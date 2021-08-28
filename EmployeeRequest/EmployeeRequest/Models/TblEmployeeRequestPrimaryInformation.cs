@@ -21,6 +21,7 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestPrimaryInformationTrackNo { get; set; }
         public string FldEmployeeRequestPrimaryInformationPostalCode { get; set; }
         public string FldEmployeeRequestPrimaryInformationAddress { get; set; }
+        public string FldEmployeeRequestPrimaryInformationAddress2 { get; set; }
 
         public virtual TblEmployeeRequestEmployee FldEmployeeRequestEmployee { get; set; }
     }

@@ -40,6 +40,15 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage
                 return Page();
             }
 
+            var t = _context.TblEmployeeRequestSkills.Where(a => a.FldEmployeeRequestSkillsSkillTitle == TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillTitle ||
+                                                                 a.FldEmployeeRequestSkillsSkillEnglishTitle == TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishTitle);
+
+            if (t.Count() > 0)
+            {
+                ModelState.AddModelError("duplicateSkill", "مهارت وارد شده از قبل موجود است");
+                return Page();
+            }
+
             _context.TblEmployeeRequestSkills.Add(TblEmployeeRequestSkill);
             await _context.SaveChangesAsync();
 

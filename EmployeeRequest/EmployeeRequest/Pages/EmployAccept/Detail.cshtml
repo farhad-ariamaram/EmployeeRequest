@@ -186,6 +186,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>آدرس2</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationAddress2)
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>شماره پیگیری</td>
                                 <td>
                                     @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblEmployeeRequestPrimaryInformations.FirstOrDefault().FldEmployeeRequestPrimaryInformationTrackNo)
@@ -336,7 +342,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>نام و نام خانولدگی</td>
+                                    <td>نام و نام خانوادگی</td>
                                     <td>
                                         @item.FldEmployeeRequestEmergencyCallFirstName &nbsp; @item.FldEmployeeRequestEmergencyCallLastName
                                     </td>
