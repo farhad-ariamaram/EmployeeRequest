@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
 {
@@ -26,8 +27,14 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
         [BindProperty]
         public string SkillTitle { get; set; }
 
-        public async Task OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             if (id.HasValue)
             {
                 SkillId = id.Value;
@@ -41,7 +48,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
                 Version = await _context.Versions
                 .Include(v => v.Skill).ToListAsync();
             }
-            
+
+            return Page();
         }
     }
 }

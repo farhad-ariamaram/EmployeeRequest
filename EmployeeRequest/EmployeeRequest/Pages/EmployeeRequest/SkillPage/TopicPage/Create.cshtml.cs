@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
 {
@@ -23,6 +24,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
 
         public IActionResult OnGet(long? id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             if (id.HasValue)
             {
                 VersionId = id.Value;

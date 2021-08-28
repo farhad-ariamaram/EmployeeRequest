@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
 {
@@ -22,6 +23,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
 
         public IActionResult OnGet(int id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             SkillId = id;
             return Page();
         }

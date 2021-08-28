@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage
 {
@@ -20,6 +21,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage
 
         public IActionResult OnGet()
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             return Page();
         }
 

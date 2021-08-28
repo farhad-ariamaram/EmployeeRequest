@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePage
 {
@@ -22,6 +23,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePag
 
         public IActionResult OnGet(long id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             VersionId = id;
             ViewData["VersionId"] = new SelectList(_context.Versions, "Id", "Id");
             return Page();

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
 {
@@ -26,8 +27,14 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
         [BindProperty]
         public string versionTitle { get; set; }
 
-        public async Task OnGetAsync(long? id)
+        public async Task<IActionResult> OnGetAsync(long? id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             if (id.HasValue)
             {
                 versionId = id.Value;
@@ -46,6 +53,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
                 .Include(o => o.Topic)
                 .Include(o => o.Version).ToListAsync();
             }
+
+            return Page();
         }
     }
 }

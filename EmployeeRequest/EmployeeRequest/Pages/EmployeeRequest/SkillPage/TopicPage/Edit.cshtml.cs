@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
 {
@@ -24,6 +25,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
 
         public async Task<IActionResult> OnGetAsync(long? id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             if (id == null)
             {
                 return NotFound();

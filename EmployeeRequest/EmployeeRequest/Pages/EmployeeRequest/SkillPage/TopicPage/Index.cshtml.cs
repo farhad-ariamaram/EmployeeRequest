@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
 {
@@ -26,8 +27,14 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
 
         public IList<Topic> Topic { get; set; }
 
-        public async Task OnGetAsync(long? id)
+        public async Task<IActionResult> OnGetAsync(long? id)
         {
+            string uid = HttpContext.Session.GetString("uid");
+            if (uid == null)
+            {
+                return RedirectToPage("../Index");
+            }
+
             if (id.HasValue)
             {
                 versionId = id.Value;
@@ -42,6 +49,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
                 Topic = await _context.Topics
                 .Include(t => t.Version).ToListAsync();
             }
+
+            return Page();
         }
     }
 }
