@@ -51,7 +51,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
             _context.Topics.Add(Topic);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Topic.VersionId });
         }
     }
 }

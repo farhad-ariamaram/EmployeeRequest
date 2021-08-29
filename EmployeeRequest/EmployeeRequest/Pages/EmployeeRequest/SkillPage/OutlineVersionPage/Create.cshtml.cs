@@ -58,7 +58,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
             _context.OutlineVersions.Add(OutlineVersion);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = OutlineVersion.VersionId });
         }
     }
 }

@@ -45,7 +45,6 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
         [BindProperty]
         public Models.Version Version { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -56,7 +55,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
             _context.Versions.Add(Version);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Version.SkillId });
         }
     }
 }

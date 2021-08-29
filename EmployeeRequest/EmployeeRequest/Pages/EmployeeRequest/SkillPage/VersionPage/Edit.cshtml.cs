@@ -72,7 +72,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Version.SkillId });
         }
 
         private bool VersionExists(long id)

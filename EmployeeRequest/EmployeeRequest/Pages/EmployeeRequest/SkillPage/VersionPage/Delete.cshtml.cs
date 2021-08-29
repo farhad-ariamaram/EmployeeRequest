@@ -60,7 +60,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Version.SkillId });
         }
     }
 }

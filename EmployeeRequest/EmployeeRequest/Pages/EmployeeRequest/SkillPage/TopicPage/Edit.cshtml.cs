@@ -71,7 +71,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Topic.VersionId });
         }
 
         private bool TopicExists(long id)
