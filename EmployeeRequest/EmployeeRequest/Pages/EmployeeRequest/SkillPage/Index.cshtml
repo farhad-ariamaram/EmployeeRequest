@@ -72,10 +72,10 @@
                     @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillActive)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillStartDate)
+                    @item.FldEmployeeRequestSkillsSkillStartDate.toPersianDate()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillEndDate)
+                    @item.FldEmployeeRequestSkillsSkillEndDate.toPersianDate()
                 </td>
                 <td>
                     <a class="btn btn-primary" asp-page="./VersionPage/Index" asp-route-id="@item.FldEmployeeRequestSkillsId">ورژن</a>

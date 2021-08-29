@@ -48,10 +48,10 @@
                     @Html.DisplayFor(modelItem => item.EnglishTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
+                    @item.StartDate.toPersianDate()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
+                    @item.EndDate.toPersianDate()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Active)

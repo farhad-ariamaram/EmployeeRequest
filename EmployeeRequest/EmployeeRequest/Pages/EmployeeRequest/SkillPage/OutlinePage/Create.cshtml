@@ -23,13 +23,17 @@
                 <span asp-validation-for="Outline.EnglishTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.StartDate" class="control-label">تاریخ شروع</label>
-                <input asp-for="Outline.StartDate" class="form-control" />
+                <label class="control-label">تاریخ شروع</label>
+                <input class="form-control" type="text" id="startdate" readonly />
+                <span id="span1"></span>
+                <input type="hidden" asp-for="Outline.StartDate" class="form-control" />
                 <span asp-validation-for="Outline.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Outline.EndDate" class="control-label">تاریخ پایان</label>
-                <input asp-for="Outline.EndDate" class="form-control" />
+                <label class="control-label">تاریخ پایان</label>
+                <input class="form-control" type="text" id="enddate" readonly />
+                <span id="span2"></span>
+                <input type="hidden" asp-for="Outline.EndDate" class="form-control" />
                 <span asp-validation-for="Outline.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -60,4 +64,20 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function Load() {
+
+            $("#startdate, #span1").persianDatepicker({
+                onSelect: function () {
+                    $("#Outline_StartDate").val($("#startdate").attr("data-gdate"));
+                }
+            });
+            $("#enddate, #span2").persianDatepicker({
+                onSelect: function () {
+                    $("#Outline_EndDate").val($("#enddate").attr("data-gdate"));
+                }
+            });
+        }
+    </script>
 }

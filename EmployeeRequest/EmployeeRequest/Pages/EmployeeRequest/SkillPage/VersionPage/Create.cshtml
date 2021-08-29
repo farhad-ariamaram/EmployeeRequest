@@ -24,15 +24,20 @@
                 <span asp-validation-for="Version.PersianVersion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Version.StartDate" class="control-label">تاریخ شروع</label>
-                <input asp-for="Version.StartDate" class="form-control" />
+                <label class="control-label">تاریخ شروع</label>
+                <input class="form-control" type="text" id="startdate" readonly />
+                <span id="span1"></span>
+                <input type="hidden" asp-for="Version.StartDate" class="form-control" />
                 <span asp-validation-for="Version.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Version.EndDate" class="control-label">تاریخ پایان</label>
-                <input asp-for="Version.EndDate" class="form-control" />
+                <label class="control-label">تاریخ پایان</label>
+                <input class="form-control" type="text" id="enddate" readonly />
+                <span id="span2"></span>
+                <input type="hidden" asp-for="Version.EndDate" class="form-control" />
                 <span asp-validation-for="Version.EndDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Version.Description" class="control-label">توضیحات فارسی</label>
                 <textarea asp-for="Version.Description" class="form-control"></textarea>
@@ -61,4 +66,20 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function Load() {
+
+            $("#startdate, #span1").persianDatepicker({
+                onSelect: function () {
+                    $("#Version_StartDate").val($("#startdate").attr("data-gdate"));
+                }
+            });
+            $("#enddate, #span2").persianDatepicker({
+                onSelect: function () {
+                    $("#Version_EndDate").val($("#enddate").attr("data-gdate"));
+                }
+            });
+        }
+    </script>
 }
