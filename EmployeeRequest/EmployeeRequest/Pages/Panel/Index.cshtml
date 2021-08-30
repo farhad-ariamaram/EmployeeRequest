@@ -189,6 +189,24 @@
                             }
                         </script>
 
+                        @if (ViewData["status"] != null)
+                        {
+                            @if (ViewData["status"].ToString() == "OK")
+                            {
+                                <script>
+                                    Swal.fire('با موفقیت بروزرسانی شد', '', 'success').then(() => {
+                                    })
+                                </script>
+                            }
+                            else
+                            {
+                                <script>
+                                    Swal.fire('خطا در بروزرسانی', '', 'error').then(() => {
+                                    })
+                                </script>
+                            }
+                        }
+
                     </div>
                 </div>
             </div>

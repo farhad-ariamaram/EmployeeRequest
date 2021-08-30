@@ -39,7 +39,7 @@ namespace EmployeeRequest.Pages.Panel
 
             if (status != null)
             {
-
+                ViewData["status"] = status;
             }
 
             int AllMen = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationGender == "آقا").Count();
