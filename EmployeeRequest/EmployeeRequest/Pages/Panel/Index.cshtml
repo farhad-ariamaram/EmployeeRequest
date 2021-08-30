@@ -169,12 +169,26 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            تاریخ آخرین بروزرسانی
+                            تاریخ آخرین دستور بروزرسانی
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.LastUpdate.toPersianDate() <br /> @Model.LastUpdate.ToString("HH:mm")</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fa fa-check fa-2x text-gray-300 text-primary"></i><br /><a asp-page-handler="Log" style="font-size:10px">بروزرسانی</a>
+                        <i class="fa fa-check fa-2x text-gray-300 text-primary"></i><br /><a onclick="Update()" asp-page-handler="Log" style="font-size:10px">بروزرسانی</a>
+                        <script src="~/lib/sweetalert/sweetalert2.10.js"></script>
+                        <script>
+                            function Update() {
+                                Swal.fire({
+                                    html: 'در حال بارگذاری اطلاعات، لطفا منتظر بمانید...',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: false,
+                                    onBeforeOpen: () => {
+                                        Swal.showLoading()
+                                    }
+                                });
+                            }
+                        </script>
+
                     </div>
                 </div>
             </div>

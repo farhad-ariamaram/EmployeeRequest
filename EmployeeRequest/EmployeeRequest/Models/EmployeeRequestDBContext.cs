@@ -88,11 +88,13 @@ namespace EmployeeRequest.Models
             {
                 entity.ToTable("Log");
 
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
                 entity.Property(e => e.DateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.Type)
+                entity.Property(e => e.Response)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(150);
             });
 
             modelBuilder.Entity<Outline>(entity =>

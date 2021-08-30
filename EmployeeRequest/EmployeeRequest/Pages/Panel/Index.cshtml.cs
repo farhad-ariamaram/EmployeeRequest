@@ -29,12 +29,17 @@ namespace EmployeeRequest.Pages.Panel
         public int MenPercent { get; set; }
         public int WomenPercent { get; set; }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string status)
         {
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
             {
                 return RedirectToPage("../Index");
+            }
+
+            if (status != null)
+            {
+
             }
 
             int AllMen = _context.TblEmployeeRequestPrimaryInformations.Where(a => a.FldEmployeeRequestPrimaryInformationGender == "آقا").Count();
@@ -54,7 +59,7 @@ namespace EmployeeRequest.Pages.Panel
                 }
             }
 
-            LastUpdate = _context.Logs.Where(a => a.Type == "Update").OrderByDescending(a => a.DateTime).FirstOrDefault().DateTime;
+            LastUpdate = _context.Logs.OrderByDescending(a => a.DateTime).FirstOrDefault().DateTime;
             LastRegister = _context.TblEmployeeRequestPageTimeLogs.OrderByDescending(a => a.FldEmployeeRequestPageTimeLogStartTime).FirstOrDefault().FldEmployeeRequestPageTimeLogStartTime.Value;
 
             ViewData["AllRegisteredUsers"] = _context.TblEmployeeRequestEmployees.Count();
@@ -78,15 +83,15 @@ namespace EmployeeRequest.Pages.Panel
 
         public async Task<IActionResult> OnGetLog()
         {
-            await _context.Logs.AddAsync(new Models.Log
-            {
-                DateTime = DateTime.Now,
-                Type = "Update"
-            });
-
+            var u = await _context.Logs.AsNoTracking().FirstOrDefaultAsync();
+            u.Flag = true;
+            _context.Update(u);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            await Task.Delay(10000);
+            u = await _context.Logs.AsNoTracking().FirstOrDefaultAsync();
+
+            return RedirectToPage("./Index",new { status = u.Response });
         }
     }
 }
