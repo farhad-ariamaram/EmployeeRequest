@@ -1,4 +1,13 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+function clearDate(v,t) {
+    $("#" + v).val("");
+    $("#" + t).val("");
+}
 
-// Write your Javascript code.
+$(".remove-enter").on("keyup", function (event) {
+    var value = $(this).val();
+    if (value.indexOf('\n') != -1) {
+        $(this).val(value.replace(/\n/g, ""));
+    }
+    $(this).children('div').html($(".areainputs").val().length + "/4000");
+});

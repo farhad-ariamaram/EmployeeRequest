@@ -28,6 +28,7 @@
                 <label class="control-label">تاریخ شروع</label>
                 <input class="form-control" type="text" id="startdate" readonly />
                 <span id="span1"></span>
+                <div onclick="clearDate('startdate','Version_StartDate')" class="fa fa-calendar-minus"></div>
                 <input type="hidden" asp-for="Version.StartDate" class="form-control" />
                 <span asp-validation-for="Version.StartDate" class="text-danger"></span>
             </div>
@@ -35,18 +36,25 @@
                 <label class="control-label">تاریخ پایان</label>
                 <input class="form-control" type="text" id="enddate" readonly />
                 <span id="span2"></span>
+                <div onclick="clearDate('enddate','Version_EndDate')" class="fa fa-calendar-minus"></div>
                 <input type="hidden" asp-for="Version.EndDate" class="form-control" />
                 <span asp-validation-for="Version.EndDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Version.Description" class="control-label">توضیحات فارسی</label>
-                <textarea asp-for="Version.Description" class="form-control"></textarea>
+                <div class="remove-enter">
+                    <textarea asp-for="Version.Description" class="form-control areainputs remove-enter"></textarea>
+                    <div>0/4000</div>
+                </div>
                 <span asp-validation-for="Version.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Version.EnglishDescription" class="control-label">توضیحات انگلیسی</label>
-                <textarea asp-for="Version.EnglishDescription" class="form-control"></textarea>
+                <div class="remove-enter">
+                    <textarea asp-for="Version.EnglishDescription" class="form-control areainputs remove-enter"></textarea>
+                    <div>0/4000</div>
+                </div>
                 <span asp-validation-for="Version.EnglishDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -70,7 +78,6 @@
 
     <script>
         function Load() {
-
             $("#startdate, #span1").persianDatepicker({
                 onSelect: function () {
                     $("#Version_StartDate").val($("#startdate").attr("data-gdate"));

@@ -27,6 +27,7 @@
                 <label class="control-label">تاریخ شروع</label>
                 <input class="form-control" type="text" id="startdate" readonly />
                 <span id="span1"></span>
+                <div onclick="clearDate('startdate','Outline_StartDate')" class="fa fa-calendar-minus"></div>
                 <input type="hidden" asp-for="Outline.StartDate" class="form-control" />
                 <span asp-validation-for="Outline.StartDate" class="text-danger"></span>
             </div>
@@ -34,6 +35,7 @@
                 <label class="control-label">تاریخ پایان</label>
                 <input class="form-control" type="text" id="enddate" readonly />
                 <span id="span2"></span>
+                <div onclick="clearDate('enddate','Outline_EndDate')" class="fa fa-calendar-minus"></div>
                 <input type="hidden" asp-for="Outline.EndDate" class="form-control" />
                 <span asp-validation-for="Outline.EndDate" class="text-danger"></span>
             </div>
@@ -45,12 +47,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Outline.Description" class="control-label">توضیحات فارسی</label>
-                <textarea asp-for="Outline.Description" class="form-control"></textarea>
+                <div class="remove-enter">
+                    <textarea asp-for="Outline.Description" class="form-control areainputs remove-enter"></textarea>
+                    <div>0/4000</div>
+                </div>
                 <span asp-validation-for="Outline.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Outline.EnglishDescription" class="control-label">توضیحات انگلیسی</label>
-                <textarea asp-for="Outline.EnglishDescription" class="form-control"></textarea>
+                <div class="remove-enter">
+                    <textarea asp-for="Outline.EnglishDescription" class="form-control areainputs remove-enter"></textarea>
+                    <div>0/4000</div>
+                </div>
+                
                 <span asp-validation-for="Outline.EnglishDescription" class="text-danger"></span>
             </div>
             <div class="form-group">

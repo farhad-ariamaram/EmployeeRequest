@@ -85,11 +85,17 @@ namespace EmployeeRequest.Pages.Panel
         {
             var u = await _context.Logs.AsNoTracking().FirstOrDefaultAsync();
             u.Flag = true;
+            var currentDate = u.DateTime;
             _context.Update(u);
             await _context.SaveChangesAsync();
 
             await Task.Delay(10000);
             u = await _context.Logs.AsNoTracking().FirstOrDefaultAsync();
+
+            if(currentDate == u.DateTime)
+            {
+                return RedirectToPage("./Index", new { status = "FAIL" });
+            }
 
             return RedirectToPage("./Index",new { status = u.Response });
         }

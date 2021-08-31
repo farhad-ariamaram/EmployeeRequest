@@ -26,12 +26,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="Topic.Description" class="control-label">توضیحات فارسی</label>
-                <textarea asp-for="Topic.Description" class="form-control"></textarea>
+                <div class="remove-enter">
+                    <textarea asp-for="Topic.Description" class="form-control areainputs remove-enter"></textarea>
+                    <div>0/4000</div>
+                </div>
+                
                 <span asp-validation-for="Topic.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Topic.EnglishDescription" class="control-label">توضیحات انگلیسی</label>
-                <textarea asp-for="Topic.EnglishDescription" class="form-control"></textarea>
+                <div class="remove-enter">
+                    <textarea asp-for="Topic.EnglishDescription" class="form-control areainputs remove-enter"></textarea>
+                    <div>0/4000</div>
+                </div>
+                
                 <span asp-validation-for="Topic.EnglishDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
