@@ -18,9 +18,11 @@ namespace EmployeeRequest.Models
         public string FldEmployeeRequestSkillsSkillEnglishTitle { get; set; }
 
         [RegularExpression(@"^.{1,4000}$", ErrorMessage = "طول فیلد حداکثر 4000 کاراکتر میباشد")]
+        [DataType(DataType.MultilineText)]
         public string FldEmployeeRequestSkillsSkillDescription { get; set; }
 
         [RegularExpression(@"^.{1,4000}$", ErrorMessage = "طول فیلد حداکثر 4000 کاراکتر میباشد")]
+        [DataType(DataType.MultilineText)]
         public string FldEmployeeRequestSkillsSkillEnglishDescription { get; set; }
     }
 

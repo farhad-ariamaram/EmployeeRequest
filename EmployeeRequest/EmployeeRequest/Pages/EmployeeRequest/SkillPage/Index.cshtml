@@ -51,21 +51,21 @@
                 <td>
                     @if (item.FldEmployeeRequestSkillsSkillDescription != null && item.FldEmployeeRequestSkillsSkillDescription.Length > 50)
                     {
-                        @(item.FldEmployeeRequestSkillsSkillDescription.Substring(0, 50)+ "...");
+                        @Html.Raw(item.FldEmployeeRequestSkillsSkillDescription.Substring(0, 50) + "...");
                     }
                     else
                     {
-                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillDescription)
+                        @Html.Raw(item.FldEmployeeRequestSkillsSkillDescription)
                     }
                 </td>
                 <td>
                     @if (item.FldEmployeeRequestSkillsSkillEnglishDescription != null && item.FldEmployeeRequestSkillsSkillEnglishDescription.Length > 50)
                     {
-                        @(item.FldEmployeeRequestSkillsSkillEnglishDescription.Substring(0, 50)+ "...");
+                        @Html.Raw(item.FldEmployeeRequestSkillsSkillEnglishDescription.Substring(0, 50)+ "...");
                     }
                     else
                     {
-                        @Html.DisplayFor(modelItem => item.FldEmployeeRequestSkillsSkillEnglishDescription)
+                        @Html.Raw(item.FldEmployeeRequestSkillsSkillEnglishDescription)
                     }
                 </td>
                 <td>
