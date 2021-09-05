@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Http;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.Employee.Skill
+namespace EmployeeRequest.Pages.Employee.Suggestion
 {
     public class CreateModel : PageModel
     {
@@ -28,13 +28,12 @@ namespace EmployeeRequest.Pages.Employee.Skill
             }
 
             ViewData["EmployeeId"] = id;
-
-            ViewData["FldEmployeeRequestSkillsId"] = new SelectList(_context.TblEmployeeRequestSkills, "FldEmployeeRequestSkillsId", "FldEmployeeRequestSkillsSkillTitle");
+            ViewData["UserId"] = new SelectList(_context.TblEmployeeRequestEmployees, "FldEmployeeRequestEmployeeId", "FldEmployeeRequestEmployeeId");
             return Page();
         }
 
         [BindProperty]
-        public TblEmployeeRequestUserSkill TblEmployeeRequestUserSkill { get; set; }
+        public TblUserSuggestion TblUserSuggestion { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -49,22 +48,25 @@ namespace EmployeeRequest.Pages.Employee.Skill
                 return Page();
             }
 
-            long lastid = _context.TblEmployeeRequestUserSkills.OrderByDescending(a => a.FldEmployeeRequestUserSkillId).FirstOrDefault().FldEmployeeRequestUserSkillId;
-            TblEmployeeRequestUserSkill.FldEmployeeRequestUserSkillId = lastid + 1;
-            _context.TblEmployeeRequestUserSkills.Add(TblEmployeeRequestUserSkill);
+            int lastid = _context.TblUserSuggestions.OrderByDescending(a => a.Id).FirstOrDefault().Id;
+            TblUserSuggestion.Id = lastid + 1;
+            _context.TblUserSuggestions.Add(TblUserSuggestion);
 
             TblEmployeeRequestEmployeeEditLog t = new TblEmployeeRequestEmployeeEditLog()
             {
                 FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,
                 FldEmployeeRequestUserId = Int64.Parse(uid),
-                FldEmployeeRequestEmployeeId = TblEmployeeRequestUserSkill.FldEmployeeRequestEmployeeId,
-                FldEmployeeRequestEmployeeEditLogSection = "Skill-Create"
+                FldEmployeeRequestEmployeeId = TblUserSuggestion.UserId,
+                FldEmployeeRequestEmployeeEditLogSection = "Suggestion-Create"
             };
             _context.TblEmployeeRequestEmployeeEditLogs.Add(t);
 
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("Index", new { id = TblEmployeeRequestUserSkill.FldEmployeeRequestEmployeeId });
+            _context.TblUserSuggestions.Add(TblUserSuggestion);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index", new { id = TblUserSuggestion.UserId });
         }
     }
 }

@@ -39,7 +39,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
             OutlineVersion = await _context.OutlineVersions
                 .Include(o => o.Outline)
                 .Include(o => o.Topic)
-                .Include(o => o.Version).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(o => o.Version).ThenInclude(o=>o.Skill).FirstOrDefaultAsync(m => m.Id == id);
 
             if (OutlineVersion == null)
             {

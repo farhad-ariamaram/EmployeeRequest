@@ -37,7 +37,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
             }
 
             Topic = await _context.Topics
-                .Include(t => t.Version).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(t => t.Version).ThenInclude(t=>t.Skill).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Topic == null)
             {

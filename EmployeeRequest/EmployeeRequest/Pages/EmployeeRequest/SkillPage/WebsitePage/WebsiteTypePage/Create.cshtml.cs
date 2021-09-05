@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
-using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
+namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.WebsitePage.WebsiteTypePage
 {
     public class CreateModel : PageModel
     {
@@ -19,35 +18,26 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
             _context = context;
         }
 
-        public int SkillId { get; set; }
-
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet()
         {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
-            SkillId = id;
             return Page();
         }
 
         [BindProperty]
-        public SkillWebsiteTable SkillWebsiteTable { get; set; }
+        public TblWebsiteType TblWebsiteType { get; set; }
 
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                SkillId = SkillWebsiteTable.SkillId;
                 return Page();
             }
 
-            _context.SkillWebsiteTables.Add(SkillWebsiteTable);
+            _context.TblWebsiteTypes.Add(TblWebsiteType);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index", new { id = SkillWebsiteTable.SkillId });
+            return RedirectToPage("./Index");
         }
     }
 }

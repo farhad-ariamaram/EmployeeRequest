@@ -80,6 +80,8 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.TblWorkExperiences).ThenInclude(t => t.FldTaminJob)
                 .Include(t => t.TblWorkExperiences).ThenInclude(t => t.TblWorkExperienceLeaveJobDtls).ThenInclude(t=>t.FldLeaveJobNavigation)
                 
+                .Include(t=>t.TblUserSuggestions)
+
                 .Where(m => m.FldEmployeeRequestEmployeeId == id)
                 
                 .FirstOrDefaultAsync();

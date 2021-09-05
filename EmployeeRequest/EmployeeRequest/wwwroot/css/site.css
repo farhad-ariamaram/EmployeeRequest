@@ -93,5 +93,9 @@ body {
     bottom: 0;
     left: 0;
     z-index: 775;
-    width : 100%;
+    width: 100%;
+}
+
+.bigger {
+    font-size: 20px;
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
 {
@@ -22,6 +23,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
         [BindProperty]
         public long VersionId { get; set; }
 
+        public string VersionTitle { get; set; }
+
         public IActionResult OnGet(long? id)
         {
             string uid = HttpContext.Session.GetString("uid");
@@ -34,7 +37,9 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.TopicPage
             {
                 VersionId = id.Value;
             }
-            
+
+            VersionTitle = _context.Versions.Include(o => o.Skill).FirstOrDefault(a => a.Id == id.Value).Skill.FldEmployeeRequestSkillsSkillTitle + " " + _context.Versions.FirstOrDefault(a => a.Id == id.Value).Version1;
+
             return Page();
         }
 

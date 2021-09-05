@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
 {
@@ -20,6 +21,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
         }
 
         public long VersionId { get; set; }
+
+        public string VersionTitle { get; set; }
 
         public IActionResult OnGet(long? id)
         {
@@ -41,6 +44,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.OutlineVersionPage
                 ViewData["TopicId"] = new SelectList(_context.Topics, "Id", "Title");
                 ViewData["VersionId"] = new SelectList(_context.Versions.Where(a => a.Id == id.Value), "Id", "Version1");
             }
+
+            VersionTitle = _context.Versions.Include(o=>o.Skill).FirstOrDefault(a => a.Id == id.Value).Skill.FldEmployeeRequestSkillsSkillTitle + " " + _context.Versions.FirstOrDefault(a => a.Id == id.Value).Version1;
 
             return Page();
         }

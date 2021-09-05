@@ -20,7 +20,7 @@
                 عنوان انگلیسی
             </th>
             <th>
-                توضیحات فارسی
+                توضیحات فارسی <span id="openDes"><i class="fa fa-box-open"></i></span>
             </th>
             <th>
                 توضیحات انگلیسی
@@ -51,21 +51,35 @@
                 <td>
                     @if (item.FldEmployeeRequestSkillsSkillDescription != null && item.FldEmployeeRequestSkillsSkillDescription.Length > 50)
                     {
-                        @Html.Raw(item.FldEmployeeRequestSkillsSkillDescription.Substring(0, 50) + "...");
+                        try
+                        {
+                            <div class="hostDes text-break">@Html.Raw(item.FldEmployeeRequestSkillsSkillDescription.Substring(0, 50) + "...")</div>
+                            <div class="completeDes d-none text-break">@Html.Raw(item.FldEmployeeRequestSkillsSkillDescription)</div>
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                     else
                     {
-                        @Html.Raw(item.FldEmployeeRequestSkillsSkillDescription)
+                        <div class="text-break">@item.FldEmployeeRequestSkillsSkillDescription</div>
                     }
                 </td>
                 <td>
                     @if (item.FldEmployeeRequestSkillsSkillEnglishDescription != null && item.FldEmployeeRequestSkillsSkillEnglishDescription.Length > 50)
                     {
-                        @Html.Raw(item.FldEmployeeRequestSkillsSkillEnglishDescription.Substring(0, 50)+ "...");
+                        try
+                        {
+                            <div class="hostDes text-break">@Html.Raw(item.FldEmployeeRequestSkillsSkillEnglishDescription.Substring(0, 50) + "...")</div>
+                            <div class="completeDes d-none text-break">@Html.Raw(item.FldEmployeeRequestSkillsSkillEnglishDescription)</div>
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                     else
                     {
-                        @Html.Raw(item.FldEmployeeRequestSkillsSkillEnglishDescription)
+                        <div class="text-break">@item.FldEmployeeRequestSkillsSkillEnglishDescription</div>
                     }
                 </td>
                 <td>
@@ -78,8 +92,8 @@
                     @item.FldEmployeeRequestSkillsSkillEndDate.toPersianDate()
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-page="./VersionPage/Index" asp-route-id="@item.FldEmployeeRequestSkillsId">ورژن</a>
-                    <a class="btn btn-danger m-1" asp-page="./SkillWebsiteTablePage/Index" asp-route-id="@item.FldEmployeeRequestSkillsId">وبگاه</a>
+                    <a class="btn btn-primary btn-block m-1" asp-page="./VersionPage/Index" asp-route-id="@item.FldEmployeeRequestSkillsId">ورژن</a>
+                    <a class="btn btn-primary btn-block m-1" target="_blank" asp-page="./WebsitePage/Index" asp-route-definationId="1" asp-route-subDefId="@item.FldEmployeeRequestSkillsId">وبگاه</a>
                 </td>
                 <td>
                     <a class="btn btn-warning text-white" asp-page="./Edit" asp-route-id="@item.FldEmployeeRequestSkillsId"><i class="fa fa-edit"></i></a>

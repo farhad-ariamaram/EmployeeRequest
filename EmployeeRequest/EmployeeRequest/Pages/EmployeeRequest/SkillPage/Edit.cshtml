@@ -25,20 +25,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="control-label">توضیحات فارسی</label>
-                <div class="remove-enter">
-                    <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="form-control areainputs remove-enter"></textarea>
-                    <div>0/4000</div>
+                <div class="remove-enter11">
+                    <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" maxlength="4000" class="form-control remove-enter1"></textarea>
+                    <span>0/4000</span>
                 </div>
-                
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="control-label">توضیحات انگلیسی</label>
-                <div class="remove-enter">
-                    <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="form-control areainputs remove-enter"></textarea>
-                    <div>0/4000</div>
+                <div class="remove-enter12">
+                    <textarea asp-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" maxlength="4000" class="form-control remove-enter2"></textarea>
+                    <span>0/4000</span>
                 </div>
-                
+
                 <span asp-validation-for="TblEmployeeRequestSkill.FldEmployeeRequestSkillsSkillEnglishDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -77,13 +76,6 @@
 
     <script>
         function Load() {
-            $(".remove-enter").on("keyup", function (event) {
-                var value = $(this).val();
-                if (value.indexOf('\n') != -1) {
-                    $(this).val(value.replace(/\n/g, ""));
-                }
-            });
-
             $("#startdate, #span1").persianDatepicker({
                 onSelect: function () {
                     $("#TblEmployeeRequestSkill_FldEmployeeRequestSkillsSkillStartDate").val($("#startdate").attr("data-gdate"));

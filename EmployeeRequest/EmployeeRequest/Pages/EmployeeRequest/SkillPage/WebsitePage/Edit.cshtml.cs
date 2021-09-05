@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
-using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePage
+namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.WebsitePage
 {
     public class EditModel : PageModel
     {
@@ -21,29 +20,24 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePag
         }
 
         [BindProperty]
-        public VersionWebsiteTable VersionWebsiteTable { get; set; }
+        public TblWebsite TblWebsite { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            VersionWebsiteTable = await _context.VersionWebsiteTables
-                .Include(v => v.Version).FirstOrDefaultAsync(m => m.Id == id);
+            TblWebsite = await _context.TblWebsites
+                .Include(t => t.Definition)
+                .Include(t => t.WebsiteType).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (VersionWebsiteTable == null)
+            if (TblWebsite == null)
             {
                 return NotFound();
             }
-           ViewData["VersionId"] = new SelectList(_context.Versions, "Id", "Version1");
+            ViewData["WebsiteTypeId"] = new SelectList(_context.TblWebsiteTypes, "Id", "Title");
             return Page();
         }
 
@@ -54,7 +48,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePag
                 return Page();
             }
 
-            _context.Attach(VersionWebsiteTable).State = EntityState.Modified;
+            if (!TblWebsite.Website.ToLower().StartsWith("http"))
+            {
+                TblWebsite.Website = "http://" + TblWebsite.Website;
+            }
+
+            _context.Attach(TblWebsite).State = EntityState.Modified;
 
             try
             {
@@ -62,7 +61,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePag
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VersionWebsiteTableExists(VersionWebsiteTable.Id))
+                if (!TblWebsiteExists(TblWebsite.Id))
                 {
                     return NotFound();
                 }
@@ -72,12 +71,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePag
                 }
             }
 
-            return RedirectToPage("./Index", new { id = VersionWebsiteTable.VersionId });
+            return RedirectToPage("./Index", new { definationId = TblWebsite.DefinitionId, subDefId = TblWebsite.SubDefinationId });
         }
 
-        private bool VersionWebsiteTableExists(int id)
+        private bool TblWebsiteExists(int id)
         {
-            return _context.VersionWebsiteTables.Any(e => e.Id == id);
+            return _context.TblWebsites.Any(e => e.Id == id);
         }
     }
 }

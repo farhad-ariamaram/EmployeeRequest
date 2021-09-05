@@ -9,7 +9,6 @@ namespace EmployeeRequest.Models
     {
         public TblEmployeeRequestSkill()
         {
-            SkillWebsiteTables = new HashSet<SkillWebsiteTable>();
             TblEmployeeRequestUserSkills = new HashSet<TblEmployeeRequestUserSkill>();
             Versions = new HashSet<Version>();
         }
@@ -23,7 +22,6 @@ namespace EmployeeRequest.Models
         public DateTime? FldEmployeeRequestSkillsSkillStartDate { get; set; }
         public DateTime? FldEmployeeRequestSkillsSkillEndDate { get; set; }
 
-        public virtual ICollection<SkillWebsiteTable> SkillWebsiteTables { get; set; }
         public virtual ICollection<TblEmployeeRequestUserSkill> TblEmployeeRequestUserSkills { get; set; }
         public virtual ICollection<Version> Versions { get; set; }
     }

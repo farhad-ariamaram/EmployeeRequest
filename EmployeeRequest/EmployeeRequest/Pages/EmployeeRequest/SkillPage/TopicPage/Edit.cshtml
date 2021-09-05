@@ -6,7 +6,11 @@
 }
 
 <h1>ویرایش سرفصل</h1>
-
+<p>
+    <span class="badge badge-info text-white bigger">
+        ورژن انتخاب شده: @Model.Topic.Version.Skill.FldEmployeeRequestSkillsSkillEnglishTitle @Model.Topic.Version.Version1
+    </span>
+</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -26,18 +30,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Topic.Description" class="control-label">توضیحات فارسی</label>
-                <div class="remove-enter">
-                    <textarea asp-for="Topic.Description" class="form-control areainputs remove-enter"></textarea>
-                    <div>0/4000</div>
+                <div class="remove-enter11">
+                    <textarea asp-for="Topic.Description" class="form-control remove-enter1"></textarea>
+                    <span>0/4000</span>
                 </div>
                 
                 <span asp-validation-for="Topic.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Topic.EnglishDescription" class="control-label">توضیحات انگلیسی</label>
-                <div class="remove-enter">
-                    <textarea asp-for="Topic.EnglishDescription" class="form-control areainputs remove-enter"></textarea>
-                    <div>0/4000</div>
+                <div class="remove-enter12">
+                    <textarea asp-for="Topic.EnglishDescription" class="form-control remove-enter2"></textarea>
+                    <span>0/4000</span>
                 </div>
                 
                 <span asp-validation-for="Topic.EnglishDescription" class="text-danger"></span>

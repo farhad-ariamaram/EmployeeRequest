@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
+namespace EmployeeRequest.Pages.Employee.Suggestion
 {
     public class IndexModel : PageModel
     {
@@ -19,20 +19,27 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
             _context = context;
         }
 
-        public IList<SkillWebsiteTable> SkillWebsiteTable { get; set; }
+        public IList<TblUserSuggestion> TblUserSuggestion { get;set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public string Id { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(string id)
         {
+            Id = id;
+
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
             {
-                return RedirectToPage("../Index");
+                return RedirectToPage("../../Index");
             }
 
-            ViewData["id"] = id;
-            SkillWebsiteTable = await _context.SkillWebsiteTables
-                .Where(a => a.SkillId == id)
-                .Include(s => s.Skill).ToListAsync();
+            if (id == null)
+            {
+                return RedirectToPage("../../Index");
+            }
+
+            TblUserSuggestion = await _context.TblUserSuggestions
+                .Include(t => t.User).ToListAsync();
 
             return Page();
         }

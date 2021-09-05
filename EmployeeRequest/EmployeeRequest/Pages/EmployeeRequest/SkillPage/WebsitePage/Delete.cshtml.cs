@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
-using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePage
+namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.WebsitePage
 {
     public class DeleteModel : PageModel
     {
@@ -20,25 +19,20 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePag
         }
 
         [BindProperty]
-        public VersionWebsiteTable VersionWebsiteTable { get; set; }
+        public TblWebsite TblWebsite { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            VersionWebsiteTable = await _context.VersionWebsiteTables
-                .Include(v => v.Version).FirstOrDefaultAsync(m => m.Id == id);
+            TblWebsite = await _context.TblWebsites
+                .Include(t => t.Definition)
+                .Include(t => t.WebsiteType).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (VersionWebsiteTable == null)
+            if (TblWebsite == null)
             {
                 return NotFound();
             }
@@ -52,15 +46,15 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionWebsiteTablePag
                 return NotFound();
             }
 
-            VersionWebsiteTable = await _context.VersionWebsiteTables.FindAsync(id);
+            TblWebsite = await _context.TblWebsites.FindAsync(id);
 
-            if (VersionWebsiteTable != null)
+            if (TblWebsite != null)
             {
-                _context.VersionWebsiteTables.Remove(VersionWebsiteTable);
+                _context.TblWebsites.Remove(TblWebsite);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index", new { id = VersionWebsiteTable.VersionId });
+            return RedirectToPage("./Index" , new { definationId = TblWebsite.DefinitionId, subDefId = TblWebsite.SubDefinationId });
         }
     }
 }

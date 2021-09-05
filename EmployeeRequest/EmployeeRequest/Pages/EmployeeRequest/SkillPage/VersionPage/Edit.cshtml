@@ -6,7 +6,11 @@
 }
 
 <h1>ویرایش ورژن</h1>
-
+<p>
+    <span class="badge badge-info text-white bigger">
+        مهارت انتخاب شده: @Model.Version.Skill.FldEmployeeRequestSkillsSkillTitle
+    </span>
+</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,17 +47,17 @@
 
             <div class="form-group">
                 <label asp-for="Version.Description" class="control-label">توضیحات فارسی</label>
-                <div class="remove-enter">
-                    <textarea asp-for="Version.Description" class="form-control areainputs remove-enter"></textarea>
-                    <div>0/4000</div>
+                <div class="remove-enter11">
+                    <textarea asp-for="Version.Description" class="form-control remove-enter1"></textarea>
+                    <span>0/4000</span>
                 </div>
                 <span asp-validation-for="Version.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Version.EnglishDescription" class="control-label">توضیحات انگلیسی</label>
-                <div class="remove-enter">
-                    <textarea asp-for="Version.EnglishDescription" class="form-control areainputs remove-enter"></textarea>
-                    <div>0/4000</div>
+                <div class="remove-enter12">
+                    <textarea asp-for="Version.EnglishDescription" class="form-control remove-enter2"></textarea>
+                    <span>0/4000</span>
                 </div>
                 <span asp-validation-for="Version.EnglishDescription" class="text-danger"></span>
             </div>

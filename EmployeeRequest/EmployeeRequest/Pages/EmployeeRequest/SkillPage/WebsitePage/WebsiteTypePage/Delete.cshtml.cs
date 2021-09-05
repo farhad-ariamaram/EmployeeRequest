@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
-using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
+namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.WebsitePage.WebsiteTypePage
 {
     public class DeleteModel : PageModel
     {
@@ -20,25 +19,18 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
         }
 
         [BindProperty]
-        public SkillWebsiteTable SkillWebsiteTable { get; set; }
+        public TblWebsiteType TblWebsiteType { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            SkillWebsiteTable = await _context.SkillWebsiteTables
-                .Include(s => s.Skill).FirstOrDefaultAsync(m => m.Id == id);
+            TblWebsiteType = await _context.TblWebsiteTypes.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (SkillWebsiteTable == null)
+            if (TblWebsiteType == null)
             {
                 return NotFound();
             }
@@ -52,15 +44,15 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
                 return NotFound();
             }
 
-            SkillWebsiteTable = await _context.SkillWebsiteTables.FindAsync(id);
+            TblWebsiteType = await _context.TblWebsiteTypes.FindAsync(id);
 
-            if (SkillWebsiteTable != null)
+            if (TblWebsiteType != null)
             {
-                _context.SkillWebsiteTables.Remove(SkillWebsiteTable);
+                _context.TblWebsiteTypes.Remove(TblWebsiteType);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index", new { id = SkillWebsiteTable.SkillId });
+            return RedirectToPage("./Index");
         }
     }
 }

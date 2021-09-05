@@ -19,6 +19,8 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
             _context = context;
         }
 
+        public string SkillTitle { get; set; }
+
         [BindProperty]
         public int SkillId { get; set; }
 
@@ -33,12 +35,13 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.VersionPage
             if (id.HasValue)
             {
                 SkillId = id.Value;
-                ViewData["SkillId"] = new SelectList(_context.TblEmployeeRequestSkills.Where(a => a.FldEmployeeRequestSkillsId == id), "FldEmployeeRequestSkillsId", "FldEmployeeRequestSkillsId");
+                SkillTitle = _context.TblEmployeeRequestSkills.FirstOrDefault(a => a.FldEmployeeRequestSkillsId == id.Value).FldEmployeeRequestSkillsSkillTitle;
             }
             else
             {
-                ViewData["SkillId"] = new SelectList(_context.TblEmployeeRequestSkills, "FldEmployeeRequestSkillsId", "FldEmployeeRequestSkillsId");
+                RedirectToPage("./Index");
             }
+
             return Page();
         }
 

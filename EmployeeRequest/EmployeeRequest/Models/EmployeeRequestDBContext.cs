@@ -26,8 +26,8 @@ namespace EmployeeRequest.Models
         public virtual DbSet<PayJob> PayJobs { get; set; }
         public virtual DbSet<PayWorkPlace> PayWorkPlaces { get; set; }
         public virtual DbSet<Ping> Pings { get; set; }
-        public virtual DbSet<SkillWebsiteTable> SkillWebsiteTables { get; set; }
         public virtual DbSet<TblCustomerDegree> TblCustomerDegrees { get; set; }
+        public virtual DbSet<TblDefinition> TblDefinitions { get; set; }
         public virtual DbSet<TblEmployeeRequestCompilationType> TblEmployeeRequestCompilationTypes { get; set; }
         public virtual DbSet<TblEmployeeRequestCreativityType> TblEmployeeRequestCreativityTypes { get; set; }
         public virtual DbSet<TblEmployeeRequestEmergencyCall> TblEmployeeRequestEmergencyCalls { get; set; }
@@ -65,18 +65,20 @@ namespace EmployeeRequest.Models
         public virtual DbSet<TblJob> TblJobs { get; set; }
         public virtual DbSet<TblJobTamin> TblJobTamins { get; set; }
         public virtual DbSet<TblLeaveJob> TblLeaveJobs { get; set; }
+        public virtual DbSet<TblUserSuggestion> TblUserSuggestions { get; set; }
+        public virtual DbSet<TblWebsite> TblWebsites { get; set; }
+        public virtual DbSet<TblWebsiteType> TblWebsiteTypes { get; set; }
         public virtual DbSet<TblWorkExperience> TblWorkExperiences { get; set; }
         public virtual DbSet<TblWorkExperienceLeaveJobDtl> TblWorkExperienceLeaveJobDtls { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<Version> Versions { get; set; }
-        public virtual DbSet<VersionWebsiteTable> VersionWebsiteTables { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.;Database=EmployeeRequestDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("server=192.168.10.250;database=EmployeeRequestDB;User Id=EmplyUser2;Password=S33@||;");
             }
         }
 
@@ -101,11 +103,11 @@ namespace EmployeeRequest.Models
             {
                 entity.ToTable("Outline");
 
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Description).HasMaxLength(4000);
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
-                entity.Property(e => e.EnglishDescription).HasMaxLength(1000);
+                entity.Property(e => e.EnglishDescription).HasMaxLength(4000);
 
                 entity.Property(e => e.EnglishTitle).HasMaxLength(50);
 
@@ -266,23 +268,6 @@ namespace EmployeeRequest.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<SkillWebsiteTable>(entity =>
-            {
-                entity.ToTable("SkillWebsiteTable");
-
-                entity.Property(e => e.EducationalWebsite).HasMaxLength(150);
-
-                entity.Property(e => e.QuestionalWebsite).HasMaxLength(150);
-
-                entity.Property(e => e.SkillWebsite).HasMaxLength(150);
-
-                entity.HasOne(d => d.Skill)
-                    .WithMany(p => p.SkillWebsiteTables)
-                    .HasForeignKey(d => d.SkillId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SkillWebsiteTable_Tbl_EmployeeRequest_Skills");
-            });
-
             modelBuilder.Entity<TblCustomerDegree>(entity =>
             {
                 entity.HasKey(e => e.FldCustomerDegreeId);
@@ -355,6 +340,13 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.TblCustomerDegrees)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_Tbl_CustomerDegree_Tbl_User");
+            });
+
+            modelBuilder.Entity<TblDefinition>(entity =>
+            {
+                entity.ToTable("Tbl_Definition");
+
+                entity.Property(e => e.Definition).HasMaxLength(150);
             });
 
             modelBuilder.Entity<TblEmployeeRequestCompilationType>(entity =>
@@ -1152,10 +1144,13 @@ namespace EmployeeRequest.Models
 
                 entity.Property(e => e.FldEmployeeRequestSkillsId).HasColumnName("Fld_EmployeeRequest_Skills_Id");
 
-                entity.Property(e => e.FldEmployeeRequestSkillsSkillActive).HasColumnName("Fld_EmployeeRequest_Skills_SkillActive");
+                entity.Property(e => e.FldEmployeeRequestSkillsSkillActive)
+                    .IsRequired()
+                    .HasColumnName("Fld_EmployeeRequest_Skills_SkillActive")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.FldEmployeeRequestSkillsSkillDescription)
-                    .HasMaxLength(1000)
+                    .HasMaxLength(4000)
                     .HasColumnName("Fld_EmployeeRequest_Skills_SkillDescription");
 
                 entity.Property(e => e.FldEmployeeRequestSkillsSkillEndDate)
@@ -1163,11 +1158,11 @@ namespace EmployeeRequest.Models
                     .HasColumnName("Fld_EmployeeRequest_Skills_SkillEndDate");
 
                 entity.Property(e => e.FldEmployeeRequestSkillsSkillEnglishDescription)
-                    .HasMaxLength(1000)
+                    .HasMaxLength(4000)
                     .HasColumnName("Fld_EmployeeRequest_Skills_SkillEnglishDescription");
 
                 entity.Property(e => e.FldEmployeeRequestSkillsSkillEnglishTitle)
-                    .HasMaxLength(50)
+                    .HasMaxLength(100)
                     .HasColumnName("Fld_EmployeeRequest_Skills_SkillEnglishTitle");
 
                 entity.Property(e => e.FldEmployeeRequestSkillsSkillStartDate)
@@ -1175,7 +1170,7 @@ namespace EmployeeRequest.Models
                     .HasColumnName("Fld_EmployeeRequest_Skills_SkillStartDate");
 
                 entity.Property(e => e.FldEmployeeRequestSkillsSkillTitle)
-                    .HasMaxLength(50)
+                    .HasMaxLength(100)
                     .HasColumnName("Fld_EmployeeRequest_Skills_SkillTitle");
             });
 
@@ -1686,6 +1681,52 @@ namespace EmployeeRequest.Models
                     .HasColumnName("Fld_LeaveJobTitle");
             });
 
+            modelBuilder.Entity<TblUserSuggestion>(entity =>
+            {
+                entity.ToTable("Tbl_UserSuggestion");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(50)
+                    .HasColumnName("User_Id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TblUserSuggestions)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_Tbl_UserSuggestion_Tbl_EmployeeRequest_Employee");
+            });
+
+            modelBuilder.Entity<TblWebsite>(entity =>
+            {
+                entity.ToTable("Tbl_Website");
+
+                entity.Property(e => e.DefinitionId).HasColumnName("Definition_Id");
+
+                entity.Property(e => e.SubDefinationId).HasColumnName("SubDefination_Id");
+
+                entity.Property(e => e.Website).HasMaxLength(150);
+
+                entity.Property(e => e.WebsiteTypeId).HasColumnName("WebsiteType_Id");
+
+                entity.HasOne(d => d.Definition)
+                    .WithMany(p => p.TblWebsites)
+                    .HasForeignKey(d => d.DefinitionId)
+                    .HasConstraintName("FK_Tbl_Website_Tbl_Definition");
+
+                entity.HasOne(d => d.WebsiteType)
+                    .WithMany(p => p.TblWebsites)
+                    .HasForeignKey(d => d.WebsiteTypeId)
+                    .HasConstraintName("FK_Tbl_Website_Tbl_WebsiteType");
+            });
+
+            modelBuilder.Entity<TblWebsiteType>(entity =>
+            {
+                entity.ToTable("Tbl_WebsiteType");
+
+                entity.Property(e => e.Title).HasMaxLength(150);
+            });
+
             modelBuilder.Entity<TblWorkExperience>(entity =>
             {
                 entity.HasKey(e => e.FldWorkExperienceId);
@@ -1695,6 +1736,8 @@ namespace EmployeeRequest.Models
                 entity.Property(e => e.FldWorkExperienceId)
                     .ValueGeneratedNever()
                     .HasColumnName("Fld_WorkExperienceID");
+
+                entity.Property(e => e.FieldOfWork).HasMaxLength(150);
 
                 entity.Property(e => e.FldAmountOfDailyInsurance)
                     .HasMaxLength(50)
@@ -1821,9 +1864,9 @@ namespace EmployeeRequest.Models
             {
                 entity.ToTable("Topic");
 
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Description).HasMaxLength(4000);
 
-                entity.Property(e => e.EnglishDescription).HasMaxLength(1000);
+                entity.Property(e => e.EnglishDescription).HasMaxLength(4000);
 
                 entity.Property(e => e.EnglishTitle).HasMaxLength(50);
 
@@ -1841,11 +1884,11 @@ namespace EmployeeRequest.Models
             {
                 entity.ToTable("Version");
 
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Description).HasMaxLength(4000);
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
-                entity.Property(e => e.EnglishDescription).HasMaxLength(1000);
+                entity.Property(e => e.EnglishDescription).HasMaxLength(4000);
 
                 entity.Property(e => e.PersianVersion).HasMaxLength(50);
 
@@ -1861,23 +1904,6 @@ namespace EmployeeRequest.Models
                     .WithMany(p => p.Versions)
                     .HasForeignKey(d => d.SkillId)
                     .HasConstraintName("FK_Version_Tbl_EmployeeRequest_Skills");
-            });
-
-            modelBuilder.Entity<VersionWebsiteTable>(entity =>
-            {
-                entity.ToTable("VersionWebsiteTable");
-
-                entity.Property(e => e.EducationalWebsite).HasMaxLength(150);
-
-                entity.Property(e => e.QuestionalWebsite).HasMaxLength(150);
-
-                entity.Property(e => e.VersionWebsite).HasMaxLength(150);
-
-                entity.HasOne(d => d.Version)
-                    .WithMany(p => p.VersionWebsiteTables)
-                    .HasForeignKey(d => d.VersionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VersionWebsiteTable_Version");
             });
 
             OnModelCreatingPartial(modelBuilder);

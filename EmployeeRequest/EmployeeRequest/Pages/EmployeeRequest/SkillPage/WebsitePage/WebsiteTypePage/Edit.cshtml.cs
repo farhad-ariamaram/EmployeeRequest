@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeRequest.Models;
-using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
+namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.WebsitePage.WebsiteTypePage
 {
     public class EditModel : PageModel
     {
@@ -21,31 +20,21 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
         }
 
         [BindProperty]
-        public SkillWebsiteTable SkillWebsiteTable { get; set; }
+        public TblWebsiteType TblWebsiteType { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string uid = HttpContext.Session.GetString("uid");
-            if (uid == null)
-            {
-                return RedirectToPage("../Index");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            SkillWebsiteTable = await _context.SkillWebsiteTables
-                .Include(s => s.Skill).FirstOrDefaultAsync(m => m.Id == id);
+            TblWebsiteType = await _context.TblWebsiteTypes.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (SkillWebsiteTable == null)
+            if (TblWebsiteType == null)
             {
                 return NotFound();
             }
-
-            ViewData["SkillId"] = new SelectList(_context.TblEmployeeRequestSkills, "FldEmployeeRequestSkillsId", "FldEmployeeRequestSkillsSkillTitle");
-            
             return Page();
         }
 
@@ -56,7 +45,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
                 return Page();
             }
 
-            _context.Attach(SkillWebsiteTable).State = EntityState.Modified;
+            _context.Attach(TblWebsiteType).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +53,7 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SkillWebsiteTableExists(SkillWebsiteTable.Id))
+                if (!TblWebsiteTypeExists(TblWebsiteType.Id))
                 {
                     return NotFound();
                 }
@@ -74,12 +63,12 @@ namespace EmployeeRequest.Pages.EmployeeRequest.SkillPage.SkillWebsiteTablePage
                 }
             }
 
-            return RedirectToPage("./Index", new { id = SkillWebsiteTable.SkillId });
+            return RedirectToPage("./Index");
         }
 
-        private bool SkillWebsiteTableExists(int id)
+        private bool TblWebsiteTypeExists(int id)
         {
-            return _context.SkillWebsiteTables.Any(e => e.Id == id);
+            return _context.TblWebsiteTypes.Any(e => e.Id == id);
         }
     }
 }

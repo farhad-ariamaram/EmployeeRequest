@@ -57,7 +57,7 @@ namespace EmployeeRequest.Pages.EmployAccept
                 .Include(t => t.FldEmployeeRequestUserPrimaryAccepter)
                 .Include(t => t.TblEmployeeRequestPageTimeLogs)
                 .Include(t => t.TblEmployeeRequestPrimaryInformations)
-                .OrderBy(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
+                .OrderByDescending(a => a.TblEmployeeRequestPageTimeLogs.Where(a => a.FldEmployeeRequestPageTimeLogPageLevel == "Level1").FirstOrDefault())
                 .Where(a=>!a.IsDelete.Value)
                 .ToListAsync();
 

@@ -126,6 +126,11 @@
                 <span asp-validation-for="TblWorkExperience.PreviousJobAchievements" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label class="control-label">زمینه کاری شرکت</label>
+                <input asp-for="TblWorkExperience.FieldOfWork" class="form-control" />
+                <span asp-validation-for="TblWorkExperience.FieldOfWork" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="ذخیره" class="btn btn-primary" />
             </div>
         </form>

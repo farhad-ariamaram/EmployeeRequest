@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
 using EmployeeRequest.Models;
+using Microsoft.AspNetCore.Http;
 
-namespace EmployeeRequest.Pages.Employee.Skill
+namespace EmployeeRequest.Pages.Employee.Suggestion
 {
     public class DeleteModel : PageModel
     {
@@ -20,9 +20,9 @@ namespace EmployeeRequest.Pages.Employee.Skill
         }
 
         [BindProperty]
-        public TblEmployeeRequestUserSkill TblEmployeeRequestUserSkill { get; set; }
+        public TblUserSuggestion TblUserSuggestion { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(long? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
@@ -35,20 +35,18 @@ namespace EmployeeRequest.Pages.Employee.Skill
                 return NotFound();
             }
 
-            TblEmployeeRequestUserSkill = await _context.TblEmployeeRequestUserSkills
-                    .Include(t => t.FldEmployeeRequestEmployee)
-                    .Include(t => t.FldEmployeeRequestSkills).FirstOrDefaultAsync(m => m.FldEmployeeRequestUserSkillId == id);
+            TblUserSuggestion = await _context.TblUserSuggestions
+                .Include(t => t.User).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (TblEmployeeRequestUserSkill == null)
+            if (TblUserSuggestion == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(long? id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-
             string uid = HttpContext.Session.GetString("uid");
             if (uid == null)
             {
@@ -60,18 +58,18 @@ namespace EmployeeRequest.Pages.Employee.Skill
                 return NotFound();
             }
 
-            TblEmployeeRequestUserSkill = await _context.TblEmployeeRequestUserSkills.FindAsync(id);
+            TblUserSuggestion = await _context.TblUserSuggestions.FindAsync(id);
 
-            if (TblEmployeeRequestUserSkill != null)
+            if (TblUserSuggestion != null)
             {
-                _context.TblEmployeeRequestUserSkills.Remove(TblEmployeeRequestUserSkill);
+                _context.TblUserSuggestions.Remove(TblUserSuggestion);
 
                 TblEmployeeRequestEmployeeEditLog t = new TblEmployeeRequestEmployeeEditLog()
                 {
                     FldEmployeeRequestEmployeeEditLogDate = DateTime.Now,
                     FldEmployeeRequestUserId = Int64.Parse(uid),
-                    FldEmployeeRequestEmployeeId = TblEmployeeRequestUserSkill.FldEmployeeRequestEmployeeId,
-                    FldEmployeeRequestEmployeeEditLogSection = "Skill-Delete"
+                    FldEmployeeRequestEmployeeId = TblUserSuggestion.UserId,
+                    FldEmployeeRequestEmployeeEditLogSection = "Suggestion-Delete"
                 };
 
                 _context.TblEmployeeRequestEmployeeEditLogs.Add(t);
@@ -79,7 +77,7 @@ namespace EmployeeRequest.Pages.Employee.Skill
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("Index", new { id = TblEmployeeRequestUserSkill.FldEmployeeRequestEmployeeId });
+            return RedirectToPage("./Index", new { id = TblUserSuggestion.UserId });
         }
     }
 }

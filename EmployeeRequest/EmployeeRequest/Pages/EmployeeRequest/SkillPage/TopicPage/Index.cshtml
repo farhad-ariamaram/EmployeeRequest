@@ -11,7 +11,7 @@
     <a class="btn btn-success" target="_blank" asp-page="Create" asp-route-id="@Model.versionId"><i class="fa fa-plus"></i></a>
 </p>
 <p>
-    <span class="badge badge-info text-white">
+    <span class="badge badge-info text-white bigger">
         ورژن انتخاب شده: @Model.VersionTitle
     </span>
 </p>
@@ -25,7 +25,7 @@
                 عنوان انگلیسی
             </th>
             <th>
-                توضیحات فارسی
+                توضیحات فارسی <span id="openDes"><i class="fa fa-box-open"></i></span>
             </th>
             <th>
                 توضیحات انگلیسی
@@ -42,44 +42,61 @@
     <tbody>
         @foreach (var item in Model.Topic)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnglishTitle)
-                </td>
-                <td>
-                    @if (item.Description != null && item.Description.Length > 50)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnglishTitle)
+            </td>
+            <td>
+                @if (item.Description != null && item.Description.Length > 50)
+                {
+                    try
                     {
-                        @Html.Raw(item.Description.Substring(0, 50)+ "...");
+                        <div class="hostDes text-break">@Html.Raw(item.Description.Substring(0, 50) + "...")</div>
+                        <div class="completeDes d-none text-break">@Html.Raw(item.Description)</div>
                     }
-                    else
+                    catch (Exception)
                     {
-                        @Html.Raw(item.Description)
                     }
-                </td>
-                <td>
-                    @if (item.EnglishDescription != null && item.EnglishDescription.Length > 50)
+                }
+                else
+                {
+                    <div class="text-break">@item.Description</div>
+                }
+            </td>
+            <td>
+                @if (item.EnglishDescription != null && item.EnglishDescription.Length > 50)
+                {
+                    try
                     {
-                        @Html.Raw(item.EnglishDescription.Substring(0, 50)+"...");
+                        <div class="hostDes text-break">@Html.Raw(item.EnglishDescription.Substring(0, 50) + "...")</div>
+                        <div class="completeDes d-none text-break">@Html.Raw(item.EnglishDescription)</div>
                     }
-                    else
+                    catch (Exception)
                     {
-                        @Html.Raw(item.EnglishDescription)
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Active)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Number)
-                </td>
-                <td>
-                    <a class="btn btn-warning text-white" asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
-                </td>
-            </tr>
+                }
+                else
+                {
+                    <div class="text-break">@item.EnglishDescription</div>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                <a class="btn btn-primary btn-block m-1" target="_blank" asp-page="../WebsitePage/Index" asp-route-definationId="5" asp-route-subDefId="@item.Id">وبگاه</a>
+            </td>
+            <td>
+                <a class="btn btn-warning text-white" asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

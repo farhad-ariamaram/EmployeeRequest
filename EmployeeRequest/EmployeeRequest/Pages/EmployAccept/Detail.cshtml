@@ -1232,6 +1232,10 @@
 
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td> زمینه کاری شرکت</td>
+                                        <td>@item.FieldOfWork</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         }
@@ -1246,6 +1250,36 @@
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
                 <div class="card-header">سوابق شغلی (0)<i class="fa-pull-left"><img src="~/img/workexperience.png" height="20" width="20" /></i> <a class="fa-pull-left text-white mr-2" asp-page="../Employee/WorkExperience/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a></div>
+            </div>
+        </div>
+    }
+
+    @*Suggestion*@
+    @if (Model.TblEmployeeRequestEmployee.TblEmployeeRequestHowFinds.FirstOrDefault() != null)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                <div onclick="$('#suggestion').toggle()" class="card-header"><i class="fa fa-info fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/Suggestion/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a>انتقادات و پیشنهادات</div>
+                <div id="suggestion" style="display:none" class="card-body">
+                    <table class="table text-white">
+                        <tbody>
+                            <tr>
+                                <td>انتقادات و پیشنهادات</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.TblEmployeeRequestEmployee.TblUserSuggestions.FirstOrDefault().Suggestion)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header"><i class="fa fa-info fa-pull-left"></i><a class="fa-pull-left text-white mr-2" asp-page="../Employee/Suggestion/Index" asp-route-id="@Model.TblEmployeeRequestEmployee.FldEmployeeRequestEmployeeId"><i class="fa fa-edit"></i></a>انتقادات و پیشنهادات</div>
             </div>
         </div>
     }
