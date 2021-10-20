@@ -20,12 +20,13 @@
                 <label data-toggle="tooltip" title="مرتب سازی بر اساس" for="inputGroupSelect02" class="col-sm-1 col-form-label"><i class="fa fa-filter"></i></label>
                 <div class="col-sm-11">
                     <select class="form-select w-100" name="orderBy" id="inputGroupSelect02" asp-for="@Model.currentorderBy">
-                        <option value="name">نام و نام خانوادگی</option>
                         <option value="regdate">تاریخ ثبت نام</option>
+                        <option value="name">نام و نام خانوادگی</option>
                         <option value="primacc">تایید کننده اولیه</option>
                         <option value="finalacc">تایید کننده نهایی</option>
                         <option value="primaccdate">تاریخ تایید اولیه</option>
                         <option value="finalaccdate">تاریخ تایید نهایی</option>
+                        IrancellChargeWorkerService
                         <option value="interstartdate">تاریخ شروع مصاحبه</option>
                         <option value="interenddate">تاریخ پایان مصاحبه</option>
                     </select>
@@ -37,8 +38,8 @@
                 <label data-toggle="tooltip" title="مرتب سازی به صورت" for="inputGroupSelect03" class="col-sm-1 col-form-label"><i class="fa fa-sort"></i></label>
                 <div class="col-sm-11">
                     <select class="form-select w-100" name="orderType" id="inputGroupSelect03" asp-for="@Model.currentorderType">
-                        <option value="asc">صعودی</option>
                         <option value="desc">نزولی</option>
+                        <option value="asc">صعودی</option>
                     </select>
                 </div>
             </div>
@@ -518,7 +519,8 @@
                         'نامرتبط بودن رشته تحصیلی': 'نامرتبط بودن رشته تحصیلی',
                         'غیر بومی بودن': 'غیر بومی بودن',
                         'عدم داشتن سابقه کاری': 'عدم داشتن سابقه کاری',
-                        'عدم داشتن مهارت': 'عدم داشتن مهارت'
+                        'عدم داشتن مهارت': 'عدم داشتن مهارت',
+                        '': 'دلایل دیگر(نوشتن توضیح)'
                     })
                 }, 1000)
             })
